@@ -8,6 +8,7 @@
 - React
 - Tailwind CSS
 - TypeScript
+- Node.js 24+
 - 页面通过 `lib/data.ts` 数据服务层读取内容，当前底层使用本地 fixture，后续可替换为 SQLite/API/PostgreSQL
 
 ## 页面
@@ -22,6 +23,7 @@
 - `/hot` 热门赛事
 - `/vip` VIP 社群说明
 - `/login` Google 登录预留页
+- `/admin` 预览版内容后台
 - `/about` 关于
 
 ## 运行
@@ -70,6 +72,22 @@ npm run build
 ```
 
 环境变量可参考 `.env.example`。当前预览 MVP 不依赖必填环境变量。
+
+后台入口：
+
+```text
+http://localhost:3000/admin
+```
+
+本地预览默认密码：
+
+```text
+admin123
+```
+
+部署或共享预览时请设置环境变量 `ADMIN_PASSWORD` 覆盖默认密码。
+
+后台数据当前写入本地 SQLite 文件 `data/football-ai-intel.db`。这适合本机预览和早期运营验证；正式部署到 Serverless 平台前，建议迁移到 PostgreSQL、托管 SQLite 或独立 API 服务。
 
 ## 数据与接口边界
 

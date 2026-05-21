@@ -2,6 +2,9 @@
   "name": "football-ai-intel",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "dev": "NEXT_TEST_WASM=1 NEXT_TEST_WASM_DIR=./node_modules/@next/swc-wasm-nodejs next dev --webpack",
     "build": "NEXT_TEST_WASM=1 NEXT_TEST_WASM_DIR=./node_modules/@next/swc-wasm-nodejs next build --webpack",
