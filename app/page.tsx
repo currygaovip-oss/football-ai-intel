@@ -54,7 +54,7 @@ export default function HomePage() {
         <div>
           <SectionHeading title="最新 AI 赛前观点" eyebrow="AI Intelligence" href="/today" />
           <div className="grid gap-4">
-            {predictions.slice(0, 3).map(({ prediction, model }) => <PredictionCard key={prediction.id} prediction={prediction} model={model} />)}
+            {predictions.slice(0, 4).map(({ prediction, model }) => <PredictionCard key={prediction.id} prediction={prediction} model={model} compact />)}
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
             {principles.map((principle) => (

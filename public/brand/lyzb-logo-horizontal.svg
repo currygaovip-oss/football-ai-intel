@@ -1,0 +1,19 @@
+<svg width="1400" height="420" viewBox="0 0 1400 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="420" rx="56" fill="#06110D"/>
+  <g transform="translate(66 58) scale(4.75)">
+    <rect x="6" y="6" width="52" height="52" rx="14" fill="#06110D"/>
+    <rect x="6" y="6" width="52" height="52" rx="14" stroke="#00D6A3" stroke-opacity=".78" stroke-width="3"/>
+    <path d="M32 15v34" stroke="#163B31" stroke-width="2" stroke-linecap="round"/>
+    <path d="M17 32h30" stroke="#163B31" stroke-width="2" stroke-linecap="round"/>
+    <path d="M23 20h18v8H23z" fill="#00D6A3" fill-opacity=".14" stroke="#00D6A3" stroke-width="2"/>
+    <path d="M20 28h24v16H20z" fill="#00D6A3" fill-opacity=".08" stroke="#00D6A3" stroke-width="2"/>
+    <path d="M25 44v-8h14v8" stroke="#D4AF37" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M27 24h10M25 32h14M25 37h8" stroke="#F7FBF7" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="44" cy="44" r="6" fill="#D4AF37"/>
+    <path d="M41.5 44.2l1.8 1.9 3.4-4" stroke="#06110D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="430" y="188" fill="#F7FBF7" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="88" font-weight="800">绿茵智报</text>
+  <text x="432" y="270" fill="#00D6A3" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="38" font-weight="700" letter-spacing="6">FOOTBALL AI INTELLIGENCE</text>
+  <path d="M432 320h520" stroke="#00D6A3" stroke-opacity=".42" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="994" cy="320" r="8" fill="#D4AF37"/>
+</svg>
