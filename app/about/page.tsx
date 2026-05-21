@@ -16,7 +16,7 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="mt-8 rounded-lg border border-gold/25 bg-gold/10 p-5 text-sm leading-7 text-white/70">
-          明确声明：本站内容仅供足球交流、数据研究和模型观察参考，不构成投资、博彩或投注建议。请理性阅读，独立判断。
+          明确声明：本站内容仅供足球交流、数据研究和模型观察参考，不构成任何结果承诺或行动建议。请理性阅读，独立判断。
         </div>
       </div>
     </article>

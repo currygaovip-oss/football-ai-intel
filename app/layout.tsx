@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   title: "绿茵智报 | 中文足球 AI 赛前情报官",
   description: "中文足球 AI 赛前观点、模型倾向、风险提示与赛后复盘记录。",
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
     googleBot: {
-      index: false,
-      follow: false
+      index: true,
+      follow: true
     }
   }
 };

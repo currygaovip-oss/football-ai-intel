@@ -23,7 +23,6 @@ export function SiteHeader() {
           <div>
             <div className="flex items-center gap-2 text-base font-semibold tracking-wide">
               绿茵智报
-              <span className="rounded-full border border-gold/35 bg-gold/10 px-2 py-0.5 text-[10px] font-medium tracking-normal text-gold">预览版</span>
             </div>
             <div className="text-xs text-white/55">Football AI Intelligence</div>
           </div>

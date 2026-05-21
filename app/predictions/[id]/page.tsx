@@ -82,7 +82,7 @@ export default async function PredictionDetailPage({ params }: { params: Promise
           </Link>
         ) : null}
         <p className="mt-8 border-t border-white/10 pt-5 text-xs leading-6 text-white/45">
-          免责声明：本页面内容仅供足球交流、数据研究和赛前阅读参考，不构成投资、博彩或投注建议。
+          免责声明：本页面内容仅供足球交流、数据研究和赛前阅读参考，不构成任何结果承诺或行动建议。
         </p>
       </div>
     </article>

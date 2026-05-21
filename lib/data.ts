@@ -1,15 +1,11 @@
 import {
-  aiModels,
-  hotEvents,
-  matches,
-  predictions,
-  reviews,
   type AiModel,
   type HotEvent,
   type Match,
   type Prediction,
   type Review
 } from "@/lib/mock-data";
+import { aiModels, hotEvents, matches, predictions, reviews } from "@/lib/content-data";
 
 export type { AiModel, HotEvent, Match, Prediction, Review };
 
