@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Bot, Radio } from "lucide-react";
+import { TELEGRAM_URL } from "@/components/social-cta";
 
 const nav = [
   ["首页", "/"],
@@ -35,10 +36,10 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="hidden items-center gap-2 sm:flex">
-          <Link href="/vip" className="inline-flex items-center gap-2 rounded-md border border-turf/30 bg-turf/10 px-3 py-2 text-sm text-turf">
+          <a href={TELEGRAM_URL} className="inline-flex items-center gap-2 rounded-md border border-turf/30 bg-turf/10 px-3 py-2 text-sm text-turf">
             <Radio size={16} />
             社群入口
-          </Link>
+          </a>
         </div>
       </div>
       <nav className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 pb-3 text-sm sm:px-6 lg:hidden lg:px-8">
