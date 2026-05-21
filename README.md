@@ -22,7 +22,7 @@
 - `/schedule` 赛程
 - `/hot` 热门赛事
 - `/vip` VIP 社群说明
-- `/login` Google 登录预留页
+- `/login` 兼容旧入口，自动跳转到后台登录
 - `/admin` 预览版内容后台
 - `/about` 关于
 

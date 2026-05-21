@@ -36,9 +36,9 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="hidden items-center gap-2 sm:flex">
-          <Link href="/login" className="inline-flex items-center gap-2 rounded-md border border-white/15 px-3 py-2 text-sm text-white/72">
+          <Link href="/admin" className="inline-flex items-center gap-2 rounded-md border border-white/15 px-3 py-2 text-sm text-white/72">
             <LogIn size={16} />
-            登录
+            管理后台
           </Link>
           <a href="https://t.me/" className="inline-flex items-center gap-2 rounded-md border border-turf/30 bg-turf/10 px-3 py-2 text-sm text-turf">
             <Radio size={16} />
