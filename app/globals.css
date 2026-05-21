@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background:
+    radial-gradient(circle at 12% 4%, rgba(0, 214, 163, 0.14), transparent 28rem),
+    radial-gradient(circle at 88% 0%, rgba(212, 175, 55, 0.12), transparent 24rem),
+    linear-gradient(135deg, #06110d 0%, #081814 48%, #020403 100%);
+  color: #f7fbf7;
+}
+
+::selection {
+  background: rgba(0, 214, 163, 0.35);
+}
+
+.pitch-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.glass {
+  background: rgba(9, 24, 19, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(14px);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
