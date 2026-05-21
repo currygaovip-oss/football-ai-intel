@@ -30,10 +30,10 @@ export default function HomePage() {
               <BrainCircuit size={15} /> 中文足球 AI 赛前情报官
             </div>
             <h1 className="mt-2 text-xl font-semibold leading-tight text-white sm:text-2xl">
-              AI 读取历史比赛与指数信号，给出赛前参考方向。
+              AI 帮你赛前读懂一场球。
             </h1>
             <p className="mt-1 max-w-3xl text-sm leading-6 text-white/58">
-              模型综合球队状态、赛程强度、阵容消息、历史交锋、进球趋势和指数变化，输出可追踪的倾向与风险等级。
+              综合球队状态、阵容消息、历史交锋和数据变化，给出模型倾向与风险提示。
             </p>
           </div>
           <div className="flex gap-2 overflow-x-auto xl:min-w-[520px] xl:justify-end">
