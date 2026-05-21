@@ -1,21 +1,19 @@
 import {
+  aiModels,
+  hotEvents,
+  matches,
+  predictions,
+  reviews,
   type AiModel,
   type HotEvent,
   type Match,
   type Prediction,
   type Review
 } from "@/lib/mock-data";
-import { findPrediction, findReview, listAiModels, listHotEvents, listMatches, listPredictions, listReviews } from "@/lib/db";
 
 export type { AiModel, HotEvent, Match, Prediction, Review };
 
 export function getHomeData() {
-  const aiModels = listAiModels();
-  const hotEvents = listHotEvents();
-  const matches = listMatches();
-  const predictions = listPredictions();
-  const reviews = listReviews();
-
   return {
     aiModels: aiModels.slice(0, 3),
     modelCount: aiModels.length,
@@ -27,39 +25,39 @@ export function getHomeData() {
 }
 
 export function getTodayPredictions() {
-  return listPredictions().map(withPredictionModel);
+  return predictions.map(withPredictionModel);
 }
 
 export function getModelDirectory() {
-  return listAiModels();
+  return aiModels;
 }
 
 export function getSchedule() {
-  return listMatches();
+  return matches;
 }
 
 export function getHotEvents() {
-  return listHotEvents();
+  return hotEvents;
 }
 
 export function getReviews() {
-  return listReviews().map(withReviewPrediction);
+  return reviews.map(withReviewPrediction);
 }
 
 export function getPredictionDetail(id: string) {
-  const prediction = findPrediction(id);
+  const prediction = predictions.find((item) => item.id === id);
   if (!prediction) return null;
 
   return {
     prediction,
     model: getPredictionModel(prediction),
     assistantModels: getAssistantModels(prediction),
-    review: listReviews().find((review) => review.prediction_id === prediction.id)
+    review: reviews.find((review) => review.prediction_id === prediction.id)
   };
 }
 
 export function getReviewDetail(id: string) {
-  const review = findReview(id);
+  const review = reviews.find((item) => item.id === id);
   if (!review) return null;
 
   return {
@@ -83,7 +81,7 @@ function withReviewPrediction(review: Review) {
 }
 
 function getAiModel(id: string) {
-  return listAiModels().find((model) => model.id === id);
+  return aiModels.find((model) => model.id === id);
 }
 
 function getPredictionModel(prediction: Prediction) {
@@ -95,5 +93,5 @@ function getAssistantModels(prediction: Prediction) {
 }
 
 function getPredictionForReview(review: Review) {
-  return listPredictions().find((prediction) => prediction.id === review.prediction_id);
+  return predictions.find((prediction) => prediction.id === review.prediction_id);
 }

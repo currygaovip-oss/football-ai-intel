@@ -30,11 +30,11 @@ export default async function PredictionDetailPage({ params }: { params: Promise
               </div>
               <div className="grid grid-cols-2 gap-3 text-sm">
                 <div className="rounded-md border border-white/10 bg-black/15 p-3">
-                  <div className="text-white/45">历史命中率</div>
+                  <div className="text-white/45">内测样本表现</div>
                   <div className="mt-1 text-2xl font-semibold text-turf">{model.hit_rate}%</div>
                 </div>
                 <div className="rounded-md border border-white/10 bg-black/15 p-3">
-                  <div className="text-white/45">近30场</div>
+                  <div className="text-white/45">近期复盘样本</div>
                   <div className="mt-1 text-xs leading-5 text-white/72">{model.recent_record}</div>
                 </div>
               </div>
@@ -67,6 +67,14 @@ export default async function PredictionDetailPage({ params }: { params: Promise
         <section className="mt-6 rounded-lg border border-gold/25 bg-gold/10 p-5">
           <h2 className="text-lg font-semibold text-gold">风险提示</h2>
           <p className="mt-2 text-sm leading-7 text-white/68">足球比赛存在阵容、伤停、临场战术、红黄牌和偶发事件影响。模型倾向只代表赛前信息下的概率判断，不能替代独立判断。</p>
+        </section>
+        <section className="mt-6 rounded-lg border border-white/10 bg-white/5 p-5">
+          <h2 className="text-lg font-semibold">如何阅读这条情报</h2>
+          <div className="mt-3 grid gap-3 text-sm leading-6 text-white/62 sm:grid-cols-3">
+            <p>先看主模型和辅助模型，理解这条观点主要来自哪类分析逻辑。</p>
+            <p>再看参考方向和风险等级，避免把单场倾向理解成确定结论。</p>
+            <p>赛后优先查看复盘，长期记录比单场结果更重要。</p>
+          </div>
         </section>
         {review ? (
           <Link href={`/reviews/${review.id}`} className="mt-6 inline-flex rounded-md border border-white/15 px-4 py-3 text-sm text-white/82 hover:border-turf/40 hover:text-turf">

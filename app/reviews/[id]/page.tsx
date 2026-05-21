@@ -10,6 +10,7 @@ export default async function ReviewDetailPage({ params }: { params: Promise<{ i
   const detail = getReviewDetail(id);
   if (!detail) notFound();
   const { prediction, review } = detail;
+  const originalDirection = prediction?.recommendation.replace(/^模型倾向：|^参考方向：/, "");
 
   return (
     <article className="mx-auto max-w-4xl">
@@ -23,7 +24,7 @@ export default async function ReviewDetailPage({ params }: { params: Promise<{ i
         <div className="mt-6 rounded-lg border border-white/10 bg-white/5 p-4">
           <div className="text-sm text-white/58">比赛结果</div>
           <div className="mt-1 text-2xl font-semibold text-gold">{review.match_result}</div>
-          <div className="mt-4 text-sm text-white/68">原预测方向：{prediction?.recommendation}</div>
+          <div className="mt-4 text-sm text-white/68">原预测方向：{originalDirection}</div>
         </div>
         <section className="mt-8 space-y-4 text-base leading-8 text-white/72">
           {review.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}

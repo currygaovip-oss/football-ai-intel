@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Bot, LogIn, Radio } from "lucide-react";
+import { Bot, Radio } from "lucide-react";
 
 const nav = [
   ["首页", "/"],
@@ -15,7 +15,7 @@ const nav = [
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-pitch-950/86 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3">
           <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-turf/30 bg-turf/10 text-turf shadow-glow">
             <Bot size={21} />
@@ -36,16 +36,19 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="hidden items-center gap-2 sm:flex">
-          <Link href="/admin" className="inline-flex items-center gap-2 rounded-md border border-white/15 px-3 py-2 text-sm text-white/72">
-            <LogIn size={16} />
-            管理后台
-          </Link>
-          <a href="https://t.me/" className="inline-flex items-center gap-2 rounded-md border border-turf/30 bg-turf/10 px-3 py-2 text-sm text-turf">
+          <Link href="/vip" className="inline-flex items-center gap-2 rounded-md border border-turf/30 bg-turf/10 px-3 py-2 text-sm text-turf">
             <Radio size={16} />
-            Telegram 入口
-          </a>
+            社群入口
+          </Link>
         </div>
       </div>
+      <nav className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 pb-3 text-sm sm:px-6 lg:hidden lg:px-8">
+        {nav.map(([label, href]) => (
+          <Link key={href} href={href} className="shrink-0 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-white/72">
+            {label}
+          </Link>
+        ))}
+      </nav>
     </header>
   );
 }

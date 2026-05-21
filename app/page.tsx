@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Activity, BarChart3, BrainCircuit, CalendarDays, CheckCircle2 } from "lucide-react";
+import { Activity, BarChart3, BrainCircuit, CalendarDays, CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
 import { ModelCard } from "@/components/model-card";
 import { PredictionCard } from "@/components/prediction-card";
 import { ReviewCard } from "@/components/review-card";
@@ -15,6 +15,11 @@ export default function HomePage() {
     { label: "重点赛事", value: matches.length, Icon: CalendarDays },
     { label: "AI模型", value: modelCount, Icon: BarChart3 }
   ];
+  const principles = [
+    "赛前观点有模型署名",
+    "每条倾向附带风险提示",
+    "赛后独立复盘并留痕"
+  ];
 
   return (
     <div className="space-y-10">
@@ -24,11 +29,19 @@ export default function HomePage() {
             <BrainCircuit size={16} /> 中文足球 AI 赛前情报官
           </div>
           <h1 className="mt-6 max-w-3xl text-4xl font-semibold leading-tight text-balance sm:text-6xl">
-            赛前观点、模型倾向与赛后复盘，放在同一个长期记录里。
+            看赛前模型倾向，也看赛后复盘结果。
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-white/66">
-            绿茵智报面向关注世界杯、五大联赛和焦点杯赛的中文用户。我们用结构化数据、AI 观点和复盘评分，把每一场赛前判断沉淀成可追踪的模型表现。
+            绿茵智报面向关注世界杯、五大联赛和焦点杯赛的中文用户。每条情报都标注 AI 模型、参考方向、风险等级和复盘入口，把单场判断沉淀成可追踪的长期记录。
           </p>
+          <div className="mt-6 grid gap-2 text-sm text-white/70 sm:grid-cols-3">
+            {principles.map((principle) => (
+              <div key={principle} className="flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-2">
+                <ShieldCheck size={16} className="text-turf" />
+                {principle}
+              </div>
+            ))}
+          </div>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link href="/today" className="rounded-md bg-turf px-5 py-3 text-center text-sm font-semibold text-pitch-950">
               查看今日情报
@@ -74,6 +87,10 @@ export default function HomePage() {
 
       <section>
         <SectionHeading title="AI模型观察席" eyebrow="Model Matrix" href="/models" />
+        <div className="mb-4 rounded-lg border border-white/10 bg-black/20 p-4 text-sm leading-7 text-white/62">
+          <Sparkles className="mr-2 inline text-turf" size={16} />
+          模型席位不是统一署名，而是不同分析职责：综合赛前、指数结构、进球趋势、阵容伤停、冷门风险和赛后校准各自分工。
+        </div>
         <div className="grid gap-4 lg:grid-cols-3">
           {aiModels.map((model) => <ModelCard key={model.id} model={model} compact />)}
         </div>

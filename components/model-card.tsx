@@ -16,12 +16,12 @@ export function ModelCard({ model, compact = false }: { model: AiModel; compact?
             <div className="text-sm text-white/58">{model.name} · {model.role}</div>
           </div>
         </div>
-        <Badge tone={model.hit_rate >= 60 ? "green" : model.hit_rate >= 53 ? "gold" : "white"}>{model.hit_rate}%</Badge>
+        <Badge tone={model.hit_rate >= 60 ? "green" : model.hit_rate >= 53 ? "gold" : "white"}>样本 {model.hit_rate}%</Badge>
       </div>
 
       <div className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
         <div className="rounded-md border border-white/10 bg-white/5 p-3">
-          <div className="text-white/45">历史命中率</div>
+          <div className="text-white/45">内测样本表现</div>
           <div className="mt-1 text-2xl font-semibold text-turf">{model.hit_rate}%</div>
         </div>
         <div className="rounded-md border border-white/10 bg-white/5 p-3">
@@ -32,7 +32,7 @@ export function ModelCard({ model, compact = false }: { model: AiModel; compact?
         </div>
       </div>
 
-      <p className="mt-4 text-sm leading-6 text-white/64">{compact ? model.recent_record : model.description}</p>
+      <p className="mt-4 text-sm leading-6 text-white/64">{compact ? `${model.role}：${model.recent_record}` : model.description}</p>
 
       {!compact ? (
         <>
