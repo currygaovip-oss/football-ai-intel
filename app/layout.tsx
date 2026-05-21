@@ -6,14 +6,18 @@ import { SiteHeader } from "@/components/site-header";
 export const metadata: Metadata = {
   metadataBase: new URL("https://lyzbvip.vip"),
   title: "绿茵智报 | 中文足球 AI 赛前情报官",
-  description: "中文足球 AI 赛前观点、模型倾向、风险提示与赛后复盘记录。",
+  description: "中文足球 AI 赛前观点，综合历史比赛、指数变化、阵容赛程和进球趋势，输出模型倾向与风险等级。",
   applicationName: "绿茵智报",
   icons: {
-    icon: "/icon.svg"
+    icon: [
+      { url: "/icon.svg?v=2", type: "image/svg+xml" },
+      { url: "/brand/lyzb-logo-square.png?v=2", sizes: "1024x1024", type: "image/png" }
+    ],
+    apple: "/brand/lyzb-logo-square.png?v=2"
   },
   openGraph: {
     title: "绿茵智报 | 中文足球 AI 赛前情报官",
-    description: "中文足球 AI 赛前观点、模型倾向、风险提示与赛后复盘记录。",
+    description: "综合历史比赛、指数变化、阵容赛程和进球趋势，输出赛前模型倾向与风险等级。",
     url: "https://lyzbvip.vip",
     siteName: "绿茵智报",
     locale: "zh_CN",

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Activity, BarChart3, BrainCircuit, CalendarDays, CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
+import { Activity, BarChart3, BrainCircuit, CalendarDays, Database, ShieldCheck, Sparkles } from "lucide-react";
 import { ModelCard } from "@/components/model-card";
 import { PredictionCard } from "@/components/prediction-card";
 import { ReviewCard } from "@/components/review-card";
@@ -11,14 +11,14 @@ export default function HomePage() {
   const { aiModels, hotEvents, matches, modelCount, predictions, reviews } = getHomeData();
   const stats = [
     { label: "今日观点", value: predictions.length, Icon: Activity },
-    { label: "已复盘记录", value: reviews.length, Icon: CheckCircle2 },
+    { label: "数据信号", value: 6, Icon: Database },
     { label: "世界杯赛程", value: matches.length, Icon: CalendarDays },
     { label: "AI模型", value: modelCount, Icon: BarChart3 }
   ];
   const principles = [
-    "赛前观点有模型署名",
-    "每条倾向附带风险提示",
-    "赛后独立复盘并留痕"
+    "历史样本 + 指数变化",
+    "阵容赛程同步校验",
+    "赛后复盘校准模型"
   ];
 
   return (
@@ -30,10 +30,10 @@ export default function HomePage() {
               <BrainCircuit size={15} /> 中文足球 AI 赛前情报官
             </div>
             <h1 className="mt-2 text-xl font-semibold leading-tight text-white sm:text-2xl">
-              今日赛前观点、模型倾向与赛后复盘。
+              AI 读取历史比赛与指数信号，给出赛前参考方向。
             </h1>
             <p className="mt-1 max-w-3xl text-sm leading-6 text-white/58">
-              每条情报标注 AI 模型、参考方向和风险等级，赛后复盘长期留痕。
+              模型综合球队状态、赛程强度、阵容消息、历史交锋、进球趋势和指数变化，输出可追踪的倾向与风险等级。
             </p>
           </div>
           <div className="flex gap-2 overflow-x-auto xl:min-w-[520px] xl:justify-end">
