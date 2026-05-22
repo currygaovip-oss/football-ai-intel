@@ -12,6 +12,15 @@ const csp = [
 ].join("; ");
 
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/hot",
+        destination: "/schedule",
+        permanent: true
+      }
+    ];
+  },
   async headers() {
     return [
       {
