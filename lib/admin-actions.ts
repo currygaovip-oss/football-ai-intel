@@ -2,16 +2,38 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { checkAdminPassword, clearAdminAuth, setAdminAuth } from "@/lib/admin-auth";
+import { headers } from "next/headers";
+import {
+  checkAdminPassword,
+  clearAdminAuth,
+  clearFailedLogins,
+  isAdminAuthed,
+  isAdminPasswordConfigured,
+  isLoginAllowed,
+  recordFailedLogin,
+  setAdminAuth
+} from "@/lib/admin-auth";
 import { insertPrediction, insertReview } from "@/lib/db";
 import type { Prediction, Review } from "@/lib/data";
 
 export async function loginAdmin(formData: FormData) {
   const password = String(formData.get("password") || "");
+  const identifier = await getLoginIdentifier();
+
+  if (!isAdminPasswordConfigured()) {
+    redirect("/admin/login?error=config");
+  }
+
+  if (!isLoginAllowed(identifier)) {
+    redirect("/admin/login?error=locked");
+  }
+
   if (!checkAdminPassword(password)) {
+    recordFailedLogin(identifier);
     redirect("/admin/login?error=1");
   }
 
+  clearFailedLogins(identifier);
   await setAdminAuth();
   redirect("/admin");
 }
@@ -22,6 +44,8 @@ export async function logoutAdmin() {
 }
 
 export async function createPrediction(formData: FormData) {
+  await requireAdmin();
+
   const now = Date.now();
   const prediction: Prediction = {
     id: `p-${now}`,
@@ -47,6 +71,8 @@ export async function createPrediction(formData: FormData) {
 }
 
 export async function createReview(formData: FormData) {
+  await requireAdmin();
+
   const now = Date.now();
   const review: Review = {
     id: `r-${now}`,
@@ -88,4 +114,14 @@ function splitCsv(value: FormDataEntryValue | null) {
     .split(",")
     .map((item) => item.trim())
     .filter(Boolean);
+}
+
+async function requireAdmin() {
+  if (!(await isAdminAuthed())) redirect("/admin/login");
+}
+
+async function getLoginIdentifier() {
+  const headerStore = await headers();
+  const forwardedFor = headerStore.get("x-forwarded-for")?.split(",")[0]?.trim();
+  return forwardedFor || headerStore.get("x-real-ip") || "local";
 }

@@ -5,7 +5,7 @@ const features = [
   "更完整的赛前 AI 分析正文与关键变量",
   "VIP 标记赛事的模型倾向与风险拆解",
   "赛后复盘评分、偏差归因和长期表现记录",
-  "Telegram 群内的临场信息更新与管理员说明"
+  "Telegram 群内的更新提醒与社群说明"
 ];
 
 export default function VipPage() {
@@ -15,9 +15,9 @@ export default function VipPage() {
         <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-sm text-gold">
           <ShieldAlert size={16} /> VIP 社群说明
         </div>
-        <h1 className="mt-5 text-4xl font-semibold">先做内容信任，再做会员体系。</h1>
+        <h1 className="mt-5 text-4xl font-semibold">VIP 适合深度跟踪赛前观点。</h1>
         <p className="mt-4 leading-8 text-white/66">
-          第一版不接在线支付，也不做复杂用户系统。VIP 内容通过 Telegram 群组联系管理员开通，重点是让用户先看懂观点质量、复盘纪律和风险边界。
+          VIP 内容会提供更完整的模型拆解、关键变量说明和复盘记录。当前通过 Telegram 社群开放加入说明，适合希望长期跟踪模型表现的用户。
         </p>
         <div className="mt-8 grid gap-3">
           {features.map((feature) => (

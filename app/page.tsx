@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Activity, BarChart3, BrainCircuit, CalendarDays, Database, ShieldCheck, Sparkles } from "lucide-react";
 import { ModelCard } from "@/components/model-card";
 import { PredictionCard } from "@/components/prediction-card";
@@ -8,12 +7,12 @@ import { SocialCta } from "@/components/social-cta";
 import { getHomeData } from "@/lib/data";
 
 export default function HomePage() {
-  const { aiModels, hotEvents, matches, modelCount, predictions, reviews } = getHomeData();
+  const { aiModels, matches, modelCount, predictions, reviews } = getHomeData();
   const stats = [
     { label: "今日观点", value: predictions.length, Icon: Activity },
     { label: "数据信号", value: 6, Icon: Database },
     { label: "世界杯赛程", value: matches.length, Icon: CalendarDays },
-    { label: "AI模型", value: modelCount, Icon: BarChart3 }
+    { label: "AI分析师", value: modelCount, Icon: BarChart3 }
   ];
   const principles = [
     "历史样本 + 指数变化",
@@ -92,26 +91,13 @@ export default function HomePage() {
       </section>
 
       <section>
-        <SectionHeading title="AI模型观察席" eyebrow="Model Matrix" href="/models" />
+        <SectionHeading title="AI分析师矩阵" eyebrow="Analyst Matrix" href="/models" />
         <div className="mb-4 rounded-lg border border-white/10 bg-black/20 p-4 text-sm leading-7 text-white/62">
           <Sparkles className="mr-2 inline text-turf" size={16} />
-          模型席位不是统一署名，而是不同分析职责：综合赛前、指数结构、进球趋势、阵容伤停、冷门风险和赛后校准各自分工。
+          不是单一模型统一输出，而是多模型分析席位分工：基本面、指数结构、进球趋势、阵容赛程、热度风险各自校验。
         </div>
         <div className="grid gap-4 lg:grid-cols-3">
           {aiModels.map((model) => <ModelCard key={model.id} model={model} compact />)}
-        </div>
-      </section>
-
-      <section>
-        <SectionHeading title="热门赛事" eyebrow="Hot" href="/hot" />
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {hotEvents.slice(0, 6).map((event) => (
-            <div key={event.id} className="glass rounded-lg p-5">
-              <div className="text-xs text-gold">{event.competition} · {event.kickoff_time_text}</div>
-              <h3 className="mt-2 text-lg font-semibold">{event.matchup}</h3>
-              <p className="mt-2 text-sm leading-6 text-white/62">{event.body}</p>
-            </div>
-          ))}
         </div>
       </section>
     </div>

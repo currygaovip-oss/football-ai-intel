@@ -22,7 +22,7 @@ export default async function PredictionDetailPage({ params }: { params: Promise
         <h1 className="text-3xl font-semibold leading-tight sm:text-5xl">{prediction.title}</h1>
         {model ? (
           <section className="mt-6 rounded-lg border border-turf/25 bg-turf/10 p-5">
-            <div className="text-sm font-semibold text-turf">AI 模型预测</div>
+            <div className="text-sm font-semibold text-turf">AI 分析师模型</div>
             <div className="mt-3 grid gap-4 lg:grid-cols-[1fr_0.8fr]">
               <div>
                 <div className="text-2xl font-semibold">{model.code} · {model.name}</div>
@@ -31,10 +31,10 @@ export default async function PredictionDetailPage({ params }: { params: Promise
               <div className="grid grid-cols-2 gap-3 text-sm">
                 <div className="rounded-md border border-white/10 bg-black/15 p-3">
                   <div className="text-white/45">内测样本表现</div>
-                  <div className="mt-1 text-2xl font-semibold text-turf">{model.hit_rate}%</div>
+                  <div className="mt-1 text-2xl font-semibold text-turf">{model.hit_rate}%+</div>
                 </div>
                 <div className="rounded-md border border-white/10 bg-black/15 p-3">
-                  <div className="text-white/45">近期复盘样本</div>
+                  <div className="text-white/45">近期样本表现</div>
                   <div className="mt-1 text-xs leading-5 text-white/72">{model.recent_record}</div>
                 </div>
               </div>
@@ -69,6 +69,12 @@ export default async function PredictionDetailPage({ params }: { params: Promise
           <p className="mt-2 text-sm leading-7 text-white/68">足球比赛存在阵容、伤停、临场战术、红黄牌和偶发事件影响。模型倾向只代表赛前信息下的概率判断，不能替代独立判断。</p>
         </section>
         <section className="mt-6 rounded-lg border border-white/10 bg-white/5 p-5">
+          <h2 className="text-lg font-semibold">数据来源与校验</h2>
+          <p className="mt-2 text-sm leading-7 text-white/64">
+            模型参考维度包括球队状态、历史交锋、阵容伤停、赛程密度、指数变化、进球趋势和赛后复盘反馈。赛前观点由 AI 分析模型生成初步框架，并结合人工校验后发布，用于提高内容可读性和风险边界。
+          </p>
+        </section>
+        <section className="mt-6 rounded-lg border border-white/10 bg-white/5 p-5">
           <h2 className="text-lg font-semibold">如何阅读这条情报</h2>
           <div className="mt-3 grid gap-3 text-sm leading-6 text-white/62 sm:grid-cols-3">
             <p>先看主模型和辅助模型，理解这条观点主要来自哪类分析逻辑。</p>
@@ -82,7 +88,7 @@ export default async function PredictionDetailPage({ params }: { params: Promise
           </Link>
         ) : null}
         <p className="mt-8 border-t border-white/10 pt-5 text-xs leading-6 text-white/45">
-          免责声明：本页面内容仅供足球交流、数据研究和赛前阅读参考，不构成任何结果承诺或行动建议。
+          免责声明：本内容仅用于足球交流、数据研究和赛前阅读参考，不构成任何结果承诺或行动建议。
         </p>
       </div>
     </article>

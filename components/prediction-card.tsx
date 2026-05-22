@@ -28,7 +28,7 @@ export function PredictionCard({ prediction, model, compact = false }: { predict
                 <span className="font-semibold text-white">{model.code}</span>
                 <span className="text-white/50">{model.name}</span>
               </div>
-              <div className="mt-1 text-xs text-white/50">历史样本表现 {model.hit_rate}% · {model.role}</div>
+              <div className="mt-1 text-xs text-white/50">近期样本表现 {model.hit_rate}% · {model.role}</div>
             </div>
           ) : null}
         </div>
@@ -57,7 +57,7 @@ export function PredictionCard({ prediction, model, compact = false }: { predict
             <span className="rounded-full border border-white/10 bg-black/20 px-2 py-0.5 text-[11px] text-white/62">{model.role}</span>
           </div>
           <div className="mt-3 grid gap-2 text-xs text-white/58 sm:grid-cols-2">
-            <span className="rounded border border-white/10 bg-black/15 px-2 py-1">样本表现 {model.hit_rate}%</span>
+            <span className="rounded border border-white/10 bg-black/15 px-2 py-1">内测样本表现 {model.hit_rate}%+</span>
             <span className="rounded border border-white/10 bg-black/15 px-2 py-1">{model.recent_record}</span>
           </div>
         </div>

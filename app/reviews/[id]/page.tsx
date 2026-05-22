@@ -29,8 +29,11 @@ export default async function ReviewDetailPage({ params }: { params: Promise<{ i
         <section className="mt-8 space-y-4 text-base leading-8 text-white/72">
           {review.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </section>
+        <div className="mt-8 rounded-lg border border-turf/20 bg-turf/5 p-4 text-sm leading-6 text-white/65">
+          我们不只展示符合预期的观点，也会记录偏差和未符合预期的场次。模型表现会通过长期样本持续校准，命中的会记录，偏差的也会复盘。
+        </div>
         <p className="mt-8 border-t border-white/10 pt-5 text-xs leading-6 text-white/45">
-          免责声明：复盘用于记录模型表现与改进方向，仅供足球交流参考。
+          免责声明：本内容仅用于足球交流、数据研究和赛前阅读参考，不构成任何结果承诺或行动建议。
         </p>
       </div>
     </article>

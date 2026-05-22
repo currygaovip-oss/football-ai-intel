@@ -6,5 +6,7 @@ coverage/
 .env.local
 data/*.db
 data/*.db-*
+backups/
+tsconfig.tsbuildinfo
 .DS_Store
 *.log
