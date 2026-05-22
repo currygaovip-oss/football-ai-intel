@@ -1,7 +1,16 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { AdminShell } from "@/components/admin-shell";
 import { isAdminAuthed } from "@/lib/admin-auth";
 import { getHomeData, getReviews, getTodayPredictions } from "@/lib/data";
+import { createMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createMetadata({
+  title: "后台管理",
+  description: "绿茵智报后台管理入口。",
+  path: "/admin",
+  noIndex: true
+});
 
 export default async function AdminPage() {
   if (!(await isAdminAuthed())) redirect("/admin/login");

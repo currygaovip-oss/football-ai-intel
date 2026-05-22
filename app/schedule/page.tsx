@@ -1,7 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { SectionHeading } from "@/components/section-heading";
 import { cn } from "@/lib/utils";
 import { getSchedule } from "@/lib/data";
+import { createMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createMetadata({
+  title: "世界杯赛程中心",
+  description: "查看世界杯赛程、今日赛程、明日赛程、小组赛和淘汰赛安排，配合绿茵智报赛前观点阅读。",
+  path: "/schedule"
+});
 
 const filters = [
   { key: "today", label: "今日赛程" },

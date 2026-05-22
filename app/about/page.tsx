@@ -1,3 +1,12 @@
+import type { Metadata } from "next";
+import { createMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createMetadata({
+  title: "关于绿茵智报",
+  description: "绿茵智报是中文足球 AI 赛前情报项目，围绕赛前观点、模型倾向、风险提示和赛后复盘建立长期记录。",
+  path: "/about"
+});
+
 export default function AboutPage() {
   return (
     <article className="mx-auto max-w-4xl">

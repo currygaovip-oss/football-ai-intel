@@ -5,6 +5,7 @@ import { ReviewCard } from "@/components/review-card";
 import { SectionHeading } from "@/components/section-heading";
 import { SocialCta } from "@/components/social-cta";
 import { getHomeData } from "@/lib/data";
+import { jsonLd, websiteJsonLd } from "@/lib/seo";
 
 export default function HomePage() {
   const { aiModels, matches, modelCount, predictions, reviews } = getHomeData();
@@ -22,6 +23,7 @@ export default function HomePage() {
 
   return (
     <div className="space-y-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(websiteJsonLd()) }} />
       <section className="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3">
         <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
           <div>

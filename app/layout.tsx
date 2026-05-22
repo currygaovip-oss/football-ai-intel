@@ -2,29 +2,37 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { defaultOgImage, seoKeywords, siteDescription, siteName, siteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lyzbvip.vip"),
-  title: "绿茵智报 | 中文足球 AI 赛前情报官",
-  description: "中文足球 AI 赛前观点，综合历史比赛、指数变化、阵容赛程和进球趋势，输出模型倾向与风险等级。",
-  applicationName: "绿茵智报",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "绿茵智报 | 中文足球 AI 赛前情报官",
+    template: "%s | 绿茵智报"
+  },
+  description: siteDescription,
+  applicationName: siteName,
+  keywords: seoKeywords,
+  alternates: {
+    canonical: siteUrl
+  },
   icons: {
     icon: [
-      { url: "/brand/football-ai-logo-universal.png?v=3", sizes: "1254x1254", type: "image/png" }
+      { url: defaultOgImage, sizes: "1254x1254", type: "image/png" }
     ],
-    apple: "/brand/football-ai-logo-universal.png?v=3"
+    apple: defaultOgImage
   },
   openGraph: {
     title: "绿茵智报 | 中文足球 AI 赛前情报官",
-    description: "综合历史比赛、指数变化、阵容赛程和进球趋势，输出赛前模型倾向与风险等级。",
-    url: "https://lyzbvip.vip",
-    siteName: "绿茵智报",
+    description: siteDescription,
+    url: siteUrl,
+    siteName,
     images: [
       {
-        url: "/brand/football-ai-logo-universal.png?v=3",
+        url: defaultOgImage,
         width: 1254,
         height: 1254,
-        alt: "绿茵智报"
+        alt: siteName
       }
     ],
     locale: "zh_CN",
@@ -33,8 +41,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "绿茵智报 | 中文足球 AI 赛前情报官",
-    description: "综合历史比赛、指数变化、阵容赛程和进球趋势，输出赛前模型倾向与风险等级。",
-    images: ["/brand/football-ai-logo-universal.png?v=3"]
+    description: siteDescription,
+    images: [defaultOgImage]
   },
   robots: {
     index: true,

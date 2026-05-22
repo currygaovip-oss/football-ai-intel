@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import { ReviewCard } from "@/components/review-card";
 import { SectionHeading } from "@/components/section-heading";
 import { getReviews } from "@/lib/data";
+import { createMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createMetadata({
+  title: "赛后复盘记录",
+  description: "绿茵智报独立记录足球 AI 赛前观点的赛后复盘、命中情况、偏差归因和模型表现评分。",
+  path: "/reviews"
+});
 
 export default function ReviewsPage() {
   const reviews = getReviews();

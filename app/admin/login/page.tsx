@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import { loginAdmin } from "@/lib/admin-actions";
 import { getAdminPasswordHint } from "@/lib/admin-auth";
+import { createMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createMetadata({
+  title: "后台登录",
+  description: "绿茵智报后台登录入口。",
+  path: "/admin/login",
+  noIndex: true
+});
 
 export default async function AdminLoginPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const { error } = await searchParams;

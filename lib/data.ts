@@ -47,6 +47,10 @@ export function getTodayPredictions() {
   return getContentData().predictions.map(withPredictionModel);
 }
 
+export function getAllPredictions() {
+  return getContentData().predictions;
+}
+
 export function getModelDirectory() {
   return publicAiModels;
 }
@@ -58,6 +62,10 @@ export function getSchedule() {
 export function getReviews() {
   const data = getContentData();
   return data.reviews.map((review) => withReviewPrediction(review, data.predictions));
+}
+
+export function getAllReviews() {
+  return getContentData().reviews;
 }
 
 export function getPredictionDetail(id: string) {

@@ -1,17 +1,72 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/badge";
 import { ModelMiniLink } from "@/components/model-card";
 import { getPredictionDetail } from "@/lib/data";
+import { articleJsonLd, breadcrumbJsonLd, createMetadata, jsonLd, truncateSeo } from "@/lib/seo";
 
-export default async function PredictionDetailPage({ params }: { params: Promise<{ id: string }> }) {
+type PredictionParams = { params: Promise<{ id: string }> };
+
+export async function generateMetadata({ params }: PredictionParams): Promise<Metadata> {
+  const { id } = await params;
+  const detail = getPredictionDetail(id);
+  if (!detail) {
+    return createMetadata({
+      title: "赛前观点详情",
+      description: "绿茵智报足球 AI 赛前观点详情。",
+      path: `/predictions/${id}`,
+      noIndex: true
+    });
+  }
+
+  const { prediction, model } = detail;
+  const description = truncateSeo(
+    `${prediction.competition} ${prediction.matchup}，${prediction.recommendation}，风险等级：${prediction.risk_level}。${model ? `由 ${model.name} 生成主要分析。` : ""}`
+  );
+
+  return createMetadata({
+    title: `${prediction.matchup} AI 赛前观点`,
+    description,
+    path: `/predictions/${prediction.id}`,
+    type: "article"
+  });
+}
+
+export default async function PredictionDetailPage({ params }: PredictionParams) {
   const { id } = await params;
   const detail = getPredictionDetail(id);
   if (!detail) notFound();
   const { assistantModels, model, prediction, review } = detail;
+  const description = truncateSeo(`${prediction.competition} ${prediction.matchup}，${prediction.recommendation}，风险等级：${prediction.risk_level}。`);
 
   return (
     <article className="mx-auto max-w-4xl">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            articleJsonLd({
+              title: `${prediction.matchup} AI 赛前观点`,
+              description,
+              path: `/predictions/${prediction.id}`,
+              publishedAt: prediction.published_at
+            })
+          )
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            breadcrumbJsonLd([
+              { name: "首页", path: "/" },
+              { name: "今日情报", path: "/today" },
+              { name: prediction.matchup, path: `/predictions/${prediction.id}` }
+            ])
+          )
+        }}
+      />
       <div className="glass rounded-lg p-6 sm:p-8">
         <div className="mb-5 flex flex-wrap items-center gap-2">
           <Badge tone={prediction.visibility === "vip" ? "gold" : "green"}>{prediction.visibility === "vip" ? "VIP内容" : "免费观点"}</Badge>

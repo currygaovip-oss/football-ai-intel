@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import { PredictionCard } from "@/components/prediction-card";
 import { SectionHeading } from "@/components/section-heading";
 import { getModelDirectory, getReviews, getTodayPredictions } from "@/lib/data";
+import { createMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createMetadata({
+  title: "今日足球 AI 赛前观点",
+  description: "查看今日足球赛前观点、AI 模型倾向、风险等级和最新发布的中文足球数据分析情报。",
+  path: "/today"
+});
 
 export default function TodayPage() {
   const predictions = getTodayPredictions();

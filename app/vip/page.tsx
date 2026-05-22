@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import { CheckCircle2, MessageCircle, ShieldAlert } from "lucide-react";
 import { SocialCta } from "@/components/social-cta";
+import { createMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createMetadata({
+  title: "VIP 社群说明",
+  description: "绿茵智报 VIP 社群说明，提供更完整的赛前 AI 分析正文、关键变量、模型倾向和赛后复盘记录。",
+  path: "/vip"
+});
 
 const features = [
   "更完整的赛前 AI 分析正文与关键变量",

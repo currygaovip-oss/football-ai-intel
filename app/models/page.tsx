@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import { ModelCard } from "@/components/model-card";
 import { SectionHeading } from "@/components/section-heading";
 import { getModelDirectory } from "@/lib/data";
+import { createMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createMetadata({
+  title: "AI 分析师矩阵",
+  description: "了解绿茵智报的 AI 分析师模型，包括基本面、指数结构、进球趋势、阵容赛程和热度风险分析。",
+  path: "/models"
+});
 
 export default function ModelsPage() {
   const aiModels = getModelDirectory();
