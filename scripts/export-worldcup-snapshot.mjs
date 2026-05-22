@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 
@@ -253,7 +253,6 @@ try {
   const predictions = predictionRows.map(rowToPrediction);
   const reviews = predictionRows.flatMap(rowToReview);
   const payload = {
-    exported_at: new Date().toISOString(),
     source: "worldcup_bot_snapshot",
     counts: {
       matches: matchRows.length,
@@ -266,9 +265,28 @@ try {
   };
 
   mkdirSync(path.dirname(outputPath), { recursive: true });
-  writeFileSync(outputPath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
-  console.log(`Exported ${payload.counts.predictions} predictions, ${payload.counts.reviews} reviews, ${payload.counts.matches} matches.`);
-  console.log(`Snapshot written to ${outputPath}`);
+  if (snapshotContentUnchanged(payload)) {
+    console.log(`Snapshot unchanged: ${outputPath}`);
+  } else {
+    writeFileSync(outputPath, `${JSON.stringify({ exported_at: new Date().toISOString(), ...payload }, null, 2)}\n`, "utf8");
+    console.log(`Exported ${payload.counts.predictions} predictions, ${payload.counts.reviews} reviews, ${payload.counts.matches} matches.`);
+    console.log(`Snapshot written to ${outputPath}`);
+  }
 } finally {
   database.close();
+}
+
+function snapshotContentUnchanged(nextPayload) {
+  if (!existsSync(outputPath)) return false;
+  try {
+    const currentPayload = JSON.parse(readFileSync(outputPath, "utf8"));
+    delete currentPayload.exported_at;
+    return stableJson(currentPayload) === stableJson(nextPayload);
+  } catch {
+    return false;
+  }
+}
+
+function stableJson(value) {
+  return JSON.stringify(value);
 }
