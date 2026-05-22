@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-05-22T13:47:53.217Z",
+  "exported_at": "2026-05-22T14:18:24.450Z",
   "source": "worldcup_bot_snapshot",
   "counts": {
     "matches": 104,
@@ -946,20 +946,21 @@
   ],
   "predictions": [
     {
-      "id": "tg-p9",
-      "model_id": "heat-guard",
+      "id": "tg-p10",
+      "model_id": "alpha-pitch",
       "assistant_model_ids": [
         "odds-mind",
         "goal-net"
       ],
-      "title": "爱超 谢尔本 VS 沃特福德联队",
-      "competition": "爱超",
+      "title": "测试测试 谢尔本 VS 沃特福德联队",
+      "competition": "测试测试",
       "kickoff_time_text": "05-23 01:45",
       "matchup": "谢尔本 vs 沃特福德联队",
       "visibility": "free",
       "recommendation": "模型倾向：谢尔本 -1.25",
       "risk_level": "高",
       "body": [
+        "爱超",
         "基本面来看，两队本赛季质量差距比较明显。谢尔本目前处在中上游竞争区，整体攻防表现更加均衡；沃特福德联队则防守问题突出，失球数偏多，面对持续压迫能力较强的对手时，后防容易被打穿。",
         "谢尔本主场属性较强，过往面对沃特福德联队也占据心理优势。近期主场交锋中，谢尔本曾多次取得主动，整体打法和比赛节奏都更适合压制沃特福德联队。",
         "战意层面，谢尔本仍需要积分巩固排名，主场争胜动力充足。沃特福德联队虽然也有抢分诉求，但防守基础不够稳，尤其在客场面对主动提速和连续冲击时，容易出现被动局面。",
@@ -970,7 +971,7 @@
         "谢尔本 -1.25",
         "大 2.75 可关注"
       ],
-      "published_at": "05/22 12:06"
+      "published_at": "05/22 14:18"
     },
     {
       "id": "tg-p8",
@@ -1175,15 +1176,15 @@
   ],
   "reviews": [
     {
-      "id": "tg-r9",
-      "prediction_id": "tg-p9",
+      "id": "tg-r10",
+      "prediction_id": "tg-p10",
       "match_result": "谢尔本 vs 沃特福德联队",
       "result_status": "hit",
       "score": 8,
       "body": [
         "暂无完整正文，建议结合参考方向和风险提示阅读。"
       ],
-      "reviewed_at": "05/22 12:06"
+      "reviewed_at": "05/22 14:18"
     },
     {
       "id": "tg-r8",
