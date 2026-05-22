@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Radio } from "lucide-react";
-import { BrandMark } from "@/components/brand-logo";
 import { TELEGRAM_URL } from "@/components/social-cta";
 
 const nav = [
@@ -19,7 +18,11 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-pitch-950/86 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3">
-          <BrandMark className="h-10 w-10 shrink-0 shadow-glow" />
+          <img
+            src="/brand/football-ai-logo-universal.png"
+            alt="绿茵智报"
+            className="h-11 w-11 shrink-0 rounded-full border border-gold/45 object-cover shadow-glow"
+          />
           <div>
             <div className="flex items-center gap-2 text-base font-semibold tracking-wide">
               绿茵智报
