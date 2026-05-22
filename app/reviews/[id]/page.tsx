@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/badge";
 import { getReviewDetail } from "@/lib/data";
@@ -22,8 +23,8 @@ export async function generateMetadata({ params }: ReviewParams): Promise<Metada
   }
 
   const { prediction, review } = detail;
-  const title = `${prediction?.matchup ?? "足球赛事"} 赛后复盘`;
-  const description = truncateSeo(`比赛结果：${review.match_result}。复盘状态：${statusText[review.result_status]}，评分：${review.score}。`);
+  const title = `${compactMatchup(prediction?.matchup ?? "足球赛事")}赛后复盘：赛前分析结果记录`;
+  const description = truncateSeo(`足球赛后复盘：${prediction?.matchup ?? "足球赛事"}比赛结果为${review.match_result}，复盘状态：${statusText[review.result_status]}，评分：${review.score}。`);
 
   return createMetadata({
     title,
@@ -39,8 +40,9 @@ export default async function ReviewDetailPage({ params }: ReviewParams) {
   if (!detail) notFound();
   const { prediction, review } = detail;
   const originalDirection = prediction?.recommendation.replace(/^模型倾向：|^参考方向：/, "");
-  const pageTitle = `${prediction?.matchup ?? "足球赛事"} 赛后复盘`;
-  const description = truncateSeo(`比赛结果：${review.match_result}。复盘状态：${statusText[review.result_status]}，评分：${review.score}。`);
+  const matchupKeyword = compactMatchup(prediction?.matchup ?? "足球赛事");
+  const pageTitle = `${matchupKeyword}赛后复盘`;
+  const description = truncateSeo(`足球赛后复盘：${prediction?.matchup ?? "足球赛事"}比赛结果为${review.match_result}，复盘状态：${statusText[review.result_status]}，评分：${review.score}。`);
 
   return (
     <article className="mx-auto max-w-4xl">
@@ -76,11 +78,19 @@ export default async function ReviewDetailPage({ params }: ReviewParams) {
           <span className="text-sm text-white/45">{review.reviewed_at}</span>
         </div>
         <h1 className="text-3xl font-semibold sm:text-5xl">{prediction?.matchup ?? "赛后复盘详情"}</h1>
+        <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
+          本页记录{prediction?.matchup ?? "本场比赛"}的赛前观点复盘，包括比赛结果、原参考方向、结果状态和复盘评分，用于长期观察赛前分析质量。
+        </p>
         <div className="mt-6 rounded-lg border border-white/10 bg-white/5 p-4">
           <div className="text-sm text-white/58">比赛结果</div>
           <div className="mt-1 text-2xl font-semibold text-gold">{review.match_result}</div>
           <div className="mt-4 text-sm text-white/68">原预测方向：{originalDirection}</div>
         </div>
+        {prediction ? (
+          <Link href={`/predictions/${prediction.id}`} className="mt-4 inline-flex rounded-md border border-white/15 px-4 py-2 text-sm text-white/78 hover:border-turf/35 hover:text-turf">
+            查看原赛前分析
+          </Link>
+        ) : null}
         <section className="mt-8 space-y-4 text-base leading-8 text-white/72">
           {review.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </section>
@@ -93,4 +103,8 @@ export default async function ReviewDetailPage({ params }: ReviewParams) {
       </div>
     </article>
   );
+}
+
+function compactMatchup(matchup: string) {
+  return matchup.replace(/\s+vs\s+/i, "vs").replace(/\s+/g, "");
 }

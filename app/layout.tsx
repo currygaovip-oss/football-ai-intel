@@ -7,7 +7,7 @@ import { defaultOgImage, seoKeywords, siteDescription, siteName, siteUrl } from 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "绿茵智报 | 中文足球 AI 赛前情报官",
+    default: "绿茵智报 | 今日足球赛程、赛前分析与赛后复盘",
     template: "%s | 绿茵智报"
   },
   description: siteDescription,
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     apple: defaultOgImage
   },
   openGraph: {
-    title: "绿茵智报 | 中文足球 AI 赛前情报官",
+    title: "绿茵智报 | 今日足球赛程、赛前分析与赛后复盘",
     description: siteDescription,
     url: siteUrl,
     siteName,
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "绿茵智报 | 中文足球 AI 赛前情报官",
+    title: "绿茵智报 | 今日足球赛程、赛前分析与赛后复盘",
     description: siteDescription,
     images: [defaultOgImage]
   },

@@ -2,19 +2,22 @@ import type { Metadata } from "next";
 
 export const siteUrl = "https://lyzbvip.vip";
 export const siteName = "绿茵智报";
-export const siteDescription = "中文足球 AI 赛前情报平台，提供赛前观点、模型倾向、风险提示、世界杯赛程和赛后复盘。";
+export const siteDescription = "绿茵智报提供今日足球赛程、世界杯赛程、赛前分析、模型倾向、风险提示和赛后复盘，面向中文足球用户持续记录比赛观点。";
 export const defaultOgImage = "/brand/football-ai-logo-universal.png?v=3";
 
 export const seoKeywords = [
   "绿茵智报",
-  "足球 AI",
-  "足球 AI 赛前情报",
-  "今日足球预测",
-  "足球赛前观点",
-  "AI 模型倾向",
+  "足球赛程",
+  "今日足球赛程",
   "世界杯赛程",
+  "足球赛前分析",
+  "足球比赛分析",
+  "足球赛前观点",
+  "世界杯赛前分析",
+  "足球比赛时间",
   "足球数据分析",
-  "赛后复盘"
+  "足球赛后复盘",
+  "AI 模型倾向"
 ];
 
 type PageSeo = {

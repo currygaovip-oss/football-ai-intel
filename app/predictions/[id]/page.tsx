@@ -21,12 +21,14 @@ export async function generateMetadata({ params }: PredictionParams): Promise<Me
   }
 
   const { prediction, model } = detail;
+  const matchupKeyword = compactMatchup(prediction.matchup);
+  const pageTitle = `${matchupKeyword}赛前分析：比赛时间、球队状态与模型倾向`;
   const description = truncateSeo(
-    `${prediction.competition} ${prediction.matchup}，${prediction.recommendation}，风险等级：${prediction.risk_level}。${model ? `由 ${model.name} 生成主要分析。` : ""}`
+    `${prediction.competition}${prediction.matchup}赛前分析，包含比赛时间、球队状态、数据变化、模型倾向、参考方向和风险等级。${model ? `主要分析模型：${model.name}。` : ""}`
   );
 
   return createMetadata({
-    title: `${prediction.matchup} AI 赛前观点`,
+    title: pageTitle,
     description,
     path: `/predictions/${prediction.id}`,
     type: "article"
@@ -38,7 +40,9 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
   const detail = getPredictionDetail(id);
   if (!detail) notFound();
   const { assistantModels, model, prediction, review } = detail;
-  const description = truncateSeo(`${prediction.competition} ${prediction.matchup}，${prediction.recommendation}，风险等级：${prediction.risk_level}。`);
+  const matchupKeyword = compactMatchup(prediction.matchup);
+  const pageTitle = `${matchupKeyword}赛前分析`;
+  const description = truncateSeo(`${prediction.competition}${prediction.matchup}赛前分析，比赛时间：${prediction.kickoff_time_text}。${prediction.recommendation}，风险等级：${prediction.risk_level}。`);
 
   return (
     <article className="mx-auto max-w-4xl">
@@ -47,7 +51,7 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
         dangerouslySetInnerHTML={{
           __html: jsonLd(
             articleJsonLd({
-              title: `${prediction.matchup} AI 赛前观点`,
+              title: `${matchupKeyword}赛前分析：比赛时间、球队状态与模型倾向`,
               description,
               path: `/predictions/${prediction.id}`,
               publishedAt: prediction.published_at
@@ -74,7 +78,10 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
           <Badge tone="white">风险：{prediction.risk_level}</Badge>
           <span className="text-sm text-white/45">{prediction.published_at}</span>
         </div>
-        <h1 className="text-3xl font-semibold leading-tight sm:text-5xl">{prediction.title}</h1>
+        <h1 className="text-3xl font-semibold leading-tight sm:text-5xl">{pageTitle}</h1>
+        <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
+          本页整理{prediction.matchup}的比赛时间、赛事信息、赛前分析、模型倾向、参考方向与风险提示，适合在赛前快速阅读重点信息。
+        </p>
         {model ? (
           <section className="mt-6 rounded-lg border border-turf/25 bg-turf/10 p-5">
             <div className="text-sm font-semibold text-turf">AI 分析师模型</div>
@@ -104,13 +111,24 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
             ) : null}
           </section>
         ) : null}
-        <div className="mt-6 grid gap-3 rounded-lg border border-white/10 bg-white/5 p-4 text-sm text-white/68 sm:grid-cols-3">
-          <div>开赛时间：{prediction.kickoff_time_text}</div>
-          <div>对阵：{prediction.matchup}</div>
-          <div>赛事：{prediction.competition}</div>
-        </div>
+        <section className="mt-6 rounded-lg border border-white/10 bg-white/5 p-4">
+          <h2 className="mb-3 text-lg font-semibold">比赛信息</h2>
+          <div className="grid gap-3 text-sm text-white/68 sm:grid-cols-3">
+            <div>比赛时间：{prediction.kickoff_time_text}</div>
+            <div>对阵：{prediction.matchup}</div>
+            <div>赛事：{prediction.competition}</div>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Link href="/schedule" className="rounded-md border border-white/15 px-3 py-2 text-xs text-white/72 hover:border-turf/30 hover:text-turf">
+              查看足球赛程
+            </Link>
+            <Link href="/today" className="rounded-md border border-white/15 px-3 py-2 text-xs text-white/72 hover:border-turf/30 hover:text-turf">
+              返回今日赛前分析
+            </Link>
+          </div>
+        </section>
         <section className="mt-8">
-          <h2 className="mb-3 text-xl font-semibold">AI 分析正文</h2>
+          <h2 className="mb-3 text-xl font-semibold">{matchupKeyword}赛前分析正文</h2>
           <div className="space-y-4 text-base leading-8 text-white/72">
             {prediction.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
@@ -128,6 +146,20 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
           <p className="mt-2 text-sm leading-7 text-white/64">
             模型参考维度包括球队状态、历史交锋、阵容伤停、赛程密度、指数变化、进球趋势和赛后复盘反馈。赛前观点由 AI 分析模型生成初步框架，并结合人工校验后发布，用于提高内容可读性和风险边界。
           </p>
+        </section>
+        <section className="mt-6 rounded-lg border border-white/10 bg-white/5 p-5">
+          <h2 className="text-lg font-semibold">相关足球内容</h2>
+          <div className="mt-3 flex flex-wrap gap-2 text-sm">
+            <Link href="/schedule" className="rounded-md border border-white/15 px-3 py-2 text-white/72 hover:border-turf/30 hover:text-turf">
+              今日足球赛程
+            </Link>
+            <Link href="/today" className="rounded-md border border-white/15 px-3 py-2 text-white/72 hover:border-turf/30 hover:text-turf">
+              今日足球赛前分析
+            </Link>
+            <Link href="/reviews" className="rounded-md border border-white/15 px-3 py-2 text-white/72 hover:border-turf/30 hover:text-turf">
+              足球赛后复盘
+            </Link>
+          </div>
         </section>
         <section className="mt-6 rounded-lg border border-white/10 bg-white/5 p-5">
           <h2 className="text-lg font-semibold">如何阅读这条情报</h2>
@@ -148,4 +180,8 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
       </div>
     </article>
   );
+}
+
+function compactMatchup(matchup: string) {
+  return matchup.replace(/\s+vs\s+/i, "vs").replace(/\s+/g, "");
 }

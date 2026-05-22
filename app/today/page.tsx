@@ -5,8 +5,8 @@ import { getModelDirectory, getReviews, getTodayPredictions } from "@/lib/data";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
-  title: "今日足球 AI 赛前观点",
-  description: "查看今日足球赛前观点、AI 模型倾向、风险等级和最新发布的中文足球数据分析情报。",
+  title: "今日足球赛前分析：比赛观点、模型倾向与风险提示",
+  description: "查看今日足球赛前分析、比赛时间、对阵信息、模型倾向、参考方向和风险等级；覆盖世界杯、五大联赛和焦点赛事。",
   path: "/today"
 });
 
@@ -19,9 +19,9 @@ export default function TodayPage() {
 
   return (
     <div>
-      <SectionHeading title="今日情报" eyebrow="Pre-match" level={1} />
+      <SectionHeading title="今日足球赛前分析" eyebrow="Pre-match" level={1} />
       <p className="mb-6 max-w-3xl text-sm leading-7 text-white/62">
-        每条观点都由一个主 AI 分析师模型署名，并可由多个辅助模型校准。赛前观点由 AI 生成初步框架，并结合人工校验后发布；样本表现用于观察模型稳定性，不代表任何确定结果。
+        这里汇总今日足球比赛的赛前观点，包含赛事、比赛时间、对阵、参考方向、风险等级和 AI 分析师模型。AI 用于辅助读取球队状态、历史交锋、赛程强度、阵容消息和数据变化，最终内容用于足球交流与赛前阅读参考。
       </p>
       <div className="mb-6 grid gap-3 md:grid-cols-4">
         <div className="glass rounded-lg p-4">
@@ -44,6 +44,14 @@ export default function TodayPage() {
       <div className="grid gap-4">
         {predictions.map(({ prediction, model }) => <PredictionCard key={prediction.id} prediction={prediction} model={model} />)}
       </div>
+      <section className="mt-8 rounded-lg border border-white/10 bg-white/[0.04] p-5">
+        <h2 className="text-lg font-semibold">今日足球赛前分析包含什么</h2>
+        <div className="mt-3 grid gap-3 text-sm leading-7 text-white/62 md:grid-cols-3">
+          <p>比赛基础信息：赛事、比赛时间、主队与客队，方便用户快速确认今日足球赛程。</p>
+          <p>赛前分析维度：球队状态、历史交锋、赛程密度、阵容消息、进球趋势和数据变化。</p>
+          <p>阅读边界：模型倾向和参考方向都配合风险等级展示，赛后会通过复盘记录长期校准。</p>
+        </div>
+      </section>
     </div>
   );
 }
