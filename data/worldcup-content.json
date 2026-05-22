@@ -1,10 +1,10 @@
 {
-  "exported_at": "2026-05-22T14:27:22.139Z",
+  "exported_at": "2026-05-22T20:15:43.521Z",
   "source": "worldcup_bot_snapshot",
   "counts": {
     "matches": 104,
     "predictions": 8,
-    "reviews": 8
+    "reviews": 5
   },
   "matches": [
     {
@@ -1175,39 +1175,6 @@
   ],
   "reviews": [
     {
-      "id": "tg-r10",
-      "prediction_id": "tg-p10",
-      "match_result": "谢尔本 vs 沃特福德联队",
-      "result_status": "hit",
-      "score": 8,
-      "body": [
-        "暂无完整正文，建议结合参考方向和风险提示阅读。"
-      ],
-      "reviewed_at": "05/22 14:27"
-    },
-    {
-      "id": "tg-r8",
-      "prediction_id": "tg-p8",
-      "match_result": "里德 vs 维快速",
-      "result_status": "hit",
-      "score": 8,
-      "body": [
-        "暂无完整正文，建议结合参考方向和风险提示阅读。"
-      ],
-      "reviewed_at": "05/22 12:06"
-    },
-    {
-      "id": "tg-r7",
-      "prediction_id": "tg-p7",
-      "match_result": "红白埃森 vs 菲尔特",
-      "result_status": "hit",
-      "score": 8,
-      "body": [
-        "暂无完整正文，建议结合参考方向和风险提示阅读。"
-      ],
-      "reviewed_at": "05/22 12:06"
-    },
-    {
       "id": "tg-r6",
       "prediction_id": "tg-p6",
       "match_result": "未命中",
@@ -1233,8 +1200,8 @@
       "id": "tg-r4",
       "prediction_id": "tg-p4",
       "match_result": "已复盘",
-      "result_status": "hit",
-      "score": 8,
+      "result_status": "miss",
+      "score": 4,
       "body": [
         "今日中超赛后复盘：",
         "辽宁铁人 2-1 青岛海牛",

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BrainCircuit, Clock, ShieldAlert, Sparkles, Trophy } from "lucide-react";
+import { BrainCircuit, Clock, Sparkles, Trophy } from "lucide-react";
 import { Badge } from "@/components/badge";
 import type { AiModel, Prediction } from "@/lib/data";
 
@@ -18,7 +18,6 @@ export function PredictionCard({ prediction, model, compact = false }: { predict
             <h3 className="text-lg font-semibold leading-snug text-white">{prediction.matchup}</h3>
             <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-white/62">
               <span className="flex items-center gap-1.5"><Clock size={14} />{prediction.kickoff_time_text}</span>
-              <span className="flex items-center gap-1.5"><ShieldAlert size={14} />风险：{prediction.risk_level}</span>
             </div>
           </div>
           {model ? (
@@ -63,10 +62,9 @@ export function PredictionCard({ prediction, model, compact = false }: { predict
         </div>
       ) : null}
       <h3 className="mb-3 text-lg font-semibold leading-snug text-white">{prediction.title}</h3>
-      <div className="grid gap-2 text-sm text-white/68 sm:grid-cols-3">
+      <div className="grid gap-2 text-sm text-white/68 sm:grid-cols-2">
         <span className="flex items-center gap-2"><Clock size={15} />{prediction.kickoff_time_text}</span>
         <span className="flex items-center gap-2"><Trophy size={15} />{prediction.matchup}</span>
-        <span className="flex items-center gap-2"><ShieldAlert size={15} />风险：{prediction.risk_level}</span>
       </div>
       <p className="mt-4 flex items-start gap-2 rounded-md border border-turf/20 bg-turf/10 px-3 py-2 text-sm text-turf">
         <Sparkles className="mt-0.5 shrink-0" size={15} />

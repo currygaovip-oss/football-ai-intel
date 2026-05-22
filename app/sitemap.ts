@@ -5,7 +5,6 @@ import { siteUrl } from "@/lib/seo";
 const staticRoutes = [
   "",
   "/today",
-  "/models",
   "/reviews",
   "/schedule",
   "/vip",

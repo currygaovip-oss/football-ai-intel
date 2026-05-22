@@ -41,7 +41,7 @@ export function ModelCard({ model, compact = false }: { model: AiModel; compact?
           </div>
           <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4 text-xs text-white/45">
             <span>{model.recent_record}</span>
-            <span>风格：{model.risk_style}</span>
+            <span>分析角度：{model.role}</span>
           </div>
         </>
       ) : null}
@@ -51,7 +51,7 @@ export function ModelCard({ model, compact = false }: { model: AiModel; compact?
 
 export function ModelMiniLink({ model }: { model: AiModel }) {
   return (
-    <Link href="/models" className="rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm transition hover:border-turf/40">
+    <Link href="/today" className="rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm transition hover:border-turf/40">
       <span className="font-semibold text-white">{model.code}</span>
       <span className="ml-2 text-white/50">{model.name}</span>
     </Link>

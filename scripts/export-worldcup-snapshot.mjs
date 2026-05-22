@@ -76,22 +76,18 @@ function rowToPrediction(row) {
 
 function rowToReview(row) {
   const result = cleanText(row.review_result);
-  const body = cleanPredictionBody(row.review_body, {
-    title: "",
-    competition: "",
-    kickoff: "",
-    matchup: ""
-  });
+  const body = cleanReviewBody(row.review_body);
+  const statusSource = result && !/已复盘|复盘完成/.test(result) ? result : body.join(" ");
 
-  if (!result && body.length === 0 && row.review_score == null) return [];
+  if (!result && body.length === 0) return [];
 
   return [
     {
       id: `tg-r${row.id}`,
       prediction_id: `tg-p${row.id}`,
       match_result: formatMatchResult(row, result),
-      result_status: inferReviewStatus(result),
-      score: Number(row.review_score ?? defaultReviewScore(result)),
+      result_status: inferReviewStatus(statusSource),
+      score: Number(row.review_score ?? defaultReviewScore(statusSource)),
       body: body.length > 0 ? body : [`复盘结果：${result || "已复盘"}。后续会继续观察同类样本的模型表现。`],
       reviewed_at: formatDisplayTime(row.reviewed_at || row.published_at || row.created_at)
     }
@@ -130,6 +126,15 @@ function cleanPredictionBody(value, context) {
     .filter((line, index, array) => array.indexOf(line) === index);
 
   return lines.length > 0 ? lines : ["暂无完整正文，建议结合参考方向和风险提示阅读。"];
+}
+
+function cleanReviewBody(value) {
+  return String(value || "")
+    .split(/\n+/)
+    .map(cleanText)
+    .filter(Boolean)
+    .filter((line) => !/投资|博彩|投注|重要声明/.test(line))
+    .filter((line, index, array) => array.indexOf(line) === index);
 }
 
 function cleanCompetition(eventName, body, stage) {
@@ -194,7 +199,8 @@ function inferRiskLevel(text) {
 }
 
 function inferReviewStatus(result) {
-  if (/未|错|黑|偏差|失误/.test(result)) return "miss";
+  if (/未命中|未能命中|方向未|未能守住|错|黑|失误/.test(result)) return "miss";
+  if (/命中|顺利打出|符合/.test(result)) return "hit";
   if (/半|部分|走|平/.test(result)) return "half";
   return "hit";
 }

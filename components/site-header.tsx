@@ -5,7 +5,6 @@ import { TELEGRAM_URL } from "@/components/social-cta";
 const nav = [
   ["首页", "/"],
   ["今日情报", "/today"],
-  ["AI分析师", "/models"],
   ["赛后复盘", "/reviews"],
   ["赛程", "/schedule"],
   ["VIP", "/vip"],

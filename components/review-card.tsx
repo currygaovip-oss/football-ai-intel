@@ -17,7 +17,7 @@ export function ReviewCard({ review, prediction }: { review: Review; prediction?
       </div>
       <h3 className="text-lg font-semibold text-white">{prediction?.matchup ?? "赛后复盘"}</h3>
       <p className="mt-2 text-sm text-white/62">赛果：{review.match_result}</p>
-      <p className="mt-3 text-sm text-white/72">原模型倾向：{originalDirection}</p>
+      <p className="mt-3 text-sm text-white/72">原参考方向：{originalDirection}</p>
     </Link>
   );
 }

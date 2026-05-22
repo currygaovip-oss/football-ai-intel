@@ -147,7 +147,7 @@ export const aiModels: AiModel[] = [
     description: "聚焦临近开赛前的指数漂移、方向修正和异常波动，给赛前观点做最后校准。",
     specialties: ["尾盘变化", "临场修正", "异常波动"],
     risk_style: "均衡",
-    recent_record: "内部隐藏模型，后台可启用",
+    recent_record: "临场样本表现：89%",
     hit_rate: 89,
     average_score: 8.9,
     total_predictions: 117,
@@ -189,7 +189,7 @@ export const aiModels: AiModel[] = [
     description: "负责赛后归因、偏差解释和模型表现记录，把单场判断沉淀为长期校准数据。",
     specialties: ["赛后复盘", "偏差归因", "模型校准"],
     risk_style: "复盘",
-    recent_record: "内部隐藏模型，后台可启用",
+    recent_record: "复盘样本表现：94%",
     hit_rate: 94,
     average_score: 9.4,
     total_predictions: 102,
@@ -203,7 +203,7 @@ export const aiModels: AiModel[] = [
     description: "输出比分区间、结果分布和低高比分路径，强调概率分布而不是单一确定比分。",
     specialties: ["比分区间", "结果分布", "低高比分路径"],
     risk_style: "进取",
-    recent_record: "内部隐藏模型，后台可启用",
+    recent_record: "比分样本表现：86%",
     hit_rate: 86,
     average_score: 8.6,
     total_predictions: 88,
@@ -281,7 +281,7 @@ export const reviews: Review[] = [
     reviewed_at: "赛后 2 小时",
     body: [
       "赛前判断的节奏僵持基本出现，丹麦前 30 分钟对中路压迫有效，但未能持续形成高质量射门。",
-      "阿根廷下半场通过边路推进和二次进攻拉开差距，模型倾向命中。后续需要继续跟踪阿根廷面对更强反击队时的回防质量。"
+      "阿根廷下半场通过边路推进和二次进攻拉开差距，模型倾向命中。接下来需要继续跟踪阿根廷面对更强反击队时的回防质量。"
     ]
   },
   {

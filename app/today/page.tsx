@@ -1,57 +1,107 @@
 import type { Metadata } from "next";
-import { PredictionCard } from "@/components/prediction-card";
+import Link from "next/link";
+import { BrainCircuit, Clock, Sparkles, Target } from "lucide-react";
+import { Badge } from "@/components/badge";
 import { SectionHeading } from "@/components/section-heading";
-import { getModelDirectory, getReviews, getTodayPredictions } from "@/lib/data";
+import { getModelDirectory, getTodayPredictions, type AiModel, type Prediction } from "@/lib/data";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
-  title: "今日足球赛前分析：比赛观点、模型倾向与风险提示",
-  description: "查看今日足球赛前分析、比赛时间、对阵信息、模型倾向、参考方向和风险等级；覆盖世界杯、五大联赛和焦点赛事。",
+  title: "今日足球赛前分析：比赛观点与参考方向",
+  description: "查看今日足球赛前分析、比赛时间、对阵信息和参考方向；覆盖世界杯、五大联赛和焦点赛事。",
   path: "/today"
 });
 
 export default function TodayPage() {
   const predictions = getTodayPredictions();
   const models = getModelDirectory();
-  const reviews = getReviews();
   const freeCount = predictions.filter(({ prediction }) => prediction.visibility === "free").length;
   const vipCount = predictions.length - freeCount;
 
   return (
-    <div>
-      <SectionHeading title="今日足球赛前分析" eyebrow="Pre-match" level={1} />
-      <p className="mb-6 max-w-3xl text-sm leading-7 text-white/62">
-        这里汇总今日足球比赛的赛前观点，包含赛事、比赛时间、对阵、参考方向、风险等级和 AI 分析师模型。AI 用于辅助读取球队状态、历史交锋、赛程强度、阵容消息和数据变化，最终内容用于足球交流与赛前阅读参考。
-      </p>
-      <div className="mb-6 grid gap-3 md:grid-cols-4">
-        <div className="glass rounded-lg p-4">
-          <div className="text-xs text-white/45">今日观点</div>
-          <div className="mt-2 text-2xl font-semibold text-white">{predictions.length}</div>
+    <div className="space-y-5">
+      <div className="flex flex-col gap-3 border-b border-white/10 pb-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <SectionHeading title="今日赛前观点" eyebrow="Pre-match" level={1} />
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-white/58">
+            先看对阵和参考方向，再点进详情看完整分析。
+          </p>
         </div>
-        <div className="glass rounded-lg p-4">
-          <div className="text-xs text-white/45">免费 / VIP</div>
-          <div className="mt-2 text-2xl font-semibold text-turf">{freeCount}<span className="text-white/35"> / </span>{vipCount}</div>
-        </div>
-        <div className="glass rounded-lg p-4">
-          <div className="text-xs text-white/45">分析师席位</div>
-          <div className="mt-2 text-2xl font-semibold text-white">{models.length}</div>
-        </div>
-        <div className="glass rounded-lg p-4">
-          <div className="text-xs text-white/45">复盘记录</div>
-          <div className="mt-2 text-2xl font-semibold text-gold">{reviews.length}</div>
+        <div className="flex flex-wrap gap-2 text-xs text-white/58">
+          <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5">观点 {predictions.length}</span>
+          <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5">免费 {freeCount}</span>
+          <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5">VIP {vipCount}</span>
         </div>
       </div>
-      <div className="grid gap-4">
-        {predictions.map(({ prediction, model }) => <PredictionCard key={prediction.id} prediction={prediction} model={model} />)}
-      </div>
-      <section className="mt-8 rounded-lg border border-white/10 bg-white/[0.04] p-5">
-        <h2 className="text-lg font-semibold">今日足球赛前分析包含什么</h2>
-        <div className="mt-3 grid gap-3 text-sm leading-7 text-white/62 md:grid-cols-3">
-          <p>比赛基础信息：赛事、比赛时间、主队与客队，方便用户快速确认今日足球赛程。</p>
-          <p>赛前分析维度：球队状态、历史交锋、赛程密度、阵容消息、进球趋势和数据变化。</p>
-          <p>阅读边界：模型倾向和参考方向都配合风险等级展示，赛后会通过复盘记录长期校准。</p>
+
+      <section>
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <h2 className="text-lg font-semibold text-white">观点列表</h2>
+          <Link href="/reviews" className="text-sm text-white/55 hover:text-turf">查看历史复盘</Link>
         </div>
+        <div className="grid gap-3">
+          {predictions.map(({ prediction, model }) => <DirectionCard key={prediction.id} prediction={prediction} model={model} />)}
+        </div>
+      </section>
+
+      <section className="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+          <h2 className="flex items-center gap-2 text-base font-semibold text-white"><BrainCircuit size={16} className="text-turf" /> AI 分析席位</h2>
+          <p className="mt-2 text-sm leading-6 text-white/58">
+            不同席位负责观察不同维度，例如指数结构、球队状态、进球趋势和阵容赛程。这部分是赛前观点的来源说明，不需要单独进入一个页面。
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2 text-xs text-white/52">
+            {models.slice(0, 5).map((model) => <span key={model.id} className="rounded-full border border-white/10 bg-black/20 px-2.5 py-1">{model.name}</span>)}
+          </div>
       </section>
     </div>
   );
+}
+
+function DirectionCard({ prediction, model }: { prediction: Prediction; model?: AiModel }) {
+  const direction = extractDirection(prediction.recommendation);
+  const reason = prediction.body[0]?.replace(/\n/g, " ").slice(0, 78);
+
+  return (
+    <Link
+      href={`/predictions/${prediction.id}`}
+      className="block rounded-lg border border-white/10 bg-white/[0.04] p-4 transition hover:-translate-y-0.5 hover:border-turf/40"
+    >
+      <div className="grid gap-3 lg:grid-cols-[1.05fr_1.1fr_auto] lg:items-center">
+        <div>
+          <div className="mb-2 flex flex-wrap items-center gap-2">
+            <Badge tone={prediction.visibility === "vip" ? "gold" : "green"}>{prediction.visibility === "vip" ? "VIP" : "免费"}</Badge>
+            <Badge>{prediction.competition}</Badge>
+          </div>
+          <h3 className="text-lg font-semibold text-white">{prediction.matchup}</h3>
+          <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-white/52">
+            <span className="inline-flex items-center gap-1.5"><Clock size={14} />{prediction.kickoff_time_text}</span>
+            <span>{prediction.published_at}</span>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-turf/25 bg-turf/10 px-4 py-3">
+          <div className="flex items-center gap-2 text-xs text-turf">
+            <Target size={15} /> 核心参考方向
+          </div>
+          <div className="mt-2 text-lg font-semibold leading-snug text-white">{direction}</div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2 lg:justify-end">
+          <span className="rounded-full border border-white/10 bg-black/20 px-2.5 py-1 text-xs text-white/50">查看分析</span>
+        </div>
+      </div>
+
+      {reason ? (
+        <p className="mt-3 flex items-start gap-2 border-t border-white/10 pt-3 text-sm leading-6 text-white/58">
+          <Sparkles className="mt-1 shrink-0 text-turf" size={14} />
+          <span>{reason}{reason.length >= 78 ? "..." : ""}</span>
+          {model ? <span className="ml-auto hidden shrink-0 text-xs text-white/40 md:inline">分析席位：{model.name}</span> : null}
+        </p>
+      ) : null}
+    </Link>
+  );
+}
+
+function extractDirection(recommendation: string) {
+  return recommendation.replace(/^模型倾向：/, "").replace(/^参考方向：/, "");
 }
