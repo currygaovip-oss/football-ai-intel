@@ -13,7 +13,7 @@ const features = [
   "重点赛事赛前分析与关键变量",
   "参考方向与关键变量拆解",
   "赛后复盘评分和偏差归因",
-  "Telegram 群内更新提醒"
+  "Telegram 群与 X 动态更新"
 ];
 
 export default function VipPage() {
@@ -25,7 +25,7 @@ export default function VipPage() {
         </div>
         <h1 className="mt-5 text-4xl font-semibold">VIP 适合深度阅读重点赛事。</h1>
         <p className="mt-4 leading-8 text-white/66">
-          VIP 内容聚焦重点比赛的赛前分析、关键变量和赛后复盘。想持续跟踪赛事观点的用户，可通过 Telegram 社群联系管理员了解加入方式。
+          VIP 内容聚焦重点比赛的赛前分析、关键变量和赛后复盘。想持续跟踪赛事观点的用户，可通过 Telegram 社群联系管理员，也可以关注 X 主页查看公开更新。
         </p>
         <div className="mt-8 grid gap-3">
           {features.map((feature) => (

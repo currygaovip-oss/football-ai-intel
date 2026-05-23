@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Radio } from "lucide-react";
-import { TELEGRAM_URL } from "@/components/social-cta";
+import { MessageCircle, Radio } from "lucide-react";
+import { TELEGRAM_URL, X_URL } from "@/components/social-cta";
 
 const nav = [
   ["首页", "/"],
@@ -45,13 +45,27 @@ export function SiteHeader() {
         <div className="hidden items-center gap-2 sm:flex">
           <a
             href={TELEGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-md border border-turf/30 bg-turf/10 px-3 py-2 text-sm text-turf"
             data-analytics-event="click_telegram"
             data-analytics-area="header"
             data-analytics-label="社群入口"
           >
             <Radio size={16} />
-            社群入口
+            Telegram
+          </a>
+          <a
+            href={X_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-md border border-white/15 bg-white/[0.04] px-3 py-2 text-sm text-white/72 transition hover:border-turf/30 hover:text-turf"
+            data-analytics-event="click_x"
+            data-analytics-area="header"
+            data-analytics-label="X 主页"
+          >
+            <MessageCircle size={16} />
+            X 主页
           </a>
         </div>
       </div>
@@ -68,6 +82,28 @@ export function SiteHeader() {
             {label}
           </Link>
         ))}
+        <a
+          href={TELEGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 rounded-md border border-turf/30 bg-turf/10 px-3 py-2 text-turf"
+          data-analytics-event="click_telegram"
+          data-analytics-area="mobile_header"
+          data-analytics-label="Telegram"
+        >
+          Telegram
+        </a>
+        <a
+          href={X_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-white/72"
+          data-analytics-event="click_x"
+          data-analytics-area="mobile_header"
+          data-analytics-label="X 主页"
+        >
+          X 主页
+        </a>
       </nav>
     </header>
   );
