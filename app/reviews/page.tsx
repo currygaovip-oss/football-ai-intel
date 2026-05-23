@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ReviewCard } from "@/components/review-card";
 import { SectionHeading } from "@/components/section-heading";
+import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getAllPredictions, getAllReviews, getReviews } from "@/lib/data";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
+
+const reviewsDescription = "查看足球赛后复盘记录，包含赛前分析结果、比赛赛果、偏差归因、复盘评分和模型表现，用于长期观察比赛观点质量。";
 
 export const metadata: Metadata = createMetadata({
   title: "足球赛后复盘记录：赛前分析结果与模型表现",
-  description: "查看足球赛后复盘记录，包含赛前分析结果、比赛赛果、偏差归因、复盘评分和模型表现，用于长期观察比赛观点质量。",
+  description: reviewsDescription,
   path: "/reviews"
 });
 
@@ -23,6 +26,43 @@ export default function ReviewsPage() {
 
   return (
     <div className="space-y-6">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(webPageJsonLd({ name: "足球赛后复盘记录", description: reviewsDescription, path: "/reviews" })) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            itemListJsonLd({
+              name: "足球赛后复盘列表",
+              path: "/reviews",
+              items: reviews.slice(0, 20).map(({ review, prediction }) => ({
+                name: `${prediction?.matchup ?? "足球赛事"}赛后复盘`,
+                path: `/reviews/${review.id}`
+              }))
+            })
+          )
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            faqJsonLd([
+              {
+                question: "赛后复盘页面记录什么？",
+                answer: "页面记录已完成复盘的赛前观点，包括原参考方向、比赛结果、符合情况、复盘评分和主要偏差。"
+              },
+              {
+                question: "为什么有些观点还没有复盘？",
+                answer: "比赛结束后需要整理赛果和实际走势，完成后才会进入已完成复盘列表。"
+              },
+              {
+                question: "复盘评分代表什么？",
+                answer: "复盘评分用于辅助记录赛前判断与实际比赛走势的贴合程度，不代表未来结果承诺。"
+              }
+            ])
+          )
+        }}
+      />
       <SectionHeading title="历史复盘记录" eyebrow="Review Archive" level={1} />
       <p className="mb-6 max-w-3xl text-sm leading-7 text-white/62">
         这里记录已经完成复盘的赛前观点，不代表今日新增数量。用户可以回看原参考方向、比赛结果、符合情况和主要偏差。
@@ -69,6 +109,8 @@ export default function ReviewsPage() {
           </div>
         </section>
       ) : null}
+
+      <SeoTopicLinks />
     </div>
   );
 }

@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarDays, ChevronRight, Clock3, Trophy } from "lucide-react";
+import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { cn } from "@/lib/utils";
 import { getAllPredictions, getSchedule } from "@/lib/data";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, sportsEventJsonLd, webPageJsonLd } from "@/lib/seo";
+
+const scheduleDescription = "查看今日足球赛程、明日赛程、世界杯2026赛程、小组赛和淘汰赛比赛时间；有赛前分析的比赛可继续阅读参考方向和详细分析。";
 
 export const metadata: Metadata = createMetadata({
   title: "足球赛程中心：今日赛程、世界杯赛程与比赛时间",
-  description: "查看今日足球赛程、明日赛程、世界杯赛程、小组赛和淘汰赛比赛时间；有赛前分析的比赛可继续阅读参考方向和详细分析。",
+  description: scheduleDescription,
   path: "/schedule"
 });
 
@@ -43,6 +46,61 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
 
   return (
     <div className="space-y-5">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(webPageJsonLd({ name: "足球赛程中心", description: scheduleDescription, path: "/schedule" })) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            itemListJsonLd({
+              name: "足球赛程列表",
+              path: `/schedule?type=${currentType}`,
+              items: filteredMatches.slice(0, 20).map((match) => ({
+                name: `${match.home_team} vs ${match.away_team}`,
+                path: `/schedule?type=${currentType}`
+              }))
+            })
+          )
+        }}
+      />
+      {filteredMatches.slice(0, 6).map((match) => (
+        <script
+          key={`event-${match.id}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: jsonLd(
+              sportsEventJsonLd({
+                name: `${match.home_team} vs ${match.away_team}`,
+                path: `/schedule?type=${currentType}`,
+                startDate: toEventDateTime(match.kickoff_time),
+                competition: match.competition,
+                homeTeam: match.home_team,
+                awayTeam: match.away_team
+              })
+            )
+          }}
+        />
+      ))}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            faqJsonLd([
+              {
+                question: "足球赛程中心可以查看哪些内容？",
+                answer: "可以查看今日足球赛程、明日赛程、世界杯小组赛、淘汰赛和全部已收录比赛时间。"
+              },
+              {
+                question: "哪些比赛有赛前分析？",
+                answer: "已经发布赛前观点的比赛会显示分析入口，点击后可以查看参考方向和详细分析。"
+              },
+              {
+                question: "世界杯赛程怎么筛选？",
+                answer: "可以通过小组赛、淘汰赛和全部赛程标签切换，也可以查看右侧世界杯阶段入口。"
+              }
+            ])
+          )
+        }}
+      />
       <section className="border-b border-white/10 pb-4">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -164,6 +222,8 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
           </p>
         </div>
       </section>
+
+      <SeoTopicLinks />
     </div>
   );
 }
@@ -260,4 +320,11 @@ function getDateLabel(kickoffTime: string) {
 function getTimeLabel(kickoffTime: string) {
   const match = kickoffTime.match(/\d{2}\/\d{2}\s+(\d{2}:\d{2})/);
   return match?.[1] ?? kickoffTime;
+}
+
+function toEventDateTime(kickoffTime: string) {
+  const match = kickoffTime.match(/^(\d{2})\/(\d{2})\s+(\d{2}):(\d{2})/);
+  if (!match) return kickoffTime;
+  const year = new Date().getFullYear();
+  return `${year}-${match[1]}-${match[2]}T${match[3]}:${match[4]}:00+07:00`;
 }

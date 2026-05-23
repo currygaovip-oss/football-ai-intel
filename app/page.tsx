@@ -5,13 +5,16 @@ import { Badge } from "@/components/badge";
 import { ModelCard } from "@/components/model-card";
 import { ReviewCard } from "@/components/review-card";
 import { SectionHeading } from "@/components/section-heading";
+import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { SocialCta } from "@/components/social-cta";
 import { getHomeData, type AiModel, type Prediction } from "@/lib/data";
-import { createMetadata, jsonLd, websiteJsonLd } from "@/lib/seo";
+import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd, websiteJsonLd } from "@/lib/seo";
+
+const homeDescription = "绿茵智报整理今日足球赛程、世界杯赛程、比赛时间、赛前分析、参考方向和赛后复盘，帮助中文足球用户快速阅读重点赛事。";
 
 export const metadata: Metadata = createMetadata({
   title: "今日足球赛程、赛前分析与赛后复盘",
-  description: "绿茵智报整理今日足球赛程、世界杯赛程、比赛时间、赛前分析、参考方向和赛后复盘，帮助中文足球用户快速阅读重点赛事。",
+  description: homeDescription,
   path: "/"
 });
 
@@ -32,6 +35,43 @@ export default function HomePage() {
   return (
     <div className="space-y-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(websiteJsonLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(webPageJsonLd({ name: "今日足球赛程、赛前分析与赛后复盘", description: homeDescription, path: "/" })) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            itemListJsonLd({
+              name: "今日足球赛前分析",
+              path: "/today",
+              items: predictions.slice(0, 6).map(({ prediction }) => ({
+                name: `${prediction.matchup}赛前分析`,
+                path: `/predictions/${prediction.id}`
+              }))
+            })
+          )
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            faqJsonLd([
+              {
+                question: "绿茵智报主要提供什么足球内容？",
+                answer: "绿茵智报整理今日足球赛程、世界杯赛程、赛前分析、参考方向和赛后复盘，方便中文足球用户快速阅读重点赛事。"
+              },
+              {
+                question: "赛前分析适合怎么阅读？",
+                answer: "可以先看比赛时间、对阵和参考方向，再进入详情页阅读球队状态、历史交锋、进球趋势和数据变化等分析。"
+              },
+              {
+                question: "赛后复盘有什么作用？",
+                answer: "赛后复盘用于记录原参考方向、比赛结果和主要偏差，方便回看赛前判断与实际走势的差异。"
+              }
+            ])
+          )
+        }}
+      />
       <section className="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3">
         <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
           <div>
@@ -124,6 +164,8 @@ export default function HomePage() {
           {aiModels.map((model) => <ModelCard key={model.id} model={model} compact />)}
         </div>
       </section>
+
+      <SeoTopicLinks />
     </div>
   );
 }

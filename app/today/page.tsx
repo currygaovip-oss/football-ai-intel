@@ -3,12 +3,15 @@ import Link from "next/link";
 import { BrainCircuit, Clock, Sparkles, Target } from "lucide-react";
 import { Badge } from "@/components/badge";
 import { SectionHeading } from "@/components/section-heading";
+import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getModelDirectory, getTodayPredictions, type AiModel, type Prediction } from "@/lib/data";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
+
+const todayDescription = "查看今日足球赛前分析、比赛时间、对阵信息和参考方向；覆盖世界杯、五大联赛、中超和焦点赛事。";
 
 export const metadata: Metadata = createMetadata({
   title: "今日足球赛前分析：比赛观点与参考方向",
-  description: "查看今日足球赛前分析、比赛时间、对阵信息和参考方向；覆盖世界杯、五大联赛和焦点赛事。",
+  description: todayDescription,
   path: "/today"
 });
 
@@ -20,6 +23,43 @@ export default function TodayPage() {
 
   return (
     <div className="space-y-5">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(webPageJsonLd({ name: "今日足球赛前分析", description: todayDescription, path: "/today" })) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            itemListJsonLd({
+              name: "今日足球赛前观点列表",
+              path: "/today",
+              items: predictions.map(({ prediction }) => ({
+                name: `${prediction.matchup}赛前分析`,
+                path: `/predictions/${prediction.id}`
+              }))
+            })
+          )
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            faqJsonLd([
+              {
+                question: "今日足球赛前分析页面怎么看？",
+                answer: "先看比赛对阵、开球时间和核心参考方向，再点击查看分析，阅读球队状态、赛程强度和数据变化等正文。"
+              },
+              {
+                question: "参考方向和赛前分析有什么区别？",
+                answer: "参考方向是对本场比赛的简要结论，赛前分析则解释这个方向来自哪些比赛变量。"
+              },
+              {
+                question: "页面会覆盖哪些赛事？",
+                answer: "页面会优先整理世界杯、五大联赛、中超、杯赛和当天焦点足球赛事。"
+              }
+            ])
+          )
+        }}
+      />
       <div className="flex flex-col gap-3 border-b border-white/10 pb-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <SectionHeading title="今日赛前观点" eyebrow="Pre-match" level={1} />
@@ -53,6 +93,8 @@ export default function TodayPage() {
             {models.slice(0, 5).map((model) => <span key={model.id} className="rounded-full border border-white/10 bg-black/20 px-2.5 py-1">{model.name}</span>)}
           </div>
       </section>
+
+      <SeoTopicLinks />
     </div>
   );
 }

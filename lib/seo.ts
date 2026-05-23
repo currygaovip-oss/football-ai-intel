@@ -2,22 +2,42 @@ import type { Metadata } from "next";
 
 export const siteUrl = "https://lyzbvip.vip";
 export const siteName = "绿茵智报";
-export const siteDescription = "绿茵智报提供今日足球赛程、世界杯赛程、赛前分析、参考方向和赛后复盘，面向中文足球用户持续记录比赛观点。";
+export const siteDescription = "绿茵智报整理今日足球赛程、世界杯2026赛程、足球赛前分析、参考方向和赛后复盘，面向中文足球用户持续记录重点赛事观点。";
 export const defaultOgImage = "/brand/football-ai-logo-universal.png?v=3";
 
 export const seoKeywords = [
   "绿茵智报",
   "足球赛程",
   "今日足球赛程",
+  "今日足球比赛",
+  "今日足球赛事",
+  "足球赛程表",
+  "足球比赛时间",
   "世界杯赛程",
+  "世界杯2026赛程",
+  "世界杯小组赛赛程",
+  "世界杯淘汰赛赛程",
+  "世界杯比赛时间",
+  "五大联赛赛程",
+  "中超赛程",
   "足球赛前分析",
   "足球比赛分析",
+  "足球赛事分析",
   "足球赛前观点",
   "世界杯赛前分析",
-  "足球比赛时间",
+  "球队状态分析",
+  "足球指数分析",
   "足球数据分析",
-  "足球赛后复盘",
-  "AI 足球分析"
+  "足球比分赛果",
+  "足球赛后复盘"
+];
+
+export const seoTopicLinks = [
+  { label: "今日足球赛程", href: "/schedule?type=today" },
+  { label: "足球赛前分析", href: "/today" },
+  { label: "世界杯2026赛程", href: "/schedule?type=all" },
+  { label: "足球赛后复盘", href: "/reviews" },
+  { label: "VIP社群说明", href: "/vip" }
 ];
 
 type PageSeo = {
@@ -90,6 +110,88 @@ export function websiteJsonLd() {
     description: siteDescription,
     inLanguage: "zh-CN",
     publisher: organizationJsonLd()
+  };
+}
+
+export function webPageJsonLd({ name, description, path }: { name: string; description: string; path: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name,
+    description,
+    url: absoluteUrl(path),
+    isPartOf: {
+      "@type": "WebSite",
+      name: siteName,
+      url: siteUrl
+    },
+    publisher: organizationJsonLd(),
+    inLanguage: "zh-CN"
+  };
+}
+
+export function faqJsonLd(items: Array<{ question: string; answer: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer
+      }
+    }))
+  };
+}
+
+export function itemListJsonLd({ name, path, items }: { name: string; path: string; items: Array<{ name: string; path: string }> }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name,
+    url: absoluteUrl(path),
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      url: absoluteUrl(item.path)
+    }))
+  };
+}
+
+export function sportsEventJsonLd({
+  name,
+  path,
+  startDate,
+  competition,
+  homeTeam,
+  awayTeam
+}: {
+  name: string;
+  path: string;
+  startDate: string;
+  competition: string;
+  homeTeam: string;
+  awayTeam: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SportsEvent",
+    name,
+    url: absoluteUrl(path),
+    startDate,
+    sport: "Football",
+    eventStatus: "https://schema.org/EventScheduled",
+    organizer: {
+      "@type": "Organization",
+      name: competition
+    },
+    competitor: [
+      { "@type": "SportsTeam", name: homeTeam },
+      { "@type": "SportsTeam", name: awayTeam }
+    ],
+    inLanguage: "zh-CN"
   };
 }
 

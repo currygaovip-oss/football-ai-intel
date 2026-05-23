@@ -1,15 +1,39 @@
 import type { Metadata } from "next";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, faqJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
+
+const aboutDescription = "绿茵智报整理足球赛程、赛前分析、参考方向和赛后复盘，面向中文足球用户提供赛前阅读参考。";
 
 export const metadata: Metadata = createMetadata({
   title: "关于绿茵智报",
-  description: "绿茵智报整理足球赛程、赛前分析、参考方向和赛后复盘，面向中文足球用户提供赛前阅读参考。",
+  description: aboutDescription,
   path: "/about"
 });
 
 export default function AboutPage() {
   return (
     <article className="mx-auto max-w-4xl">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(webPageJsonLd({ name: "关于绿茵智报", description: aboutDescription, path: "/about" })) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            faqJsonLd([
+              {
+                question: "绿茵智报是什么？",
+                answer: "绿茵智报是面向中文足球用户的赛前情报网站，整理足球赛程、赛前分析、参考方向和赛后复盘。"
+              },
+              {
+                question: "绿茵智报覆盖哪些比赛？",
+                answer: "内容重点覆盖世界杯、五大联赛、中超、杯赛和当天焦点足球赛事。"
+              },
+              {
+                question: "绿茵智报的内容可以作为结果承诺吗？",
+                answer: "不可以。本站内容仅用于足球交流、数据研究和赛前阅读参考，不构成任何结果承诺或行动建议。"
+              }
+            ])
+          )
+        }}
+      />
       <div className="glass rounded-lg p-6 sm:p-8">
         <div className="text-sm font-semibold text-turf">About</div>
         <h1 className="mt-3 text-4xl font-semibold">关于绿茵智报</h1>
