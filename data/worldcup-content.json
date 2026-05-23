@@ -1,10 +1,10 @@
 {
-  "exported_at": "2026-05-22T20:15:43.521Z",
+  "exported_at": "2026-05-23T08:14:39.253Z",
   "source": "worldcup_bot_snapshot",
   "counts": {
     "matches": 104,
     "predictions": 8,
-    "reviews": 5
+    "reviews": 6
   },
   "matches": [
     {
@@ -1174,6 +1174,23 @@
     }
   ],
   "reviews": [
+    {
+      "id": "tg-r7",
+      "prediction_id": "tg-p7",
+      "match_result": "未命中",
+      "result_status": "miss",
+      "score": 3,
+      "body": [
+        "赛后复盘",
+        "德乙附加赛",
+        "红白埃森 1-0 菲尔特",
+        "赛前方向：菲尔特 +0 / 大 2.75",
+        "这场判断偏差比较明显。赛前更看重菲尔特的阵容层级和客场不败能力，但实际比赛中红白埃森主场执行力更强，最终依靠下半场进球拿下首回合。",
+        "进球方向也没有打出，全场只有 1 球，比赛节奏比预期更谨慎。",
+        "这场主要问题是低估了红白埃森主场强度，也高估了菲尔特客场拿结果的稳定性。"
+      ],
+      "reviewed_at": "05/23 08:14"
+    },
     {
       "id": "tg-r6",
       "prediction_id": "tg-p6",
