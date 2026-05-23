@@ -66,7 +66,7 @@ export const seoTopics: SeoTopic[] = [
     eyebrow: "World Cup 2026",
     description: "查看世界杯2026赛程、小组赛、淘汰赛、比赛时间和赛前分析入口。",
     intro: "世界杯2026赛程会按比赛阶段整理，方便查看小组赛、淘汰赛和重点比赛时间；有赛前观点的比赛会提供分析入口。",
-    primaryLink: { label: "查看世界杯赛程", href: "/schedule?type=all" },
+    primaryLink: { label: "查看世界杯赛程", href: "/world-cup-2026/schedule" },
     faq: [
       {
         question: "世界杯2026赛程页面可以看哪些内容？",

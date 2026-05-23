@@ -6,6 +6,7 @@ import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getAllPredictions, getReviews, getSchedule } from "@/lib/data";
 import { getSeoTopic, seoTopics } from "@/lib/seo-topics";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
+import { getWorldCupFixturePath } from "@/lib/world-cup";
 
 type TopicParams = { params: Promise<{ slug: string }> };
 
@@ -85,7 +86,7 @@ export default async function TopicPage({ params }: TopicParams) {
           {topicMatches.length > 0 ? (
             <div className="grid gap-3">
               {topicMatches.map((match) => (
-                <Link key={match.id} href="/schedule" className="rounded-lg border border-white/10 bg-black/20 p-4 transition hover:border-turf/30">
+                <Link key={match.id} href={getWorldCupFixturePath(match)} className="rounded-lg border border-white/10 bg-black/20 p-4 transition hover:border-turf/30">
                   <div className="mb-2 text-xs text-turf">{match.competition} · {match.stage}</div>
                   <div className="text-lg font-semibold text-white">{match.home_team} vs {match.away_team}</div>
                   <div className="mt-2 text-sm text-white/55">{match.kickoff_time}</div>
@@ -184,6 +185,6 @@ function getListItems(
   }
   return matches.map((match) => ({
     name: `${match.home_team} vs ${match.away_team}`,
-    path: "/schedule"
+    path: getWorldCupFixturePath(match)
   }));
 }

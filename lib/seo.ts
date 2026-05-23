@@ -33,6 +33,7 @@ export const seoKeywords = [
 ];
 
 export const seoTopicLinks = [
+  { label: "世界杯2026专题", href: "/world-cup-2026" },
   { label: "今日足球赛程", href: "/topics/today-football-schedule" },
   { label: "足球赛前分析", href: "/topics/football-match-analysis" },
   { label: "世界杯2026赛程", href: "/topics/world-cup-2026-schedule" },

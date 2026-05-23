@@ -2,12 +2,17 @@ import type { MetadataRoute } from "next";
 import { getAllPredictions, getAllReviews } from "@/lib/data";
 import { seoTopics } from "@/lib/seo-topics";
 import { siteUrl } from "@/lib/seo";
+import { getWorldCupFixturePath, getWorldCupMatches, worldCupBasePath } from "@/lib/world-cup";
 
 const staticRoutes = [
   "",
   "/today",
   "/reviews",
   "/schedule",
+  worldCupBasePath,
+  `${worldCupBasePath}/schedule`,
+  `${worldCupBasePath}/groups`,
+  `${worldCupBasePath}/knockout`,
   "/vip",
   "/about"
 ];
@@ -42,5 +47,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75
   }));
 
-  return [...staticEntries, ...topicEntries, ...predictionEntries, ...reviewEntries];
+  const worldCupFixtureEntries = getWorldCupMatches().map((match) => ({
+    url: `${siteUrl}${getWorldCupFixturePath(match)}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: match.stage.includes("决赛") || match.stage.includes("强赛") ? 0.78 : 0.72
+  }));
+
+  return [...staticEntries, ...topicEntries, ...worldCupFixtureEntries, ...predictionEntries, ...reviewEntries];
 }
