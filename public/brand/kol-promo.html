@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>绿茵智报 KOL Promo</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 1600px;
+        height: 900px;
+        overflow: hidden;
+        background: #020b08;
+        font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+      }
+
+      .poster {
+        position: relative;
+        width: 1600px;
+        height: 900px;
+        overflow: hidden;
+        color: #f5fff9;
+        background:
+          radial-gradient(circle at 22% 48%, rgba(0, 222, 166, 0.24), transparent 28%),
+          radial-gradient(circle at 82% 12%, rgba(214, 170, 68, 0.2), transparent 30%),
+          linear-gradient(120deg, #03120d 0%, #061d13 48%, #020604 100%);
+      }
+
+      .poster::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.3;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+        background-size: 86px 86px;
+        mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 84%, transparent);
+      }
+
+      .pitch {
+        position: absolute;
+        left: -180px;
+        bottom: -280px;
+        width: 900px;
+        height: 620px;
+        border: 4px solid rgba(0, 229, 176, 0.28);
+        border-radius: 50%;
+        transform: rotate(-8deg);
+      }
+
+      .pitch::before,
+      .pitch::after {
+        content: "";
+        position: absolute;
+        border: 3px solid rgba(255, 255, 255, 0.18);
+        border-radius: 50%;
+      }
+
+      .pitch::before {
+        inset: 120px 190px;
+      }
+
+      .pitch::after {
+        inset: 250px 360px;
+        background: rgba(0, 229, 176, 0.1);
+      }
+
+      .logo-wrap {
+        position: absolute;
+        left: 120px;
+        top: 132px;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle, rgba(0, 229, 176, 0.2), transparent 62%),
+          rgba(0, 0, 0, 0.18);
+        box-shadow: 0 0 100px rgba(0, 229, 176, 0.2);
+        display: grid;
+        place-items: center;
+      }
+
+      .logo-wrap img {
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+      }
+
+      .data-card {
+        position: absolute;
+        border: 1px solid rgba(0, 229, 176, 0.24);
+        background: rgba(3, 28, 19, 0.72);
+        border-radius: 18px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
+      }
+
+      .data-card.one {
+        left: 430px;
+        top: 166px;
+        width: 280px;
+        height: 96px;
+      }
+
+      .data-card.two {
+        left: 390px;
+        top: 552px;
+        width: 320px;
+        height: 116px;
+      }
+
+      .data-card.three {
+        right: 86px;
+        bottom: 76px;
+        width: 390px;
+        height: 92px;
+        border-color: rgba(214, 170, 68, 0.32);
+      }
+
+      .signal {
+        position: absolute;
+        background: linear-gradient(90deg, transparent, #00e5b0, transparent);
+        height: 2px;
+        opacity: 0.55;
+      }
+
+      .signal.a {
+        left: 580px;
+        top: 244px;
+        width: 290px;
+        transform: rotate(12deg);
+      }
+
+      .signal.b {
+        left: 540px;
+        top: 608px;
+        width: 390px;
+        transform: rotate(-9deg);
+      }
+
+      .content {
+        position: absolute;
+        left: 790px;
+        top: 125px;
+        width: 650px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 18px;
+        border: 1px solid rgba(0, 229, 176, 0.36);
+        border-radius: 999px;
+        color: #00e5b0;
+        background: rgba(0, 229, 176, 0.1);
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #00e5b0;
+        box-shadow: 0 0 24px #00e5b0;
+      }
+
+      h1 {
+        margin: 42px 0 0;
+        font-size: 104px;
+        line-height: 1.02;
+        letter-spacing: 0;
+        color: #ffffff;
+        text-shadow: 0 0 34px rgba(0, 229, 176, 0.12);
+      }
+
+      .subtitle {
+        margin-top: 26px;
+        font-size: 44px;
+        font-weight: 700;
+        color: #d7fff0;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 38px;
+      }
+
+      .tag {
+        padding: 15px 22px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.07);
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 28px;
+        font-weight: 650;
+      }
+
+      .url {
+        display: inline-flex;
+        margin-top: 58px;
+        padding: 19px 28px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #00dca8, #00b98f);
+        color: #02110c;
+        font-size: 38px;
+        font-weight: 900;
+        letter-spacing: 0.02em;
+        box-shadow: 0 22px 60px rgba(0, 229, 176, 0.22);
+      }
+
+      .footer {
+        position: absolute;
+        left: 120px;
+        right: 120px;
+        bottom: 58px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.52);
+        font-size: 24px;
+      }
+
+      .footer strong {
+        color: #d6aa44;
+        font-weight: 800;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="poster">
+      <div class="pitch"></div>
+      <div class="signal a"></div>
+      <div class="signal b"></div>
+      <div class="data-card one"></div>
+      <div class="data-card two"></div>
+      <div class="data-card three"></div>
+      <div class="logo-wrap">
+        <img src="/brand/football-ai-logo-universal.png" alt="绿茵智报" />
+      </div>
+      <section class="content">
+        <div class="eyebrow">FOOTBALL AI INTELLIGENCE</div>
+        <h1>绿茵智报</h1>
+        <div class="subtitle">中文足球 AI 赛前情报</div>
+        <div class="tags">
+          <div class="tag">今日赛程</div>
+          <div class="tag">参考方向</div>
+          <div class="tag">赛后复盘</div>
+        </div>
+        <div class="url">lyzbvip.vip</div>
+      </section>
+      <div class="footer">
+        <span>世界杯 · 五大联赛 · 焦点赛事</span>
+        <span>官方 X：<strong>@worldcupvip</strong></span>
+      </div>
+    </main>
+  </body>
+</html>
