@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Activity, BarChart3, BrainCircuit, CalendarDays, Clock, Database, ShieldCheck, Sparkles, Target } from "lucide-react";
+import { Activity, BarChart3, CalendarDays, Clock, Database, ShieldCheck, Sparkles, Target } from "lucide-react";
 import { Badge } from "@/components/badge";
 import { ModelCard } from "@/components/model-card";
-import { ReviewCard } from "@/components/review-card";
 import { SectionHeading } from "@/components/section-heading";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { SocialCta } from "@/components/social-cta";
@@ -31,6 +30,8 @@ export default function HomePage() {
     "阵容赛程同步观察",
     "赛后复盘回看偏差"
   ];
+  const topPredictions = predictions.slice(0, 5);
+  const latestReviews = reviews.slice(0, 2);
 
   return (
     <div className="space-y-8">
@@ -72,53 +73,30 @@ export default function HomePage() {
           )
         }}
       />
-      <section className="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3">
-        <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-turf/30 bg-turf/10 px-3 py-1 text-xs text-turf">
-              <BrainCircuit size={15} /> 今日足球赛程 · 赛前分析 · 赛后复盘
+      <section className="grid gap-5 xl:grid-cols-[1.45fr_0.75fr]">
+        <div className="rounded-lg border border-turf/20 bg-turf/[0.055] p-4 sm:p-5">
+          <div className="flex flex-col gap-3 border-b border-white/10 pb-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-[0.24em] text-turf">Pre-match Notes</div>
+              <h1 className="mt-2 text-2xl font-semibold leading-tight text-white sm:text-3xl">
+                今日已发布赛前观点
+              </h1>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-white/58">
+                这里展示今日已整理的赛前观点与参考方向。点进详情可阅读完整分析，更多更新会同步到 Telegram 群。
+              </p>
             </div>
-            <h1 className="mt-2 text-xl font-semibold leading-tight text-white sm:text-2xl">
-              今日足球赛程、赛前分析与参考方向。
-            </h1>
-            <p className="mt-1 max-w-3xl text-sm leading-6 text-white/58">
-              绿茵智报围绕世界杯、五大联赛和焦点赛事，整理比赛时间、对阵信息、赛前观点、参考方向和赛后复盘；AI 用于辅助读取球队状态、历史交锋和数据变化。
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <Link href="/schedule" className="rounded-md border border-turf/30 bg-turf/10 px-3 py-2 text-xs text-turf hover:bg-turf/15">
-                查看今日足球赛程
-              </Link>
-              <Link href="/today" className="rounded-md border border-white/15 bg-white/5 px-3 py-2 text-xs text-white/75 hover:border-turf/30 hover:text-turf">
-                阅读赛前分析
-              </Link>
-              <Link href="/reviews" className="rounded-md border border-white/15 bg-white/5 px-3 py-2 text-xs text-white/75 hover:border-turf/30 hover:text-turf">
-                查看赛后复盘
-              </Link>
-            </div>
+            <Link href="/today" className="inline-flex shrink-0 rounded-md bg-turf px-4 py-2.5 text-sm font-semibold text-pitch-950">
+              查看全部赛前观点
+            </Link>
           </div>
-          <div className="flex gap-2 overflow-x-auto xl:min-w-[520px] xl:justify-end">
-            {stats.map(({ label, value, Icon }) => (
-              <div key={label} className="flex min-w-[118px] items-center gap-3 rounded-lg border border-white/10 bg-black/20 px-3 py-2">
-                <Icon className="shrink-0 text-turf" size={15} />
-                <div>
-                  <div className="text-[11px] text-white/45">{label}</div>
-                  <div className="text-lg font-semibold leading-tight">{value}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="grid gap-6 xl:grid-cols-[1.35fr_0.75fr]">
-        <div>
-          <SectionHeading title="今日参考方向" eyebrow="Pre-match Analysis" href="/today" />
-          <div className="grid gap-3">
-            {predictions.slice(0, 4).map(({ prediction, model }) => <HomeDirectionCard key={prediction.id} prediction={prediction} model={model} />)}
+          <div className="mt-4 grid gap-3">
+            {topPredictions.map(({ prediction, model }) => <HeroDirectionCard key={prediction.id} prediction={prediction} model={model} />)}
           </div>
+
           <div className="mt-4 flex flex-wrap gap-2">
             {principles.map((principle) => (
-              <span key={principle} className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/62">
+              <span key={principle} className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-black/20 px-3 py-2 text-xs text-white/62">
                 <ShieldCheck size={14} className="text-turf" />
                 {principle}
               </span>
@@ -126,16 +104,51 @@ export default function HomePage() {
           </div>
         </div>
 
-        <aside className="space-y-5">
-          <div>
-            <SectionHeading title="最新复盘记录" eyebrow="Reviews" href="/reviews" />
-            <div className="grid gap-4">
-              {reviews.slice(0, 2).map(({ review, prediction }) => <ReviewCard key={review.id} review={review} prediction={prediction} />)}
-            </div>
-          </div>
+        <aside className="space-y-4">
           <SocialCta />
+          <div className="grid grid-cols-2 gap-2">
+            {stats.map(({ label, value, Icon }) => (
+              <Link
+                key={label}
+                href={label === "世界杯赛程" ? "/schedule" : label === "赛前观点" ? "/today" : "/about"}
+                className="rounded-lg border border-white/10 bg-white/[0.04] p-3 transition hover:border-turf/30"
+              >
+                <Icon className="text-turf" size={16} />
+                <div className="mt-2 text-[11px] text-white/45">{label}</div>
+                <div className="mt-1 text-xl font-semibold leading-tight">{value}</div>
+              </Link>
+            ))}
+          </div>
+          {latestReviews.length > 0 ? (
+            <div className="rounded-lg border border-white/10 bg-black/20 p-4">
+              <div className="flex items-center justify-between gap-3">
+                <h2 className="text-base font-semibold text-white">最新复盘</h2>
+                <Link href="/reviews" className="text-xs text-turf">查看全部</Link>
+              </div>
+              <div className="mt-3 grid gap-2">
+                {latestReviews.map(({ review, prediction }) => (
+                  <Link key={review.id} href={`/reviews/${review.id}`} className="rounded-md border border-white/10 bg-white/[0.04] p-3 transition hover:border-turf/30">
+                    <div className="flex items-center justify-between gap-2 text-xs">
+                      <span className="text-turf">{review.result_status === "hit" ? "命中" : review.result_status === "half" ? "部分符合" : "未命中"}</span>
+                      <span className="text-white/40">评分 {review.score}</span>
+                    </div>
+                    <div className="mt-2 text-sm font-semibold text-white">{prediction?.matchup}</div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </aside>
       </section>
+
+      {predictions.length > 5 ? (
+        <section>
+          <SectionHeading title="更多赛前分析" eyebrow="Pre-match Analysis" href="/today" />
+          <div className="grid gap-3 md:grid-cols-2">
+            {predictions.slice(5, 9).map(({ prediction, model }) => <HomeDirectionCard key={prediction.id} prediction={prediction} model={model} />)}
+          </div>
+        </section>
+      ) : null}
 
       <section>
         <SectionHeading title="世界杯赛程与比赛时间" eyebrow="Matches" href="/schedule" />
@@ -167,6 +180,42 @@ export default function HomePage() {
 
       <SeoTopicLinks />
     </div>
+  );
+}
+
+function HeroDirectionCard({ prediction, model }: { prediction: Prediction; model?: AiModel }) {
+  const direction = prediction.recommendation.replace(/^模型倾向：/, "").replace(/^参考方向：/, "");
+
+  return (
+    <Link
+      href={`/predictions/${prediction.id}`}
+      className="block rounded-lg border border-white/10 bg-black/20 p-3 transition hover:-translate-y-0.5 hover:border-turf/40"
+    >
+      <div className="grid gap-3 md:grid-cols-[1fr_0.86fr_auto] md:items-center">
+        <div>
+          <div className="mb-1.5 flex flex-wrap items-center gap-2">
+            <Badge tone={prediction.visibility === "vip" ? "gold" : "green"}>{prediction.visibility === "vip" ? "VIP" : "免费"}</Badge>
+            <Badge>{prediction.competition}</Badge>
+          </div>
+          <h2 className="text-base font-semibold leading-snug text-white sm:text-lg">{prediction.matchup}</h2>
+          <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs text-white/48">
+            <span className="inline-flex items-center gap-1.5"><Clock size={13} />{prediction.kickoff_time_text}</span>
+            {model ? <span>{model.name}</span> : null}
+          </div>
+        </div>
+
+        <div className="rounded-md border border-turf/25 bg-turf/10 px-3 py-2">
+          <div className="flex items-center gap-1.5 text-[11px] text-turf">
+            <Target size={13} /> 参考方向
+          </div>
+          <div className="mt-1 text-base font-semibold leading-snug text-white">{direction}</div>
+        </div>
+
+        <span className="inline-flex justify-center rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 text-xs text-white/55 md:justify-start">
+          查看分析
+        </span>
+      </div>
+    </Link>
   );
 }
 
