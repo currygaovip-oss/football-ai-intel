@@ -85,7 +85,13 @@ export default function HomePage() {
                 这里展示今日已整理的赛前观点与参考方向。点进详情可阅读完整分析，更多更新会同步到 Telegram 群。
               </p>
             </div>
-            <Link href="/today" className="inline-flex shrink-0 rounded-md bg-turf px-4 py-2.5 text-sm font-semibold text-pitch-950">
+            <Link
+              href="/today"
+              className="inline-flex shrink-0 rounded-md bg-turf px-4 py-2.5 text-sm font-semibold text-pitch-950"
+              data-analytics-event="click_today"
+              data-analytics-area="home_hero"
+              data-analytics-label="查看全部赛前观点"
+            >
               查看全部赛前观点
             </Link>
           </div>
@@ -112,6 +118,9 @@ export default function HomePage() {
                 key={label}
                 href={label === "世界杯赛程" ? "/schedule" : label === "赛前观点" ? "/today" : "/about"}
                 className="rounded-lg border border-white/10 bg-white/[0.04] p-3 transition hover:border-turf/30"
+                data-analytics-event="click_home_stat"
+                data-analytics-area="home_stats"
+                data-analytics-label={label}
               >
                 <Icon className="text-turf" size={16} />
                 <div className="mt-2 text-[11px] text-white/45">{label}</div>
@@ -127,7 +136,14 @@ export default function HomePage() {
               </div>
               <div className="mt-3 grid gap-2">
                 {latestReviews.map(({ review, prediction }) => (
-                  <Link key={review.id} href={`/reviews/${review.id}`} className="rounded-md border border-white/10 bg-white/[0.04] p-3 transition hover:border-turf/30">
+                  <Link
+                    key={review.id}
+                    href={`/reviews/${review.id}`}
+                    className="rounded-md border border-white/10 bg-white/[0.04] p-3 transition hover:border-turf/30"
+                    data-analytics-event="click_review"
+                    data-analytics-area="home_latest_reviews"
+                    data-analytics-label={prediction?.matchup ?? "最新复盘"}
+                  >
                     <div className="flex items-center justify-between gap-2 text-xs">
                       <span className="text-turf">{review.result_status === "hit" ? "命中" : review.result_status === "half" ? "部分符合" : "未命中"}</span>
                       <span className="text-white/40">评分 {review.score}</span>
@@ -190,6 +206,9 @@ function HeroDirectionCard({ prediction, model }: { prediction: Prediction; mode
     <Link
       href={`/predictions/${prediction.id}`}
       className="block rounded-lg border border-white/10 bg-black/20 p-3 transition hover:-translate-y-0.5 hover:border-turf/40"
+      data-analytics-event="click_prediction"
+      data-analytics-area="home_top_predictions"
+      data-analytics-label={prediction.matchup}
     >
       <div className="grid gap-3 md:grid-cols-[1fr_0.86fr_auto] md:items-center">
         <div>
@@ -226,6 +245,9 @@ function HomeDirectionCard({ prediction, model }: { prediction: Prediction; mode
     <Link
       href={`/predictions/${prediction.id}`}
       className="block rounded-lg border border-white/10 bg-white/[0.04] p-4 transition hover:-translate-y-0.5 hover:border-turf/40"
+      data-analytics-event="click_prediction"
+      data-analytics-area="home_more_predictions"
+      data-analytics-label={prediction.matchup}
     >
       <div className="grid gap-3 lg:grid-cols-[1fr_1.08fr_auto] lg:items-center">
         <div>

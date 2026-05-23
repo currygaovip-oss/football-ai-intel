@@ -1,3 +1,5 @@
+const analyticsOrigin = getOrigin(process.env.NEXT_PUBLIC_ANALYTICS_ENDPOINT);
+
 /** @type {import('next').NextConfig} */
 const csp = [
   "default-src 'self'",
@@ -5,7 +7,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self' data:",
-  "connect-src 'self'",
+  `connect-src 'self'${analyticsOrigin ? ` ${analyticsOrigin}` : ""}`,
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'"
@@ -39,3 +41,12 @@ const nextConfig = {
 };
 
 export default nextConfig;
+
+function getOrigin(value) {
+  if (!value) return "";
+  try {
+    return new URL(value).origin;
+  } catch {
+    return "";
+  }
+}

@@ -9,7 +9,13 @@ export function ReviewCard({ review, prediction }: { review: Review; prediction?
   const originalDirection = prediction?.recommendation.replace(/^模型倾向：|^参考方向：/, "");
 
   return (
-    <Link href={`/reviews/${review.id}`} className="glass block rounded-lg p-5 transition hover:-translate-y-0.5 hover:border-gold/40">
+    <Link
+      href={`/reviews/${review.id}`}
+      className="glass block rounded-lg p-5 transition hover:-translate-y-0.5 hover:border-gold/40"
+      data-analytics-event="click_review"
+      data-analytics-area="review_card"
+      data-analytics-label={prediction?.matchup ?? "赛后复盘"}
+    >
       <div className="mb-3 flex flex-wrap items-center gap-2">
         <Badge tone={tone[review.result_status]}>{statusText[review.result_status]}</Badge>
         <Badge tone="white">复盘评分 {review.score}</Badge>

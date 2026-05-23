@@ -6,7 +6,13 @@ import type { AiModel, Prediction } from "@/lib/data";
 export function PredictionCard({ prediction, model, compact = false }: { prediction: Prediction; model?: AiModel; compact?: boolean }) {
   if (compact) {
     return (
-      <Link href={`/predictions/${prediction.id}`} className="glass block rounded-lg p-4 transition hover:-translate-y-0.5 hover:border-turf/40">
+      <Link
+        href={`/predictions/${prediction.id}`}
+        className="glass block rounded-lg p-4 transition hover:-translate-y-0.5 hover:border-turf/40"
+        data-analytics-event="click_prediction"
+        data-analytics-area="prediction_card"
+        data-analytics-label={prediction.matchup}
+      >
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <Badge tone={prediction.visibility === "vip" ? "gold" : "green"}>{prediction.visibility === "vip" ? "VIP" : "免费"}</Badge>
           <Badge>{prediction.competition}</Badge>
@@ -41,7 +47,13 @@ export function PredictionCard({ prediction, model, compact = false }: { predict
   }
 
   return (
-    <Link href={`/predictions/${prediction.id}`} className="glass block rounded-lg p-5 transition hover:-translate-y-0.5 hover:border-turf/40">
+    <Link
+      href={`/predictions/${prediction.id}`}
+      className="glass block rounded-lg p-5 transition hover:-translate-y-0.5 hover:border-turf/40"
+      data-analytics-event="click_prediction"
+      data-analytics-area="prediction_card"
+      data-analytics-label={prediction.matchup}
+    >
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <Badge tone={prediction.visibility === "vip" ? "gold" : "green"}>{prediction.visibility === "vip" ? "VIP" : "免费"}</Badge>
         <Badge>{prediction.competition}</Badge>

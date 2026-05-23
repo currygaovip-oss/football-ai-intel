@@ -107,6 +107,9 @@ function DirectionCard({ prediction, model }: { prediction: Prediction; model?: 
     <Link
       href={`/predictions/${prediction.id}`}
       className="block rounded-lg border border-white/10 bg-white/[0.04] p-4 transition hover:-translate-y-0.5 hover:border-turf/40"
+      data-analytics-event="click_prediction"
+      data-analytics-area="today_list"
+      data-analytics-label={prediction.matchup}
     >
       <div className="grid gap-3 lg:grid-cols-[1.05fr_1.1fr_auto] lg:items-center">
         <div>

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import "./globals.css";
+import { AnalyticsProvider } from "@/components/analytics-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { defaultOgImage, seoKeywords, siteDescription, siteName, siteUrl } from "@/lib/seo";
@@ -59,6 +61,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="zh-CN">
       <body className="min-h-screen antialiased">
         <div className="fixed inset-0 -z-10 pitch-grid opacity-35" />
+        <Suspense fallback={null}>
+          <AnalyticsProvider />
+        </Suspense>
         <SiteHeader />
         <main className="mx-auto w-full max-w-7xl px-4 pb-16 pt-6 sm:px-6 lg:px-8">{children}</main>
         <SiteFooter />

@@ -15,7 +15,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-pitch-950/86 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3" data-analytics-event="click_nav" data-analytics-area="header" data-analytics-label="首页 Logo">
           <img
             src="/brand/football-ai-logo-universal.png"
             alt="绿茵智报"
@@ -30,13 +30,26 @@ export function SiteHeader() {
         </Link>
         <nav className="hidden items-center gap-1 lg:flex">
           {nav.map(([label, href]) => (
-            <Link key={href} href={href} className="rounded-md px-3 py-2 text-sm text-white/72 transition hover:bg-white/10 hover:text-white">
+            <Link
+              key={href}
+              href={href}
+              className="rounded-md px-3 py-2 text-sm text-white/72 transition hover:bg-white/10 hover:text-white"
+              data-analytics-event="click_nav"
+              data-analytics-area="desktop_header"
+              data-analytics-label={label}
+            >
               {label}
             </Link>
           ))}
         </nav>
         <div className="hidden items-center gap-2 sm:flex">
-          <a href={TELEGRAM_URL} className="inline-flex items-center gap-2 rounded-md border border-turf/30 bg-turf/10 px-3 py-2 text-sm text-turf">
+          <a
+            href={TELEGRAM_URL}
+            className="inline-flex items-center gap-2 rounded-md border border-turf/30 bg-turf/10 px-3 py-2 text-sm text-turf"
+            data-analytics-event="click_telegram"
+            data-analytics-area="header"
+            data-analytics-label="社群入口"
+          >
             <Radio size={16} />
             社群入口
           </a>
@@ -44,7 +57,14 @@ export function SiteHeader() {
       </div>
       <nav className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 pb-3 text-sm sm:px-6 lg:hidden lg:px-8">
         {nav.map(([label, href]) => (
-          <Link key={href} href={href} className="shrink-0 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-white/72">
+          <Link
+            key={href}
+            href={href}
+            className="shrink-0 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-white/72"
+            data-analytics-event="click_nav"
+            data-analytics-area="mobile_header"
+            data-analytics-label={label}
+          >
             {label}
           </Link>
         ))}

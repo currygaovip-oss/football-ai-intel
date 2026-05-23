@@ -132,6 +132,9 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
                 "inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-medium transition",
                 active ? "border-turf/35 bg-turf/15 text-turf" : "border-white/15 bg-white/10 text-white/75 hover:border-turf/30 hover:text-turf"
               )}
+              data-analytics-event="click_schedule"
+              data-analytics-area="schedule_filters"
+              data-analytics-label={filter.label}
             >
               {filter.label}
             </Link>
@@ -182,6 +185,9 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
                   key={stage}
                   href={`/schedule?type=${stage.includes("淘汰") || stage.includes("决赛") ? "knockout" : "group"}`}
                   className="flex items-center justify-between rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 text-sm transition hover:border-turf/30 hover:text-turf"
+                  data-analytics-event="click_schedule"
+                  data-analytics-area="schedule_stage"
+                  data-analytics-label={stage}
                 >
                   <span>{stage}</span>
                   <span className="text-xs text-white/45">{count} 场</span>
@@ -195,7 +201,13 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
             <p className="mt-2 text-sm leading-6 text-white/62">
               已发布观点的比赛会显示“查看赛前分析”。其他比赛保持赛程展示，赛前更新时会补充分析入口。
             </p>
-            <Link href="/today" className="mt-4 inline-flex items-center gap-1 text-sm text-turf hover:text-turfSoft">
+            <Link
+              href="/today"
+              className="mt-4 inline-flex items-center gap-1 text-sm text-turf hover:text-turfSoft"
+              data-analytics-event="click_today"
+              data-analytics-area="schedule_sidebar"
+              data-analytics-label="查看全部赛前分析"
+            >
               查看全部赛前分析 <ChevronRight size={15} />
             </Link>
           </div>
@@ -230,7 +242,13 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
 
 function ScheduleStat({ label, value, href }: { label: string; value: number; href: string }) {
   return (
-    <Link href={href} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 transition hover:border-turf/30 hover:text-turf">
+    <Link
+      href={href}
+      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 transition hover:border-turf/30 hover:text-turf"
+      data-analytics-event="click_schedule"
+      data-analytics-area="schedule_stats"
+      data-analytics-label={label}
+    >
       <span>{label}</span>
       <span className="font-semibold text-white">{value}</span>
     </Link>
@@ -261,6 +279,9 @@ function ScheduleMatchCard({
           <Link
             href={`/predictions/${relatedPrediction.id}`}
             className="inline-flex items-center gap-1 rounded-md border border-turf/25 bg-turf/10 px-3 py-1.5 text-xs text-turf hover:bg-turf/15"
+            data-analytics-event="click_prediction"
+            data-analytics-area="schedule_match_card"
+            data-analytics-label={relatedPrediction.matchup}
           >
             查看赛前分析 <ChevronRight size={13} />
           </Link>
