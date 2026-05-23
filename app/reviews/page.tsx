@@ -65,7 +65,7 @@ export default function ReviewsPage() {
       />
       <SectionHeading title="历史复盘记录" eyebrow="Review Archive" level={1} />
       <p className="mb-6 max-w-3xl text-sm leading-7 text-white/62">
-        这里记录已经完成复盘的赛前观点，不代表今日新增数量。用户可以回看原参考方向、比赛结果、符合情况和主要偏差。
+        已完成复盘会记录原参考方向、比赛结果、符合情况和主要偏差，方便回看赛前判断与实际走势的差异。
       </p>
 
       <div className="grid gap-3 md:grid-cols-4">

@@ -84,7 +84,7 @@ export default async function ReviewDetailPage({ params }: ReviewParams) {
         <div className="mt-6 rounded-lg border border-white/10 bg-white/5 p-4">
           <div className="text-sm text-white/58">比赛结果</div>
           <div className="mt-1 text-2xl font-semibold text-gold">{review.match_result}</div>
-          <div className="mt-4 text-sm text-white/68">原预测方向：{originalDirection}</div>
+          <div className="mt-4 text-sm text-white/68">原参考方向：{originalDirection}</div>
         </div>
         {prediction ? (
           <Link href={`/predictions/${prediction.id}`} className="mt-4 inline-flex rounded-md border border-white/15 px-4 py-2 text-sm text-white/78 hover:border-turf/35 hover:text-turf">

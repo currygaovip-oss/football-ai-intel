@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllPredictions, getAllReviews } from "@/lib/data";
+import { seoTopics } from "@/lib/seo-topics";
 import { siteUrl } from "@/lib/seo";
 
 const staticRoutes = [
@@ -34,5 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.65
   }));
 
-  return [...staticEntries, ...predictionEntries, ...reviewEntries];
+  const topicEntries = seoTopics.map((topic) => ({
+    url: `${siteUrl}/topics/${topic.slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.75
+  }));
+
+  return [...staticEntries, ...topicEntries, ...predictionEntries, ...reviewEntries];
 }

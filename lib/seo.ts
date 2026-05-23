@@ -33,10 +33,11 @@ export const seoKeywords = [
 ];
 
 export const seoTopicLinks = [
-  { label: "今日足球赛程", href: "/schedule?type=today" },
-  { label: "足球赛前分析", href: "/today" },
-  { label: "世界杯2026赛程", href: "/schedule?type=all" },
-  { label: "足球赛后复盘", href: "/reviews" },
+  { label: "今日足球赛程", href: "/topics/today-football-schedule" },
+  { label: "足球赛前分析", href: "/topics/football-match-analysis" },
+  { label: "世界杯2026赛程", href: "/topics/world-cup-2026-schedule" },
+  { label: "足球赛后复盘", href: "/topics/football-review" },
+  { label: "足球比分赛果", href: "/topics/football-score-result" },
   { label: "VIP社群说明", href: "/vip" }
 ];
 

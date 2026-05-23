@@ -82,7 +82,7 @@ export default function HomePage() {
                 今日已发布赛前观点
               </h1>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-white/58">
-                这里展示今日已整理的赛前观点与参考方向。点进详情可阅读完整分析，更多更新会同步到 Telegram 群。
+                今日重点比赛已整理对阵、时间、参考方向和完整分析，更多赛前更新会同步到 Telegram 群。
               </p>
             </div>
             <Link
