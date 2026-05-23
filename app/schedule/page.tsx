@@ -113,8 +113,8 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
             </p>
           </div>
           <div className="flex flex-wrap gap-2 text-xs text-white/58">
-            <ScheduleStat label="今日" value={todayCount} href="/schedule?type=today" />
-            <ScheduleStat label="明日" value={tomorrowCount} href="/schedule?type=tomorrow" />
+            <ScheduleStat label="今日" value={todayCount} href="/football-schedule/today" />
+            <ScheduleStat label="明日" value={tomorrowCount} href="/football-schedule/tomorrow" />
             <ScheduleStat label="全部" value={matches.length} href="/schedule?type=all" />
             <ScheduleStat label="有分析" value={predictionMatchCount} href="/today" />
           </div>
@@ -122,6 +122,9 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
       </section>
 
       <div className="flex flex-wrap items-center gap-2 border-y border-white/10 py-3">
+        <Link href="/football-schedule/today" className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white/75 transition hover:border-turf/30 hover:text-turf">今日足球赛程</Link>
+        <Link href="/football-schedule/tomorrow" className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white/75 transition hover:border-turf/30 hover:text-turf">明日足球赛程</Link>
+        <Link href="/world-cup-2026/schedule" className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white/75 transition hover:border-turf/30 hover:text-turf">世界杯赛程表</Link>
         {filters.map((filter) => {
           const active = filter.key === currentType;
           return (

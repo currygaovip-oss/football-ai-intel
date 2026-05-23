@@ -116,7 +116,7 @@ export default function HomePage() {
             {stats.map(({ label, value, Icon }) => (
               <Link
                 key={label}
-                href={label === "世界杯赛程" ? "/schedule" : label === "赛前观点" ? "/today" : "/about"}
+                href={label === "世界杯赛程" ? "/world-cup-2026" : label === "赛前观点" ? "/today" : "/about"}
                 className="rounded-lg border border-white/10 bg-white/[0.04] p-3 transition hover:border-turf/30"
                 data-analytics-event="click_home_stat"
                 data-analytics-area="home_stats"
@@ -167,7 +167,7 @@ export default function HomePage() {
       ) : null}
 
       <section>
-        <SectionHeading title="世界杯赛程与比赛时间" eyebrow="Matches" href="/schedule" />
+        <SectionHeading title="世界杯赛程与比赛时间" eyebrow="Matches" href="/world-cup-2026/schedule" />
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {matches.slice(0, 8).map((match) => (
             <div key={match.id} className="glass rounded-lg p-5">
@@ -180,6 +180,11 @@ export default function HomePage() {
         </div>
         <div className="mt-4 rounded-lg border border-white/10 bg-black/20 p-4 text-sm leading-7 text-white/62">
           赛程页可查看今日足球赛程、明日赛程、世界杯小组赛和淘汰赛安排；有赛前观点的比赛可继续进入详情页阅读参考方向与详细分析。
+        </div>
+        <div className="mt-3 flex flex-wrap gap-2 text-sm">
+          <Link href="/football-schedule/today" className="rounded-md border border-white/15 px-3 py-2 text-white/68 hover:border-turf/30 hover:text-turf">今日足球赛程</Link>
+          <Link href="/world-cup-2026/host-cities" className="rounded-md border border-white/15 px-3 py-2 text-white/68 hover:border-turf/30 hover:text-turf">世界杯举办城市</Link>
+          <Link href="/world-cup-2026/teams" className="rounded-md border border-white/15 px-3 py-2 text-white/68 hover:border-turf/30 hover:text-turf">球队赛程</Link>
         </div>
       </section>
 

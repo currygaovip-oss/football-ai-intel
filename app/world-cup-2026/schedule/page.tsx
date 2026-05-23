@@ -45,8 +45,11 @@ export default function WorldCupSchedulePage() {
           按比赛日查看世界杯2026赛程、比赛时间和对阵信息。已发布赛前观点的比赛会显示分析入口。
         </p>
         <div className="mt-4 flex flex-wrap gap-2 text-sm">
+          <Link href={`${worldCupBasePath}/host-countries`} className="rounded-md border border-white/15 px-3 py-2 text-white/72 hover:border-turf/30 hover:text-turf">美加墨世界杯</Link>
+          <Link href={`${worldCupBasePath}/host-cities`} className="rounded-md border border-white/15 px-3 py-2 text-white/72 hover:border-turf/30 hover:text-turf">举办城市</Link>
           <Link href={`${worldCupBasePath}/groups`} className="rounded-md border border-white/15 px-3 py-2 text-white/72 hover:border-turf/30 hover:text-turf">小组赛</Link>
           <Link href={`${worldCupBasePath}/knockout`} className="rounded-md border border-white/15 px-3 py-2 text-white/72 hover:border-turf/30 hover:text-turf">淘汰赛</Link>
+          <Link href={`${worldCupBasePath}/teams`} className="rounded-md border border-white/15 px-3 py-2 text-white/72 hover:border-turf/30 hover:text-turf">球队赛程</Link>
           <Link href="/today" className="rounded-md border border-white/15 px-3 py-2 text-white/72 hover:border-turf/30 hover:text-turf">赛前观点</Link>
         </div>
       </section>

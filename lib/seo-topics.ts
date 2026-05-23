@@ -22,7 +22,7 @@ export const seoTopics: SeoTopic[] = [
     eyebrow: "Football Schedule",
     description: "查看今日足球赛程、比赛时间、赛事阶段和赛前分析入口，覆盖世界杯、五大联赛、杯赛和焦点赛事。",
     intro: "今日与近期重点足球赛程按比赛时间和对阵整理；已发布观点的比赛可继续阅读赛前分析和参考方向。",
-    primaryLink: { label: "查看赛程中心", href: "/schedule?type=today" },
+    primaryLink: { label: "查看今日足球赛程", href: "/football-schedule/today" },
     faq: [
       {
         question: "今日足球赛程页面主要看什么？",
@@ -44,7 +44,7 @@ export const seoTopics: SeoTopic[] = [
     eyebrow: "Pre-match Analysis",
     description: "查看足球赛前分析、比赛观点、球队状态、赛程强度、数据变化和参考方向。",
     intro: "赛前分析会把比赛时间、球队状态、赛程强度和数据变化整理成更容易阅读的赛前信息，帮助用户快速判断一场比赛值得关注的角度。",
-    primaryLink: { label: "查看今日赛前观点", href: "/today" },
+    primaryLink: { label: "查看足球赛前分析", href: "/predictions" },
     faq: [
       {
         question: "足球赛前分析包含哪些内容？",

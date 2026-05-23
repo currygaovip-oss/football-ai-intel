@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const siteUrl = "https://lyzbvip.vip";
 export const siteName = "绿茵智报";
-export const siteDescription = "绿茵智报整理今日足球赛程、世界杯2026赛程、足球赛前分析、参考方向和赛后复盘，面向中文足球用户持续记录重点赛事观点。";
+export const siteDescription = "绿茵智报整理2026世界杯赛程、美加墨世界杯举办城市、今日足球赛程、赛前分析、参考方向和赛后复盘，面向中文足球用户持续记录重点赛事观点。";
 export const defaultOgImage = "/brand/football-ai-logo-universal.png?v=3";
 
 export const seoKeywords = [
@@ -15,6 +15,13 @@ export const seoKeywords = [
   "足球比赛时间",
   "世界杯赛程",
   "世界杯2026赛程",
+  "2026世界杯",
+  "美加墨世界杯",
+  "美加墨世界杯赛程",
+  "世界杯举办城市",
+  "2026世界杯举办城市",
+  "2026世界杯揭幕战",
+  "2026世界杯决赛",
   "世界杯小组赛赛程",
   "世界杯淘汰赛赛程",
   "世界杯比赛时间",
@@ -34,9 +41,11 @@ export const seoKeywords = [
 
 export const seoTopicLinks = [
   { label: "世界杯2026专题", href: "/world-cup-2026" },
-  { label: "今日足球赛程", href: "/topics/today-football-schedule" },
-  { label: "足球赛前分析", href: "/topics/football-match-analysis" },
-  { label: "世界杯2026赛程", href: "/topics/world-cup-2026-schedule" },
+  { label: "美加墨世界杯", href: "/world-cup-2026/host-countries" },
+  { label: "世界杯举办城市", href: "/world-cup-2026/host-cities" },
+  { label: "今日足球赛程", href: "/football-schedule/today" },
+  { label: "足球赛前分析", href: "/predictions" },
+  { label: "世界杯2026赛程", href: "/world-cup-2026/schedule" },
   { label: "足球赛后复盘", href: "/topics/football-review" },
   { label: "足球比分赛果", href: "/topics/football-score-result" },
   { label: "VIP社群说明", href: "/vip" }

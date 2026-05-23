@@ -2,17 +2,39 @@ import type { MetadataRoute } from "next";
 import { getAllPredictions, getAllReviews } from "@/lib/data";
 import { seoTopics } from "@/lib/seo-topics";
 import { siteUrl } from "@/lib/seo";
-import { getWorldCupFixturePath, getWorldCupMatches, worldCupBasePath } from "@/lib/world-cup";
+import {
+  getHostCityPath,
+  getHostCountryPath,
+  getNamedWorldCupTeams,
+  getTeamPath,
+  getWorldCupFixturePath,
+  getWorldCupMatches,
+  hostCities,
+  hostCountries,
+  worldCupBasePath
+} from "@/lib/world-cup";
 
 const staticRoutes = [
   "",
   "/today",
+  "/predictions",
   "/reviews",
   "/schedule",
+  "/football-schedule/today",
+  "/football-schedule/tomorrow",
+  "/football-schedule/week",
   worldCupBasePath,
   `${worldCupBasePath}/schedule`,
+  `${worldCupBasePath}/matches`,
   `${worldCupBasePath}/groups`,
   `${worldCupBasePath}/knockout`,
+  `${worldCupBasePath}/teams`,
+  `${worldCupBasePath}/host-countries`,
+  `${worldCupBasePath}/host-cities`,
+  `${worldCupBasePath}/opening-match`,
+  `${worldCupBasePath}/final`,
+  `${worldCupBasePath}/share/schedule`,
+  `${worldCupBasePath}/share/groups`,
   "/vip",
   "/about"
 ];
@@ -54,5 +76,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: match.stage.includes("决赛") || match.stage.includes("强赛") ? 0.78 : 0.72
   }));
 
-  return [...staticEntries, ...topicEntries, ...worldCupFixtureEntries, ...predictionEntries, ...reviewEntries];
+  const worldCupTeamEntries = getNamedWorldCupTeams().map((team) => ({
+    url: `${siteUrl}${getTeamPath(team)}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.7
+  }));
+
+  const hostCountryEntries = hostCountries.map((country) => ({
+    url: `${siteUrl}${getHostCountryPath(country.slug)}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.72
+  }));
+
+  const hostCityEntries = hostCities.map((city) => ({
+    url: `${siteUrl}${getHostCityPath(city.slug)}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: city.highlight ? 0.76 : 0.7
+  }));
+
+  return [...staticEntries, ...topicEntries, ...hostCountryEntries, ...hostCityEntries, ...worldCupTeamEntries, ...worldCupFixtureEntries, ...predictionEntries, ...reviewEntries];
 }
