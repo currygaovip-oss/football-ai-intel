@@ -4,6 +4,7 @@ import { Trophy } from "lucide-react";
 import { WorldCupMatchCard } from "@/components/world-cup-match-card";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { createMetadata, faqJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
+import { getTicketTopicPath } from "@/lib/world-cup-tickets";
 import { getFinalMatch, getHostCityPath, getMatchDateTimeLabel, getWorldCupPrediction, worldCupBasePath } from "@/lib/world-cup";
 
 const description = "查看2026世界杯决赛时间、举办城市、比赛入口和赛前分析入口。决赛将在纽约/新泽西赛区举行。";
@@ -45,6 +46,7 @@ export default function WorldCupFinalPage() {
 
       <section className="grid gap-4 md:grid-cols-3">
         <Info title="举办城市" body="纽约/新泽西赛区承接2026世界杯决赛，球场为 MetLife Stadium。" href={getHostCityPath("new-york-new-jersey")} />
+        <Info title="门票信息" body="查看决赛官方入口、纽约/新泽西赛区和购票前提醒。" href={getTicketTopicPath("final")} />
         <Info title="淘汰赛赛程" body="查看32强赛到决赛的全部比赛时间。" href={`${worldCupBasePath}/knockout`} />
         <Info title="赛前观点" body="决赛临近后，相关观点会显示参考方向和分析入口。" href="/today" />
       </section>

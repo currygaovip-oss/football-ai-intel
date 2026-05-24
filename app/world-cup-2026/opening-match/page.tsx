@@ -4,6 +4,7 @@ import { Trophy } from "lucide-react";
 import { WorldCupMatchCard } from "@/components/world-cup-match-card";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { createMetadata, faqJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
+import { getTicketTopicPath } from "@/lib/world-cup-tickets";
 import { getHostCityPath, getMatchDateTimeLabel, getOpeningMatch, getWorldCupPrediction, worldCupBasePath } from "@/lib/world-cup";
 
 const description = "查看2026世界杯揭幕战时间、举办城市、对阵信息和赛前分析入口。揭幕战将在墨西哥城举行。";
@@ -45,6 +46,7 @@ export default function OpeningMatchPage() {
 
       <section className="grid gap-4 md:grid-cols-3">
         <Info title="举办城市" body="墨西哥城是2026世界杯揭幕战城市，球场为 Estadio Azteca。" href={getHostCityPath("mexico-city")} />
+        <Info title="门票信息" body="查看揭幕战官方入口、墨西哥城赛区和购票前提醒。" href={getTicketTopicPath("opening-match")} />
         <Info title="完整赛程" body="查看小组赛、淘汰赛和全部比赛时间。" href={`${worldCupBasePath}/schedule`} />
         <Info title="赛前观点" body="比赛临近后，已发布观点会显示参考方向和分析入口。" href="/today" />
       </section>

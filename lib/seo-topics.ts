@@ -2,6 +2,7 @@ export type SeoTopicSlug =
   | "today-football-schedule"
   | "football-match-analysis"
   | "world-cup-2026-schedule"
+  | "world-cup-2026-tickets"
   | "football-review"
   | "football-score-result";
 
@@ -79,6 +80,28 @@ export const seoTopics: SeoTopic[] = [
       {
         question: "世界杯比赛有赛前观点吗？",
         answer: "重点比赛发布赛前观点后，会在赛程卡片和今日情报页显示入口。"
+      }
+    ]
+  },
+  {
+    slug: "world-cup-2026-tickets",
+    title: "2026世界杯门票信息",
+    eyebrow: "World Cup Tickets",
+    description: "查看2026世界杯门票信息、官方购票入口、美加墨举办城市、揭幕战、决赛和观赛提醒。",
+    intro: "世界杯门票信息以 FIFA 官方发布为准。绿茵智报整理官方入口、赛程、举办城市和观赛前需要核对的公开信息。",
+    primaryLink: { label: "查看世界杯门票信息", href: "/world-cup-2026/tickets" },
+    faq: [
+      {
+        question: "2026世界杯门票信息以哪里为准？",
+        answer: "以 FIFA 官方门票页面和赛事官方公告为准。"
+      },
+      {
+        question: "绿茵智报提供门票交易吗？",
+        answer: "不提供。本站只整理公开信息、赛程入口、城市信息和观赛提醒。"
+      },
+      {
+        question: "买票前应该先看哪些页面？",
+        answer: "建议先查看世界杯赛程、举办城市、单场比赛页和官方门票入口。"
       }
     ]
   },

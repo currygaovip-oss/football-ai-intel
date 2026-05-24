@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { getAllPredictions, getAllReviews } from "@/lib/data";
 import { seoTopics } from "@/lib/seo-topics";
 import { siteUrl } from "@/lib/seo";
+import { getCityTicketPath, getTicketTopicPath, ticketBasePath, ticketTopics } from "@/lib/world-cup-tickets";
 import {
   getHostCityPath,
   getHostCountryPath,
@@ -33,6 +34,7 @@ const staticRoutes = [
   `${worldCupBasePath}/host-cities`,
   `${worldCupBasePath}/opening-match`,
   `${worldCupBasePath}/final`,
+  ticketBasePath,
   `${worldCupBasePath}/share/schedule`,
   `${worldCupBasePath}/share/groups`,
   "/vip",
@@ -97,5 +99,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: city.highlight ? 0.76 : 0.7
   }));
 
-  return [...staticEntries, ...topicEntries, ...hostCountryEntries, ...hostCityEntries, ...worldCupTeamEntries, ...worldCupFixtureEntries, ...predictionEntries, ...reviewEntries];
+  const ticketTopicEntries = ticketTopics.map((topic) => ({
+    url: `${siteUrl}${getTicketTopicPath(topic.slug)}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: topic.slug === "official" || topic.slug === "final" || topic.slug === "opening-match" ? 0.76 : 0.7
+  }));
+
+  const cityTicketEntries = hostCities.map((city) => ({
+    url: `${siteUrl}${getCityTicketPath(city.slug)}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: city.highlight ? 0.74 : 0.68
+  }));
+
+  return [...staticEntries, ...topicEntries, ...hostCountryEntries, ...hostCityEntries, ...ticketTopicEntries, ...cityTicketEntries, ...worldCupTeamEntries, ...worldCupFixtureEntries, ...predictionEntries, ...reviewEntries];
 }

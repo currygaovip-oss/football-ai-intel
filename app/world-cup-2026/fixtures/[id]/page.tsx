@@ -5,6 +5,7 @@ import { Badge } from "@/components/badge";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getReviews } from "@/lib/data";
 import { articleJsonLd, breadcrumbJsonLd, createMetadata, jsonLd, sportsEventJsonLd, truncateSeo, webPageJsonLd } from "@/lib/seo";
+import { ticketBasePath } from "@/lib/world-cup-tickets";
 import {
   getDirection,
   getEventStartDate,
@@ -154,6 +155,9 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
         <ContentCard title="赛后回看">
           比赛结束后，如已完成复盘，会记录原参考方向、比赛结果和主要偏差，方便长期回看。
         </ContentCard>
+        <ContentCard title="门票与观赛">
+          如计划现场观赛，建议先核对官方门票入口、举办城市、球场信息和入场要求，再结合赛程确认比赛安排。
+        </ContentCard>
       </section>
 
       {review ? (
@@ -169,6 +173,7 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
       <section className="flex flex-wrap gap-2">
         <Link href={`${worldCupBasePath}/schedule`} className="rounded-md border border-white/15 px-3 py-2 text-sm text-white/72 hover:border-turf/30 hover:text-turf">世界杯完整赛程</Link>
         <Link href={`${worldCupBasePath}/host-cities`} className="rounded-md border border-white/15 px-3 py-2 text-sm text-white/72 hover:border-turf/30 hover:text-turf">举办城市</Link>
+        <Link href={ticketBasePath} className="rounded-md border border-gold/30 px-3 py-2 text-sm text-gold hover:bg-gold/10">世界杯门票信息</Link>
         <Link href={`${worldCupBasePath}/teams`} className="rounded-md border border-white/15 px-3 py-2 text-sm text-white/72 hover:border-turf/30 hover:text-turf">球队赛程</Link>
         <Link href={`${worldCupBasePath}/groups`} className="rounded-md border border-white/15 px-3 py-2 text-sm text-white/72 hover:border-turf/30 hover:text-turf">世界杯小组赛</Link>
         <Link href={`${worldCupBasePath}/knockout`} className="rounded-md border border-white/15 px-3 py-2 text-sm text-white/72 hover:border-turf/30 hover:text-turf">世界杯淘汰赛</Link>

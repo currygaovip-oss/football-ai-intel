@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CalendarDays, ChevronRight, Globe2, MapPin, Trophy } from "lucide-react";
+import { CalendarDays, ChevronRight, Globe2, MapPin, Ticket, Trophy } from "lucide-react";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { WorldCupMatchCard } from "@/components/world-cup-match-card";
 import { getAllPredictions } from "@/lib/data";
@@ -77,6 +77,9 @@ export default function WorldCup2026Page() {
           <Link href={`${worldCupBasePath}/host-cities`} className="rounded-md border border-white/15 px-4 py-2.5 text-sm text-white/78 hover:border-turf/30 hover:text-turf">
             举办城市
           </Link>
+          <Link href={`${worldCupBasePath}/tickets`} className="rounded-md border border-gold/30 px-4 py-2.5 text-sm text-gold hover:bg-gold/10">
+            门票信息
+          </Link>
           <Link href="/today" className="rounded-md border border-white/15 px-4 py-2.5 text-sm text-white/78 hover:border-turf/30 hover:text-turf">
             今日赛前观点
           </Link>
@@ -96,6 +99,9 @@ export default function WorldCup2026Page() {
         </TopicCard>
         <TopicCard icon={<MapPin size={18} />} title="举办城市" href={`${worldCupBasePath}/host-cities`}>
           16个举办城市与球场信息集中查看。
+        </TopicCard>
+        <TopicCard icon={<Ticket size={18} />} title="门票信息" href={`${worldCupBasePath}/tickets`}>
+          查看官方入口、城市观赛和购票前提醒。
         </TopicCard>
         <TopicCard icon={<Trophy size={18} />} title="揭幕战" href={`${worldCupBasePath}/opening-match`}>
           查看揭幕战时间、城市和比赛入口。

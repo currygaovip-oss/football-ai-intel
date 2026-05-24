@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { MapPin } from "lucide-react";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { createMetadata, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
+import { getCountryTicketPath } from "@/lib/world-cup-tickets";
 import { getHostCityPath, getHostCountry, getHostCountryPath, hostCities, hostCountries, worldCupBasePath } from "@/lib/world-cup";
 
 type CountryParams = { params: Promise<{ country: string }> };
@@ -71,6 +72,10 @@ export default async function HostCountryPage({ params }: CountryParams) {
         <Link href={`${worldCupBasePath}/schedule`} className="rounded-lg border border-white/10 bg-black/20 p-5 hover:border-turf/35">
           <h2 className="text-lg font-semibold text-white">世界杯赛程表</h2>
           <p className="mt-2 text-sm leading-6 text-white/58">查看小组赛、淘汰赛和单场比赛详情。</p>
+        </Link>
+        <Link href={getCountryTicketPath(country.slug)} className="rounded-lg border border-gold/20 bg-gold/10 p-5 hover:border-gold/35">
+          <h2 className="text-lg font-semibold text-white">{country.name}门票信息</h2>
+          <p className="mt-2 text-sm leading-6 text-white/58">查看官方入口、举办城市和观赛前提醒。</p>
         </Link>
         <Link href={`${worldCupBasePath}/opening-match`} className="rounded-lg border border-white/10 bg-black/20 p-5 hover:border-turf/35">
           <h2 className="text-lg font-semibold text-white">世界杯揭幕战</h2>

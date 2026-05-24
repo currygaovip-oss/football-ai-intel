@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { MapPin } from "lucide-react";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { createMetadata, faqJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
+import { getCityTicketPath } from "@/lib/world-cup-tickets";
 import { getHostCity, getHostCityPath, hostCities, worldCupBasePath } from "@/lib/world-cup";
 
 type CityParams = { params: Promise<{ city: string }> };
@@ -63,6 +64,7 @@ export default async function HostCityPage({ params }: CityParams) {
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link href={`${worldCupBasePath}/schedule`} className="rounded-md bg-turf px-4 py-2 text-sm font-semibold text-pitch-950">查看世界杯赛程</Link>
+          <Link href={getCityTicketPath(city.slug)} className="rounded-md border border-gold/30 px-4 py-2 text-sm text-gold hover:bg-gold/10">{city.name}门票信息</Link>
           <Link href={`${worldCupBasePath}/host-cities`} className="rounded-md border border-white/15 px-4 py-2 text-sm text-white/72 hover:border-turf/30 hover:text-turf">全部举办城市</Link>
           <Link href="/today" className="rounded-md border border-white/15 px-4 py-2 text-sm text-white/72 hover:border-turf/30 hover:text-turf">今日赛前分析</Link>
         </div>
