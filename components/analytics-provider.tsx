@@ -3,7 +3,8 @@
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-const ENDPOINT = process.env.NEXT_PUBLIC_ANALYTICS_ENDPOINT;
+const DEFAULT_ANALYTICS_ENDPOINT = "https://api.lyzbvip.vip/website-events";
+const ENDPOINT = process.env.NEXT_PUBLIC_ANALYTICS_ENDPOINT || DEFAULT_ANALYTICS_ENDPOINT;
 const SITE_KEY = process.env.NEXT_PUBLIC_ANALYTICS_SITE_KEY;
 
 type AnalyticsPayload = {

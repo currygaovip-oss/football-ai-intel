@@ -1,4 +1,5 @@
-const analyticsOrigin = getOrigin(process.env.NEXT_PUBLIC_ANALYTICS_ENDPOINT);
+const defaultAnalyticsEndpoint = "https://api.lyzbvip.vip/website-events";
+const analyticsOrigin = getOrigin(process.env.NEXT_PUBLIC_ANALYTICS_ENDPOINT || defaultAnalyticsEndpoint);
 
 /** @type {import('next').NextConfig} */
 const csp = [
