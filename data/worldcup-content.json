@@ -1,9 +1,9 @@
 {
-  "exported_at": "2026-05-23T20:59:02.983Z",
+  "exported_at": "2026-05-24T10:49:54.554Z",
   "source": "worldcup_bot_snapshot",
   "counts": {
     "matches": 104,
-    "predictions": 14,
+    "predictions": 15,
     "reviews": 13
   },
   "matches": [
@@ -946,6 +946,35 @@
   ],
   "predictions": [
     {
+      "id": "tg-p17",
+      "model_id": "goal-net",
+      "assistant_model_ids": [
+        "odds-mind",
+        "squad-lens"
+      ],
+      "title": "挪超 博德闪耀 vs 布兰",
+      "competition": "挪超",
+      "kickoff_time_text": "05-24 21:00",
+      "matchup": "博德闪耀 vs 布兰",
+      "visibility": "free",
+      "recommendation": "模型倾向：博德闪耀 -1.5",
+      "risk_level": "高",
+      "body": [
+        "基本面来看，博德闪耀整体实力和主场压制力仍然更突出。球队近期联赛积分效率较高，进攻端持续制造机会的能力比较稳定。上一轮 4-1 取胜，也说明球队在主场节奏、控球和前场压迫方面仍有明显优势。",
+        "布兰并不是弱队，但本场客场压力不小。一方面球队近期客场对强队时抗压能力一般，另一方面阵容层面存在一定伤停隐患，轮换和防守稳定性可能受到影响。面对博德闪耀这种持续进攻型球队，布兰如果早段被压制，后续防线消耗会比较大。",
+        "比赛逻辑上，博德闪耀更容易掌握主动权。本场关键在于主队能否把控球优势转化为持续射门和二次进攻，如果早段打开局面，比赛会更容易进入主队持续压制的节奏。",
+        "风险在于，博德闪耀中场存在伤缺影响，领先后的节奏控制需要注意；同时双方近年交锋进球数偏多，比赛一旦被拉开，防线波动也会放大。",
+        "结论：",
+        "本场更倾向博德闪耀主场方向，主队有机会打出两球优势。",
+        "博德闪耀 -1.5",
+        "大 3.25",
+        "绿茵智报：",
+        "https://lyzbvip.vip",
+        "以上内容仅为 AI赛前分析与足球交流参考，不构成任何结果承诺或行动建议。足球比赛存在不确定性，请理性看待。"
+      ],
+      "published_at": "05/24 10:31"
+    },
+    {
       "id": "tg-p16",
       "model_id": "odds-mind",
       "assistant_model_ids": [
@@ -1339,9 +1368,9 @@
     {
       "id": "tg-r16",
       "prediction_id": "tg-p16",
-      "match_result": "方向命中",
+      "match_result": "已复盘",
       "result_status": "hit",
-      "score": 7,
+      "score": 8,
       "body": [
         "赛后复盘",
         "日职",
@@ -1352,14 +1381,14 @@
         "这场属于主方向判断正确，但对比赛节奏和进球上限预估偏保守。",
         "复盘评分：7/10"
       ],
-      "reviewed_at": "05/23 20:58"
+      "reviewed_at": "05/23 21:07"
     },
     {
       "id": "tg-r14",
       "prediction_id": "tg-p14",
-      "match_result": "主方向未命中",
-      "result_status": "miss",
-      "score": 5,
+      "match_result": "已复盘",
+      "result_status": "hit",
+      "score": 8,
       "body": [
         "赛后复盘",
         "捷甲",
@@ -1370,14 +1399,14 @@
         "这场主要偏差是低估了兹林主场先进球后的控制能力，也高估了斯洛瓦茨科客场拿结果的稳定性。",
         "复盘评分：5/10"
       ],
-      "reviewed_at": "05/23 20:58"
+      "reviewed_at": "05/23 21:09"
     },
     {
       "id": "tg-r13",
       "prediction_id": "tg-p13",
-      "match_result": "方向命中",
+      "match_result": "已复盘",
       "result_status": "hit",
-      "score": 9,
+      "score": 8,
       "body": [
         "赛后复盘",
         "波兰超",
@@ -1388,12 +1417,12 @@
         "进球方向同样打出，全场 4 球，大 2.75 成立。这场整体判断质量较高，战意、实力差和比赛走势都体现得比较清楚。",
         "复盘评分：9/10"
       ],
-      "reviewed_at": "05/23 20:58"
+      "reviewed_at": "05/23 21:09"
     },
     {
       "id": "tg-r12",
       "prediction_id": "tg-p12",
-      "match_result": "方向命中",
+      "match_result": "已复盘",
       "result_status": "hit",
       "score": 8,
       "body": [
@@ -1406,12 +1435,12 @@
         "进球方向也打出，全场 2 球，小 2.75 成立。这场判断主要问题不大，不足是赛前对大连英博进攻反击效率预估偏保守，没有完全放大主队赢球空间。",
         "复盘评分：8/10"
       ],
-      "reviewed_at": "05/23 20:58"
+      "reviewed_at": "05/23 21:08"
     },
     {
       "id": "tg-r11",
       "prediction_id": "tg-p11",
-      "match_result": "方向命中",
+      "match_result": "已复盘",
       "result_status": "hit",
       "score": 8,
       "body": [
@@ -1424,7 +1453,7 @@
         "这场判断比较稳，主要逻辑是客队不败和低比分结构都兑现。不足是对南通支云反击端威胁预估略高，实际进攻端也比较有限。",
         "复盘评分：8/10"
       ],
-      "reviewed_at": "05/23 20:58"
+      "reviewed_at": "05/23 21:08"
     },
     {
       "id": "tg-r10",
