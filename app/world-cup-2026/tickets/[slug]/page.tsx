@@ -83,7 +83,7 @@ export default async function TicketTopicPage({ params }: TicketParams) {
       <section className="rounded-lg border border-white/10 bg-black/20 p-5">
         <h2 className="text-xl font-semibold text-white">信息说明</h2>
         <p className="mt-3 text-sm leading-7 text-white/62">
-          绿茵智报只整理世界杯赛程、举办城市、观赛信息和赛前分析，不提供票务交易服务。门票销售阶段、可售状态、价格和入场规则请以 FIFA 官方信息为准。
+          绿茵智报提供世界杯赛程、举办城市、观赛信息和赛前观点，不提供票务交易服务。门票销售阶段、可售状态、价格和入场规则请以 FIFA 官方信息为准。
         </p>
       </section>
 

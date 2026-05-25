@@ -9,7 +9,7 @@ import { SocialCta } from "@/components/social-cta";
 import { getHomeData, type AiModel, type Prediction } from "@/lib/data";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd, websiteJsonLd } from "@/lib/seo";
 
-const homeDescription = "绿茵智报整理今日足球赛程、世界杯赛程、比赛时间、赛前分析、参考方向和赛后复盘，帮助中文球迷集中阅读重点赛事。";
+const homeDescription = "绿茵智报提供今日足球赛程、世界杯赛程、比赛时间、赛前分析、参考方向和赛后复盘，面向中文球迷追踪重点赛事。";
 
 export const metadata: Metadata = createMetadata({
   title: "今日足球赛程、赛前分析与赛后复盘",
@@ -59,11 +59,11 @@ export default function HomePage() {
             faqJsonLd([
               {
                 question: "绿茵智报主要提供什么足球内容？",
-                answer: "绿茵智报整理今日足球赛程、世界杯赛程、赛前分析、参考方向和赛后复盘，帮助中文球迷集中阅读重点赛事。"
+                answer: "绿茵智报提供今日足球赛程、世界杯赛程、赛前分析、参考方向和赛后复盘，面向中文球迷追踪重点赛事。"
               },
               {
-                question: "赛前分析适合怎么阅读？",
-                answer: "比赛卡片标注开球时间、对阵和参考方向；详情包含球队状态、历史交锋、进球趋势和数据变化等分析。"
+                question: "赛前分析怎么看？",
+                answer: "重点比赛展示开球时间、对阵和参考方向；详情包含球队状态、历史交锋、进球趋势和数据变化等分析。"
               },
               {
                 question: "赛后复盘有什么作用？",
@@ -82,7 +82,7 @@ export default function HomePage() {
                 今日已发布赛前观点
               </h1>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-white/58">
-                今日重点比赛包含对阵、时间、参考方向和完整分析，更多赛前更新同步到 Telegram 群。
+                今日重点比赛提供对阵、时间、参考方向和完整分析，更多赛前动态同步到 Telegram 群。
               </p>
             </div>
             <Link
@@ -179,7 +179,7 @@ export default function HomePage() {
           ))}
         </div>
         <div className="mt-4 rounded-lg border border-white/10 bg-black/20 p-4 text-sm leading-7 text-white/62">
-          赛程中心可查看今日足球赛程、明日赛程、世界杯小组赛和淘汰赛安排；重点比赛包含参考方向与详细分析。
+          赛程中心包含今日足球赛程、明日赛程、世界杯小组赛和淘汰赛安排；重点比赛提供参考方向与详细分析。
         </div>
         <div className="mt-3 flex flex-wrap gap-2 text-sm">
           <Link href="/football-schedule/today" className="rounded-md border border-white/15 px-3 py-2 text-white/68 hover:border-turf/30 hover:text-turf">今日足球赛程</Link>

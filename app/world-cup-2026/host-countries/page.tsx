@@ -5,7 +5,7 @@ import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 import { getHostCountryPath, hostCountries, worldCupBasePath } from "@/lib/world-cup";
 
-const description = "2026世界杯由美国、加拿大、墨西哥共同举办，查看美加墨世界杯举办国家、举办城市和重点赛程。";
+const description = "2026世界杯由美国、加拿大、墨西哥共同举办，包含美加墨世界杯举办国家、举办城市和重点赛程。";
 
 export const metadata: Metadata = createMetadata({
   title: "美加墨世界杯举办国家：美国、加拿大、墨西哥",
@@ -39,7 +39,7 @@ export default function HostCountriesPage() {
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">美加墨世界杯举办国家</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
-          2026世界杯由美国、加拿大、墨西哥共同举办。这里按举办国家整理城市分布、球场信息和赛程，中文球迷可以按国家查看比赛分布。
+          2026世界杯由美国、加拿大、墨西哥共同举办。按举办国家看城市分布、球场信息和比赛分布。
         </p>
       </section>
 

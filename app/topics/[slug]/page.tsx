@@ -96,7 +96,7 @@ export default async function TopicPage({ params }: TopicParams) {
             </div>
           ) : (
             <div className="rounded-lg border border-white/10 bg-black/20 p-6 text-sm leading-6 text-white/58">
-              当前没有符合条件的赛程，接下来可在赛程中心查看完整比赛安排。
+              当前没有符合条件的赛程，可查看完整比赛安排。
             </div>
           )}
         </div>

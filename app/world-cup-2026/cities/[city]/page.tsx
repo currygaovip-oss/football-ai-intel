@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: CityParams): Promise<Metadata
   if (!city) return createMetadata({ title: "2026世界杯举办城市", description: "2026世界杯举办城市。", path: `${worldCupBasePath}/cities/${slug}`, noIndex: true });
   return createMetadata({
     title: `${city.name}世界杯赛程、球场与门票信息`,
-    description: `${city.name}是2026美加墨世界杯举办城市之一，比赛球场为${city.stadium}。查看${city.name}赛区信息、世界杯赛程、门票提醒和赛前分析。`,
+    description: `${city.name}是2026美加墨世界杯举办城市之一，比赛球场为${city.stadium}。包含${city.name}赛区、世界杯赛程、门票提醒和赛前观点。`,
     path: getHostCityPath(city.slug)
   });
 }
@@ -39,7 +39,7 @@ export default async function HostCityPage({ params }: CityParams) {
           __html: jsonLd(faqJsonLd([
             { question: `${city.name}是2026世界杯举办城市吗？`, answer: `${city.name}是2026美加墨世界杯举办城市之一，所属举办国家为${city.country}。` },
             { question: `${city.name}世界杯比赛在哪个球场？`, answer: `${city.name}赛区球场为${city.stadium}。` },
-            { question: `${city.name}世界杯门票信息在哪里看？`, answer: `${city.name}门票信息整理城市观赛提醒和官方票务链接，实际购票以 FIFA 官方信息和赛事公告为准。` }
+            { question: `${city.name}世界杯门票信息在哪里看？`, answer: `${city.name}门票信息包含城市观赛提醒和官方票务链接，实际购票以 FIFA 官方信息和赛事公告为准。` }
           ]))
         }}
       />
@@ -50,7 +50,7 @@ export default async function HostCityPage({ params }: CityParams) {
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">{city.name}世界杯赛程与球场信息</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
-          {city.summary} 这里可以查看赛区、球场、赛程、门票提醒和赛前分析。
+          {city.summary} 重点看赛区球场、比赛日程、门票提醒和赛前观点。
         </p>
       </section>
 
@@ -63,7 +63,7 @@ export default async function HostCityPage({ params }: CityParams) {
       <section className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
         <h2 className="text-xl font-semibold text-white">{city.name}赛区怎么看</h2>
         <p className="mt-3 text-sm leading-7 text-white/62">
-          该城市所属国家、比赛球场和赛程集中展示。重点比赛详情包含参考方向和完整分析。
+          先确认举办国家、比赛球场和赛程安排；重点比赛提供参考方向和赛前分析。
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link href={`${worldCupBasePath}/schedule`} className="rounded-md bg-turf px-4 py-2 text-sm font-semibold text-pitch-950">查看世界杯赛程</Link>
@@ -75,13 +75,13 @@ export default async function HostCityPage({ params }: CityParams) {
 
       <section className="grid gap-4 lg:grid-cols-3">
         <SearchCard title={`${city.name}世界杯赛程`}>
-          适合查看该赛区相关比赛时间、比赛阶段和重点对阵，也可从完整赛程查看单场比赛。
+          该赛区比赛时间、赛事阶段和重点对阵。
         </SearchCard>
         <SearchCard title={`${city.name}世界杯门票`}>
-          本站只整理公开信息和官方票务提醒，不提供门票交易。购票前请以 FIFA 官方信息和赛事公告为准。
+          官方票务信息、城市观赛提醒和入场前核对事项。绿茵智报不提供票务交易。
         </SearchCard>
         <SearchCard title={`${city.name}赛前分析`}>
-          重点比赛包含参考方向和完整分析，赛前可重点关注球队状态、赛程强度和数据变化。
+          重点比赛包含参考方向、球队状态、赛程强度和数据变化。
         </SearchCard>
       </section>
 

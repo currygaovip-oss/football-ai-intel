@@ -23,9 +23,9 @@ export default function VipPage() {
         <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-sm text-gold">
           <ShieldAlert size={16} /> VIP 社群说明
         </div>
-        <h1 className="mt-5 text-4xl font-semibold">VIP 适合深度阅读重点赛事。</h1>
+        <h1 className="mt-5 text-4xl font-semibold">VIP 聚焦重点赛事深度阅读。</h1>
         <p className="mt-4 leading-8 text-white/66">
-          VIP 内容聚焦重点比赛的赛前分析、关键变量和赛后复盘。想持续跟踪赛事观点，可通过 Telegram 社群联系管理员，也可以关注 X 主页查看公开更新。
+          VIP 内容聚焦重点比赛的赛前分析、关键变量和赛后复盘。Telegram 社群开放开通咨询，X 主页同步公开更新。
         </p>
         <div className="mt-8 grid gap-3">
           {features.map((feature) => (
@@ -43,9 +43,9 @@ export default function VipPage() {
         <SocialCta />
         <div className="glass rounded-lg p-6">
           <MessageCircle className="text-gold" />
-          <h2 className="mt-4 text-xl font-semibold">适合谁加入？</h2>
+          <h2 className="mt-4 text-xl font-semibold">适合哪些用户？</h2>
           <p className="mt-2 text-sm leading-7 text-white/62">
-            适合喜欢研究赛程、球队状态、赛前变量和复盘记录的球迷。所有内容都以信息参考和交流讨论为主。
+            面向喜欢研究赛程、球队状态、赛前变量和复盘记录的球迷。所有内容都以信息参考和交流讨论为主。
           </p>
         </div>
       </aside>

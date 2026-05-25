@@ -4,7 +4,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
   title: "本周足球赛程：比赛时间、重点对阵与赛前分析",
-  description: "查看本周足球赛程、比赛时间、重点对阵和赛前分析，适合提前安排观赛。",
+  description: "本周足球赛程、比赛时间、重点对阵和赛前分析。",
   path: "/football-schedule/week"
 });
 

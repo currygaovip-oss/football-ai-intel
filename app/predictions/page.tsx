@@ -6,7 +6,7 @@ import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getTodayPredictions } from "@/lib/data";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 
-const description = "查看足球赛前分析、今日比赛观点、参考方向和完整分析，覆盖世界杯、五大联赛、杯赛和焦点赛事。";
+const description = "足球赛前分析、今日比赛观点、参考方向和完整分析，覆盖世界杯、五大联赛、杯赛和焦点赛事。";
 
 export const metadata: Metadata = createMetadata({
   title: "足球赛前分析：今日观点、参考方向与比赛解读",
@@ -30,7 +30,7 @@ export default function PredictionsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: jsonLd(faqJsonLd([
-            { question: "足球赛前分析看什么？", answer: "这里展示比赛对阵、开球时间和参考方向，详情提供完整赛前分析。" },
+            { question: "足球赛前分析看什么？", answer: "重点看比赛对阵、开球时间、参考方向和完整赛前分析。" },
             { question: "赛前分析和赛后复盘有什么关系？", answer: "赛前分析记录比赛前的观点，赛后复盘回看原参考方向与实际走势的差异。" }
           ]))
         }}
@@ -40,7 +40,7 @@ export default function PredictionsPage() {
         <div className="text-xs font-semibold uppercase tracking-[0.24em] text-turf">Predictions</div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">足球赛前分析</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
-          今日已发布的比赛观点集中展示，包含比赛时间、参考方向和完整分析。
+          今日比赛观点提供比赛时间、参考方向和完整分析。
         </p>
       </section>
 

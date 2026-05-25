@@ -7,7 +7,7 @@ import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getModelDirectory, getTodayPredictions, type AiModel, type Prediction } from "@/lib/data";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 
-const todayDescription = "查看今日足球赛前分析、比赛时间、对阵信息和参考方向；覆盖世界杯、五大联赛、中超和焦点赛事。";
+const todayDescription = "今日足球赛前分析、比赛时间、对阵信息和参考方向；覆盖世界杯、五大联赛、中超和焦点赛事。";
 
 export const metadata: Metadata = createMetadata({
   title: "今日足球赛前分析：比赛观点与参考方向",
@@ -46,7 +46,7 @@ export default function TodayPage() {
             faqJsonLd([
               {
                 question: "今日足球赛前分析怎么看？",
-                answer: "今日情报集中展示比赛对阵、开球时间和核心参考方向，详情包含球队状态、赛程强度和数据变化等正文。"
+                answer: "今日情报包含比赛对阵、开球时间和核心参考方向；详情页提供球队状态、赛程强度和数据变化。"
               },
               {
                 question: "参考方向和赛前分析有什么区别？",

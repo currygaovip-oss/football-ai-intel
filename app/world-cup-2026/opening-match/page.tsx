@@ -7,7 +7,7 @@ import { createMetadata, faqJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 import { getTicketTopicPath } from "@/lib/world-cup-tickets";
 import { getHostCityPath, getMatchDateTimeLabel, getOpeningMatch, getWorldCupPrediction, worldCupBasePath } from "@/lib/world-cup";
 
-const description = "查看2026世界杯揭幕战时间、举办城市、对阵信息和赛前分析。揭幕战将在墨西哥城举行。";
+const description = "2026世界杯揭幕战时间、举办城市、对阵信息和赛前观点。揭幕战将在墨西哥城举行。";
 
 export const metadata: Metadata = createMetadata({
   title: "2026世界杯揭幕战时间与举办城市",
@@ -27,7 +27,7 @@ export default function OpeningMatchPage() {
         dangerouslySetInnerHTML={{
           __html: jsonLd(faqJsonLd([
             { question: "2026世界杯揭幕战在哪里举行？", answer: "2026世界杯揭幕战将在墨西哥城举行。" },
-            { question: "2026世界杯揭幕战什么时候开始？", answer: match ? `当前赛程显示为${getMatchDateTimeLabel(match)}。` : "可在世界杯赛程表中查看揭幕战时间。" }
+            { question: "2026世界杯揭幕战什么时候开始？", answer: match ? `当前赛程显示为${getMatchDateTimeLabel(match)}。` : "揭幕战时间以世界杯赛程表为准。" }
           ]))
         }}
       />
@@ -38,7 +38,7 @@ export default function OpeningMatchPage() {
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">2026世界杯揭幕战</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
-          揭幕战是美加墨世界杯开赛阶段的核心比赛。这里整理比赛时间、墨西哥城赛区信息和赛前分析。
+          揭幕战是美加墨世界杯开赛阶段的核心比赛。重点看比赛时间、墨西哥城赛区信息和赛前观点。
         </p>
       </section>
 
@@ -48,7 +48,7 @@ export default function OpeningMatchPage() {
         <Info title="举办城市" body="墨西哥城是2026世界杯揭幕战城市，球场为 Estadio Azteca。" href={getHostCityPath("mexico-city")} />
         <Info title="门票信息" body="查看揭幕战官方票务链接、墨西哥城赛区和购票前提醒。" href={getTicketTopicPath("opening-match")} />
         <Info title="完整赛程" body="查看小组赛、淘汰赛和全部比赛时间。" href={`${worldCupBasePath}/schedule`} />
-        <Info title="赛前观点" body="开赛前可关注今日情报，查看本场参考方向和赛前分析。" href="/today" />
+        <Info title="赛前观点" body="赛前观点包含参考方向、球队状态和比赛节奏。" href="/today" />
       </section>
 
       <SeoTopicLinks />

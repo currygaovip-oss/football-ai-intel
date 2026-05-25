@@ -6,7 +6,7 @@ import { getWorldCupGroups, worldCupBasePath } from "@/lib/world-cup";
 
 export const metadata: Metadata = createMetadata({
   title: "世界杯2026分组图：A组到L组中文赛程",
-  description: "查看世界杯2026小组赛分组、比赛时间和赛前分析，适合转发收藏。",
+  description: "世界杯2026小组赛分组、比赛时间和赛前分析，中文球迷赛前收藏。",
   path: `${worldCupBasePath}/share/groups`
 });
 
@@ -21,7 +21,7 @@ export default function WorldCupGroupsSharePage() {
           <span className="text-xs font-semibold uppercase tracking-[0.24em]">Groups</span>
         </div>
         <h1 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-5xl">世界杯2026分组赛程</h1>
-        <p className="mt-4 max-w-2xl text-sm leading-7 text-white/62">A组到L组小组赛集中查看，适合收藏和转发。</p>
+        <p className="mt-4 max-w-2xl text-sm leading-7 text-white/62">A组到L组小组赛、比赛时间和重点对阵，一页看清。</p>
 
         <div className="mt-6 grid gap-3 md:grid-cols-3 xl:grid-cols-4">
           {groups.map(([group, matches]) => (

@@ -4,7 +4,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
   title: "登录",
-  description: "绿茵智报登录入口。",
+  description: "绿茵智报登录。",
   path: "/login",
   noIndex: true
 });

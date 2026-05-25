@@ -6,7 +6,7 @@ const csp = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
+  "img-src 'self' data: blob: https://upload.wikimedia.org",
   "font-src 'self' data:",
   `connect-src 'self'${analyticsOrigin ? ` ${analyticsOrigin}` : ""}`,
   "frame-ancestors 'none'",

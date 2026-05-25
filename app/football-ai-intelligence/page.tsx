@@ -6,7 +6,7 @@ import { SocialCta } from "@/components/social-cta";
 import { createMetadata, faqJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 
 const path = "/football-ai-intelligence";
-const description = "绿茵智报整理今日足球赛程、赛前观点、参考方向和赛后复盘，适合赛前集中了解重点比赛。";
+const description = "绿茵智报提供今日足球赛程、赛前观点、参考方向和赛后复盘，面向中文球迷追踪重点比赛。";
 
 export const metadata: Metadata = createMetadata({
   title: "足球AI情报：今日赛程、赛前观点与参考方向",
@@ -56,9 +56,9 @@ export default function FootballAiIntelligencePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: jsonLd(faqJsonLd([
-            { question: "足球AI情报可以看什么？", answer: "可以查看今日足球赛程、赛前观点、参考方向、世界杯2026赛程和赛后复盘。" },
-            { question: "绿茵智报适合什么人？", answer: "适合赛前想集中了解比赛、对阵、参考方向和赛后复盘的中文球迷。" },
-            { question: "赛前观点在哪里看？", answer: "今日情报集中展示赛前观点，Telegram 群和 X 主页同步公开动态。" }
+            { question: "足球AI情报看什么？", answer: "重点看今日足球赛程、赛前观点、参考方向、世界杯2026赛程和赛后复盘。" },
+            { question: "绿茵智报面向哪些用户？", answer: "面向赛前想了解比赛、对阵、参考方向和赛后复盘的中文球迷。" },
+            { question: "赛前观点在哪里看？", answer: "今日情报提供赛前观点，Telegram 群和 X 主页同步公开动态。" }
           ]))
         }}
       />
@@ -67,7 +67,7 @@ export default function FootballAiIntelligencePage() {
         <div className="text-xs font-semibold uppercase tracking-[0.24em] text-turf">Football AI Intelligence</div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">足球AI情报</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64">
-          绿茵智报整理今日足球赛程、赛前观点、参考方向和复盘记录。比赛信息、分析正文和社群动态放在一起，更适合赛前集中阅读。
+          绿茵智报提供今日足球赛程、赛前观点、参考方向和复盘记录。比赛信息、分析正文和社群动态放在一起，赛前阅读更集中。
         </p>
       </section>
 

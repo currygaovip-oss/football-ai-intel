@@ -7,7 +7,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
   title: "后台管理",
-  description: "绿茵智报后台管理入口。",
+  description: "绿茵智报后台管理。",
   path: "/admin",
   noIndex: true
 });
@@ -35,7 +35,7 @@ export default async function AdminPage() {
       <div className="glass rounded-lg p-5">
         <h2 className="text-xl font-semibold">内容管理</h2>
         <p className="mt-3 text-sm leading-7 text-white/62">
-          可在这里维护赛前观点和赛后复盘内容。发布后，相关内容会同步出现在首页、今日情报和复盘页面。
+          维护赛前观点和赛后复盘内容，保存后同步到首页、今日情报和复盘列表。
         </p>
       </div>
     </AdminShell>

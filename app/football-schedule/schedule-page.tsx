@@ -10,26 +10,26 @@ const rangeCopy = {
   today: {
     title: "今日足球赛程",
     eyebrow: "Today Football Schedule",
-    description: "查看今日足球赛程、比赛时间、对阵信息和赛前分析；重点场次包含参考方向。",
-    empty: "今日还没有已收录比赛，可查看明日赛程或本周赛程，提前关注接下来的重点场次。",
+    description: "今日足球赛程、比赛时间、对阵信息和赛前分析；重点场次提供参考方向。",
+    empty: "今日没有重点比赛，明日赛程和本周赛程可查看接下来的重点场次。",
     primaryLink: "/football-schedule/tomorrow",
-    primaryLabel: "查看明日赛程"
+    primaryLabel: "明日赛程"
   },
   tomorrow: {
     title: "明日足球赛程",
     eyebrow: "Tomorrow Football Schedule",
-    description: "查看明日足球赛程、比赛时间、对阵信息和赛前分析，提前关注重点比赛。",
-    empty: "明日还没有已收录比赛，可查看本周赛程，确认接下来的比赛安排。",
+    description: "明日足球赛程、比赛时间、对阵信息和赛前分析，重点比赛提前看。",
+    empty: "明日没有重点比赛，本周赛程可查看接下来的比赛安排。",
     primaryLink: "/football-schedule/week",
-    primaryLabel: "查看本周赛程"
+    primaryLabel: "本周赛程"
   },
   week: {
     title: "本周足球赛程",
     eyebrow: "Weekly Football Schedule",
-    description: "查看本周足球赛程、比赛时间、重点对阵和赛前分析，适合提前安排观赛。",
-    empty: "本周还没有已收录比赛，可进入赛程中心查看世界杯和完整赛程。",
+    description: "本周足球赛程、比赛时间、重点对阵和赛前分析。",
+    empty: "本周没有重点比赛，可查看世界杯赛程和完整赛程。",
     primaryLink: "/schedule",
-    primaryLabel: "查看赛程中心"
+    primaryLabel: "赛程中心"
   }
 } satisfies Record<ScheduleRange, { title: string; eyebrow: string; description: string; empty: string; primaryLink: string; primaryLabel: string }>;
 
@@ -69,7 +69,7 @@ export function FootballSchedulePage({ range, path }: { range: ScheduleRange; pa
               },
               {
                 question: "没有比赛时怎么办？",
-                answer: "可以切换到明日赛程、本周赛程或世界杯赛程，查看已经整理的比赛安排。"
+                answer: "明日赛程、本周赛程和世界杯赛程保留不同时间范围的比赛安排。"
               }
             ])
           )

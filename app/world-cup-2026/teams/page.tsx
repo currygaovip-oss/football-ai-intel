@@ -4,7 +4,7 @@ import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { createMetadata, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 import { getTeamMatches, getTeamPath, getTeamSquadPath, getWorldCupTeamEntries, worldCupBasePath } from "@/lib/world-cup";
 
-const description = "查看2026世界杯球队赛程，覆盖阿根廷、巴西、法国、英格兰、葡萄牙、美国、墨西哥、加拿大等热门球队的比赛时间、对阵和赛前分析。";
+const description = "2026世界杯球队赛程，覆盖阿根廷、巴西、法国、英格兰、葡萄牙、美国、墨西哥、加拿大等热门球队的比赛时间、对阵和赛前观点。";
 
 export const metadata: Metadata = createMetadata({
   title: "2026世界杯球队赛程：阿根廷、巴西、法国等球队比赛时间",
@@ -29,7 +29,7 @@ export default function WorldCupTeamsPage() {
         <div className="text-xs font-semibold uppercase tracking-[0.24em] text-turf">Teams</div>
         <h1 className="mt-2 text-3xl font-semibold text-white">2026世界杯球队赛程</h1>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-white/62">
-          按球队查看世界杯比赛时间、对阵和赛前分析。热门球队覆盖赛程、阵容观察和重点球员信息。
+          按球队看世界杯比赛时间、对阵和赛前观点。热门球队包含赛程、阵容名单和重点球员。
         </p>
       </section>
 
@@ -44,7 +44,7 @@ export default function WorldCupTeamsPage() {
             <p className="mt-3 line-clamp-2 text-xs leading-5 text-white/45">{team.searchFocus.join(" / ")}</p>
             <div className="mt-4 flex flex-wrap gap-3 text-xs">
               <Link href={getTeamPath(team.slug)} className="text-turf hover:text-white">球队赛程</Link>
-              {team.players?.length ? <Link href={getTeamSquadPath(team.slug)} className="text-turf hover:text-white">阵容观察</Link> : null}
+              {team.players?.length ? <Link href={getTeamSquadPath(team.slug)} className="text-turf hover:text-white">阵容名单</Link> : null}
             </div>
           </div>
         ))}

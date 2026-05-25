@@ -6,7 +6,7 @@ import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from
 import { fifaTicketUrl, getCityTicketPath, getTicketTopicPath, ticketBasePath, ticketTopics } from "@/lib/world-cup-tickets";
 import { getHostCityPath, hostCities, worldCupBasePath } from "@/lib/world-cup";
 
-const description = "整理2026世界杯门票信息、FIFA官方购票链接、美加墨举办城市、揭幕战、决赛和观赛提醒。绿茵智报不提供票务交易，只做公开信息整理。";
+const description = "2026世界杯门票信息、FIFA官方购票链接、美加墨举办城市、揭幕战、决赛和观赛提醒。绿茵智报不提供票务交易。";
 
 export const metadata: Metadata = createMetadata({
   title: "2026世界杯门票信息、官方购票链接与观赛提醒",
@@ -29,8 +29,8 @@ export default function WorldCupTicketsPage() {
         dangerouslySetInnerHTML={{
           __html: jsonLd(faqJsonLd([
             { question: "2026世界杯门票信息以哪里为准？", answer: "应以 FIFA 官方门票信息和赛事公告为准。" },
-            { question: "绿茵智报卖世界杯门票吗？", answer: "不卖。绿茵智报只整理赛程、城市、官方票务链接和观赛提醒。" },
-            { question: "买票前应该先确认什么？", answer: "建议先确认比赛时间、举办城市、球场、官方购票流程和入场要求。" }
+            { question: "绿茵智报卖世界杯门票吗？", answer: "不卖。绿茵智报提供赛程、城市、官方票务链接和观赛提醒。" },
+            { question: "买票前应该先确认什么？", answer: "先确认比赛时间、举办城市、球场、官方购票流程和入场要求。" }
           ]))
         }}
       />
@@ -41,7 +41,7 @@ export default function WorldCupTicketsPage() {
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">2026世界杯门票信息与观赛提醒</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/66">
-          这里整理 FIFA 官方门票链接、美加墨举办城市、揭幕战、决赛和城市观赛信息。绿茵智报不提供票务交易，购票安排请以官方发布为准。
+          FIFA 官方门票链接、美加墨举办城市、揭幕战、决赛和城市观赛信息。绿茵智报不提供票务交易，购票安排请以官方发布为准。
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <a href={fifaTicketUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md bg-gold px-4 py-2.5 text-sm font-semibold text-pitch-950">
@@ -55,13 +55,13 @@ export default function WorldCupTicketsPage() {
 
       <section className="grid gap-4 lg:grid-cols-3">
         <InfoCard title="官方票务">
-          门票销售阶段、账户要求、价格区间和入场规则会变化，正式购票前应回到 FIFA 官方信息核对。
+          门票销售阶段、账户要求、价格区间和入场规则以 FIFA 官方信息为准。
         </InfoCard>
         <InfoCard title="城市与赛程">
           美加墨共有16个举办城市，同一城市可能有多场比赛，购票前要确认具体比赛、日期和球场。
         </InfoCard>
         <InfoCard title="避免信息混杂">
-          二级市场信息需要额外核验来源、座位、交付方式和退款规则，避免只凭截图或口头说明判断。
+          二级市场信息要额外核验来源、座位、交付方式和退款规则，避免只凭截图或口头说明判断。
         </InfoCard>
       </section>
 

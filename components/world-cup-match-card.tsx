@@ -39,7 +39,7 @@ export function WorldCupMatchCard({ match, prediction }: { match: Match; predict
           <div className="mt-1 text-sm font-semibold text-white">{direction}</div>
         </div>
       ) : (
-        <p className="mt-3 text-sm leading-6 text-white/50">赛前信息结合球队状态、赛程强度和阵容消息。</p>
+        <p className="mt-3 text-sm leading-6 text-white/50">开球时间、对阵和赛事阶段已确认。</p>
       )}
       <div className="mt-3 inline-flex items-center gap-1 text-xs text-turf">
         查看比赛 <ChevronRight size={13} />

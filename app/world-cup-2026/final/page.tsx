@@ -7,7 +7,7 @@ import { createMetadata, faqJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 import { getTicketTopicPath } from "@/lib/world-cup-tickets";
 import { getFinalMatch, getHostCityPath, getMatchDateTimeLabel, getWorldCupPrediction, worldCupBasePath } from "@/lib/world-cup";
 
-const description = "查看2026世界杯决赛时间、举办城市、比赛信息和赛前分析。决赛将在纽约/新泽西赛区举行。";
+const description = "2026世界杯决赛时间、举办城市、比赛信息和赛前观点。决赛将在纽约/新泽西赛区举行。";
 
 export const metadata: Metadata = createMetadata({
   title: "2026世界杯决赛时间与举办城市",
@@ -27,7 +27,7 @@ export default function WorldCupFinalPage() {
         dangerouslySetInnerHTML={{
           __html: jsonLd(faqJsonLd([
             { question: "2026世界杯决赛在哪里举行？", answer: "2026世界杯决赛将在纽约/新泽西赛区举行。" },
-            { question: "2026世界杯决赛什么时候开始？", answer: match ? `当前赛程显示为${getMatchDateTimeLabel(match)}。` : "可在世界杯赛程表中查看决赛时间。" }
+            { question: "2026世界杯决赛什么时候开始？", answer: match ? `当前赛程显示为${getMatchDateTimeLabel(match)}。` : "决赛时间以世界杯赛程表为准。" }
           ]))
         }}
       />
@@ -38,7 +38,7 @@ export default function WorldCupFinalPage() {
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">2026世界杯决赛</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64">
-          决赛是美加墨世界杯最受关注的比赛。这里整理决赛时间、纽约/新泽西赛区信息和赛前分析。
+          决赛是美加墨世界杯最受关注的比赛。重点看决赛时间、纽约/新泽西赛区信息和赛前观点。
         </p>
       </section>
 

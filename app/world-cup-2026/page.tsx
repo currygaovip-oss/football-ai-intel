@@ -7,7 +7,7 @@ import { getAllPredictions } from "@/lib/data";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 import { getTeamPath, getWorldCupGroupMatches, getWorldCupKnockoutMatches, getWorldCupMatches, getWorldCupPrediction, getWorldCupTeamEntries, hostCities, worldCupBasePath } from "@/lib/world-cup";
 
-const pageDescription = "世界杯2026专题整理美加墨世界杯赛程、举办国家、举办城市、揭幕战、决赛、比赛时间和赛前分析。";
+const pageDescription = "2026美加墨世界杯赛程、举办国家、举办城市、揭幕战、决赛、比赛时间和赛前观点。";
 
 export const metadata: Metadata = createMetadata({
   title: "2026世界杯赛程、美加墨举办城市与赛前分析",
@@ -48,16 +48,16 @@ export default function WorldCup2026Page() {
           __html: jsonLd(
             faqJsonLd([
               {
-                question: "世界杯2026专题可以看什么？",
-                answer: "可以查看世界杯2026赛程、比赛时间、小组赛、淘汰赛、单场比赛和赛前分析。"
+                question: "世界杯2026有哪些重点信息？",
+                answer: "世界杯2026赛程、比赛时间、小组赛、淘汰赛、举办城市、单场比赛和赛前观点。"
               },
               {
-                question: "单场比赛可以看什么？",
+                question: "单场比赛看什么？",
                 answer: "单场比赛包含对阵、开球时间、赛事阶段、赛前观点和赛后复盘。"
               },
               {
                 question: "世界杯赛前分析什么时候更新？",
-                answer: "重点比赛会根据赛前信息整理参考方向，并在今日情报中展示。"
+                answer: "重点比赛会在开赛前给出参考方向，并同步到今日情报。"
               }
             ])
           )
@@ -70,7 +70,7 @@ export default function WorldCup2026Page() {
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">2026世界杯赛程与美加墨举办城市</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64">
-          绿茵智报整理美加墨世界杯比赛时间、小组赛、淘汰赛、举办城市、揭幕战、决赛和赛前分析。
+          看美加墨世界杯比赛时间、小组赛、淘汰赛、举办城市、揭幕战、决赛和赛前观点。
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link href={`${worldCupBasePath}/schedule`} className="rounded-md bg-turf px-4 py-2.5 text-sm font-semibold text-pitch-950">
@@ -97,19 +97,19 @@ export default function WorldCup2026Page() {
 
       <section className="grid gap-4 lg:grid-cols-4">
         <TopicCard icon={<Globe2 size={18} />} title="美加墨世界杯" href={`${worldCupBasePath}/host-countries`}>
-          查看美国、加拿大、墨西哥三个举办国家。
+          美国、加拿大、墨西哥三国联合举办。
         </TopicCard>
         <TopicCard icon={<MapPin size={18} />} title="举办城市" href={`${worldCupBasePath}/host-cities`}>
-          16个举办城市与球场信息集中查看。
+          16个举办城市、球场与比赛分布。
         </TopicCard>
         <TopicCard icon={<Ticket size={18} />} title="门票信息" href={`${worldCupBasePath}/tickets`}>
-          查看官方票务链接、城市观赛和购票前提醒。
+          官方票务链接、城市观赛和购票前提醒。
         </TopicCard>
         <TopicCard icon={<Trophy size={18} />} title="揭幕战" href={`${worldCupBasePath}/opening-match`}>
-          查看揭幕战时间、城市和比赛信息。
+          揭幕战时间、城市和比赛信息。
         </TopicCard>
         <TopicCard icon={<Trophy size={18} />} title="决赛" href={`${worldCupBasePath}/final`}>
-          查看决赛时间、城市和淘汰赛安排。
+          决赛时间、城市和淘汰赛安排。
         </TopicCard>
       </section>
 
@@ -128,19 +128,22 @@ export default function WorldCup2026Page() {
 
       <section className="grid gap-4 lg:grid-cols-3">
         <InfoCard title="世界杯小组赛" href={`${worldCupBasePath}/groups`}>
-          按 A 组到 L 组整理比赛时间和对阵，适合赛前确认小组赛比赛日。
+          A 组到 L 组比赛时间、对阵和比赛日。
         </InfoCard>
         <InfoCard title="世界杯淘汰赛" href={`${worldCupBasePath}/knockout`}>
-          32强赛、16强赛、1/4决赛、半决赛、季军赛和决赛集中查看。
+          32强赛、16强赛、1/4决赛、半决赛、季军赛和决赛。
         </InfoCard>
         <InfoCard title="全部比赛" href={`${worldCupBasePath}/matches`}>
-          按赛程顺序查看全部比赛，适合搜索具体对阵和比赛时间。
+          按赛程顺序看全部比赛、具体对阵和开球时间。
         </InfoCard>
         <InfoCard title="球队赛程" href={`${worldCupBasePath}/teams`}>
-          按球队查看世界杯比赛时间、对阵信息和赛前分析。
+          按球队看世界杯比赛时间、对阵信息和赛前观点。
+        </InfoCard>
+        <InfoCard title="重点球员" href={`${worldCupBasePath}/players`}>
+          热门球队核心球员、阵容位置和赛前看点。
         </InfoCard>
         <InfoCard title="单场赛前分析" href="/predictions">
-          重点比赛包含参考方向和完整赛前分析。
+          重点比赛的参考方向与完整分析。
         </InfoCard>
       </section>
 

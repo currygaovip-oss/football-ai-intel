@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: FixtureParams): Promise<Metad
   }
 
   const title = `${getMatchTitle(match)}比赛时间、赛程与赛前分析`;
-  const description = truncateSeo(`${match.home_team} vs ${match.away_team}世界杯2026比赛时间：${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}，赛事阶段：${getStageLabel(match)}，可查看赛程信息、赛前观点和参考方向。`);
+  const description = truncateSeo(`${match.home_team} vs ${match.away_team}世界杯2026比赛时间：${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}，赛事阶段：${getStageLabel(match)}，包含赛程信息、赛前观点和参考方向。`);
 
   return createMetadata({
     title,
@@ -58,7 +58,7 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
   const review = prediction ? getReviews().find((item) => item.prediction?.id === prediction.id) : undefined;
   const path = getWorldCupFixturePath(match);
   const title = `${getMatchTitle(match)}比赛时间、赛程与赛前分析`;
-  const description = truncateSeo(`${match.home_team} vs ${match.away_team}世界杯2026比赛时间：${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}，赛事阶段：${getStageLabel(match)}，可查看赛程信息、赛前观点和参考方向。`);
+  const description = truncateSeo(`${match.home_team} vs ${match.away_team}世界杯2026比赛时间：${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}，赛事阶段：${getStageLabel(match)}，包含赛程信息、赛前观点和参考方向。`);
   const direction = getDirection(prediction);
 
   return (
@@ -97,7 +97,7 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
           __html: jsonLd(faqJsonLd([
             { question: `${match.home_team} vs ${match.away_team}什么时候比赛？`, answer: `本场比赛时间为北京时间${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}。` },
             { question: `${match.home_team} vs ${match.away_team}属于哪个阶段？`, answer: `本场属于世界杯2026${getStageLabel(match)}。` },
-            { question: `${match.home_team} vs ${match.away_team}有赛前分析吗？`, answer: prediction ? "本场已有赛前观点，可查看完整分析和参考方向。" : "本场先提供比赛时间、赛事阶段和对阵信息；重点分析可在今日情报查看。" }
+            { question: `${match.home_team} vs ${match.away_team}有赛前分析吗？`, answer: prediction ? "本场已有赛前观点，包含完整分析和参考方向。" : "本场赛程信息已确认，重点关注比赛时间、赛事阶段和对阵信息。" }
           ]))
         }}
       />
@@ -125,7 +125,7 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
         </div>
         <h1 className="text-3xl font-semibold leading-tight text-white sm:text-5xl">{match.home_team} vs {match.away_team}</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64">
-          世界杯2026{getStageLabel(match)}赛程信息，包含开球时间、对阵双方和比赛阶段。重点场次提供参考方向与完整分析。
+          世界杯2026{getStageLabel(match)}赛程信息，包含开球时间、对阵双方和比赛阶段。重点场次提供参考方向和赛前分析。
         </p>
       </section>
 
@@ -147,7 +147,7 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
         <section className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
           <h2 className="text-lg font-semibold text-white">赛前分析</h2>
           <p className="mt-2 text-sm leading-7 text-white/62">
-            本场提供赛程与对阵信息。重点分析可在今日情报查看。
+            本场赛程信息已确认，重点关注开球时间、对阵和赛事阶段。
           </p>
           <Link href="/today" className="mt-4 inline-flex rounded-md border border-white/15 px-4 py-2 text-sm text-white/78 hover:border-turf/30 hover:text-turf">
             查看今日情报
@@ -157,16 +157,16 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
 
       <section className="grid gap-4 lg:grid-cols-3">
         <ContentCard title="比赛看点">
-          先看开球时间、赛事阶段和对阵双方，再结合球队状态、赛程强度和阵容消息判断本场关注点。
+          开球时间、赛事阶段和对阵双方，是赛前判断的第一层信息。
         </ContentCard>
         <ContentCard title="赛前阅读">
-          重点场次会给出参考方向，并展开球队状态、历史交锋、赛程强度和数据变化。
+          重点场次提供参考方向、球队状态、历史交锋、赛程强度和数据变化。
         </ContentCard>
         <ContentCard title="赛后回看">
-          比赛结束并完成复盘后，记录原参考方向、实际赛果和主要偏差，便于回看判断质量。
+          复盘记录原参考方向、实际赛果和主要偏差，便于回看判断质量。
         </ContentCard>
         <ContentCard title="门票与观赛">
-          如计划现场观赛，建议先核对官方票务链接、举办城市、球场信息和入场要求，再结合赛程确认比赛安排。
+          计划现场观赛时，先核对官方票务链接、举办城市、球场信息和入场要求，再结合赛程确认比赛安排。
         </ContentCard>
       </section>
 

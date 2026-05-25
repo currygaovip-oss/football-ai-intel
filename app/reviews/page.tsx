@@ -6,7 +6,7 @@ import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getAllPredictions, getAllReviews, getReviews } from "@/lib/data";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 
-const reviewsDescription = "查看足球赛后复盘记录，包含赛前分析结果、比赛赛果、偏差归因、复盘评分和模型表现，持续观察比赛观点质量。";
+const reviewsDescription = "足球赛后复盘记录，包含赛前观点、比赛赛果、偏差归因、复盘评分和模型表现。";
 
 export const metadata: Metadata = createMetadata({
   title: "足球赛后复盘记录：赛前分析结果与模型表现",
@@ -53,7 +53,7 @@ export default function ReviewsPage() {
               },
               {
                 question: "为什么有些观点还没有复盘？",
-                answer: "比赛结束后需要整理赛果和实际走势，完成后才会进入已完成复盘列表。"
+                answer: "比赛结束后核对赛果、比赛走势和关键偏差，再进入已完成复盘列表。"
               },
               {
                 question: "复盘评分代表什么？",

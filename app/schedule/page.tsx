@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { getAllPredictions, getSchedule } from "@/lib/data";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, sportsEventJsonLd, webPageJsonLd } from "@/lib/seo";
 
-const scheduleDescription = "查看今日足球赛程、明日赛程、世界杯2026赛程、小组赛和淘汰赛比赛时间；重点场次包含参考方向和详细分析。";
+const scheduleDescription = "今日足球赛程、明日赛程、世界杯2026赛程、小组赛和淘汰赛比赛时间；重点场次提供参考方向和详细分析。";
 
 export const metadata: Metadata = createMetadata({
   title: "足球赛程中心：今日赛程、世界杯赛程与比赛时间",
@@ -25,8 +25,8 @@ const filters = [
 type FilterKey = (typeof filters)[number]["key"];
 
 const emptyCopy: Record<FilterKey, string> = {
-  today: "今日还没有已收录赛程。可切换到全部赛程查看接下来的比赛。",
-  tomorrow: "明日还没有已收录赛程。可切换到全部赛程查看接下来的比赛。",
+  today: "今日没有重点赛程。完整赛程可查看接下来的比赛。",
+  tomorrow: "明日没有重点赛程。完整赛程可查看接下来的比赛。",
   all: "目前还没有已收录赛程。",
   group: "目前还没有小组赛赛程。",
   knockout: "目前还没有淘汰赛赛程。"
@@ -86,8 +86,8 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
           __html: jsonLd(
             faqJsonLd([
               {
-                question: "足球赛程中心可以查看哪些内容？",
-                answer: "可以查看今日足球赛程、明日赛程、世界杯小组赛、淘汰赛和全部已收录比赛时间。"
+                question: "足球赛程中心包含哪些内容？",
+                answer: "包含今日足球赛程、明日赛程、世界杯小组赛、淘汰赛和全部已收录比赛时间。"
               },
               {
                 question: "哪些比赛有赛前分析？",
@@ -95,7 +95,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
               },
               {
                 question: "世界杯赛程怎么筛选？",
-                answer: "可以通过小组赛、淘汰赛和全部赛程标签切换，也可以查看世界杯阶段分类。"
+                answer: "通过小组赛、淘汰赛和全部赛程标签切换，也能按世界杯阶段查看。"
               }
             ])
           )
@@ -109,7 +109,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
             </div>
             <h1 className="text-2xl font-semibold leading-tight text-white">足球赛程中心</h1>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-white/58">
-              查看今日、明日和世界杯阶段赛程。重点比赛包含赛前分析。
+              今日、明日和世界杯阶段赛程一页查看。重点比赛包含赛前分析。
             </p>
           </div>
           <div className="flex flex-wrap gap-2 text-xs text-white/58">
@@ -202,7 +202,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
           <div className="rounded-lg border border-turf/20 bg-turf/10 p-4">
             <h2 className="text-base font-semibold text-white">赛前观点</h2>
             <p className="mt-2 text-sm leading-6 text-white/62">
-              重点场次包含参考方向和完整分析；其他比赛可查看开球时间和对阵信息。
+              重点场次提供参考方向和完整分析；其他比赛展示开球时间和对阵信息。
             </p>
             <Link
               href="/today"
@@ -221,7 +221,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
         <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
           <h2 className="text-lg font-semibold">今日足球赛程怎么用</h2>
           <p className="mt-2 text-sm leading-7 text-white/62">
-            比赛卡片包含开球时间、赛事阶段和对阵双方；重点场次可查看完整分析和参考方向。
+            赛程信息包含开球时间、赛事阶段和对阵双方；重点场次提供完整分析和参考方向。
           </p>
         </div>
         <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">

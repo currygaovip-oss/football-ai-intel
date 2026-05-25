@@ -6,7 +6,9 @@ import { getCityTicketPath, getTicketTopicPath, ticketBasePath, ticketTopics } f
 import {
   getHostCityPath,
   getHostCountryPath,
+  getPlayerPath,
   getTeamPath,
+  getWorldCupPlayerEntries,
   getWorldCupTeamEntries,
   getWorldCupFixturePath,
   getWorldCupMatches,
@@ -31,6 +33,7 @@ const staticRoutes = [
   `${worldCupBasePath}/groups`,
   `${worldCupBasePath}/knockout`,
   `${worldCupBasePath}/teams`,
+  `${worldCupBasePath}/players`,
   `${worldCupBasePath}/host-countries`,
   `${worldCupBasePath}/host-cities`,
   `${worldCupBasePath}/opening-match`,
@@ -93,6 +96,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.72
   }));
 
+  const worldCupPlayerEntries = getWorldCupPlayerEntries().map((player) => ({
+    url: `${siteUrl}${getPlayerPath(player.slug)}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.7
+  }));
+
   const hostCountryEntries = hostCountries.map((country) => ({
     url: `${siteUrl}${getHostCountryPath(country.slug)}`,
     lastModified: now,
@@ -121,5 +131,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: city.highlight ? 0.74 : 0.68
   }));
 
-  return [...staticEntries, ...topicEntries, ...hostCountryEntries, ...hostCityEntries, ...ticketTopicEntries, ...cityTicketEntries, ...worldCupTeamEntries, ...worldCupSquadEntries, ...worldCupFixtureEntries, ...predictionEntries, ...reviewEntries];
+  return [...staticEntries, ...topicEntries, ...hostCountryEntries, ...hostCityEntries, ...ticketTopicEntries, ...cityTicketEntries, ...worldCupTeamEntries, ...worldCupSquadEntries, ...worldCupPlayerEntries, ...worldCupFixtureEntries, ...predictionEntries, ...reviewEntries];
 }

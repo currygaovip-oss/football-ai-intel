@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const siteUrl = "https://lyzbvip.vip";
 export const siteName = "绿茵智报";
-export const siteDescription = "绿茵智报整理2026世界杯赛程、美加墨世界杯举办城市、今日足球赛程、赛前分析、参考方向和赛后复盘，面向中文球迷持续记录重点赛事观点。";
+export const siteDescription = "绿茵智报提供2026世界杯赛程、美加墨世界杯举办城市、今日足球赛程、赛前分析、参考方向和赛后复盘，面向中文球迷持续记录重点赛事观点。";
 export const defaultOgImage = "/brand/football-ai-logo-universal.png?v=3";
 
 export const seoKeywords = [
@@ -25,6 +25,8 @@ export const seoKeywords = [
   "世界杯小组赛赛程",
   "世界杯淘汰赛赛程",
   "世界杯比赛时间",
+  "世界杯球员名单",
+  "世界杯重点球员",
   "世界杯门票",
   "2026世界杯门票",
   "世界杯门票怎么买",
@@ -40,6 +42,7 @@ export const seoKeywords = [
   "巴西世界杯赛程",
   "巴西世界杯阵容",
   "巴西世界杯名单",
+  "维尼修斯世界杯",
   "法国世界杯赛程",
   "法国世界杯阵容",
   "姆巴佩世界杯",
@@ -53,6 +56,7 @@ export const seoKeywords = [
   "德国世界杯阵容",
   "西班牙世界杯赛程",
   "西班牙世界杯阵容",
+  "亚马尔世界杯",
   "美国世界杯赛程",
   "美国世界杯阵容",
   "墨西哥世界杯赛程",
@@ -63,6 +67,7 @@ export const seoKeywords = [
   "日本世界杯阵容",
   "韩国世界杯赛程",
   "韩国世界杯阵容",
+  "孙兴慜世界杯",
   "纽约世界杯赛程",
   "洛杉矶世界杯赛程",
   "达拉斯世界杯赛程",
@@ -94,6 +99,7 @@ export const seoTopicLinks = [
   { label: "美加墨世界杯", href: "/world-cup-2026/host-countries" },
   { label: "世界杯举办城市", href: "/world-cup-2026/host-cities" },
   { label: "世界杯球队赛程", href: "/world-cup-2026/teams" },
+  { label: "世界杯重点球员", href: "/world-cup-2026/players" },
   { label: "世界杯门票信息", href: "/world-cup-2026/tickets" },
   { label: "今日足球赛程", href: "/football-schedule/today" },
   { label: "足球赛前分析", href: "/predictions" },

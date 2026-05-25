@@ -5,7 +5,7 @@ import { getAllPredictions } from "@/lib/data";
 import { createMetadata, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 import { getWorldCupKnockoutMatches, getWorldCupPrediction, getWorldCupStageGroups, worldCupBasePath } from "@/lib/world-cup";
 
-const pageDescription = "世界杯2026淘汰赛赛程整理32强赛、16强赛、1/4决赛、半决赛、季军赛和决赛比赛时间。";
+const pageDescription = "世界杯2026淘汰赛赛程，32强赛、16强赛、1/4决赛、半决赛、季军赛和决赛比赛时间。";
 
 export const metadata: Metadata = createMetadata({
   title: "世界杯2026淘汰赛赛程：32强赛至决赛时间",
@@ -41,7 +41,7 @@ export default function WorldCupKnockoutPage() {
         <div className="text-xs font-semibold uppercase tracking-[0.24em] text-turf">Knockout Stage</div>
         <h1 className="mt-2 text-3xl font-semibold text-white">世界杯2026淘汰赛赛程</h1>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-white/62">
-          从32强赛到决赛，集中查看淘汰赛阶段比赛时间、对阵信息和赛前观点。
+          从32强赛到决赛，看淘汰赛阶段比赛时间、对阵信息和赛前观点。
         </p>
       </section>
 
