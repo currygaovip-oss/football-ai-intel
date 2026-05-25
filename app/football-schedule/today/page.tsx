@@ -3,8 +3,8 @@ import { FootballSchedulePage } from "@/app/football-schedule/schedule-page";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
-  title: "今日足球赛程：比赛时间、对阵与赛前分析入口",
-  description: "查看今日足球赛程、比赛时间、对阵信息和赛前分析入口；有观点的比赛会显示参考方向。",
+  title: "今日足球赛程：比赛时间、对阵与赛前分析",
+  description: "查看今日足球赛程、比赛时间、对阵信息和赛前分析；重点场次包含参考方向。",
   path: "/football-schedule/today"
 });
 

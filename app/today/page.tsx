@@ -45,16 +45,16 @@ export default function TodayPage() {
           __html: jsonLd(
             faqJsonLd([
               {
-                question: "今日足球赛前分析页面怎么看？",
-                answer: "先看比赛对阵、开球时间和核心参考方向，再点击查看分析，阅读球队状态、赛程强度和数据变化等正文。"
+                question: "今日足球赛前分析怎么看？",
+                answer: "今日情报集中展示比赛对阵、开球时间和核心参考方向，详情包含球队状态、赛程强度和数据变化等正文。"
               },
               {
                 question: "参考方向和赛前分析有什么区别？",
                 answer: "参考方向是对本场比赛的简要结论，赛前分析则解释这个方向来自哪些比赛变量。"
               },
               {
-                question: "页面会覆盖哪些赛事？",
-                answer: "页面会优先整理世界杯、五大联赛、中超、杯赛和当天焦点足球赛事。"
+                question: "今日情报覆盖哪些赛事？",
+                answer: "今日情报重点覆盖世界杯、五大联赛、中超、杯赛和当天焦点足球赛事。"
               }
             ])
           )
@@ -64,7 +64,7 @@ export default function TodayPage() {
         <div>
           <SectionHeading title="今日赛前观点" eyebrow="Pre-match" level={1} />
           <p className="mt-2 max-w-2xl text-sm leading-6 text-white/58">
-            先看对阵和参考方向，再点进详情看完整分析。
+            汇总今日重点比赛、开球时间、参考方向和完整赛前分析。
           </p>
         </div>
         <div className="flex flex-wrap gap-2 text-xs text-white/58">
@@ -87,7 +87,7 @@ export default function TodayPage() {
       <section className="rounded-lg border border-white/10 bg-white/[0.04] p-4">
           <h2 className="flex items-center gap-2 text-base font-semibold text-white"><BrainCircuit size={16} className="text-turf" /> AI 分析席位</h2>
           <p className="mt-2 text-sm leading-6 text-white/58">
-            不同席位负责观察不同维度，例如指数结构、球队状态、进球趋势和阵容赛程。这部分是赛前观点的来源说明，不需要单独进入一个页面。
+            不同席位负责观察不同维度，例如指数结构、球队状态、进球趋势和阵容赛程。这部分是赛前观点的来源说明。
           </p>
           <div className="mt-3 flex flex-wrap gap-2 text-xs text-white/52">
             {models.slice(0, 5).map((model) => <span key={model.id} className="rounded-full border border-white/10 bg-black/20 px-2.5 py-1">{model.name}</span>)}

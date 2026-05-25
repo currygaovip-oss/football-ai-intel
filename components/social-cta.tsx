@@ -6,9 +6,9 @@ export const X_URL = "https://x.com/worldcupvip";
 export function SocialCta() {
   return (
     <div className="glass rounded-lg p-6">
-      <div className="text-sm font-semibold text-turf">社群入口</div>
+      <div className="text-sm font-semibold text-turf">加入社群</div>
       <h3 className="mt-2 text-2xl font-semibold">跟随每日情报更新</h3>
-      <p className="mt-2 text-sm leading-6 text-white/62">每日赛程、赛前观点和复盘会同步到 Telegram 群，更多更新可关注 X。</p>
+      <p className="mt-2 text-sm leading-6 text-white/62">每日赛程、赛前观点和复盘同步到 Telegram 群，X 主页发布公开动态。</p>
       <div className="mt-5 flex flex-col gap-3 sm:flex-row">
         <a
           href={TELEGRAM_URL}

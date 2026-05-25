@@ -79,7 +79,7 @@ export default async function ReviewDetailPage({ params }: ReviewParams) {
         </div>
         <h1 className="text-3xl font-semibold sm:text-5xl">{prediction?.matchup ?? "赛后复盘详情"}</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
-          本页记录{prediction?.matchup ?? "本场比赛"}的赛后复盘，包括比赛结果、原参考方向、符合情况和主要偏差。
+          这场比赛的复盘记录包含比赛结果、原参考方向、符合情况和主要偏差。
         </p>
         <div className="mt-6 rounded-lg border border-white/10 bg-white/5 p-4">
           <div className="text-sm text-white/58">比赛结果</div>
@@ -95,10 +95,10 @@ export default async function ReviewDetailPage({ params }: ReviewParams) {
           {review.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </section>
         <div className="mt-8 rounded-lg border border-turf/20 bg-turf/5 p-4 text-sm leading-6 text-white/65">
-          复盘会同时记录符合预期和出现偏差的场次，方便用户回看赛前判断和实际比赛走势。
+          复盘会同时记录符合预期和出现偏差的场次，用长期样本回看赛前判断和实际比赛走势。
         </div>
         <p className="mt-8 border-t border-white/10 pt-5 text-xs leading-6 text-white/45">
-          免责声明：本内容仅用于足球交流、数据研究和赛前阅读参考，不构成任何结果承诺或行动建议。
+          免责声明：本内容仅作足球交流、数据研究和赛前阅读参考，不构成任何结果承诺或行动建议。
         </p>
       </div>
     </article>

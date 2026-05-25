@@ -6,7 +6,7 @@ import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from
 import { getCityTicketPath, ticketBasePath } from "@/lib/world-cup-tickets";
 import { getHostCityPath, hostCities, worldCupBasePath } from "@/lib/world-cup";
 
-const description = "查看2026世界杯举办城市，美加墨16个城市、球场信息、揭幕战和决赛城市入口。";
+const description = "查看2026世界杯举办城市，美加墨16个城市、球场信息、揭幕战和决赛城市。";
 
 export const metadata: Metadata = createMetadata({
   title: "2026世界杯举办城市：美加墨16个城市与球场",
@@ -41,7 +41,7 @@ export default function HostCitiesPage() {
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">2026世界杯举办城市</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
-          美加墨世界杯覆盖16个举办城市。页面按城市整理球场信息、重点标签和赛程入口，方便查看美国、加拿大、墨西哥不同赛区。
+          美加墨世界杯覆盖16个举办城市。每个城市内容包含球场信息、重点标签、赛程和门票提醒。
         </p>
       </section>
 
@@ -64,7 +64,7 @@ export default function HostCitiesPage() {
       <section className="rounded-lg border border-gold/20 bg-gold/10 p-5">
         <h2 className="text-xl font-semibold text-white">2026世界杯城市门票信息</h2>
         <p className="mt-2 text-sm leading-7 text-white/62">
-          计划前往美加墨观赛时，可以先按城市核对球场、比赛时间和官方门票入口。绿茵智报只整理公开信息，不提供票务交易。
+          计划前往美加墨观赛时，可按城市核对球场、比赛时间和官方门票链接。绿茵智报只整理公开信息，不提供票务交易。
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link href={ticketBasePath} className="rounded-md bg-gold px-4 py-2 text-sm font-semibold text-pitch-950">门票信息总览</Link>

@@ -79,7 +79,7 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
         </div>
         <h1 className="text-3xl font-semibold leading-tight sm:text-5xl">{pageTitle}</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
-          本页整理{prediction.matchup}的比赛时间、赛事信息、赛前变量和参考方向。
+          {prediction.matchup}的比赛时间、赛事信息、赛前变量和参考方向如下。
         </p>
 
         <section className="mt-6 rounded-lg border border-turf/25 bg-turf/10 p-5">
@@ -143,7 +143,7 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
         <section className="mt-6 rounded-lg border border-white/10 bg-white/5 p-5">
           <h2 className="text-lg font-semibold">数据来源与校验</h2>
           <p className="mt-2 text-sm leading-7 text-white/64">
-            分析参考球队状态、历史交锋、阵容伤停、赛程密度、指数变化和进球趋势。发布前会整理表达，方便用户快速阅读。
+            分析参考球队状态、历史交锋、阵容伤停、赛程密度、指数变化和进球趋势。发布前会统一梳理表达，让赛前信息更容易阅读。
           </p>
         </section>
         <section className="mt-6 rounded-lg border border-white/10 bg-white/5 p-5">
@@ -163,8 +163,8 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
         <section className="mt-6 rounded-lg border border-white/10 bg-white/5 p-5">
           <h2 className="text-lg font-semibold">如何阅读这条情报</h2>
           <div className="mt-3 grid gap-3 text-sm leading-6 text-white/62 sm:grid-cols-3">
-            <p>先看参考方向，快速了解这场比赛的核心倾向。</p>
-            <p>再看正文理由，理解这条观点主要来自哪类比赛变量。</p>
+            <p>参考方向呈现这场比赛的核心倾向。</p>
+            <p>正文分析包含球队状态、赛程强度和数据变化等比赛变量。</p>
             <p>赛后回看复盘，了解赛前判断与实际走势的差异。</p>
           </div>
         </section>
@@ -174,7 +174,7 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
           </Link>
         ) : null}
         <p className="mt-8 border-t border-white/10 pt-5 text-xs leading-6 text-white/45">
-          免责声明：本内容仅用于足球交流、数据研究和赛前阅读参考，不构成任何结果承诺或行动建议。
+          免责声明：本内容仅作足球交流、数据研究和赛前阅读参考，不构成任何结果承诺或行动建议。
         </p>
       </div>
     </article>

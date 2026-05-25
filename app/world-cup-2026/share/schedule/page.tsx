@@ -6,7 +6,7 @@ import { getWorldCupMatches, worldCupBasePath } from "@/lib/world-cup";
 
 export const metadata: Metadata = createMetadata({
   title: "世界杯2026赛程图：中文赛程分享页",
-  description: "适合转发的世界杯2026中文赛程入口，查看比赛时间、重点对阵和赛前分析。",
+  description: "适合转发的世界杯2026中文赛程，查看比赛时间、重点对阵和赛前分析。",
   path: `${worldCupBasePath}/share/schedule`
 });
 
@@ -21,7 +21,7 @@ export default function WorldCupScheduleSharePage() {
           <span className="text-xs font-semibold uppercase tracking-[0.24em]">Share Card</span>
         </div>
         <h1 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-5xl">世界杯2026中文赛程图</h1>
-        <p className="mt-4 max-w-2xl text-sm leading-7 text-white/62">适合转发给朋友的赛程入口。点击比赛可继续查看时间、对阵和赛前分析。</p>
+        <p className="mt-4 max-w-2xl text-sm leading-7 text-white/62">适合转发给朋友的世界杯赛程。点击比赛查看时间、对阵和赛前分析。</p>
 
         <div className="mt-6 grid gap-3 md:grid-cols-2">
           {matches.map((match) => (

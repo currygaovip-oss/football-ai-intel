@@ -75,15 +75,15 @@ export default async function HostCountryPage({ params }: CountryParams) {
         </Link>
         <Link href={getCountryTicketPath(country.slug)} className="rounded-lg border border-gold/20 bg-gold/10 p-5 hover:border-gold/35">
           <h2 className="text-lg font-semibold text-white">{country.name}门票信息</h2>
-          <p className="mt-2 text-sm leading-6 text-white/58">查看官方入口、举办城市和观赛前提醒。</p>
+          <p className="mt-2 text-sm leading-6 text-white/58">查看官方票务链接、举办城市和观赛前提醒。</p>
         </Link>
         <Link href={`${worldCupBasePath}/opening-match`} className="rounded-lg border border-white/10 bg-black/20 p-5 hover:border-turf/35">
           <h2 className="text-lg font-semibold text-white">世界杯揭幕战</h2>
-          <p className="mt-2 text-sm leading-6 text-white/58">查看揭幕战时间、地点和比赛页入口。</p>
+          <p className="mt-2 text-sm leading-6 text-white/58">查看揭幕战时间、地点和比赛信息。</p>
         </Link>
         <Link href={`${worldCupBasePath}/final`} className="rounded-lg border border-white/10 bg-black/20 p-5 hover:border-turf/35">
           <h2 className="text-lg font-semibold text-white">世界杯决赛</h2>
-          <p className="mt-2 text-sm leading-6 text-white/58">查看决赛时间、地点和赛程入口。</p>
+          <p className="mt-2 text-sm leading-6 text-white/58">查看决赛时间、地点和赛程安排。</p>
         </Link>
       </section>
 

@@ -37,7 +37,7 @@ export function FootballMatchRow({ match, prediction }: { match: Match; predicti
           <div className="mt-1 text-sm font-semibold text-white">{direction}</div>
         </div>
       ) : (
-        <div className="rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white/46">赛前观点更新后显示入口</div>
+        <div className="rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white/46">查看赛程信息</div>
       )}
       <span className="inline-flex items-center gap-1 text-xs text-turf">
         {prediction ? "查看分析" : "查看比赛"} <ChevronRight size={13} />

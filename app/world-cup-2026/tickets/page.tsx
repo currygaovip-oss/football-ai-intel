@@ -6,10 +6,10 @@ import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from
 import { fifaTicketUrl, getCityTicketPath, getTicketTopicPath, ticketBasePath, ticketTopics } from "@/lib/world-cup-tickets";
 import { getHostCityPath, hostCities, worldCupBasePath } from "@/lib/world-cup";
 
-const description = "整理2026世界杯门票信息、FIFA官方购票入口、美加墨举办城市、揭幕战、决赛和观赛提醒。绿茵智报不提供票务交易，只做公开信息整理。";
+const description = "整理2026世界杯门票信息、FIFA官方购票链接、美加墨举办城市、揭幕战、决赛和观赛提醒。绿茵智报不提供票务交易，只做公开信息整理。";
 
 export const metadata: Metadata = createMetadata({
-  title: "2026世界杯门票信息、官方购票入口与观赛提醒",
+  title: "2026世界杯门票信息、官方购票链接与观赛提醒",
   description,
   path: ticketBasePath
 });
@@ -28,8 +28,8 @@ export default function WorldCupTicketsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: jsonLd(faqJsonLd([
-            { question: "2026世界杯门票信息以哪里为准？", answer: "应以 FIFA 官方门票页面和赛事官方后续公告为准。" },
-            { question: "绿茵智报卖世界杯门票吗？", answer: "不卖。绿茵智报只整理赛程、城市、官方入口和观赛提醒。" },
+            { question: "2026世界杯门票信息以哪里为准？", answer: "应以 FIFA 官方门票信息和赛事公告为准。" },
+            { question: "绿茵智报卖世界杯门票吗？", answer: "不卖。绿茵智报只整理赛程、城市、官方票务链接和观赛提醒。" },
             { question: "买票前应该先确认什么？", answer: "建议先确认比赛时间、举办城市、球场、官方购票流程和入场要求。" }
           ]))
         }}
@@ -41,11 +41,11 @@ export default function WorldCupTicketsPage() {
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">2026世界杯门票信息与观赛提醒</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/66">
-          这里整理 FIFA 官方门票入口、美加墨举办城市、揭幕战、决赛和城市观赛信息。绿茵智报不提供票务交易，购票安排请以官方发布为准。
+          这里整理 FIFA 官方门票链接、美加墨举办城市、揭幕战、决赛和城市观赛信息。绿茵智报不提供票务交易，购票安排请以官方发布为准。
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <a href={fifaTicketUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md bg-gold px-4 py-2.5 text-sm font-semibold text-pitch-950">
-            FIFA 官方门票页面 <ExternalLink size={15} />
+            FIFA 官方门票信息 <ExternalLink size={15} />
           </a>
           <Link href={`${worldCupBasePath}/schedule`} className="rounded-md border border-white/15 px-4 py-2.5 text-sm text-white/78 hover:border-gold/35 hover:text-gold">
             查看世界杯赛程
@@ -54,10 +54,10 @@ export default function WorldCupTicketsPage() {
       </section>
 
       <section className="grid gap-4 lg:grid-cols-3">
-        <InfoCard title="先看官方入口">
-          门票销售阶段、账户要求、价格区间和入场规则会变化，正式购票前应回到 FIFA 官方页面核对。
+        <InfoCard title="官方票务">
+          门票销售阶段、账户要求、价格区间和入场规则会变化，正式购票前应回到 FIFA 官方信息核对。
         </InfoCard>
-        <InfoCard title="再看城市与赛程">
+        <InfoCard title="城市与赛程">
           美加墨共有16个举办城市，同一城市可能有多场比赛，购票前要确认具体比赛、日期和球场。
         </InfoCard>
         <InfoCard title="避免信息混杂">
@@ -106,7 +106,7 @@ export default function WorldCupTicketsPage() {
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           <Link href={`${worldCupBasePath}/schedule`} className="rounded-lg border border-white/10 bg-black/20 p-4 text-sm leading-6 text-white/66 hover:border-turf/35">核对比赛时间和对阵</Link>
           <Link href={`${worldCupBasePath}/host-cities`} className="rounded-lg border border-white/10 bg-black/20 p-4 text-sm leading-6 text-white/66 hover:border-turf/35">核对举办城市和球场</Link>
-          <Link href={`${ticketBasePath}/official`} className="rounded-lg border border-white/10 bg-black/20 p-4 text-sm leading-6 text-white/66 hover:border-turf/35">核对官方门票入口</Link>
+          <Link href={`${ticketBasePath}/official`} className="rounded-lg border border-white/10 bg-black/20 p-4 text-sm leading-6 text-white/66 hover:border-turf/35">核对官方门票链接</Link>
         </div>
       </section>
 

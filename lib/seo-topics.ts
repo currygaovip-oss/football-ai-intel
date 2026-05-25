@@ -2,6 +2,8 @@ export type SeoTopicSlug =
   | "today-football-schedule"
   | "football-match-analysis"
   | "world-cup-2026-schedule"
+  | "world-cup-2026-teams"
+  | "world-cup-2026-host-cities"
   | "world-cup-2026-tickets"
   | "football-review"
   | "football-score-result";
@@ -21,13 +23,13 @@ export const seoTopics: SeoTopic[] = [
     slug: "today-football-schedule",
     title: "今日足球赛程",
     eyebrow: "Football Schedule",
-    description: "查看今日足球赛程、比赛时间、赛事阶段和赛前分析入口，覆盖世界杯、五大联赛、杯赛和焦点赛事。",
-    intro: "今日与近期重点足球赛程按比赛时间和对阵整理；已发布观点的比赛可继续阅读赛前分析和参考方向。",
+    description: "查看今日足球赛程、比赛时间、赛事阶段和赛前分析，覆盖世界杯、五大联赛、杯赛和焦点赛事。",
+    intro: "今日与近期重点足球赛程按比赛时间和对阵整理；重点场次包含完整分析和参考方向。",
     primaryLink: { label: "查看今日足球赛程", href: "/football-schedule/today" },
     faq: [
       {
-        question: "今日足球赛程页面主要看什么？",
-        answer: "可以先看比赛时间、赛事阶段和对阵双方，有赛前观点的比赛会提供分析入口。"
+        question: "今日足球赛程主要看什么？",
+        answer: "今日赛程包含比赛时间、赛事阶段、对阵双方和重点场次赛前分析。"
       },
       {
         question: "没有今日比赛时怎么看？",
@@ -35,7 +37,7 @@ export const seoTopics: SeoTopic[] = [
       },
       {
         question: "赛程和赛前分析有什么关系？",
-        answer: "赛程用于确认比赛时间和对阵，赛前分析用于进一步阅读参考方向和比赛变量。"
+        answer: "先确认比赛时间和对阵，再结合赛前分析阅读参考方向和比赛变量。"
       }
     ]
   },
@@ -44,7 +46,7 @@ export const seoTopics: SeoTopic[] = [
     title: "足球赛前分析",
     eyebrow: "Pre-match Analysis",
     description: "查看足球赛前分析、比赛观点、球队状态、赛程强度、数据变化和参考方向。",
-    intro: "赛前分析会把比赛时间、球队状态、赛程强度和数据变化整理成更容易阅读的赛前信息，帮助用户快速判断一场比赛值得关注的角度。",
+    intro: "赛前分析会把比赛时间、球队状态、赛程强度和数据变化整理成更容易阅读的赛前信息，帮助中文球迷判断一场比赛值得关注的角度。",
     primaryLink: { label: "查看足球赛前分析", href: "/predictions" },
     faq: [
       {
@@ -57,7 +59,7 @@ export const seoTopics: SeoTopic[] = [
       },
       {
         question: "赛前分析会更新吗？",
-        answer: "重点比赛会根据最新信息整理更新，更多动态会同步到 Telegram 群和 X 主页。"
+        answer: "重点比赛结合最新信息更新，更多动态在 Telegram 群和 X 主页发布。"
       }
     ]
   },
@@ -65,13 +67,13 @@ export const seoTopics: SeoTopic[] = [
     slug: "world-cup-2026-schedule",
     title: "世界杯2026赛程",
     eyebrow: "World Cup 2026",
-    description: "查看世界杯2026赛程、小组赛、淘汰赛、比赛时间和赛前分析入口。",
-    intro: "世界杯2026赛程会按比赛阶段整理，方便查看小组赛、淘汰赛和重点比赛时间；有赛前观点的比赛会提供分析入口。",
+    description: "查看世界杯2026赛程、小组赛、淘汰赛、比赛时间和赛前分析。",
+    intro: "世界杯2026赛程按比赛阶段整理，小组赛、淘汰赛和重点比赛时间分开呈现；重点场次包含赛前分析。",
     primaryLink: { label: "查看世界杯赛程", href: "/world-cup-2026/schedule" },
     faq: [
       {
-        question: "世界杯2026赛程页面可以看哪些内容？",
-        answer: "可以查看已经收录的世界杯比赛时间、赛事阶段、对阵信息和赛前分析入口。"
+        question: "世界杯2026赛程可以看哪些内容？",
+        answer: "可以查看已经收录的世界杯比赛时间、赛事阶段、对阵信息和赛前分析。"
       },
       {
         question: "世界杯小组赛和淘汰赛能筛选吗？",
@@ -79,7 +81,51 @@ export const seoTopics: SeoTopic[] = [
       },
       {
         question: "世界杯比赛有赛前观点吗？",
-        answer: "重点比赛发布赛前观点后，会在赛程卡片和今日情报页显示入口。"
+        answer: "重点比赛的赛前观点在赛程卡片和今日情报中展示。"
+      }
+    ]
+  },
+  {
+    slug: "world-cup-2026-teams",
+    title: "2026世界杯球队赛程",
+    eyebrow: "World Cup Teams",
+    description: "查看2026世界杯热门球队赛程，覆盖阿根廷、巴西、法国、英格兰、葡萄牙、美国、墨西哥、加拿大等球队比赛时间和赛前分析。",
+    intro: "球队赛程适合按球队查找比赛时间、对阵和赛前分析。热门球队覆盖赛程、阵容观察和重点球员信息。",
+    primaryLink: { label: "查看世界杯球队赛程", href: "/world-cup-2026/teams" },
+    faq: [
+      {
+        question: "世界杯球队赛程适合看什么？",
+        answer: "适合按球队查看比赛时间、对阵信息、赛程阶段和赛前分析。"
+      },
+      {
+        question: "哪些球队关注度更高？",
+        answer: "阿根廷、巴西、法国、英格兰、葡萄牙、德国、西班牙、美国、墨西哥、加拿大、日本、韩国等球队在中文球迷中关注度较高。"
+      },
+      {
+        question: "球队赛程会更新赛前观点吗？",
+        answer: "重点比赛包含完整分析和参考方向，赛后可查看复盘记录。"
+      }
+    ]
+  },
+  {
+    slug: "world-cup-2026-host-cities",
+    title: "2026世界杯举办城市",
+    eyebrow: "Host Cities",
+    description: "查看2026世界杯美加墨举办城市、比赛球场、城市赛程、门票提醒和观赛信息。",
+    intro: "2026世界杯由美国、加拿大、墨西哥联合举办，可查看纽约/新泽西、洛杉矶、达拉斯、多伦多、温哥华、墨西哥城等赛区信息。",
+    primaryLink: { label: "查看世界杯举办城市", href: "/world-cup-2026/host-cities" },
+    faq: [
+      {
+        question: "2026世界杯在哪些国家举办？",
+        answer: "2026世界杯由美国、加拿大、墨西哥联合举办。"
+      },
+      {
+        question: "举办城市主要提供什么信息？",
+        answer: "城市内容整理举办国家、比赛球场、赛程、门票提醒和赛前分析。"
+      },
+      {
+        question: "为什么适合中文球迷查看？",
+        answer: "中文球迷常会按城市搜索比赛、门票和观赛安排，例如纽约世界杯赛程、洛杉矶世界杯赛程、多伦多世界杯赛程。"
       }
     ]
   },
@@ -87,21 +133,21 @@ export const seoTopics: SeoTopic[] = [
     slug: "world-cup-2026-tickets",
     title: "2026世界杯门票信息",
     eyebrow: "World Cup Tickets",
-    description: "查看2026世界杯门票信息、官方购票入口、美加墨举办城市、揭幕战、决赛和观赛提醒。",
-    intro: "世界杯门票信息以 FIFA 官方发布为准。绿茵智报整理官方入口、赛程、举办城市和观赛前需要核对的公开信息。",
+    description: "查看2026世界杯门票信息、官方购票链接、美加墨举办城市、揭幕战、决赛和观赛提醒。",
+    intro: "世界杯门票信息以 FIFA 官方发布为准。绿茵智报整理官方票务链接、赛程、举办城市和观赛前需要核对的公开信息。",
     primaryLink: { label: "查看世界杯门票信息", href: "/world-cup-2026/tickets" },
     faq: [
       {
         question: "2026世界杯门票信息以哪里为准？",
-        answer: "以 FIFA 官方门票页面和赛事官方公告为准。"
+        answer: "以 FIFA 官方门票信息和赛事公告为准。"
       },
       {
         question: "绿茵智报提供门票交易吗？",
-        answer: "不提供。本站只整理公开信息、赛程入口、城市信息和观赛提醒。"
+        answer: "不提供。本站只整理公开信息、赛程、城市信息和观赛提醒。"
       },
       {
-        question: "买票前应该先看哪些页面？",
-        answer: "建议先查看世界杯赛程、举办城市、单场比赛页和官方门票入口。"
+        question: "买票前应该确认哪些信息？",
+        answer: "建议确认世界杯赛程、举办城市、单场比赛和官方门票链接。"
       }
     ]
   },
@@ -110,7 +156,7 @@ export const seoTopics: SeoTopic[] = [
     title: "足球赛后复盘",
     eyebrow: "Match Review",
     description: "查看足球赛后复盘记录，包括原参考方向、比赛结果、符合情况、复盘评分和偏差归因。",
-    intro: "赛后复盘用于回看赛前判断与实际走势的差异，命中的会记录，出现偏差的场次也会整理原因。",
+    intro: "赛后复盘回看赛前判断与实际走势的差异，记录命中与偏差，并整理主要原因。",
     primaryLink: { label: "查看复盘记录", href: "/reviews" },
     faq: [
       {
@@ -123,7 +169,7 @@ export const seoTopics: SeoTopic[] = [
       },
       {
         question: "复盘评分代表什么？",
-        answer: "复盘评分用于辅助记录赛前判断与实际比赛走势的贴合程度，不代表未来结果。"
+        answer: "复盘评分记录赛前判断与实际比赛走势的贴合程度，不代表未来结果。"
       }
     ]
   },
@@ -131,17 +177,17 @@ export const seoTopics: SeoTopic[] = [
     slug: "football-score-result",
     title: "足球比分赛果",
     eyebrow: "Scores & Results",
-    description: "查看足球比分赛果、已完成比赛记录、原参考方向和赛后复盘入口。",
-    intro: "比分赛果适合和赛前观点一起回看：先确认比赛结果，再查看原参考方向和复盘记录。",
+    description: "查看足球比分赛果、已完成比赛记录、原参考方向和赛后复盘。",
+    intro: "比分赛果适合和赛前观点一起回看：比赛结果、原参考方向和复盘记录保持同一条线索。",
     primaryLink: { label: "查看赛后复盘", href: "/reviews" },
     faq: [
       {
-        question: "足球比分赛果页面适合怎么看？",
-        answer: "可以先看已完成比赛结果，再进入复盘记录查看赛前观点与实际赛果的差异。"
+        question: "足球比分赛果适合怎么看？",
+        answer: "已完成比赛保留赛果和复盘记录，便于回看赛前观点与实际赛果的差异。"
       },
       {
         question: "比分赛果会覆盖哪些比赛？",
-        answer: "会优先整理世界杯、五大联赛、杯赛和当天焦点足球赛事。"
+        answer: "重点覆盖世界杯、五大联赛、杯赛和当天焦点足球赛事。"
       },
       {
         question: "赛果和复盘有什么区别？",

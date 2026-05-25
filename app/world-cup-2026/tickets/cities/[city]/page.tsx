@@ -45,7 +45,7 @@ export default async function CityTicketPage({ params }: CityTicketParams) {
         dangerouslySetInnerHTML={{
           __html: jsonLd(faqJsonLd([
             { question: `${city.name}有2026世界杯比赛吗？`, answer: `${city.name}是2026世界杯举办城市之一，比赛球场为${city.stadium}。` },
-            { question: `${city.name}世界杯门票在哪里买？`, answer: "门票信息应以 FIFA 官方门票页面和官方公告为准。" },
+            { question: `${city.name}世界杯门票在哪里买？`, answer: "门票信息应以 FIFA 官方门票信息和官方公告为准。" },
             { question: `去${city.name}看世界杯前要确认什么？`, answer: "建议确认比赛时间、球场、官方门票状态、交通住宿和入场要求。" }
           ]))
         }}
@@ -57,7 +57,7 @@ export default async function CityTicketPage({ params }: CityTicketParams) {
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">{city.name}世界杯门票信息</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64">
-          {city.name}是2026世界杯举办城市之一，比赛球场为{city.stadium}。本页整理城市观赛提醒、赛程入口和官方门票信息入口。
+          {city.name}是2026世界杯举办城市之一，比赛球场为{city.stadium}。这里整理城市观赛提醒、赛程和官方门票信息。
         </p>
       </section>
 
@@ -73,12 +73,12 @@ export default async function CityTicketPage({ params }: CityTicketParams) {
         </div>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           <CheckCard title="比赛时间" body="确认该城市对应比赛日期、开球时间和对阵信息。" />
-          <CheckCard title="官方门票入口" body="门票销售阶段、余票和价格以 FIFA 官方页面为准。" />
+          <CheckCard title="官方门票链接" body="门票销售阶段、余票和价格以 FIFA 官方信息为准。" />
           <CheckCard title="城市安排" body="提前核对交通、住宿、球场位置和入场政策。" />
         </div>
         <div className="mt-5 flex flex-wrap gap-2">
           <a href={fifaTicketUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md bg-gold px-4 py-2 text-sm font-semibold text-pitch-950">
-            FIFA 官方门票页面 <ExternalLink size={15} />
+            FIFA 官方门票信息 <ExternalLink size={15} />
           </a>
           <Link href={getHostCityPath(city.slug)} className="rounded-md border border-white/15 px-4 py-2 text-sm text-white/72 hover:border-turf/30 hover:text-turf">查看{city.name}赛区</Link>
           <Link href={`${worldCupBasePath}/schedule`} className="rounded-md border border-white/15 px-4 py-2 text-sm text-white/72 hover:border-turf/30 hover:text-turf">世界杯赛程</Link>
@@ -88,7 +88,7 @@ export default async function CityTicketPage({ params }: CityTicketParams) {
       <section className="rounded-lg border border-white/10 bg-black/20 p-5">
         <h2 className="text-xl font-semibold text-white">{city.name}观赛提醒</h2>
         <p className="mt-3 text-sm leading-7 text-white/62">
-          {city.summary} 计划前往该城市观赛时，可以先收藏城市页和赛程页；比赛临近后，再结合官方门票入口和赛前分析确认最新信息。
+          {city.summary} 计划前往该城市观赛时，建议收藏城市赛程，并结合官方门票链接、入场要求和赛前分析确认最新信息。
         </p>
       </section>
 

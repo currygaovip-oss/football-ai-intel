@@ -6,7 +6,7 @@ import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getAllPredictions, getReviews, getSchedule } from "@/lib/data";
 import { getSeoTopic, seoTopics } from "@/lib/seo-topics";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
-import { getWorldCupFixturePath } from "@/lib/world-cup";
+import { getHostCityPath, getTeamPath, getWorldCupFixturePath, getWorldCupTeamEntries, hostCities } from "@/lib/world-cup";
 
 type TopicParams = { params: Promise<{ slug: string }> };
 
@@ -181,6 +181,18 @@ function getListItems(
     return predictions.map((prediction) => ({
       name: `${prediction.matchup}赛前分析`,
       path: `/predictions/${prediction.id}`
+    }));
+  }
+  if (slug === "world-cup-2026-teams") {
+    return getWorldCupTeamEntries().map((team) => ({
+      name: `${team.name}世界杯2026赛程`,
+      path: getTeamPath(team.slug)
+    }));
+  }
+  if (slug === "world-cup-2026-host-cities") {
+    return hostCities.map((city) => ({
+      name: `${city.name}世界杯赛程与球场信息`,
+      path: getHostCityPath(city.slug)
     }));
   }
   return matches.map((match) => ({

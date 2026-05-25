@@ -10,24 +10,24 @@ const rangeCopy = {
   today: {
     title: "今日足球赛程",
     eyebrow: "Today Football Schedule",
-    description: "查看今日足球赛程、比赛时间、对阵信息和赛前分析入口；有观点的比赛会显示参考方向。",
-    empty: "今日暂无已收录比赛。可以查看明日赛程或本周赛程，继续关注接下来的重点场次。",
+    description: "查看今日足球赛程、比赛时间、对阵信息和赛前分析；重点场次包含参考方向。",
+    empty: "今日还没有已收录比赛，可查看明日赛程或本周赛程，提前关注接下来的重点场次。",
     primaryLink: "/football-schedule/tomorrow",
     primaryLabel: "查看明日赛程"
   },
   tomorrow: {
     title: "明日足球赛程",
     eyebrow: "Tomorrow Football Schedule",
-    description: "查看明日足球赛程、比赛时间、对阵信息和赛前分析入口，提前关注重点比赛。",
-    empty: "明日暂无已收录比赛。可以查看本周赛程，确认接下来已经整理的比赛安排。",
+    description: "查看明日足球赛程、比赛时间、对阵信息和赛前分析，提前关注重点比赛。",
+    empty: "明日还没有已收录比赛，可查看本周赛程，确认接下来的比赛安排。",
     primaryLink: "/football-schedule/week",
     primaryLabel: "查看本周赛程"
   },
   week: {
     title: "本周足球赛程",
     eyebrow: "Weekly Football Schedule",
-    description: "查看本周足球赛程、比赛时间、重点对阵和赛前分析入口，适合提前安排观赛。",
-    empty: "本周暂无已收录比赛。可以进入赛程中心查看世界杯和完整赛程。",
+    description: "查看本周足球赛程、比赛时间、重点对阵和赛前分析，适合提前安排观赛。",
+    empty: "本周还没有已收录比赛，可进入赛程中心查看世界杯和完整赛程。",
     primaryLink: "/schedule",
     primaryLabel: "查看赛程中心"
   }
@@ -65,7 +65,7 @@ export function FootballSchedulePage({ range, path }: { range: ScheduleRange; pa
             faqJsonLd([
               {
                 question: `${copy.title}主要看什么？`,
-                answer: "先看比赛时间、赛事阶段和对阵双方；有赛前观点的比赛会显示参考方向和分析入口。"
+                answer: "赛程卡片包含比赛时间、赛事阶段、对阵双方、重点场次参考方向和赛前分析。"
               },
               {
                 question: "没有比赛时怎么办？",
@@ -122,7 +122,7 @@ export function FootballSchedulePage({ range, path }: { range: ScheduleRange; pa
         </div>
       ) : (
         <section className="rounded-lg border border-white/10 bg-white/[0.04] p-8 text-center">
-          <h2 className="text-xl font-semibold text-white">暂无比赛</h2>
+          <h2 className="text-xl font-semibold text-white">当前没有比赛</h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-7 text-white/58">{copy.empty}</p>
           <Link href={copy.primaryLink} className="mt-5 inline-flex items-center gap-1 rounded-md border border-turf/30 bg-turf/10 px-4 py-2 text-sm text-turf hover:bg-turf/15">
             {copy.primaryLabel} <ChevronRight size={15} />

@@ -51,7 +51,7 @@ export function SiteHeader() {
             className="inline-flex items-center gap-2 rounded-md border border-turf/30 bg-turf/10 px-3 py-2 text-sm text-turf"
             data-analytics-event="click_telegram"
             data-analytics-area="header"
-            data-analytics-label="社群入口"
+            data-analytics-label="加入社群"
           >
             <Radio size={16} />
             Telegram

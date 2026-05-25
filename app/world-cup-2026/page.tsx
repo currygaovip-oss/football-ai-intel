@@ -5,9 +5,9 @@ import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { WorldCupMatchCard } from "@/components/world-cup-match-card";
 import { getAllPredictions } from "@/lib/data";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
-import { getWorldCupGroupMatches, getWorldCupKnockoutMatches, getWorldCupMatches, getWorldCupPrediction, worldCupBasePath } from "@/lib/world-cup";
+import { getTeamPath, getWorldCupGroupMatches, getWorldCupKnockoutMatches, getWorldCupMatches, getWorldCupPrediction, getWorldCupTeamEntries, hostCities, worldCupBasePath } from "@/lib/world-cup";
 
-const pageDescription = "世界杯2026专题整理美加墨世界杯赛程、举办国家、举办城市、揭幕战、决赛、比赛时间和赛前分析入口。";
+const pageDescription = "世界杯2026专题整理美加墨世界杯赛程、举办国家、举办城市、揭幕战、决赛、比赛时间和赛前分析。";
 
 export const metadata: Metadata = createMetadata({
   title: "2026世界杯赛程、美加墨举办城市与赛前分析",
@@ -21,6 +21,8 @@ export default function WorldCup2026Page() {
   const knockoutMatches = getWorldCupKnockoutMatches();
   const predictions = getAllPredictions();
   const featuredMatches = matches.slice(0, 6);
+  const featuredTeams = getWorldCupTeamEntries().slice(0, 10);
+  const featuredCities = hostCities.filter((city) => city.highlight).concat(hostCities.filter((city) => !city.highlight).slice(0, 4));
 
   return (
     <div className="space-y-6">
@@ -47,15 +49,15 @@ export default function WorldCup2026Page() {
             faqJsonLd([
               {
                 question: "世界杯2026专题可以看什么？",
-                answer: "可以查看世界杯2026赛程、比赛时间、小组赛、淘汰赛、单场比赛页和赛前分析入口。"
+                answer: "可以查看世界杯2026赛程、比赛时间、小组赛、淘汰赛、单场比赛和赛前分析。"
               },
               {
-                question: "单场比赛页有什么用？",
-                answer: "单场比赛页会整理对阵、开球时间、赛事阶段、赛前观点入口和赛后复盘入口。"
+                question: "单场比赛可以看什么？",
+                answer: "单场比赛包含对阵、开球时间、赛事阶段、赛前观点和赛后复盘。"
               },
               {
                 question: "世界杯赛前分析什么时候更新？",
-                answer: "重点比赛会随赛前信息确认后更新，已发布观点会在比赛页和今日情报页显示入口。"
+                answer: "重点比赛会根据赛前信息整理参考方向，并在今日情报中展示。"
               }
             ])
           )
@@ -68,7 +70,7 @@ export default function WorldCup2026Page() {
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">2026世界杯赛程与美加墨举办城市</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64">
-          绿茵智报整理美加墨世界杯比赛时间、小组赛、淘汰赛、举办城市、揭幕战、决赛和赛前分析入口。
+          绿茵智报整理美加墨世界杯比赛时间、小组赛、淘汰赛、举办城市、揭幕战、决赛和赛前分析。
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link href={`${worldCupBasePath}/schedule`} className="rounded-md bg-turf px-4 py-2.5 text-sm font-semibold text-pitch-950">
@@ -101,13 +103,13 @@ export default function WorldCup2026Page() {
           16个举办城市与球场信息集中查看。
         </TopicCard>
         <TopicCard icon={<Ticket size={18} />} title="门票信息" href={`${worldCupBasePath}/tickets`}>
-          查看官方入口、城市观赛和购票前提醒。
+          查看官方票务链接、城市观赛和购票前提醒。
         </TopicCard>
         <TopicCard icon={<Trophy size={18} />} title="揭幕战" href={`${worldCupBasePath}/opening-match`}>
-          查看揭幕战时间、城市和比赛入口。
+          查看揭幕战时间、城市和比赛信息。
         </TopicCard>
         <TopicCard icon={<Trophy size={18} />} title="决赛" href={`${worldCupBasePath}/final`}>
-          查看决赛时间、城市和淘汰赛入口。
+          查看决赛时间、城市和淘汰赛安排。
         </TopicCard>
       </section>
 
@@ -126,20 +128,50 @@ export default function WorldCup2026Page() {
 
       <section className="grid gap-4 lg:grid-cols-3">
         <InfoCard title="世界杯小组赛" href={`${worldCupBasePath}/groups`}>
-          按 A 组到 L 组整理比赛时间和对阵，适合赛前快速确认小组赛比赛日。
+          按 A 组到 L 组整理比赛时间和对阵，适合赛前确认小组赛比赛日。
         </InfoCard>
         <InfoCard title="世界杯淘汰赛" href={`${worldCupBasePath}/knockout`}>
           32强赛、16强赛、1/4决赛、半决赛、季军赛和决赛集中查看。
         </InfoCard>
-        <InfoCard title="全部比赛入口" href={`${worldCupBasePath}/matches`}>
+        <InfoCard title="全部比赛" href={`${worldCupBasePath}/matches`}>
           按赛程顺序查看全部比赛，适合搜索具体对阵和比赛时间。
         </InfoCard>
         <InfoCard title="球队赛程" href={`${worldCupBasePath}/teams`}>
-          按球队查看世界杯比赛时间、对阵信息和赛前分析入口。
+          按球队查看世界杯比赛时间、对阵信息和赛前分析。
         </InfoCard>
         <InfoCard title="单场赛前分析" href="/predictions">
-          已发布观点的比赛会显示参考方向，详情页可继续阅读赛前分析正文。
+          重点比赛包含参考方向和完整赛前分析。
         </InfoCard>
+      </section>
+
+      <section className="grid gap-4 lg:grid-cols-2">
+        <div className="rounded-lg border border-white/10 bg-white/[0.035] p-5">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <h2 className="text-xl font-semibold text-white">热门球队赛程</h2>
+            <Link href={`${worldCupBasePath}/teams`} className="text-sm text-turf">全部球队</Link>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {featuredTeams.map((team) => (
+              <Link key={team.slug} href={getTeamPath(team.slug)} className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-sm text-white/68 hover:border-turf/30 hover:text-turf">
+                {team.name}世界杯赛程
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-white/10 bg-white/[0.035] p-5">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <h2 className="text-xl font-semibold text-white">美加墨举办城市</h2>
+            <Link href={`${worldCupBasePath}/host-cities`} className="text-sm text-turf">全部城市</Link>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {featuredCities.map((city) => (
+              <Link key={city.slug} href={`${worldCupBasePath}/cities/${city.slug}`} className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-sm text-white/68 hover:border-turf/30 hover:text-turf">
+                {city.name}世界杯赛程
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
 
       <SeoTopicLinks />
@@ -172,7 +204,7 @@ function InfoCard({ title, href, children }: { title: string; href: string; chil
     <Link href={href} className="rounded-lg border border-white/10 bg-white/[0.04] p-5 transition hover:border-turf/35">
       <h2 className="text-lg font-semibold text-white">{title}</h2>
       <p className="mt-2 text-sm leading-7 text-white/62">{children}</p>
-      <span className="mt-4 inline-flex items-center gap-1 text-sm text-turf">继续查看 <ChevronRight size={14} /></span>
+      <span className="mt-4 inline-flex items-center gap-1 text-sm text-turf">查看详情 <ChevronRight size={14} /></span>
     </Link>
   );
 }

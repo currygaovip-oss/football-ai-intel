@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { getAllPredictions, getSchedule } from "@/lib/data";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, sportsEventJsonLd, webPageJsonLd } from "@/lib/seo";
 
-const scheduleDescription = "查看今日足球赛程、明日赛程、世界杯2026赛程、小组赛和淘汰赛比赛时间；有赛前分析的比赛可继续阅读参考方向和详细分析。";
+const scheduleDescription = "查看今日足球赛程、明日赛程、世界杯2026赛程、小组赛和淘汰赛比赛时间；重点场次包含参考方向和详细分析。";
 
 export const metadata: Metadata = createMetadata({
   title: "足球赛程中心：今日赛程、世界杯赛程与比赛时间",
@@ -25,11 +25,11 @@ const filters = [
 type FilterKey = (typeof filters)[number]["key"];
 
 const emptyCopy: Record<FilterKey, string> = {
-  today: "今日暂无已收录赛程。可切换到全部赛程继续查看。",
-  tomorrow: "明日暂无已收录赛程。可切换到全部赛程继续查看。",
-  all: "暂无已收录赛程。",
-  group: "暂无小组赛赛程。",
-  knockout: "暂无淘汰赛赛程。"
+  today: "今日还没有已收录赛程。可切换到全部赛程查看接下来的比赛。",
+  tomorrow: "明日还没有已收录赛程。可切换到全部赛程查看接下来的比赛。",
+  all: "目前还没有已收录赛程。",
+  group: "目前还没有小组赛赛程。",
+  knockout: "目前还没有淘汰赛赛程。"
 };
 
 export default async function SchedulePage({ searchParams }: { searchParams?: Promise<{ type?: string }> }) {
@@ -91,11 +91,11 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
               },
               {
                 question: "哪些比赛有赛前分析？",
-                answer: "已经发布赛前观点的比赛会显示分析入口，点击后可以查看参考方向和详细分析。"
+                answer: "重点比赛包含赛前分析、参考方向和详细正文。"
               },
               {
                 question: "世界杯赛程怎么筛选？",
-                answer: "可以通过小组赛、淘汰赛和全部赛程标签切换，也可以查看右侧世界杯阶段入口。"
+                answer: "可以通过小组赛、淘汰赛和全部赛程标签切换，也可以查看世界杯阶段分类。"
               }
             ])
           )
@@ -109,7 +109,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
             </div>
             <h1 className="text-2xl font-semibold leading-tight text-white">足球赛程中心</h1>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-white/58">
-              查看今日、明日和世界杯阶段赛程。有赛前观点的比赛会显示分析入口。
+              查看今日、明日和世界杯阶段赛程。重点比赛包含赛前分析。
             </p>
           </div>
           <div className="flex flex-wrap gap-2 text-xs text-white/58">
@@ -168,7 +168,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
             ))
           ) : (
             <div className="glass rounded-lg p-8 text-center">
-              <div className="text-lg font-semibold text-white">暂无比赛</div>
+              <div className="text-lg font-semibold text-white">当前没有比赛</div>
               <p className="mt-2 text-sm leading-6 text-white/58">{emptyCopy[currentType]}</p>
               <Link href="/schedule?type=all" className="mt-5 inline-flex rounded-md border border-turf/30 bg-turf/10 px-4 py-2 text-sm text-turf hover:bg-turf/15">
                 查看全部赛程
@@ -200,9 +200,9 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
           </div>
 
           <div className="rounded-lg border border-turf/20 bg-turf/10 p-4">
-            <h2 className="text-base font-semibold text-white">赛前观点入口</h2>
+            <h2 className="text-base font-semibold text-white">赛前观点</h2>
             <p className="mt-2 text-sm leading-6 text-white/62">
-              已发布观点的比赛会显示“查看赛前分析”。其他比赛保持赛程展示，赛前更新时会补充分析入口。
+              重点场次包含参考方向和完整分析；其他比赛可查看开球时间和对阵信息。
             </p>
             <Link
               href="/today"
@@ -221,19 +221,19 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
         <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
           <h2 className="text-lg font-semibold">今日足球赛程怎么用</h2>
           <p className="mt-2 text-sm leading-7 text-white/62">
-            先看比赛时间、赛事阶段和对阵双方，再进入已发布观点的比赛详情，阅读赛前分析和参考方向。
+            比赛卡片包含开球时间、赛事阶段和对阵双方；重点场次可查看完整分析和参考方向。
           </p>
         </div>
         <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
           <h2 className="text-lg font-semibold">世界杯赛程分类</h2>
           <p className="mt-2 text-sm leading-7 text-white/62">
-            按小组赛、淘汰赛和全部赛程筛选，快速找到对应比赛日、分组和开球时间。
+            支持按小组赛、淘汰赛和全部赛程查看对应比赛日、分组和开球时间。
           </p>
         </div>
         <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
-          <h2 className="text-lg font-semibold">赛前分析入口</h2>
+          <h2 className="text-lg font-semibold">赛前分析</h2>
           <p className="mt-2 text-sm leading-7 text-white/62">
-            有赛前观点的比赛会显示详情链接，页面包含对阵、比赛时间、参考方向和复盘入口。
+            重点比赛包含对阵、比赛时间、参考方向、完整分析和赛后复盘。
           </p>
         </div>
       </section>

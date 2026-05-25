@@ -41,7 +41,7 @@ export default function WorldCupKnockoutPage() {
         <div className="text-xs font-semibold uppercase tracking-[0.24em] text-turf">Knockout Stage</div>
         <h1 className="mt-2 text-3xl font-semibold text-white">世界杯2026淘汰赛赛程</h1>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-white/62">
-          从32强赛到决赛，集中查看淘汰赛阶段比赛时间、对阵信息和赛前观点入口。
+          从32强赛到决赛，集中查看淘汰赛阶段比赛时间、对阵信息和赛前观点。
         </p>
       </section>
 

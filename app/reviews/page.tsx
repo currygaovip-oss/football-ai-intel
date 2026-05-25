@@ -6,7 +6,7 @@ import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getAllPredictions, getAllReviews, getReviews } from "@/lib/data";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 
-const reviewsDescription = "查看足球赛后复盘记录，包含赛前分析结果、比赛赛果、偏差归因、复盘评分和模型表现，用于长期观察比赛观点质量。";
+const reviewsDescription = "查看足球赛后复盘记录，包含赛前分析结果、比赛赛果、偏差归因、复盘评分和模型表现，持续观察比赛观点质量。";
 
 export const metadata: Metadata = createMetadata({
   title: "足球赛后复盘记录：赛前分析结果与模型表现",
@@ -48,8 +48,8 @@ export default function ReviewsPage() {
           __html: jsonLd(
             faqJsonLd([
               {
-                question: "赛后复盘页面记录什么？",
-                answer: "页面记录已完成复盘的赛前观点，包括原参考方向、比赛结果、符合情况、复盘评分和主要偏差。"
+                question: "赛后复盘记录什么？",
+                answer: "记录已完成复盘的赛前观点，包括原参考方向、比赛结果、符合情况、复盘评分和主要偏差。"
               },
               {
                 question: "为什么有些观点还没有复盘？",
@@ -57,7 +57,7 @@ export default function ReviewsPage() {
               },
               {
                 question: "复盘评分代表什么？",
-                answer: "复盘评分用于辅助记录赛前判断与实际比赛走势的贴合程度，不代表未来结果承诺。"
+                answer: "复盘评分记录赛前判断与实际比赛走势的贴合程度，不代表未来结果承诺。"
               }
             ])
           )
@@ -65,7 +65,7 @@ export default function ReviewsPage() {
       />
       <SectionHeading title="历史复盘记录" eyebrow="Review Archive" level={1} />
       <p className="mb-6 max-w-3xl text-sm leading-7 text-white/62">
-        已完成复盘会记录原参考方向、比赛结果、符合情况和主要偏差，方便回看赛前判断与实际走势的差异。
+        已完成复盘记录原参考方向、比赛结果、符合情况和主要偏差，回看赛前判断与实际走势的差异。
       </p>
 
       <div className="grid gap-3 md:grid-cols-4">
@@ -97,7 +97,7 @@ export default function ReviewsPage() {
       {pendingReviews.length > 0 ? (
         <section className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
           <h2 className="text-xl font-semibold text-white">待复盘观点</h2>
-          <p className="mt-2 text-sm leading-6 text-white/58">这些赛前观点已经发布，比赛结束并整理完成后会补充复盘记录。</p>
+          <p className="mt-2 text-sm leading-6 text-white/58">这些赛前观点已进入复盘池，赛果与主要偏差确认后归档到历史复盘。</p>
           <div className="mt-4 grid gap-3 md:grid-cols-2">
             {pendingReviews.map((prediction) => (
               <Link key={prediction.id} href={`/predictions/${prediction.id}`} className="rounded-lg border border-white/10 bg-black/20 p-4 transition hover:border-turf/30">

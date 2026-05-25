@@ -7,7 +7,7 @@ import { createMetadata, faqJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 import { getTicketTopicPath } from "@/lib/world-cup-tickets";
 import { getFinalMatch, getHostCityPath, getMatchDateTimeLabel, getWorldCupPrediction, worldCupBasePath } from "@/lib/world-cup";
 
-const description = "查看2026世界杯决赛时间、举办城市、比赛入口和赛前分析入口。决赛将在纽约/新泽西赛区举行。";
+const description = "查看2026世界杯决赛时间、举办城市、比赛信息和赛前分析。决赛将在纽约/新泽西赛区举行。";
 
 export const metadata: Metadata = createMetadata({
   title: "2026世界杯决赛时间与举办城市",
@@ -38,7 +38,7 @@ export default function WorldCupFinalPage() {
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">2026世界杯决赛</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64">
-          决赛是美加墨世界杯最受关注的比赛。本页整理决赛时间、纽约/新泽西赛区信息和赛前分析。
+          决赛是美加墨世界杯最受关注的比赛。这里整理决赛时间、纽约/新泽西赛区信息和赛前分析。
         </p>
       </section>
 
@@ -46,9 +46,9 @@ export default function WorldCupFinalPage() {
 
       <section className="grid gap-4 md:grid-cols-3">
         <Info title="举办城市" body="纽约/新泽西赛区承接2026世界杯决赛，球场为 MetLife Stadium。" href={getHostCityPath("new-york-new-jersey")} />
-        <Info title="门票信息" body="查看决赛官方入口、纽约/新泽西赛区和购票前提醒。" href={getTicketTopicPath("final")} />
+        <Info title="门票信息" body="查看决赛官方票务链接、纽约/新泽西赛区和购票前提醒。" href={getTicketTopicPath("final")} />
         <Info title="淘汰赛赛程" body="查看32强赛到决赛的全部比赛时间。" href={`${worldCupBasePath}/knockout`} />
-        <Info title="赛前观点" body="决赛临近后，相关观点会显示参考方向和分析入口。" href="/today" />
+        <Info title="赛前观点" body="决赛相关观点包含参考方向、球队状态和赛前分析。" href="/today" />
       </section>
 
       <SeoTopicLinks />

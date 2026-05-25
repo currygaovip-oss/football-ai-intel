@@ -5,8 +5,8 @@ import { createMetadata } from "@/lib/seo";
 import { getWorldCupGroups, worldCupBasePath } from "@/lib/world-cup";
 
 export const metadata: Metadata = createMetadata({
-  title: "世界杯2026分组图：A组到L组中文入口",
-  description: "查看世界杯2026小组赛分组、比赛时间和赛前分析入口，适合转发收藏。",
+  title: "世界杯2026分组图：A组到L组中文赛程",
+  description: "查看世界杯2026小组赛分组、比赛时间和赛前分析，适合转发收藏。",
   path: `${worldCupBasePath}/share/groups`
 });
 
@@ -20,7 +20,7 @@ export default function WorldCupGroupsSharePage() {
           <Trophy size={22} />
           <span className="text-xs font-semibold uppercase tracking-[0.24em]">Groups</span>
         </div>
-        <h1 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-5xl">世界杯2026分组入口</h1>
+        <h1 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-5xl">世界杯2026分组赛程</h1>
         <p className="mt-4 max-w-2xl text-sm leading-7 text-white/62">A组到L组小组赛集中查看，适合收藏和转发。</p>
 
         <div className="mt-6 grid gap-3 md:grid-cols-3 xl:grid-cols-4">

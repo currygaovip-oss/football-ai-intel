@@ -6,8 +6,8 @@ import { getCityTicketPath, getTicketTopicPath, ticketBasePath, ticketTopics } f
 import {
   getHostCityPath,
   getHostCountryPath,
-  getNamedWorldCupTeams,
   getTeamPath,
+  getWorldCupTeamEntries,
   getWorldCupFixturePath,
   getWorldCupMatches,
   hostCities,
@@ -21,6 +21,7 @@ const staticRoutes = [
   "/predictions",
   "/reviews",
   "/schedule",
+  "/football-ai-intelligence",
   "/football-schedule/today",
   "/football-schedule/tomorrow",
   "/football-schedule/week",
@@ -78,11 +79,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: match.stage.includes("决赛") || match.stage.includes("强赛") ? 0.78 : 0.72
   }));
 
-  const worldCupTeamEntries = getNamedWorldCupTeams().map((team) => ({
-    url: `${siteUrl}${getTeamPath(team)}`,
+  const worldCupTeamEntries = getWorldCupTeamEntries().map((team) => ({
+    url: `${siteUrl}${getTeamPath(team.slug)}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
-    priority: 0.7
+    priority: team.searchFocus.length ? 0.74 : 0.7
+  }));
+
+  const worldCupSquadEntries = getWorldCupTeamEntries().filter((team) => team.players?.length).map((team) => ({
+    url: `${siteUrl}${getTeamPath(team.slug)}/squad`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.72
   }));
 
   const hostCountryEntries = hostCountries.map((country) => ({
@@ -113,5 +121,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: city.highlight ? 0.74 : 0.68
   }));
 
-  return [...staticEntries, ...topicEntries, ...hostCountryEntries, ...hostCityEntries, ...ticketTopicEntries, ...cityTicketEntries, ...worldCupTeamEntries, ...worldCupFixtureEntries, ...predictionEntries, ...reviewEntries];
+  return [...staticEntries, ...topicEntries, ...hostCountryEntries, ...hostCityEntries, ...ticketTopicEntries, ...cityTicketEntries, ...worldCupTeamEntries, ...worldCupSquadEntries, ...worldCupFixtureEntries, ...predictionEntries, ...reviewEntries];
 }

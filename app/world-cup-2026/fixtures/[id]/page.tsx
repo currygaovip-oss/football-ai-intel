@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/badge";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getReviews } from "@/lib/data";
-import { articleJsonLd, breadcrumbJsonLd, createMetadata, jsonLd, sportsEventJsonLd, truncateSeo, webPageJsonLd } from "@/lib/seo";
+import { articleJsonLd, breadcrumbJsonLd, createMetadata, faqJsonLd, jsonLd, sportsEventJsonLd, truncateSeo, webPageJsonLd } from "@/lib/seo";
 import { ticketBasePath } from "@/lib/world-cup-tickets";
 import {
   getDirection,
@@ -38,8 +38,8 @@ export async function generateMetadata({ params }: FixtureParams): Promise<Metad
     });
   }
 
-  const title = `${getMatchTitle(match)}比赛时间与赛前分析`;
-  const description = truncateSeo(`${match.home_team} vs ${match.away_team}世界杯2026比赛时间：${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}，赛事阶段：${getStageLabel(match)}。`);
+  const title = `${getMatchTitle(match)}比赛时间、赛程与赛前分析`;
+  const description = truncateSeo(`${match.home_team} vs ${match.away_team}世界杯2026比赛时间：${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}，赛事阶段：${getStageLabel(match)}，可查看赛程信息、赛前观点和参考方向。`);
 
   return createMetadata({
     title,
@@ -57,8 +57,8 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
   const prediction = getWorldCupPrediction(match);
   const review = prediction ? getReviews().find((item) => item.prediction?.id === prediction.id) : undefined;
   const path = getWorldCupFixturePath(match);
-  const title = `${getMatchTitle(match)}比赛时间与赛前分析`;
-  const description = truncateSeo(`${match.home_team} vs ${match.away_team}世界杯2026比赛时间：${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}，赛事阶段：${getStageLabel(match)}。`);
+  const title = `${getMatchTitle(match)}比赛时间、赛程与赛前分析`;
+  const description = truncateSeo(`${match.home_team} vs ${match.away_team}世界杯2026比赛时间：${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}，赛事阶段：${getStageLabel(match)}，可查看赛程信息、赛前观点和参考方向。`);
   const direction = getDirection(prediction);
 
   return (
@@ -91,6 +91,16 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
           )
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(faqJsonLd([
+            { question: `${match.home_team} vs ${match.away_team}什么时候比赛？`, answer: `本场比赛时间为北京时间${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}。` },
+            { question: `${match.home_team} vs ${match.away_team}属于哪个阶段？`, answer: `本场属于世界杯2026${getStageLabel(match)}。` },
+            { question: `${match.home_team} vs ${match.away_team}有赛前分析吗？`, answer: prediction ? "本场已有赛前观点，可查看完整分析和参考方向。" : "本场先提供比赛时间、赛事阶段和对阵信息；重点分析可在今日情报查看。" }
+          ]))
+        }}
+      />
       {prediction ? (
         <script
           type="application/ld+json"
@@ -115,7 +125,7 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
         </div>
         <h1 className="text-3xl font-semibold leading-tight text-white sm:text-5xl">{match.home_team} vs {match.away_team}</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64">
-          世界杯2026{getStageLabel(match)}比赛页，整理比赛时间、对阵信息、赛前观点入口和赛后复盘入口。
+          世界杯2026{getStageLabel(match)}赛程信息，包含开球时间、对阵双方和比赛阶段。重点场次提供参考方向与完整分析。
         </p>
       </section>
 
@@ -135,35 +145,44 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
         </section>
       ) : (
         <section className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
-          <h2 className="text-lg font-semibold text-white">赛前分析入口</h2>
+          <h2 className="text-lg font-semibold text-white">赛前分析</h2>
           <p className="mt-2 text-sm leading-7 text-white/62">
-            本场比赛的赛前观点尚未发布。比赛临近时，可在今日情报页查看已更新的重点比赛分析。
+            本场提供赛程与对阵信息。重点分析可在今日情报查看。
           </p>
           <Link href="/today" className="mt-4 inline-flex rounded-md border border-white/15 px-4 py-2 text-sm text-white/78 hover:border-turf/30 hover:text-turf">
-            查看今日赛前观点
+            查看今日情报
           </Link>
         </section>
       )}
 
       <section className="grid gap-4 lg:grid-cols-3">
         <ContentCard title="比赛看点">
-          先确认比赛时间、阶段和对阵，再结合球队状态、赛程强度、阵容消息和数据变化阅读赛前观点。
+          先看开球时间、赛事阶段和对阵双方，再结合球队状态、赛程强度和阵容消息判断本场关注点。
         </ContentCard>
         <ContentCard title="赛前阅读">
-          已发布观点会标注参考方向，并在详情页展开完整分析，方便赛前快速判断本场比赛的重点变量。
+          重点场次会给出参考方向，并展开球队状态、历史交锋、赛程强度和数据变化。
         </ContentCard>
         <ContentCard title="赛后回看">
-          比赛结束后，如已完成复盘，会记录原参考方向、比赛结果和主要偏差，方便长期回看。
+          比赛结束并完成复盘后，记录原参考方向、实际赛果和主要偏差，便于回看判断质量。
         </ContentCard>
         <ContentCard title="门票与观赛">
-          如计划现场观赛，建议先核对官方门票入口、举办城市、球场信息和入场要求，再结合赛程确认比赛安排。
+          如计划现场观赛，建议先核对官方票务链接、举办城市、球场信息和入场要求，再结合赛程确认比赛安排。
         </ContentCard>
+      </section>
+
+      <section className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
+        <h2 className="text-xl font-semibold text-white">相关搜索</h2>
+        <div className="mt-4 flex flex-wrap gap-2 text-sm">
+          <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-white/58">{match.home_team}vs{match.away_team}比赛时间</span>
+          <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-white/58">{match.home_team}vs{match.away_team}赛前分析</span>
+          <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-white/58">{getStageLabel(match)}赛程</span>
+        </div>
       </section>
 
       {review ? (
         <section className="rounded-lg border border-gold/25 bg-gold/10 p-5">
           <h2 className="text-lg font-semibold text-white">赛后复盘</h2>
-          <p className="mt-2 text-sm leading-7 text-white/62">本场已有赛后复盘记录，可回看原参考方向与实际赛果差异。</p>
+          <p className="mt-2 text-sm leading-7 text-white/62">这场比赛已有赛后复盘记录，可回看原参考方向与实际赛果差异。</p>
           <Link href={`/reviews/${review.review.id}`} className="mt-4 inline-flex rounded-md border border-gold/35 px-4 py-2 text-sm text-gold hover:bg-gold/10">
             查看赛后复盘
           </Link>
