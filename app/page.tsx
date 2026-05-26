@@ -7,12 +7,12 @@ import { SectionHeading } from "@/components/section-heading";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { SocialCta } from "@/components/social-cta";
 import { getHomeData, type AiModel, type Prediction } from "@/lib/data";
-import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd, websiteJsonLd } from "@/lib/seo";
+import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, siteNavigationJsonLd, webPageJsonLd, websiteJsonLd } from "@/lib/seo";
 
-const homeDescription = "绿茵智报提供今日足球赛程、世界杯赛程、比赛时间、赛前分析、参考方向和赛后复盘，面向中文球迷追踪重点赛事。";
+const homeDescription = "绿茵智报官网提供今日足球赛程、世界杯赛程、比赛时间、赛前分析、参考方向和赛后复盘，面向中文球迷追踪重点赛事。";
 
 export const metadata: Metadata = createMetadata({
-  title: "今日足球赛程、赛前分析与赛后复盘",
+  title: "绿茵智报官网：今日足球赛程、赛前分析与赛后复盘",
   description: homeDescription,
   path: "/"
 });
@@ -36,7 +36,8 @@ export default function HomePage() {
   return (
     <div className="space-y-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(websiteJsonLd()) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(webPageJsonLd({ name: "今日足球赛程、赛前分析与赛后复盘", description: homeDescription, path: "/" })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(siteNavigationJsonLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(webPageJsonLd({ name: "绿茵智报官网", description: homeDescription, path: "/" })) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -59,7 +60,7 @@ export default function HomePage() {
             faqJsonLd([
               {
                 question: "绿茵智报主要提供什么足球内容？",
-                answer: "绿茵智报提供今日足球赛程、世界杯赛程、赛前分析、参考方向和赛后复盘，面向中文球迷追踪重点赛事。"
+                answer: "绿茵智报官网提供今日足球赛程、世界杯赛程、赛前分析、参考方向和赛后复盘，面向中文球迷追踪重点赛事。"
               },
               {
                 question: "赛前分析怎么看？",

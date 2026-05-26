@@ -9,7 +9,7 @@ import { defaultOgImage, seoKeywords, siteDescription, siteName, siteUrl } from 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "绿茵智报 | 2026世界杯赛程、今日足球赛程与赛前分析",
+    default: "绿茵智报官网 | 2026世界杯赛程、今日足球赛程与赛前分析",
     template: "%s | 绿茵智报"
   },
   description: siteDescription,
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     apple: defaultOgImage
   },
   openGraph: {
-    title: "绿茵智报 | 2026世界杯赛程、今日足球赛程与赛前分析",
+    title: "绿茵智报官网 | 2026世界杯赛程、今日足球赛程与赛前分析",
     description: siteDescription,
     url: siteUrl,
     siteName,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "绿茵智报 | 2026世界杯赛程、今日足球赛程与赛前分析",
+    title: "绿茵智报官网 | 2026世界杯赛程、今日足球赛程与赛前分析",
     description: siteDescription,
     images: [defaultOgImage]
   },

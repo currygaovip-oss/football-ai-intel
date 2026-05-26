@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 
 export const siteUrl = "https://lyzbvip.vip";
 export const siteName = "绿茵智报";
-export const siteDescription = "绿茵智报提供2026世界杯赛程、美加墨世界杯举办城市、今日足球赛程、赛前分析、参考方向和赛后复盘，面向中文球迷持续记录重点赛事观点。";
+export const siteDescription = "绿茵智报官网提供2026世界杯赛程、美加墨世界杯举办城市、今日足球赛程、赛前分析、参考方向和赛后复盘，面向中文球迷持续记录重点赛事观点。";
 export const defaultOgImage = "/brand/football-ai-logo-universal.png?v=3";
+export const telegramUrl = "https://t.me/vipworldcup888";
+export const xUrl = "https://x.com/worldcupvip";
 
 export const seoKeywords = [
   "绿茵智报",
@@ -174,7 +176,9 @@ export function websiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${siteUrl}/#website`,
     name: siteName,
+    alternateName: ["绿茵智报官网", "lyzbvip", "Football AI Intelligence"],
     url: siteUrl,
     description: siteDescription,
     inLanguage: "zh-CN",
@@ -191,6 +195,7 @@ export function webPageJsonLd({ name, description, path }: { name: string; descr
     url: absoluteUrl(path),
     isPartOf: {
       "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
       name: siteName,
       url: siteUrl
     },
@@ -267,9 +272,33 @@ export function sportsEventJsonLd({
 export function organizationJsonLd() {
   return {
     "@type": "Organization",
+    "@id": `${siteUrl}/#organization`,
     name: siteName,
+    alternateName: ["绿茵智报官网", "lyzbvip"],
     url: siteUrl,
-    logo: absoluteUrl("/brand/football-ai-logo-universal.png")
+    logo: absoluteUrl("/brand/football-ai-logo-universal.png"),
+    sameAs: [xUrl, telegramUrl],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "community",
+      url: telegramUrl,
+      availableLanguage: ["zh-CN"]
+    }
+  };
+}
+
+export function siteNavigationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "绿茵智报官网导航",
+    itemListElement: [
+      { "@type": "SiteNavigationElement", position: 1, name: "首页", url: siteUrl },
+      { "@type": "SiteNavigationElement", position: 2, name: "今日情报", url: absoluteUrl("/today") },
+      { "@type": "SiteNavigationElement", position: 3, name: "世界杯", url: absoluteUrl("/world-cup-2026") },
+      { "@type": "SiteNavigationElement", position: 4, name: "赛程", url: absoluteUrl("/schedule") },
+      { "@type": "SiteNavigationElement", position: 5, name: "赛后复盘", url: absoluteUrl("/reviews") }
+    ]
   };
 }
 
