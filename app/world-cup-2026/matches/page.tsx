@@ -5,7 +5,7 @@ import { getAllPredictions } from "@/lib/data";
 import { createMetadata, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 import { getWorldCupMatches, getWorldCupPrediction, worldCupBasePath } from "@/lib/world-cup";
 
-const description = "世界杯2026全部比赛列表，覆盖小组赛、淘汰赛、比赛时间、对阵信息和赛前观点。";
+const description = "世界杯2026全部比赛，覆盖小组赛、淘汰赛、比赛时间、对阵双方和赛前观点。";
 
 export const metadata: Metadata = createMetadata({
   title: "世界杯2026全部比赛：赛程、对阵与比赛时间",
@@ -28,9 +28,9 @@ export default function WorldCupMatchesPage() {
       />
 
       <section className="border-b border-white/10 pb-5">
-        <div className="text-xs font-semibold uppercase tracking-[0.24em] text-turf">All Matches</div>
+        <div className="text-xs font-semibold tracking-[0.18em] text-turf">全部比赛</div>
         <h1 className="mt-2 text-3xl font-semibold text-white">世界杯2026全部比赛</h1>
-        <p className="mt-3 max-w-3xl text-sm leading-7 text-white/62">按赛程顺序看全部比赛、对阵和开球时间。重点场次提供参考方向。</p>
+        <p className="mt-3 max-w-3xl text-sm leading-7 text-white/62">按比赛时间浏览全部对阵，有赛前观点的场次会直接标出参考方向。</p>
       </section>
 
       <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">

@@ -32,7 +32,7 @@ export default function WorldCupPlayersPage() {
 
       <section className="rounded-lg border border-turf/20 bg-turf/[0.055] p-5 sm:p-7">
         <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-turf">
-          <UsersRound size={15} /> Players
+          <UsersRound size={15} /> 重点球员
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">2026世界杯重点球员</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
@@ -45,8 +45,14 @@ export default function WorldCupPlayersPage() {
           <article key={player.slug} className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.04] transition hover:border-turf/35">
             {player.photoUrl ? (
               <Link href={getPlayerPath(player.slug)} className="block">
-                <div className="relative aspect-[4/3] overflow-hidden bg-turf/10">
-                  <img src={player.photoUrl} alt={`${player.name}世界杯2026看点`} className="h-full w-full object-cover transition duration-300 hover:scale-[1.03]" loading="lazy" />
+                <div className="relative aspect-[3/4] overflow-hidden bg-turf/10">
+                  <img
+                    src={player.photoUrl}
+                    alt={`${player.name}世界杯2026看点`}
+                    className="h-full w-full object-cover transition duration-300 hover:scale-[1.03]"
+                    style={{ objectPosition: player.photoPosition ?? "center 18%" }}
+                    loading="lazy"
+                  />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-4 pb-3 pt-10">
                     <span className="rounded-full border border-turf/30 bg-black/35 px-2.5 py-1 text-xs text-turf">{player.teamName}</span>
                   </div>
@@ -76,7 +82,7 @@ export default function WorldCupPlayersPage() {
 
       <section className="rounded-lg border border-white/10 bg-black/20 p-5">
         <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-turf">
-          <ShieldCheck size={14} /> Note
+          <ShieldCheck size={14} /> 名单说明
         </div>
         <h2 className="mt-2 text-xl font-semibold text-white">名单与出场说明</h2>
         <p className="mt-3 text-sm leading-7 text-white/58">

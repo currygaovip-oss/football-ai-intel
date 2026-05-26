@@ -4,6 +4,7 @@ import { Clock, Target } from "lucide-react";
 import { Badge } from "@/components/badge";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getTodayPredictions } from "@/lib/data";
+import { extractPredictionDirection, getPredictionDisplayMeta } from "@/lib/prediction-display";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 
 const description = "足球赛前分析、今日比赛观点、参考方向和完整分析，覆盖世界杯、五大联赛、杯赛和焦点赛事。";
@@ -37,27 +38,28 @@ export default function PredictionsPage() {
       />
 
       <section className="rounded-lg border border-turf/20 bg-turf/[0.055] p-5 sm:p-7">
-        <div className="text-xs font-semibold uppercase tracking-[0.24em] text-turf">Predictions</div>
+        <div className="text-xs font-semibold tracking-[0.18em] text-turf">赛前分析</div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">足球赛前分析</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
-          今日比赛观点提供比赛时间、参考方向和完整分析。
+          汇总近期赛前观点，重点呈现比赛时间、参考方向和影响判断的主要变量。
         </p>
       </section>
 
       <section className="grid gap-3">
         {predictions.map(({ prediction, model }) => {
-          const direction = prediction.recommendation.replace(/^模型倾向：/, "").replace(/^参考方向：/, "");
+          const direction = extractPredictionDirection(prediction.recommendation);
+          const { competitionLabel, timeLabel } = getPredictionDisplayMeta(prediction);
           return (
             <Link key={prediction.id} href={`/predictions/${prediction.id}`} className="rounded-lg border border-white/10 bg-white/[0.04] p-4 transition hover:border-turf/35">
               <div className="grid gap-3 lg:grid-cols-[1fr_0.9fr_auto] lg:items-center">
                 <div>
                   <div className="mb-2 flex flex-wrap gap-2">
                     <Badge tone={prediction.visibility === "vip" ? "gold" : "green"}>{prediction.visibility === "vip" ? "VIP" : "免费"}</Badge>
-                    <Badge>{prediction.competition}</Badge>
+                    <Badge>{competitionLabel}</Badge>
                   </div>
                   <h2 className="text-xl font-semibold text-white">{prediction.matchup}</h2>
                   <p className="mt-2 flex flex-wrap gap-3 text-xs text-white/48">
-                    <span className="inline-flex items-center gap-1.5"><Clock size={13} />{prediction.kickoff_time_text}</span>
+                    {timeLabel ? <span className="inline-flex items-center gap-1.5"><Clock size={13} />{timeLabel}</span> : null}
                     {model ? <span>{model.name}</span> : null}
                   </p>
                 </div>

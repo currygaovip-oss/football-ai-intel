@@ -5,7 +5,7 @@ import { getAllPredictions } from "@/lib/data";
 import { createMetadata, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 import { getWorldCupGroups, getWorldCupPrediction, worldCupBasePath } from "@/lib/world-cup";
 
-const pageDescription = "世界杯2026小组赛赛程，A 组到 L 组比赛时间、对阵信息和赛前观点。";
+const pageDescription = "世界杯2026小组赛赛程，A 组到 L 组比赛时间、对阵双方和赛前观点。";
 
 export const metadata: Metadata = createMetadata({
   title: "世界杯2026小组赛赛程：A组到L组比赛时间",
@@ -38,10 +38,10 @@ export default function WorldCupGroupsPage() {
       />
 
       <section className="border-b border-white/10 pb-5">
-        <div className="text-xs font-semibold uppercase tracking-[0.24em] text-turf">Group Stage</div>
+        <div className="text-xs font-semibold tracking-[0.18em] text-turf">小组赛</div>
         <h1 className="mt-2 text-3xl font-semibold text-white">世界杯2026小组赛赛程</h1>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-white/62">
-          按小组看世界杯2026比赛时间和对阵。重点比赛提供参考方向和赛前分析。
+          按小组查看比赛时间和对阵关系，有赛前观点的场次会标出参考方向与分析正文。
         </p>
       </section>
 

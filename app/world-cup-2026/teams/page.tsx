@@ -26,10 +26,10 @@ export default function WorldCupTeamsPage() {
       />
 
       <section className="border-b border-white/10 pb-5">
-        <div className="text-xs font-semibold uppercase tracking-[0.24em] text-turf">Teams</div>
+        <div className="text-xs font-semibold tracking-[0.18em] text-turf">球队</div>
         <h1 className="mt-2 text-3xl font-semibold text-white">2026世界杯球队赛程</h1>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-white/62">
-          按球队看世界杯比赛时间、对阵和赛前观点。热门球队包含赛程、阵容名单和重点球员。
+          按球队查看世界杯比赛时间、对手、阵容名单和重点球员，赛前观点会直接关联到具体比赛。
         </p>
       </section>
 

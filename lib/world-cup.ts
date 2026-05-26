@@ -41,6 +41,7 @@ export type WorldCupPlayerFocus = {
   position: string;
   note: string;
   photoUrl?: string;
+  photoPosition?: string;
   photoCredit?: string;
   photoSourceUrl?: string;
 };
@@ -102,8 +103,8 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
     slug: "argentina",
     name: "阿根廷",
     region: "南美",
-    summary: "阿根廷世界杯赛程、开球时间、对阵和赛前观点。",
-    profile: "阿根廷自带高热度，赛程、核心球员状态和淘汰赛路径都会影响赛前判断。",
+    summary: "阿根廷是本届世界杯中文球迷关注度最高的球队之一，赛前重点看小组赛路径、核心球员状态和淘汰赛位置。",
+    profile: "阿根廷的比赛热度长期较高，赛前判断需要结合核心球员状态、前场效率和小组赛出线形势。",
     style: "球队通常以技术能力、前场创造力和关键球员个人能力见长，赛前重点看阵容轮换与前场效率。",
     history: "阿根廷是世界杯传统强队，曾多次进入世界杯决赛阶段，也是中文球迷长期关注的热门球队。",
     squadStatus: "最终名单以阿根廷队官方公布为准。赛前重点看核心球员状态、首发结构和前场分工。",
@@ -114,6 +115,7 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
         position: "前场",
         note: "阿根廷关注度最高的名字，重点看出场时间、活动区域和前场分工。",
         photoUrl: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Lionel-Messi-Argentina-2022-FIFA-World-Cup.jpg",
+        photoPosition: "center 18%",
         photoCredit: "Hossein Zohrevand / Wikimedia Commons",
         photoSourceUrl: "https://commons.wikimedia.org/wiki/File:Lionel-Messi-Argentina-2022-FIFA-World-Cup.jpg"
       },
@@ -127,8 +129,8 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
     slug: "brazil",
     name: "巴西",
     region: "南美",
-    summary: "巴西世界杯赛程、比赛时间、对阵和赛前观点。",
-    profile: "巴西的关注点集中在前场球员、阵容变化和淘汰赛前景。",
+    summary: "巴西队关注点集中在前场组合、边路冲击和淘汰赛前景，赛前阅读重点看首发结构与比赛节奏。",
+    profile: "巴西的比赛通常自带进攻期待，赛前判断需要同时观察阵容完整度、边路效率和防守保护。",
     style: "边路推进、个人能力和转换效率决定巴西的比赛上限，伤停与首发结构是赛前重点。",
     history: "巴西是世界杯历史上最具代表性的球队之一，每届大赛都会吸引大量中文球迷关注。",
     squadStatus: "最终名单以巴西队官方公布为准。赛前重点看边路人选、前场组合和中场保护。",
@@ -138,9 +140,10 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
         name: "维尼修斯",
         position: "前锋",
         note: "边路突破和反击威胁突出，是巴西前场最重要的变量之一。",
-        photoUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d8/Brazil_vs_Serbia_WC2022_Vinicius_Jr_and_Zivkovic.jpg",
+        photoUrl: "https://upload.wikimedia.org/wikipedia/commons/7/74/Vinicius_Junior_2018_1_%28cropped%29.jpg",
+        photoPosition: "center 18%",
         photoCredit: "Wikimedia Commons",
-        photoSourceUrl: "https://commons.wikimedia.org/wiki/File:Brazil_vs_Serbia_WC2022_Vinicius_Jr_and_Zivkovic.jpg"
+        photoSourceUrl: "https://commons.wikimedia.org/wiki/File:Vinicius_Junior_2018_1_(cropped).jpg"
       },
       { slug: "rodrygo", name: "罗德里戈", position: "前锋", note: "可胜任多个前场位置，赛前重点关注首发角色和进攻分工。" },
       { slug: "endrick", name: "恩德里克", position: "前锋", note: "年轻前锋热度高，大赛角色和出场时间是重点。" },
@@ -152,8 +155,8 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
     slug: "france",
     name: "法国",
     region: "欧洲",
-    summary: "法国世界杯赛程、比赛时间、阵容变化和赛前观点。",
-    profile: "法国阵容深度突出，核心球员状态、中后场组合和淘汰赛路径都是赛前重点。",
+    summary: "法国队阵容深度突出，赛前重点看核心球员状态、中后场组合和淘汰赛路径。",
+    profile: "法国的优势来自速度、对抗和阵容厚度，赛前判断更依赖首发结构、伤停变化和前场效率。",
     style: "速度、身体对抗和前场冲击是法国的主要优势，关键在于中后场组合与进攻效率。",
     history: "法国队近几届世界杯表现稳定，是中文球迷持续关注的欧洲热门球队。",
     squadStatus: "最终名单以法国队官方公布为准。赛前重点看中后场组合、前场速度和核心球员出场状态。",
@@ -164,6 +167,7 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
         position: "前锋",
         note: "法国前场核心，速度、终结和出场状态会直接改变比赛走势。",
         photoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Kylian_Mbappe_2017.jpg/960px-Kylian_Mbappe_2017.jpg",
+        photoPosition: "center 18%",
         photoCredit: "Biser Todorov / Wikimedia Commons",
         photoSourceUrl: "https://commons.wikimedia.org/wiki/File:Kylian_Mbappe_2017.jpg"
       },
@@ -177,8 +181,8 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
     slug: "england",
     name: "英格兰",
     region: "欧洲",
-    summary: "英格兰世界杯赛程、比赛时间、关键对阵和赛前分析。",
-    profile: "英格兰队在中文足球社区有长期热度，赛程、阵容深度、核心球员状态和淘汰赛表现都是关注重点。",
+    summary: "英格兰长期保持较高关注度，赛前重点看前场组合、中场控制和关键球员状态。",
+    profile: "英格兰阵容厚度较高，但大赛表现常受首发取舍和比赛节奏影响，赛前需要重点观察中前场组合。",
     style: "球队阵容厚度较高，赛前重点看前场组合、中场控制和关键球员出场安排。",
     history: "英格兰队是世界杯传统热门球队，赛前话题和媒体关注度一直较高。",
     squadStatus: "最终名单以英格兰队官方公布为准。赛前重点看中前场组合、首发取舍和边路输出。",
@@ -190,6 +194,7 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
         position: "中场",
         note: "攻守覆盖和关键球能力突出，是英格兰中前场的核心看点。",
         photoUrl: "https://upload.wikimedia.org/wikipedia/commons/8/82/2022_FIFA_World_Cup_-_Bellingham_%28cropped%29.jpg",
+        photoPosition: "center 18%",
         photoCredit: "Wikimedia Commons",
         photoSourceUrl: "https://commons.wikimedia.org/wiki/File:2022_FIFA_World_Cup_-_Bellingham_(cropped).jpg"
       },
@@ -202,8 +207,8 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
     slug: "portugal",
     name: "葡萄牙",
     region: "欧洲",
-    summary: "葡萄牙世界杯赛程、小组赛、淘汰赛和重点比赛赛前观点。",
-    profile: "葡萄牙队拥有高关注球星和较强阵容深度，赛程、阵容名单、C罗动态和赛前分析都具备持续热度。",
+    summary: "葡萄牙拥有高关注球星和较强阵容深度，赛前重点看前场效率、中场创造力和核心球员角色。",
+    profile: "葡萄牙的比赛关注度来自球星、阵容深度和进攻选择，赛前判断需要结合首发结构与比赛阶段。",
     style: "葡萄牙的赛前重点是前场效率、中场创造力、边路推进和首发结构。",
     history: "葡萄牙在近年国际大赛中长期保持较高关注度，也是世界杯搜索热门球队之一。",
     squadStatus: "最终名单以葡萄牙队官方公布为准。赛前重点看前场效率、中场创造力和核心球员角色。",
@@ -214,6 +219,7 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
         position: "前锋",
         note: "葡萄牙关注度最高的名字，出场角色、身体状态和终结效率都是看点。",
         photoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Cristiano_Ronaldo.jpg/960px-Cristiano_Ronaldo.jpg",
+        photoPosition: "center 16%",
         photoCredit: "Wikimedia Commons",
         photoSourceUrl: "https://commons.wikimedia.org/wiki/File:Cristiano_Ronaldo.jpg"
       },
@@ -227,8 +233,8 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
     slug: "germany",
     name: "德国",
     region: "欧洲",
-    summary: "德国队是世界杯传统强队，重点覆盖比赛时间、对阵信息和赛前分析。",
-    profile: "德国队是世界杯传统热门球队，赛程、阵容更新、年轻球员成长和淘汰赛路径都是赛前重点。",
+    summary: "德国是世界杯传统热门球队，赛前重点看中场控制、阵容更新和后防稳定性。",
+    profile: "德国的比赛判断离不开中场压迫、年轻球员角色和防线稳定性，淘汰赛路径同样值得关注。",
     style: "德国的赛前重点是中场控制、压迫效率、后防稳定性和前场终结。",
     history: "德国队拥有深厚世界杯历史，赛程、阵容和核心球员长期受到中文球迷关注。",
     squadStatus: "最终名单以德国队官方公布为准。赛前重点看中场控制、压迫强度和防线稳定性。",
@@ -255,6 +261,8 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
         name: "亚马尔",
         position: "边锋",
         note: "年轻球员热度高，边路创造力和出场角色是西班牙的重要看点。",
+        photoUrl: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Lamine_Yamal%2C_S%C3%A1nchez_se_reuni%C3%B3_con_los_futbolistas_de_la_selecci%C3%B3n_espa%C3%B1ola_tras_ganar_la_Eurocopa_2024_%283%29_%28cropped%29_%28cropped%29.jpg",
+        photoPosition: "center 18%",
         photoCredit: "La Moncloa / Wikimedia Commons",
         photoSourceUrl: "https://commons.wikimedia.org/wiki/File:Lamine_Yamal,_S%C3%A1nchez_se_reuni%C3%B3_con_los_futbolistas_de_la_selecci%C3%B3n_espa%C3%B1ola_tras_ganar_la_Eurocopa_2024_(3)_(cropped)_(cropped).jpg"
       },
@@ -302,8 +310,8 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
     slug: "canada",
     name: "加拿大",
     region: "北美",
-    summary: "加拿大世界杯赛程、多伦多赛区、温哥华赛区和重点比赛赛前分析。",
-    profile: "加拿大队是东道主之一，球队赛程、多伦多和温哥华比赛安排以及核心球员状态都是赛前重点。",
+    summary: "加拿大以东道主身份参赛，赛前重点看主场比赛节奏、边路速度和核心球员状态。",
+    profile: "加拿大的关注点集中在多伦多、温哥华赛区安排，以及球队能否把主场氛围转化为比赛强度。",
     style: "加拿大的赛前重点是边路速度、前场冲击和主场比赛节奏。",
     history: "加拿大队在2026世界杯拥有东道主身份，赛程和举办城市会持续升温。",
     squadStatus: "最终名单以加拿大队官方公布为准。赛前重点看边路速度、前场冲击和主场比赛节奏。",
@@ -319,8 +327,8 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
     slug: "japan",
     name: "日本",
     region: "亚洲",
-    summary: "日本队在亚洲足球范围内关注度高，重点覆盖比赛时间、对阵信息和赛前分析。",
-    profile: "日本队是亚洲范围内关注度最高的球队之一，赛程、阵容、旅欧球员和赛前分析都具备持续热度。",
+    summary: "日本队整体性强，赛前重点看旅欧球员状态、首发结构和体能节奏。",
+    profile: "日本的比赛关注点在整体压迫、快速传导和边路配合，首发结构与体能节奏会影响比赛走势。",
     style: "日本通常重视整体压迫、快速传导和边路配合，首发结构与体能节奏是赛前重点。",
     history: "日本队近几届世界杯保持稳定竞争力，赛程和核心球员长期受到中文球迷关注。",
     squadStatus: "最终名单以日本队官方公布为准。赛前重点看首发结构、体能节奏和边路配合。",
@@ -336,8 +344,8 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
     slug: "korea",
     name: "韩国",
     region: "亚洲",
-    summary: "韩国世界杯赛程、比赛时间和重点比赛赛前观点。",
-    profile: "韩国队在亚洲足球范围内关注度稳定，赛程、孙兴慜状态、阵容名单和赛前分析都是重点。",
+    summary: "韩国队关注度稳定，赛前重点看孙兴慜状态、反击效率和防线稳定性。",
+    profile: "韩国的比赛重点在前场速度、反击质量和中后场稳定性，核心球员状态会直接影响赛前判断。",
     style: "韩国的赛前重点是前场速度、反击效率、中后场稳定性和核心球员状态。",
     history: "韩国队长期参加世界杯正赛，赛程和核心球员长期受到中文球迷关注。",
     squadStatus: "最终名单以韩国队官方公布为准。赛前重点看反击效率、防线稳定性和核心球员状态。",
@@ -347,6 +355,8 @@ export const featuredWorldCupTeams: WorldCupTeamEntry[] = [
         name: "孙兴慜",
         position: "前锋",
         note: "韩国前场核心，状态、出场角色和反击威胁会直接影响比赛判断。",
+        photoUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Son_Heung-min_-_2022_%2852552243725%29_%28cropped%29.jpg",
+        photoPosition: "center 16%",
         photoCredit: "Wikimedia Commons",
         photoSourceUrl: "https://commons.wikimedia.org/wiki/File:Son_Heung-min_-_2022_(52552243725)_(cropped).jpg"
       },
@@ -430,7 +440,7 @@ export function getWorldCupTeamEntries() {
       slug: encodeURIComponent(team),
       name: team,
       region: "世界杯参赛球队",
-      summary: `${team}世界杯2026赛程、比赛时间、对阵信息和赛前观点。`,
+      summary: `${team}世界杯2026比赛时间、小组赛对手和赛前看点，重点关注阵容变化、比赛节奏和关键球员状态。`,
       searchFocus: [`${team}世界杯赛程`, `${team}比赛时间`, `${team}赛前分析`]
     }));
 

@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { SocialCta } from "@/components/social-cta";
 import { getHomeData, type AiModel, type Prediction } from "@/lib/data";
+import { extractPredictionDirection, getPredictionDisplayMeta } from "@/lib/prediction-display";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, siteNavigationJsonLd, webPageJsonLd, websiteJsonLd } from "@/lib/seo";
 
 const homeDescription = "绿茵智报官网提供今日足球赛程、世界杯赛程、比赛时间、赛前分析、参考方向和赛后复盘，面向中文球迷追踪重点赛事。";
@@ -18,11 +19,11 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default function HomePage() {
-  const { aiModels, matches, modelCount, predictions, reviews } = getHomeData();
+  const { aiModels, matches, modelCount, predictions, reviews, totals } = getHomeData();
   const stats = [
-    { label: "赛前观点", value: predictions.length, Icon: Activity },
-    { label: "数据信号", value: 6, Icon: Database },
-    { label: "世界杯赛程", value: matches.length, Icon: CalendarDays },
+    { label: "观点记录", value: totals.predictions, Icon: Activity },
+    { label: "复盘记录", value: totals.reviews, Icon: Database },
+    { label: "世界杯赛程", value: totals.matches, Icon: CalendarDays },
     { label: "分析席位", value: modelCount, Icon: BarChart3 }
   ];
   const principles = [
@@ -78,12 +79,12 @@ export default function HomePage() {
         <div className="rounded-lg border border-turf/20 bg-turf/[0.055] p-4 sm:p-5">
           <div className="flex flex-col gap-3 border-b border-white/10 pb-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <div className="text-xs font-semibold uppercase tracking-[0.24em] text-turf">Pre-match Notes</div>
+              <div className="text-xs font-semibold tracking-[0.18em] text-turf">赛前观点</div>
               <h1 className="mt-2 text-2xl font-semibold leading-tight text-white sm:text-3xl">
-                今日已发布赛前观点
+                最新赛前参考方向
               </h1>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-white/58">
-                今日重点比赛提供对阵、时间、参考方向和完整分析，更多赛前动态同步到 Telegram 群。
+                每场比赛直接呈现开球时间、参考方向和完整分析；Telegram 群同步每日情报与复盘。
               </p>
             </div>
             <Link
@@ -117,7 +118,7 @@ export default function HomePage() {
             {stats.map(({ label, value, Icon }) => (
               <Link
                 key={label}
-                href={label === "世界杯赛程" ? "/world-cup-2026" : label === "赛前观点" ? "/today" : "/about"}
+                href={label === "世界杯赛程" ? "/world-cup-2026" : label === "观点记录" ? "/today" : label === "复盘记录" ? "/reviews" : "/about"}
                 className="rounded-lg border border-white/10 bg-white/[0.04] p-3 transition hover:border-turf/30"
                 data-analytics-event="click_home_stat"
                 data-analytics-area="home_stats"
@@ -132,7 +133,7 @@ export default function HomePage() {
           {latestReviews.length > 0 ? (
             <div className="rounded-lg border border-white/10 bg-black/20 p-4">
               <div className="flex items-center justify-between gap-3">
-                <h2 className="text-base font-semibold text-white">最新复盘</h2>
+                <h2 className="text-base font-semibold text-white">历史复盘</h2>
                 <Link href="/reviews" className="text-xs text-turf">查看全部</Link>
               </div>
               <div className="mt-3 grid gap-2">
@@ -160,7 +161,7 @@ export default function HomePage() {
 
       {predictions.length > 5 ? (
         <section>
-          <SectionHeading title="更多赛前分析" eyebrow="Pre-match Analysis" href="/today" />
+        <SectionHeading title="更多赛前分析" eyebrow="赛前分析" href="/today" />
           <div className="grid gap-3 md:grid-cols-2">
             {predictions.slice(5, 9).map(({ prediction, model }) => <HomeDirectionCard key={prediction.id} prediction={prediction} model={model} />)}
           </div>
@@ -168,7 +169,7 @@ export default function HomePage() {
       ) : null}
 
       <section>
-        <SectionHeading title="世界杯赛程与比赛时间" eyebrow="Matches" href="/world-cup-2026/schedule" />
+        <SectionHeading title="世界杯赛程与比赛时间" eyebrow="赛程" href="/world-cup-2026/schedule" />
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {matches.slice(0, 8).map((match) => (
             <div key={match.id} className="glass rounded-lg p-5">
@@ -180,7 +181,7 @@ export default function HomePage() {
           ))}
         </div>
         <div className="mt-4 rounded-lg border border-white/10 bg-black/20 p-4 text-sm leading-7 text-white/62">
-          赛程中心包含今日足球赛程、明日赛程、世界杯小组赛和淘汰赛安排；重点比赛提供参考方向与详细分析。
+          按比赛时间查看今日、明日和世界杯赛程；有赛前观点的场次会直接显示参考方向。
         </div>
         <div className="mt-3 flex flex-wrap gap-2 text-sm">
           <Link href="/football-schedule/today" className="rounded-md border border-white/15 px-3 py-2 text-white/68 hover:border-turf/30 hover:text-turf">今日足球赛程</Link>
@@ -190,7 +191,7 @@ export default function HomePage() {
       </section>
 
       <section>
-        <SectionHeading title="AI分析席位" eyebrow="Analyst Seats" href="/today" />
+        <SectionHeading title="AI分析席位" eyebrow="分析席位" href="/today" />
         <div className="mb-4 rounded-lg border border-white/10 bg-black/20 p-4 text-sm leading-7 text-white/62">
           <Sparkles className="mr-2 inline text-turf" size={16} />
           不同分析席位关注不同比赛变量：基本面、指数结构、进球趋势、阵容赛程和热度变化各自提供参考。
@@ -206,7 +207,8 @@ export default function HomePage() {
 }
 
 function HeroDirectionCard({ prediction, model }: { prediction: Prediction; model?: AiModel }) {
-  const direction = prediction.recommendation.replace(/^模型倾向：/, "").replace(/^参考方向：/, "");
+  const direction = extractPredictionDirection(prediction.recommendation);
+  const { competitionLabel, timeLabel } = getPredictionDisplayMeta(prediction);
 
   return (
     <Link
@@ -220,11 +222,11 @@ function HeroDirectionCard({ prediction, model }: { prediction: Prediction; mode
         <div>
           <div className="mb-1.5 flex flex-wrap items-center gap-2">
             <Badge tone={prediction.visibility === "vip" ? "gold" : "green"}>{prediction.visibility === "vip" ? "VIP" : "免费"}</Badge>
-            <Badge>{prediction.competition}</Badge>
+            <Badge>{competitionLabel}</Badge>
           </div>
           <h2 className="text-base font-semibold leading-snug text-white sm:text-lg">{prediction.matchup}</h2>
           <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs text-white/48">
-            <span className="inline-flex items-center gap-1.5"><Clock size={13} />{prediction.kickoff_time_text}</span>
+            {timeLabel ? <span className="inline-flex items-center gap-1.5"><Clock size={13} />{timeLabel}</span> : null}
             {model ? <span>{model.name}</span> : null}
           </div>
         </div>
@@ -245,7 +247,8 @@ function HeroDirectionCard({ prediction, model }: { prediction: Prediction; mode
 }
 
 function HomeDirectionCard({ prediction, model }: { prediction: Prediction; model?: AiModel }) {
-  const direction = prediction.recommendation.replace(/^模型倾向：/, "").replace(/^参考方向：/, "");
+  const direction = extractPredictionDirection(prediction.recommendation);
+  const { competitionLabel, timeLabel } = getPredictionDisplayMeta(prediction);
 
   return (
     <Link
@@ -259,11 +262,11 @@ function HomeDirectionCard({ prediction, model }: { prediction: Prediction; mode
         <div>
           <div className="mb-2 flex flex-wrap items-center gap-2">
             <Badge tone={prediction.visibility === "vip" ? "gold" : "green"}>{prediction.visibility === "vip" ? "VIP" : "免费"}</Badge>
-            <Badge>{prediction.competition}</Badge>
+            <Badge>{competitionLabel}</Badge>
           </div>
           <h3 className="text-lg font-semibold leading-snug text-white">{prediction.matchup}</h3>
           <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-white/52">
-            <span className="inline-flex items-center gap-1.5"><Clock size={14} />{prediction.kickoff_time_text}</span>
+            {timeLabel ? <span className="inline-flex items-center gap-1.5"><Clock size={14} />{timeLabel}</span> : null}
             {model ? <span>来源：{model.name}</span> : null}
           </div>
         </div>

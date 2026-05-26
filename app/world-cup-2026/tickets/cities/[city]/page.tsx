@@ -72,7 +72,7 @@ export default async function CityTicketPage({ params }: CityTicketParams) {
           <Ticket size={16} /> 购票前先核对
         </div>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
-          <CheckCard title="比赛时间" body="确认该城市对应比赛日期、开球时间和对阵信息。" />
+          <CheckCard title="比赛时间" body="核对该城市对应比赛日期、开球时间和对阵双方。" />
           <CheckCard title="官方门票链接" body="门票销售阶段、余票和价格以 FIFA 官方信息为准。" />
           <CheckCard title="城市安排" body="提前核对交通、住宿、球场位置和入场政策。" />
         </div>

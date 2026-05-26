@@ -24,7 +24,7 @@ export default function AboutPage() {
               },
               {
                 question: "绿茵智报覆盖哪些比赛？",
-                answer: "内容重点覆盖世界杯、五大联赛、中超、杯赛和当天焦点足球赛事。"
+                answer: "内容覆盖世界杯、五大联赛、中超、杯赛和当天焦点足球赛事。"
               },
               {
                 question: "绿茵智报的内容代表结果承诺吗？",
@@ -35,17 +35,17 @@ export default function AboutPage() {
         }}
       />
       <div className="glass rounded-lg p-6 sm:p-8">
-        <div className="text-sm font-semibold text-turf">About</div>
+        <div className="text-sm font-semibold text-turf">关于我们</div>
         <h1 className="mt-3 text-4xl font-semibold">关于绿茵智报</h1>
         <div className="mt-6 space-y-5 text-base leading-8 text-white/70">
           <p>
-            绿茵智报面向中文球迷，提供今日赛程、重点比赛、赛前分析和赛后复盘，让赛前信息更集中、更容易阅读。
+            绿茵智报面向中文球迷，整理今日赛程、重点比赛、赛前分析和赛后复盘，让赛前阅读更集中。
           </p>
           <p>
-            内容重点覆盖世界杯、五大联赛、杯赛和焦点赛事。每条赛前观点标注比赛时间、对阵双方和参考方向。
+            内容覆盖世界杯、五大联赛、杯赛和焦点赛事。每条赛前观点标注比赛时间、对阵双方和参考方向。
           </p>
           <p>
-            分析参考球队状态、历史交锋、阵容伤停、赛程密度、指数变化和进球趋势，并用更清晰的方式呈现赛前信息。
+            分析参考球队状态、历史交锋、阵容伤停、赛程密度、指数变化和进球趋势，帮助中文球迷更快抓住比赛变量。
           </p>
           <p>
             赛后复盘记录比赛结果、原参考方向和主要偏差。这样不只看到赛前观点，也能回看判断过程和实际赛果。

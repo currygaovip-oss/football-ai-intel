@@ -2,8 +2,11 @@ import Link from "next/link";
 import { BrainCircuit, Clock, Sparkles, Trophy } from "lucide-react";
 import { Badge } from "@/components/badge";
 import type { AiModel, Prediction } from "@/lib/data";
+import { getPredictionDisplayMeta } from "@/lib/prediction-display";
 
 export function PredictionCard({ prediction, model, compact = false }: { prediction: Prediction; model?: AiModel; compact?: boolean }) {
+  const { competitionLabel, timeLabel } = getPredictionDisplayMeta(prediction);
+
   if (compact) {
     return (
       <Link
@@ -15,7 +18,7 @@ export function PredictionCard({ prediction, model, compact = false }: { predict
       >
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <Badge tone={prediction.visibility === "vip" ? "gold" : "green"}>{prediction.visibility === "vip" ? "VIP" : "免费"}</Badge>
-          <Badge>{prediction.competition}</Badge>
+          <Badge>{competitionLabel}</Badge>
           <span className="ml-auto text-xs text-white/45">{prediction.published_at}</span>
         </div>
 
@@ -23,7 +26,7 @@ export function PredictionCard({ prediction, model, compact = false }: { predict
           <div className="min-w-0">
             <h3 className="text-lg font-semibold leading-snug text-white">{prediction.matchup}</h3>
             <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-white/62">
-              <span className="flex items-center gap-1.5"><Clock size={14} />{prediction.kickoff_time_text}</span>
+              {timeLabel ? <span className="flex items-center gap-1.5"><Clock size={14} />{timeLabel}</span> : null}
             </div>
           </div>
           {model ? (
@@ -56,7 +59,7 @@ export function PredictionCard({ prediction, model, compact = false }: { predict
     >
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <Badge tone={prediction.visibility === "vip" ? "gold" : "green"}>{prediction.visibility === "vip" ? "VIP" : "免费"}</Badge>
-        <Badge>{prediction.competition}</Badge>
+        <Badge>{competitionLabel}</Badge>
         <span className="ml-auto text-xs text-white/45">{prediction.published_at}</span>
       </div>
       {model ? (
@@ -75,7 +78,7 @@ export function PredictionCard({ prediction, model, compact = false }: { predict
       ) : null}
       <h3 className="mb-3 text-lg font-semibold leading-snug text-white">{prediction.title}</h3>
       <div className="grid gap-2 text-sm text-white/68 sm:grid-cols-2">
-        <span className="flex items-center gap-2"><Clock size={15} />{prediction.kickoff_time_text}</span>
+        {timeLabel ? <span className="flex items-center gap-2"><Clock size={15} />{timeLabel}</span> : null}
         <span className="flex items-center gap-2"><Trophy size={15} />{prediction.matchup}</span>
       </div>
       <p className="mt-4 flex items-start gap-2 rounded-md border border-turf/20 bg-turf/10 px-3 py-2 text-sm text-turf">

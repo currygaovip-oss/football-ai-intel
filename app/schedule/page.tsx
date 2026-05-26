@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { getAllPredictions, getSchedule } from "@/lib/data";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, sportsEventJsonLd, webPageJsonLd } from "@/lib/seo";
 
-const scheduleDescription = "今日足球赛程、明日赛程、世界杯2026赛程、小组赛和淘汰赛比赛时间；重点场次提供参考方向和详细分析。";
+const scheduleDescription = "今日足球赛程、明日赛程、世界杯2026赛程、小组赛和淘汰赛比赛时间；有赛前观点的比赛可查看参考方向和详细分析。";
 
 export const metadata: Metadata = createMetadata({
   title: "足球赛程中心：今日赛程、世界杯赛程与比赛时间",
@@ -104,8 +104,8 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
       <section className="border-b border-white/10 pb-4">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <div className="mb-1 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-turf">
-              <CalendarDays size={14} /> Schedule
+            <div className="mb-1 inline-flex items-center gap-2 text-xs font-semibold tracking-[0.24em] text-turf">
+              <CalendarDays size={14} /> 赛程中心
             </div>
             <h1 className="text-2xl font-semibold leading-tight text-white">足球赛程中心</h1>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-white/58">
@@ -152,7 +152,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
               <section key={dateLabel} className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <div className="text-xs uppercase tracking-[0.28em] text-turf">Match Day</div>
+                    <div className="text-xs tracking-[0.28em] text-turf">比赛日</div>
                     <h2 className="mt-1 text-xl font-semibold text-white">{dateLabel}</h2>
                   </div>
                   <div className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs text-white/55">
@@ -202,7 +202,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
           <div className="rounded-lg border border-turf/20 bg-turf/10 p-4">
             <h2 className="text-base font-semibold text-white">赛前观点</h2>
             <p className="mt-2 text-sm leading-6 text-white/62">
-              重点场次提供参考方向和完整分析；其他比赛展示开球时间和对阵信息。
+              有赛前观点的比赛会标出参考方向；其余比赛保留开球时间、赛事阶段和对阵，方便赛前筛选。
             </p>
             <Link
               href="/today"
@@ -221,19 +221,19 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
         <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
           <h2 className="text-lg font-semibold">今日足球赛程怎么用</h2>
           <p className="mt-2 text-sm leading-7 text-white/62">
-            赛程信息包含开球时间、赛事阶段和对阵双方；重点场次提供完整分析和参考方向。
+            按开球时间查看当天比赛，有赛前观点的场次可进入完整分析。
           </p>
         </div>
         <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
           <h2 className="text-lg font-semibold">世界杯赛程分类</h2>
           <p className="mt-2 text-sm leading-7 text-white/62">
-            支持按小组赛、淘汰赛和全部赛程查看对应比赛日、分组和开球时间。
+            小组赛、淘汰赛和完整赛程分开查看，方便快速定位比赛日。
           </p>
         </div>
         <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
           <h2 className="text-lg font-semibold">赛前分析</h2>
           <p className="mt-2 text-sm leading-7 text-white/62">
-            重点比赛包含对阵、比赛时间、参考方向、完整分析和赛后复盘。
+            赛前观点会给出参考方向，并在详情中解释球队状态、赛程强度和关键变量。
           </p>
         </div>
       </section>
@@ -289,7 +289,7 @@ function ScheduleMatchCard({
             查看赛前分析 <ChevronRight size={13} />
           </Link>
         ) : (
-          <div className="rounded-md border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-white/42">赛前更新</div>
+          <div className="rounded-md border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-white/42">关注临场信息</div>
         )}
       </div>
     </div>

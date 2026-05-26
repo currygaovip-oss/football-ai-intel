@@ -9,23 +9,23 @@ import { faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 const rangeCopy = {
   today: {
     title: "今日足球赛程",
-    eyebrow: "Today Football Schedule",
-    description: "今日足球赛程、比赛时间、对阵信息和赛前分析；重点场次提供参考方向。",
-    empty: "今日没有重点比赛，明日赛程和本周赛程可查看接下来的重点场次。",
+    eyebrow: "今日赛程",
+    description: "今日足球赛程、比赛时间、对阵双方和赛前分析；有赛前观点的比赛可查看参考方向。",
+    empty: "今日没有焦点比赛，可继续查看明日赛程和本周赛程。",
     primaryLink: "/football-schedule/tomorrow",
     primaryLabel: "明日赛程"
   },
   tomorrow: {
     title: "明日足球赛程",
-    eyebrow: "Tomorrow Football Schedule",
-    description: "明日足球赛程、比赛时间、对阵信息和赛前分析，重点比赛提前看。",
+    eyebrow: "明日赛程",
+    description: "明日足球赛程、比赛时间、对阵双方和赛前分析，焦点比赛提前看。",
     empty: "明日没有重点比赛，本周赛程可查看接下来的比赛安排。",
     primaryLink: "/football-schedule/week",
     primaryLabel: "本周赛程"
   },
   week: {
     title: "本周足球赛程",
-    eyebrow: "Weekly Football Schedule",
+    eyebrow: "本周赛程",
     description: "本周足球赛程、比赛时间、重点对阵和赛前分析。",
     empty: "本周没有重点比赛，可查看世界杯赛程和完整赛程。",
     primaryLink: "/schedule",
@@ -65,7 +65,7 @@ export function FootballSchedulePage({ range, path }: { range: ScheduleRange; pa
             faqJsonLd([
               {
                 question: `${copy.title}主要看什么？`,
-                answer: "赛程卡片包含比赛时间、赛事阶段、对阵双方、重点场次参考方向和赛前分析。"
+                answer: "赛程包含比赛时间、赛事阶段、对阵双方，以及赛前观点里的参考方向和分析正文。"
               },
               {
                 question: "没有比赛时怎么办？",
@@ -77,7 +77,7 @@ export function FootballSchedulePage({ range, path }: { range: ScheduleRange; pa
       />
 
       <section className="rounded-lg border border-turf/20 bg-turf/[0.055] p-5">
-        <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-turf">
+        <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.24em] text-turf">
           <CalendarDays size={15} /> {copy.eyebrow}
         </div>
         <div className="mt-3 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">

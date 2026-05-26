@@ -79,7 +79,7 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
         </div>
         <h1 className="text-3xl font-semibold leading-tight sm:text-5xl">{pageTitle}</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
-          {prediction.matchup}的比赛时间、赛事信息、赛前变量和参考方向如下。
+          {prediction.matchup}赛前观点包含参考方向、球队状态、赛程压力和数据变化，适合赛前集中阅读。
         </p>
 
         <section className="mt-6 rounded-lg border border-turf/25 bg-turf/10 p-5">
@@ -143,7 +143,7 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
         <section className="mt-6 rounded-lg border border-white/10 bg-white/5 p-5">
           <h2 className="text-lg font-semibold">数据来源与校验</h2>
           <p className="mt-2 text-sm leading-7 text-white/64">
-            分析参考球队状态、历史交锋、阵容伤停、赛程密度、指数变化和进球趋势。发布前会统一梳理表达，让赛前信息更容易阅读。
+            分析综合球队状态、历史交锋、阵容伤停、赛程密度、指数变化和进球趋势，用于判断本场比赛的主要变量。
           </p>
         </section>
         <section className="mt-6 rounded-lg border border-white/10 bg-white/5 p-5">

@@ -7,7 +7,7 @@ import { createMetadata, faqJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 import { getTicketTopicPath } from "@/lib/world-cup-tickets";
 import { getHostCityPath, getMatchDateTimeLabel, getOpeningMatch, getWorldCupPrediction, worldCupBasePath } from "@/lib/world-cup";
 
-const description = "2026世界杯揭幕战时间、举办城市、对阵信息和赛前观点。揭幕战将在墨西哥城举行。";
+const description = "2026世界杯揭幕战时间、举办城市、对阵双方和赛前观点。揭幕战将在墨西哥城举行。";
 
 export const metadata: Metadata = createMetadata({
   title: "2026世界杯揭幕战时间与举办城市",
@@ -33,8 +33,8 @@ export default function OpeningMatchPage() {
       />
 
       <section className="rounded-lg border border-turf/20 bg-turf/[0.055] p-5 sm:p-7">
-        <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-turf">
-          <Trophy size={15} /> Opening Match
+        <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-turf">
+          <Trophy size={15} /> 揭幕战
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">2026世界杯揭幕战</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">

@@ -43,7 +43,7 @@ export default function VipPage() {
         <SocialCta />
         <div className="glass rounded-lg p-6">
           <MessageCircle className="text-gold" />
-          <h2 className="mt-4 text-xl font-semibold">适合哪些用户？</h2>
+          <h2 className="mt-4 text-xl font-semibold">适合哪些人？</h2>
           <p className="mt-2 text-sm leading-7 text-white/62">
             面向喜欢研究赛程、球队状态、赛前变量和复盘记录的球迷。所有内容都以信息参考和交流讨论为主。
           </p>

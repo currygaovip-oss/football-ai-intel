@@ -53,8 +53,8 @@ export default async function WorldCupTeamSquadPage({ params }: SquadParams) {
       />
 
       <section className="rounded-lg border border-turf/20 bg-turf/[0.055] p-5 sm:p-7">
-        <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-turf">
-            <UsersRound size={15} /> Squad
+        <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-turf">
+            <UsersRound size={15} /> 阵容名单
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">{teamEntry.name}世界杯2026阵容名单</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
@@ -79,7 +79,7 @@ export default async function WorldCupTeamSquadPage({ params }: SquadParams) {
       <section>
         <div className="mb-4">
           <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-turf">
-            <ShieldCheck size={14} /> Players
+            <ShieldCheck size={14} /> 重点球员
           </div>
           <h2 className="mt-2 text-2xl font-semibold text-white">{teamEntry.name}重点球员</h2>
           <p className="mt-2 max-w-3xl text-sm leading-7 text-white/56">
@@ -93,8 +93,14 @@ export default async function WorldCupTeamSquadPage({ params }: SquadParams) {
               <article key={player.slug} className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.04]">
                 {player.photoUrl ? (
                   <Link href={getPlayerPath(player.slug)} className="block">
-                    <div className="aspect-[4/3] overflow-hidden bg-turf/10">
-                      <img src={player.photoUrl} alt={`${player.name}世界杯2026看点`} className="h-full w-full object-cover transition duration-300 hover:scale-[1.03]" loading="lazy" />
+                    <div className="aspect-[3/4] overflow-hidden bg-turf/10">
+                      <img
+                        src={player.photoUrl}
+                        alt={`${player.name}世界杯2026看点`}
+                        className="h-full w-full object-cover transition duration-300 hover:scale-[1.03]"
+                        style={{ objectPosition: player.photoPosition ?? "center 18%" }}
+                        loading="lazy"
+                      />
                     </div>
                   </Link>
                 ) : null}

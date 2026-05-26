@@ -6,7 +6,7 @@ import { getAllPredictions } from "@/lib/data";
 import { createMetadata, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 import { getWorldCupDateGroups, getWorldCupMatches, getWorldCupPrediction, worldCupBasePath } from "@/lib/world-cup";
 
-const pageDescription = "世界杯2026完整赛程，覆盖小组赛、淘汰赛、比赛时间、对阵信息和赛前观点。";
+const pageDescription = "世界杯2026完整赛程，覆盖小组赛、淘汰赛、比赛时间、对阵双方和赛前观点。";
 
 export const metadata: Metadata = createMetadata({
   title: "世界杯2026完整赛程：小组赛、淘汰赛与比赛时间",
@@ -39,10 +39,10 @@ export default function WorldCupSchedulePage() {
       />
 
       <section className="border-b border-white/10 pb-5">
-        <div className="text-xs font-semibold uppercase tracking-[0.24em] text-turf">World Cup Schedule</div>
+        <div className="text-xs font-semibold tracking-[0.18em] text-turf">世界杯赛程</div>
         <h1 className="mt-2 text-3xl font-semibold text-white">世界杯2026完整赛程</h1>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-white/62">
-          按比赛日看世界杯2026赛程、比赛时间和对阵信息。重点场次提供赛前观点。
+          按比赛日查看世界杯2026赛程、开球时间和对阵关系，有赛前观点的场次会标出参考方向。
         </p>
         <div className="mt-4 flex flex-wrap gap-2 text-sm">
           <Link href={`${worldCupBasePath}/host-countries`} className="rounded-md border border-white/15 px-3 py-2 text-white/72 hover:border-turf/30 hover:text-turf">美加墨世界杯</Link>

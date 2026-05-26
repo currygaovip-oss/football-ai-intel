@@ -70,11 +70,11 @@ export default async function WorldCupPlayerPage({ params }: PlayerParams) {
       <section className="grid gap-5 rounded-lg border border-turf/20 bg-turf/[0.055] p-5 sm:p-7 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
         <div>
           <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-turf">
-            <UsersRound size={15} /> Player
+            <UsersRound size={15} /> 球员观察
           </div>
           <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">{playerEntry.name}世界杯2026看点</h1>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
-            {playerEntry.name}牵动{playerEntry.teamName}比赛热度。赛前重点关注对手、开球时间、出场角色和球队进攻分工。
+            {playerEntry.name}是{playerEntry.teamName}赛前关注度最高的球员之一。阅读{playerEntry.teamName}比赛时，重点关注他的出场角色、活动区域和进攻参与度。
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Link href={playerEntry.teamPath} className="rounded-md bg-turf px-4 py-2.5 text-sm font-semibold text-pitch-950">
@@ -90,7 +90,16 @@ export default async function WorldCupPlayerPage({ params }: PlayerParams) {
         </div>
         {playerEntry.photoUrl ? (
           <figure className="overflow-hidden rounded-lg border border-white/10 bg-black/25">
-            <img src={playerEntry.photoUrl} alt={`${playerEntry.name}世界杯2026看点`} className="h-full min-h-[260px] w-full object-cover" />
+            <div className="aspect-[3/4] min-h-[320px] lg:h-full">
+              <div
+                aria-label={`${playerEntry.name}世界杯2026看点`}
+                className="h-full w-full bg-cover bg-center"
+                style={{
+                  backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.24)), url(${playerEntry.photoUrl})`,
+                  backgroundPosition: playerEntry.photoPosition ?? "center 18%"
+                }}
+              />
+            </div>
             {playerEntry.photoCredit ? (
               <figcaption className="border-t border-white/10 px-4 py-2 text-[11px] leading-4 text-white/38">
                 图片：{playerEntry.photoSourceUrl ? <a href={playerEntry.photoSourceUrl} target="_blank" rel="noreferrer" className="hover:text-turf">{playerEntry.photoCredit}</a> : playerEntry.photoCredit}
@@ -114,15 +123,15 @@ export default async function WorldCupPlayerPage({ params }: PlayerParams) {
           {playerEntry.teamSummary}
         </InfoPanel>
         <InfoPanel title="赛前重点">
-          看开球时间、对手强弱、首发位置和出场时间。最终名单与首发阵容以球队官方信息为准。
+          重点关注开球时间、对手强弱、首发位置和出场时间。最终名单与首发阵容以球队官方信息为准。
         </InfoPanel>
       </section>
 
       <section>
         <div className="mb-4 flex items-end justify-between gap-3">
           <div>
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-turf">
-              <CalendarDays size={14} /> Fixtures
+            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-turf">
+              <CalendarDays size={14} /> 赛程
             </div>
             <h2 className="mt-2 text-2xl font-semibold text-white">{playerEntry.teamName}世界杯比赛</h2>
           </div>
@@ -135,7 +144,7 @@ export default async function WorldCupPlayerPage({ params }: PlayerParams) {
 
       <section className="rounded-lg border border-white/10 bg-black/20 p-5">
         <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-turf">
-          <ShieldCheck size={14} /> Related Search
+          <ShieldCheck size={14} /> 相关搜索
         </div>
         <h2 className="mt-2 text-xl font-semibold text-white">相关搜索</h2>
         <div className="mt-4 flex flex-wrap gap-2">

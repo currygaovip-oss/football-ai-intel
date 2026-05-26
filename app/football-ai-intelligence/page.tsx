@@ -57,17 +57,17 @@ export default function FootballAiIntelligencePage() {
         dangerouslySetInnerHTML={{
           __html: jsonLd(faqJsonLd([
             { question: "足球AI情报看什么？", answer: "重点看今日足球赛程、赛前观点、参考方向、世界杯2026赛程和赛后复盘。" },
-            { question: "绿茵智报面向哪些用户？", answer: "面向赛前想了解比赛、对阵、参考方向和赛后复盘的中文球迷。" },
+            { question: "绿茵智报适合哪些人？", answer: "适合赛前想了解比赛、对阵、参考方向和赛后复盘的中文球迷。" },
             { question: "赛前观点在哪里看？", answer: "今日情报提供赛前观点，Telegram 群和 X 主页同步公开动态。" }
           ]))
         }}
       />
 
       <section className="rounded-lg border border-turf/20 bg-turf/[0.055] p-5 sm:p-7">
-        <div className="text-xs font-semibold uppercase tracking-[0.24em] text-turf">Football AI Intelligence</div>
+        <div className="text-xs font-semibold tracking-[0.18em] text-turf">足球 AI 情报</div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">足球AI情报</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64">
-          绿茵智报提供今日足球赛程、赛前观点、参考方向和复盘记录。比赛信息、分析正文和社群动态放在一起，赛前阅读更集中。
+          绿茵智报把今日赛程、赛前观点、参考方向和复盘记录放在同一条比赛线索里，帮助中文球迷更快抓住重点。
         </p>
       </section>
 

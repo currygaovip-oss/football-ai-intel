@@ -41,7 +41,12 @@ export function getHomeData() {
     modelCount: publicAiModels.length,
     matches: data.matches,
     predictions: activePredictions.map(withPredictionModel),
-    reviews: completedReviews.map((review) => withReviewPrediction(review, data.predictions))
+    reviews: completedReviews.map((review) => withReviewPrediction(review, data.predictions)),
+    totals: {
+      predictions: data.predictions.length,
+      reviews: completedReviews.length,
+      matches: data.matches.length
+    }
   };
 }
 
@@ -192,10 +197,19 @@ function sanitizeContentData(data: ContentData): ContentData {
     reviews: data.reviews.map((review) => ({
       ...review,
       match_result: sanitizePublicCopy(review.match_result),
+      result_status: normalizeReviewStatus(review),
       body: review.body.map(sanitizePublicCopy),
       reviewed_at: sanitizePublicCopy(review.reviewed_at)
     }))
   };
+}
+
+function normalizeReviewStatus(review: Review): Review["result_status"] {
+  const bodyText = review.body.join("\n");
+  if (review.score <= 4) return "miss";
+  if (/主方向和进球方向都没有打出|方向都没有打出/.test(bodyText)) return "miss";
+  if (/主方向没有打出|进球方向没有打出/.test(bodyText)) return "half";
+  return review.result_status;
 }
 
 function sanitizePublicCopy(text: string) {

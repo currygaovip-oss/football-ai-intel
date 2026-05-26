@@ -65,12 +65,12 @@ export default function WorldCup2026Page() {
       />
 
       <section className="rounded-lg border border-turf/20 bg-turf/[0.055] p-5 sm:p-7">
-        <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-turf">
-          <Trophy size={15} /> World Cup 2026
+        <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.24em] text-turf">
+          <Trophy size={15} /> 世界杯 2026
         </div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">2026世界杯赛程与美加墨举办城市</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64">
-          看美加墨世界杯比赛时间、小组赛、淘汰赛、举办城市、揭幕战、决赛和赛前观点。
+          汇总美加墨世界杯比赛时间、小组赛、淘汰赛、举办城市、揭幕战、决赛和赛前观点。
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link href={`${worldCupBasePath}/schedule`} className="rounded-md bg-turf px-4 py-2.5 text-sm font-semibold text-pitch-950">
@@ -116,7 +116,7 @@ export default function WorldCup2026Page() {
       <section>
         <div className="mb-4 flex items-end justify-between gap-4">
           <div>
-            <div className="mb-1 text-xs font-semibold uppercase tracking-[0.24em] text-turf">Fixtures</div>
+            <div className="mb-1 text-xs font-semibold tracking-[0.18em] text-turf">赛程</div>
             <h2 className="text-2xl font-semibold text-white">世界杯重点赛程</h2>
           </div>
           <Link href={`${worldCupBasePath}/schedule`} className="text-sm text-turf hover:text-white">查看完整赛程</Link>
@@ -137,7 +137,7 @@ export default function WorldCup2026Page() {
           按赛程顺序看全部比赛、具体对阵和开球时间。
         </InfoCard>
         <InfoCard title="球队赛程" href={`${worldCupBasePath}/teams`}>
-          按球队看世界杯比赛时间、对阵信息和赛前观点。
+          按球队看世界杯比赛时间、对手和赛前观点。
         </InfoCard>
         <InfoCard title="重点球员" href={`${worldCupBasePath}/players`}>
           热门球队核心球员、阵容位置和赛前看点。
