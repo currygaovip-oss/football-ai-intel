@@ -7,6 +7,12 @@ export type SeoTopicSlug =
   | "world-cup-2026-host-cities"
   | "world-cup-2026-tickets"
   | "world-cup-2026-match-time"
+  | "world-cup-2026-china-time"
+  | "world-cup-2026-groups"
+  | "world-cup-2026-group-stage"
+  | "world-cup-2026-knockout"
+  | "world-cup-2026-opening-time"
+  | "world-cup-2026-final-time"
   | "north-america-world-cup"
   | "world-cup-opening-final"
   | "world-cup-team-lineups"
@@ -197,6 +203,138 @@ export const seoTopics: SeoTopic[] = [
       {
         question: "世界杯赛程按什么顺序整理？",
         answer: "按比赛日、阶段和对阵顺序整理，方便快速找到具体比赛。"
+      }
+    ]
+  },
+  {
+    slug: "world-cup-2026-china-time",
+    title: "2026世界杯北京时间",
+    eyebrow: "北京时间",
+    description: "2026世界杯北京时间、揭幕战、决赛、小组赛和淘汰赛开球安排，适合中文球迷赛前确认比赛时间。",
+    intro: "按北京时间整理美加墨世界杯开球安排，重点覆盖揭幕战、决赛、小组赛比赛日和淘汰赛关键节点。",
+    primaryLink: { label: "世界杯北京时间", href: "/world-cup-2026/china-time" },
+    faq: [
+      {
+        question: "2026世界杯北京时间怎么看？",
+        answer: "重点看北京时间开球、比赛阶段、对阵双方和所在赛区。美加墨与中国存在时差，部分比赛会落在凌晨或上午。"
+      },
+      {
+        question: "2026世界杯揭幕战北京时间是什么时候？",
+        answer: "揭幕战为北京时间6月12日03:00，墨西哥对阵南非。"
+      },
+      {
+        question: "2026世界杯决赛北京时间是什么时候？",
+        answer: "决赛为北京时间7月20日03:00，地点为纽约/新泽西大都会人寿体育场。"
+      }
+    ]
+  },
+  {
+    slug: "world-cup-2026-groups",
+    title: "2026世界杯分组",
+    eyebrow: "世界杯分组",
+    description: "2026世界杯分组、小组赛对阵、A组到L组比赛时间和球队赛程。",
+    intro: "按 A 组到 L 组整理世界杯小组赛对阵和比赛时间，适合快速查看同组球队、出线路径和重点比赛。",
+    primaryLink: { label: "世界杯分组", href: "/world-cup-2026/groups" },
+    faq: [
+      {
+        question: "2026世界杯分几个小组？",
+        answer: "2026世界杯采用48队参赛，小组赛从A组到L组展开。"
+      },
+      {
+        question: "世界杯分组适合看什么？",
+        answer: "分组信息适合查看同组对手、比赛时间、出线路径和可能影响淘汰赛位置的关键对阵。"
+      },
+      {
+        question: "世界杯分组和球队赛程有什么区别？",
+        answer: "分组按A组到L组呈现对阵关系，球队赛程按单支球队整理全部比赛时间和对手。"
+      }
+    ]
+  },
+  {
+    slug: "world-cup-2026-group-stage",
+    title: "2026世界杯小组赛赛程",
+    eyebrow: "小组赛",
+    description: "2026世界杯小组赛赛程、比赛时间、A组到L组对阵和赛前观点。",
+    intro: "小组赛决定淘汰赛路径，重点看开球时间、同组对手、赛程密度和最后一轮出线形势。",
+    primaryLink: { label: "世界杯小组赛", href: "/world-cup-2026/groups" },
+    faq: [
+      {
+        question: "2026世界杯小组赛什么时候开始？",
+        answer: "小组赛从揭幕战开始，按比赛日连续展开，中文球迷可按北京时间查看全部对阵。"
+      },
+      {
+        question: "小组赛赛程重点看什么？",
+        answer: "重点看开球时间、同组对手、赛程间隔、末轮出线形势和赛前观点。"
+      },
+      {
+        question: "小组赛和淘汰赛怎么区分？",
+        answer: "小组赛按A组到L组进行，淘汰赛从32强赛开始，比赛结果直接影响晋级。"
+      }
+    ]
+  },
+  {
+    slug: "world-cup-2026-knockout",
+    title: "2026世界杯淘汰赛赛程",
+    eyebrow: "淘汰赛",
+    description: "2026世界杯淘汰赛赛程、32强赛、16强赛、1/4决赛、半决赛、季军赛和决赛时间。",
+    intro: "淘汰赛从32强赛开始，重点关注晋级路径、比赛城市、开球时间和关键球队的赛前状态。",
+    primaryLink: { label: "世界杯淘汰赛", href: "/world-cup-2026/knockout" },
+    faq: [
+      {
+        question: "2026世界杯淘汰赛从哪一轮开始？",
+        answer: "2026世界杯淘汰赛从32强赛开始，之后进入16强赛、1/4决赛、半决赛、季军赛和决赛。"
+      },
+      {
+        question: "淘汰赛赛程适合重点看什么？",
+        answer: "重点看晋级路径、休息时间、比赛城市、阵容状态和赛前观点。"
+      },
+      {
+        question: "世界杯决赛属于淘汰赛吗？",
+        answer: "决赛是淘汰赛最后一场，2026世界杯决赛为北京时间7月20日03:00。"
+      }
+    ]
+  },
+  {
+    slug: "world-cup-2026-opening-time",
+    title: "2026世界杯揭幕战时间",
+    eyebrow: "揭幕战",
+    description: "2026世界杯揭幕战时间、北京时间、比赛城市、球场和对阵信息。",
+    intro: "2026世界杯揭幕战在墨西哥城阿兹特克体育场进行，北京时间6月12日03:00开球，墨西哥对阵南非。",
+    primaryLink: { label: "世界杯揭幕战", href: "/world-cup-2026/opening-match" },
+    faq: [
+      {
+        question: "2026世界杯揭幕战北京时间是什么时候？",
+        answer: "北京时间6月12日03:00，墨西哥对阵南非。"
+      },
+      {
+        question: "2026世界杯揭幕战在哪里举行？",
+        answer: "揭幕战在墨西哥城阿兹特克体育场举行。"
+      },
+      {
+        question: "揭幕战赛前重点看什么？",
+        answer: "重点看主队热度、阵容状态、比赛节奏和赛前观点。"
+      }
+    ]
+  },
+  {
+    slug: "world-cup-2026-final-time",
+    title: "2026世界杯决赛时间",
+    eyebrow: "决赛",
+    description: "2026世界杯决赛时间、北京时间、举办城市、球场和淘汰赛路径。",
+    intro: "2026世界杯决赛为北京时间7月20日03:00，地点为纽约/新泽西大都会人寿体育场。",
+    primaryLink: { label: "世界杯决赛", href: "/world-cup-2026/final" },
+    faq: [
+      {
+        question: "2026世界杯决赛北京时间是什么时候？",
+        answer: "北京时间7月20日03:00。"
+      },
+      {
+        question: "2026世界杯决赛在哪里举行？",
+        answer: "决赛在纽约/新泽西大都会人寿体育场举行。"
+      },
+      {
+        question: "决赛前适合看哪些信息？",
+        answer: "重点看晋级路径、休息时间、伤停信息、首发变化和赛前观点。"
       }
     ]
   },

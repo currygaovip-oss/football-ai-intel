@@ -148,7 +148,7 @@ export default function WorldCup2026Page() {
         <InfoCard title="球队赛程" href={`${worldCupBasePath}/teams`}>
           按球队看世界杯比赛时间、对手和赛前观点。
         </InfoCard>
-        <InfoCard title="比赛时间" href="/topics/world-cup-2026-match-time">
+        <InfoCard title="北京时间" href={`${worldCupBasePath}/china-time`}>
           按北京时间查看小组赛、淘汰赛、揭幕战和决赛。
         </InfoCard>
         <InfoCard title="球队名单" href="/topics/world-cup-team-lineups">

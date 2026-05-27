@@ -80,6 +80,7 @@ export function GET() {
 
   const items: FeedItem[] = [
     { title: "2026世界杯赛程", description: "2026世界杯赛程、比赛时间、球队资料和赛前观点。", path: worldCupBasePath },
+    { title: "2026世界杯北京时间", description: "按北京时间整理2026世界杯揭幕战、决赛、小组赛和淘汰赛开球安排。", path: `${worldCupBasePath}/china-time` },
     ...predictions,
     ...reviews,
     ...topics,

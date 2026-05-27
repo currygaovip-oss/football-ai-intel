@@ -166,7 +166,18 @@ function getTopicMatches(slug: string, matches: ReturnType<typeof getSchedule>) 
   if (slug === "world-cup-2026-schedule") {
     return matches.filter((match) => match.competition.includes("世界杯") || match.stage.includes("小组赛") || match.stage.includes("淘汰赛"));
   }
-  if (slug === "world-cup-2026-match-time" || slug === "north-america-world-cup" || slug === "world-cup-opening-final" || slug === "world-cup-team-lineups") {
+  if (
+    slug === "world-cup-2026-match-time" ||
+    slug === "world-cup-2026-china-time" ||
+    slug === "world-cup-2026-groups" ||
+    slug === "world-cup-2026-group-stage" ||
+    slug === "world-cup-2026-knockout" ||
+    slug === "world-cup-2026-opening-time" ||
+    slug === "world-cup-2026-final-time" ||
+    slug === "north-america-world-cup" ||
+    slug === "world-cup-opening-final" ||
+    slug === "world-cup-team-lineups"
+  ) {
     return matches.filter((match) => match.competition.includes("世界杯") || match.stage.includes("小组赛") || match.stage.includes("淘汰赛") || match.stage.includes("决赛"));
   }
   if (slug === "football-score-result" || slug === "football-review") {

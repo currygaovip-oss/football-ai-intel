@@ -34,6 +34,7 @@ const staticRoutes = [
   "/opensearch.xml",
   worldCupBasePath,
   `${worldCupBasePath}/schedule`,
+  `${worldCupBasePath}/china-time`,
   `${worldCupBasePath}/matches`,
   `${worldCupBasePath}/groups`,
   `${worldCupBasePath}/knockout`,
