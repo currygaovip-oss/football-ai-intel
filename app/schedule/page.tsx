@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarDays, ChevronRight, Clock3, Trophy } from "lucide-react";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
+import { WorldCupCountdown } from "@/components/world-cup-countdown";
 import { cn } from "@/lib/utils";
 import { getAllPredictions, getSchedule } from "@/lib/data";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, sportsEventJsonLd, webPageJsonLd } from "@/lib/seo";
+import { getNextWorldCupMatch } from "@/lib/world-cup-countdown";
 
 const scheduleDescription = "今日足球赛程、明日赛程、世界杯2026赛程、小组赛和淘汰赛比赛时间；有赛前观点的比赛可查看参考方向和详细分析。";
 
@@ -25,11 +27,11 @@ const filters = [
 type FilterKey = (typeof filters)[number]["key"];
 
 const emptyCopy: Record<FilterKey, string> = {
-  today: "今日没有重点赛程。完整赛程可查看接下来的比赛。",
-  tomorrow: "明日没有重点赛程。完整赛程可查看接下来的比赛。",
-  all: "目前还没有已收录赛程。",
-  group: "目前还没有小组赛赛程。",
-  knockout: "目前还没有淘汰赛赛程。"
+  today: "今日重点比赛以赛程中心最新整理为准。",
+  tomorrow: "明日重点比赛以赛程中心最新整理为准。",
+  all: "重点赛程以公开赛事安排为准。",
+  group: "小组赛时间以世界杯官方赛程为准。",
+  knockout: "淘汰赛时间以世界杯官方赛程为准。"
 };
 
 export default async function SchedulePage({ searchParams }: { searchParams?: Promise<{ type?: string }> }) {
@@ -43,6 +45,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
   const predictionMatchCount = matches.filter((match) => findPredictionForMatch(predictions, match)).length;
   const dateGroups = groupMatchesByDate(filteredMatches);
   const stageGroups = groupStageCounts(matches);
+  const nextWorldCupMatch = getNextWorldCupMatch(matches);
 
   return (
     <div className="space-y-5">
@@ -87,7 +90,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
             faqJsonLd([
               {
                 question: "足球赛程中心包含哪些内容？",
-                answer: "包含今日足球赛程、明日赛程、世界杯小组赛、淘汰赛和全部已收录比赛时间。"
+                answer: "包含今日足球赛程、明日赛程、世界杯小组赛、淘汰赛和重点比赛时间。"
               },
               {
                 question: "哪些比赛有赛前分析？",
@@ -120,6 +123,8 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
           </div>
         </div>
       </section>
+
+      <WorldCupCountdown primary={nextWorldCupMatch} variant="strip" />
 
       <div className="flex flex-wrap items-center gap-2 border-y border-white/10 py-3">
         <Link href="/football-schedule/today" className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white/75 transition hover:border-turf/30 hover:text-turf">今日足球赛程</Link>
@@ -168,7 +173,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
             ))
           ) : (
             <div className="glass rounded-lg p-8 text-center">
-              <div className="text-lg font-semibold text-white">当前没有比赛</div>
+              <div className="text-lg font-semibold text-white">没有匹配比赛</div>
               <p className="mt-2 text-sm leading-6 text-white/58">{emptyCopy[currentType]}</p>
               <Link href="/schedule?type=all" className="mt-5 inline-flex rounded-md border border-turf/30 bg-turf/10 px-4 py-2 text-sm text-turf hover:bg-turf/15">
                 查看全部赛程
@@ -202,7 +207,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
           <div className="rounded-lg border border-turf/20 bg-turf/10 p-4">
             <h2 className="text-base font-semibold text-white">赛前观点</h2>
             <p className="mt-2 text-sm leading-6 text-white/62">
-              有赛前观点的比赛会标出参考方向；其余比赛保留开球时间、赛事阶段和对阵，方便赛前筛选。
+              重点比赛展示参考方向；其余比赛保留开球时间、赛事阶段和对阵，方便赛前筛选。
             </p>
             <Link
               href="/today"
@@ -219,9 +224,9 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
 
       <section className="grid gap-4 lg:grid-cols-3">
         <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
-          <h2 className="text-lg font-semibold">今日足球赛程怎么用</h2>
+          <h2 className="text-lg font-semibold">今日足球赛程怎么看</h2>
           <p className="mt-2 text-sm leading-7 text-white/62">
-            按开球时间查看当天比赛，有赛前观点的场次可进入完整分析。
+            按开球时间查看当天比赛，重点场次可继续阅读赛前观点。
           </p>
         </div>
         <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
@@ -233,7 +238,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
         <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
           <h2 className="text-lg font-semibold">赛前分析</h2>
           <p className="mt-2 text-sm leading-7 text-white/62">
-            赛前观点会给出参考方向，并在详情中解释球队状态、赛程强度和关键变量。
+            赛前观点给出参考方向，并解释球队状态、赛程强度和关键变量。
           </p>
         </div>
       </section>

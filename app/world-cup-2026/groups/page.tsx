@@ -41,7 +41,7 @@ export default function WorldCupGroupsPage() {
         <div className="text-xs font-semibold tracking-[0.18em] text-turf">小组赛</div>
         <h1 className="mt-2 text-3xl font-semibold text-white">世界杯2026小组赛赛程</h1>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-white/62">
-          按小组查看比赛时间和对阵关系，有赛前观点的场次会标出参考方向与分析正文。
+          按小组查看比赛时间和对阵关系，重点场次可继续阅读赛前观点与参考方向。
         </p>
       </section>
 

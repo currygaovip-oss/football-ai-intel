@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MapPin } from "lucide-react";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
-import { createMetadata, faqJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, createMetadata, faqJsonLd, jsonLd, placeJsonLd, webPageJsonLd } from "@/lib/seo";
 import { getCityTicketPath } from "@/lib/world-cup-tickets";
 import { getHostCity, getHostCityPath, hostCities, worldCupBasePath } from "@/lib/world-cup";
 
@@ -36,11 +36,30 @@ export default async function HostCityPage({ params }: CityParams) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
+          __html: jsonLd(placeJsonLd({ name: city.name, description: `${city.name}是2026世界杯举办城市，比赛球场为${city.stadium}。${city.summary}`, path, country: city.country, stadium: city.stadium }))
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
           __html: jsonLd(faqJsonLd([
             { question: `${city.name}是2026世界杯举办城市吗？`, answer: `${city.name}是2026美加墨世界杯举办城市之一，所属举办国家为${city.country}。` },
             { question: `${city.name}世界杯比赛在哪个球场？`, answer: `${city.name}赛区球场为${city.stadium}。` },
             { question: `${city.name}世界杯门票信息在哪里看？`, answer: `${city.name}门票信息包含城市观赛提醒和官方票务链接，实际购票以 FIFA 官方信息和赛事公告为准。` }
           ]))
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            breadcrumbJsonLd([
+              { name: "首页", path: "/" },
+              { name: "世界杯2026", path: worldCupBasePath },
+              { name: "举办城市", path: `${worldCupBasePath}/host-cities` },
+              { name: city.name, path }
+            ])
+          )
         }}
       />
 
@@ -61,9 +80,9 @@ export default async function HostCityPage({ params }: CityParams) {
       </section>
 
       <section className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
-        <h2 className="text-xl font-semibold text-white">{city.name}赛区怎么看</h2>
+        <h2 className="text-xl font-semibold text-white">{city.name}赛区重点</h2>
         <p className="mt-3 text-sm leading-7 text-white/62">
-          先确认举办国家、比赛球场和赛程安排；重点比赛提供参考方向和赛前分析。
+          举办国家、比赛球场、比赛时间和重点对阵，是赛前阅读该赛区的核心线索。
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link href={`${worldCupBasePath}/schedule`} className="rounded-md bg-turf px-4 py-2 text-sm font-semibold text-pitch-950">查看世界杯赛程</Link>

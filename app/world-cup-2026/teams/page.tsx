@@ -29,7 +29,7 @@ export default function WorldCupTeamsPage() {
         <div className="text-xs font-semibold tracking-[0.18em] text-turf">球队</div>
         <h1 className="mt-2 text-3xl font-semibold text-white">2026世界杯球队赛程</h1>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-white/62">
-          按球队查看世界杯比赛时间、对手、阵容名单和重点球员，赛前观点会直接关联到具体比赛。
+          按球队查看世界杯比赛时间、对手、阵容名单和重点球员，适合赛前快速确认球队路径。
         </p>
       </section>
 
@@ -40,7 +40,7 @@ export default function WorldCupTeamsPage() {
             <Link href={getTeamPath(team.slug)} className="block">
               <h2 className="text-base font-semibold text-white hover:text-turf">{team.name}世界杯赛程</h2>
             </Link>
-            <p className="mt-2 text-sm text-white/50">{getTeamMatches(team.slug).length} 场已收录比赛</p>
+            <p className="mt-2 text-sm text-white/50">{getTeamMatches(team.slug).length} 场世界杯比赛</p>
             <p className="mt-3 line-clamp-2 text-xs leading-5 text-white/45">{team.searchFocus.join(" / ")}</p>
             <div className="mt-4 flex flex-wrap gap-3 text-xs">
               <Link href={getTeamPath(team.slug)} className="text-turf hover:text-white">球队赛程</Link>

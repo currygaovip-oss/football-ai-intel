@@ -5,7 +5,7 @@ import { CalendarDays, ShieldCheck, UsersRound } from "lucide-react";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { WorldCupMatchCard } from "@/components/world-cup-match-card";
 import { getAllPredictions } from "@/lib/data";
-import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, createMetadata, faqJsonLd, itemListJsonLd, jsonLd, personJsonLd, webPageJsonLd } from "@/lib/seo";
 import { getPlayerPath, getTeamMatches, getWorldCupPlayerEntries, getWorldCupPlayerEntry, getWorldCupPrediction, worldCupBasePath } from "@/lib/world-cup";
 
 type PlayerParams = { params: Promise<{ player: string }> };
@@ -49,6 +49,20 @@ export default async function WorldCupPlayerPage({ params }: PlayerParams) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            personJsonLd({
+              name: playerEntry.name,
+              description: `${playerEntry.name}是${playerEntry.teamName}重点球员，位置是${playerEntry.position}。${playerEntry.note}`,
+              path,
+              image: playerEntry.photoUrl,
+              teamName: playerEntry.teamName
+            })
+          )
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
           __html: jsonLd(itemListJsonLd({
             name: `${playerEntry.teamName}世界杯2026赛程`,
             path,
@@ -60,10 +74,23 @@ export default async function WorldCupPlayerPage({ params }: PlayerParams) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: jsonLd(faqJsonLd([
-            { question: `${playerEntry.name}会参加2026世界杯吗？`, answer: `最终参赛名单以${playerEntry.teamName}官方公布为准。` },
-            { question: `${playerEntry.name}世界杯比赛在哪里看？`, answer: `${playerEntry.teamName}世界杯赛程包含比赛时间、对阵和赛前观点。` },
+            { question: `${playerEntry.name}是否进入2026世界杯名单？`, answer: `最终参赛名单以${playerEntry.teamName}官方公布为准。` },
+            { question: `${playerEntry.name}世界杯比赛怎么看？`, answer: `${playerEntry.teamName}世界杯赛程包含比赛时间、对阵和赛前观点。` },
             { question: `${playerEntry.name}赛前看什么？`, answer: playerEntry.note }
           ]))
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            breadcrumbJsonLd([
+              { name: "首页", path: "/" },
+              { name: "世界杯2026", path: worldCupBasePath },
+              { name: "重点球员", path: `${worldCupBasePath}/players` },
+              { name: playerEntry.name, path }
+            ])
+          )
         }}
       />
 

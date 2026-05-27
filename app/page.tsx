@@ -6,9 +6,11 @@ import { ModelCard } from "@/components/model-card";
 import { SectionHeading } from "@/components/section-heading";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { SocialCta } from "@/components/social-cta";
+import { WorldCupCountdown } from "@/components/world-cup-countdown";
 import { getHomeData, type AiModel, type Prediction } from "@/lib/data";
 import { extractPredictionDirection, getPredictionDisplayMeta } from "@/lib/prediction-display";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, siteNavigationJsonLd, webPageJsonLd, websiteJsonLd } from "@/lib/seo";
+import { getNextWorldCupMatch, worldCupFinalCountdown } from "@/lib/world-cup-countdown";
 
 const homeDescription = "绿茵智报官网提供今日足球赛程、世界杯赛程、比赛时间、赛前分析、参考方向和赛后复盘，面向中文球迷追踪重点赛事。";
 
@@ -31,6 +33,7 @@ export default function HomePage() {
     "阵容赛程同步观察",
     "赛后复盘回看偏差"
   ];
+  const nextWorldCupMatch = getNextWorldCupMatch(matches);
   const topPredictions = predictions.slice(0, 5);
   const latestReviews = reviews.slice(0, 2);
 
@@ -113,6 +116,7 @@ export default function HomePage() {
         </div>
 
         <aside className="space-y-4">
+          <WorldCupCountdown primary={nextWorldCupMatch} secondary={worldCupFinalCountdown} />
           <SocialCta />
           <div className="grid grid-cols-2 gap-2">
             {stats.map(({ label, value, Icon }) => (
@@ -181,7 +185,7 @@ export default function HomePage() {
           ))}
         </div>
         <div className="mt-4 rounded-lg border border-white/10 bg-black/20 p-4 text-sm leading-7 text-white/62">
-          按比赛时间查看今日、明日和世界杯赛程；有赛前观点的场次会直接显示参考方向。
+          按比赛时间查看今日、明日和世界杯赛程；重点场次同步呈现参考方向。
         </div>
         <div className="mt-3 flex flex-wrap gap-2 text-sm">
           <Link href="/football-schedule/today" className="rounded-md border border-white/15 px-3 py-2 text-white/68 hover:border-turf/30 hover:text-turf">今日足球赛程</Link>

@@ -11,7 +11,7 @@ const rangeCopy = {
     title: "今日足球赛程",
     eyebrow: "今日赛程",
     description: "今日足球赛程、比赛时间、对阵双方和赛前分析；有赛前观点的比赛可查看参考方向。",
-    empty: "今日没有焦点比赛，可继续查看明日赛程和本周赛程。",
+    empty: "今日焦点比赛以赛程中心最新整理为准。",
     primaryLink: "/football-schedule/tomorrow",
     primaryLabel: "明日赛程"
   },
@@ -19,7 +19,7 @@ const rangeCopy = {
     title: "明日足球赛程",
     eyebrow: "明日赛程",
     description: "明日足球赛程、比赛时间、对阵双方和赛前分析，焦点比赛提前看。",
-    empty: "明日没有重点比赛，本周赛程可查看接下来的比赛安排。",
+    empty: "明日重点比赛以赛程中心最新整理为准。",
     primaryLink: "/football-schedule/week",
     primaryLabel: "本周赛程"
   },
@@ -27,7 +27,7 @@ const rangeCopy = {
     title: "本周足球赛程",
     eyebrow: "本周赛程",
     description: "本周足球赛程、比赛时间、重点对阵和赛前分析。",
-    empty: "本周没有重点比赛，可查看世界杯赛程和完整赛程。",
+    empty: "本周重点比赛以公开赛事安排为准。",
     primaryLink: "/schedule",
     primaryLabel: "赛程中心"
   }
@@ -92,7 +92,7 @@ export function FootballSchedulePage({ range, path }: { range: ScheduleRange; pa
       </section>
 
       <section className="grid gap-3 md:grid-cols-3">
-        <Stat label="已收录比赛" value={matches.length} />
+        <Stat label="重点比赛" value={matches.length} />
         <Stat label="有赛前观点" value={matchesWithPrediction} />
         <Stat label="赛程日期" value={groups.length} />
       </section>
@@ -122,7 +122,7 @@ export function FootballSchedulePage({ range, path }: { range: ScheduleRange; pa
         </div>
       ) : (
         <section className="rounded-lg border border-white/10 bg-white/[0.04] p-8 text-center">
-          <h2 className="text-xl font-semibold text-white">当前没有比赛</h2>
+          <h2 className="text-xl font-semibold text-white">没有匹配比赛</h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-7 text-white/58">{copy.empty}</p>
           <Link href={copy.primaryLink} className="mt-5 inline-flex items-center gap-1 rounded-md border border-turf/30 bg-turf/10 px-4 py-2 text-sm text-turf hover:bg-turf/15">
             {copy.primaryLabel} <ChevronRight size={15} />

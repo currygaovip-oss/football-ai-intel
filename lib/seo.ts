@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const siteUrl = "https://lyzbvip.vip";
 export const siteName = "绿茵智报";
-export const siteDescription = "绿茵智报官网提供2026世界杯赛程、美加墨世界杯举办城市、今日足球赛程、赛前分析、参考方向和赛后复盘，面向中文球迷持续记录重点赛事观点。";
+export const siteDescription = "绿茵智报整理今日足球赛程、2026世界杯赛程、美加墨举办城市、球队资料、赛前观点、参考方向和赛后复盘，面向中文球迷追踪重点赛事。";
 export const defaultOgImage = "/brand/football-ai-logo-universal.png?v=3";
 export const telegramUrl = "https://t.me/vipworldcup888";
 export const xUrl = "https://x.com/worldcupvip";
@@ -27,12 +27,21 @@ export const seoKeywords = [
   "世界杯小组赛赛程",
   "世界杯淘汰赛赛程",
   "世界杯比赛时间",
+  "世界杯倒计时",
+  "2026世界杯倒计时",
+  "美加墨世界杯倒计时",
   "世界杯球员名单",
   "世界杯重点球员",
   "世界杯门票",
   "2026世界杯门票",
   "世界杯门票怎么买",
   "世界杯官方购票链接",
+  "世界杯开球时间",
+  "世界杯举办国家",
+  "世界杯东道主",
+  "美加墨世界杯举办国家",
+  "世界杯揭幕战时间",
+  "世界杯决赛时间",
   "美加墨世界杯门票",
   "世界杯决赛门票",
   "世界杯揭幕战门票",
@@ -100,7 +109,11 @@ export const seoTopicLinks = [
   { label: "世界杯2026专题", href: "/world-cup-2026" },
   { label: "美加墨世界杯", href: "/world-cup-2026/host-countries" },
   { label: "世界杯举办城市", href: "/world-cup-2026/host-cities" },
+  { label: "世界杯比赛时间", href: "/topics/world-cup-2026-match-time" },
+  { label: "美加墨世界杯", href: "/topics/north-america-world-cup" },
+  { label: "世界杯揭幕战与决赛", href: "/topics/world-cup-opening-final" },
   { label: "世界杯球队赛程", href: "/world-cup-2026/teams" },
+  { label: "世界杯球队名单", href: "/topics/world-cup-team-lineups" },
   { label: "世界杯重点球员", href: "/world-cup-2026/players" },
   { label: "世界杯门票信息", href: "/world-cup-2026/tickets" },
   { label: "今日足球赛程", href: "/football-schedule/today" },
@@ -182,7 +195,22 @@ export function websiteJsonLd() {
     url: siteUrl,
     description: siteDescription,
     inLanguage: "zh-CN",
-    publisher: organizationJsonLd()
+    publisher: organizationJsonLd(),
+    about: [
+      "今日足球赛程",
+      "2026世界杯赛程",
+      "美加墨世界杯",
+      "世界杯球队",
+      "世界杯重点球员",
+      "足球赛前观点",
+      "赛后复盘"
+    ],
+    mentions: seoKeywords.slice(0, 40),
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${siteUrl}/search?q={search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
   };
 }
 
@@ -200,6 +228,114 @@ export function webPageJsonLd({ name, description, path }: { name: string; descr
       url: siteUrl
     },
     publisher: organizationJsonLd(),
+    inLanguage: "zh-CN",
+    about: [
+      "足球赛程",
+      "世界杯2026",
+      "赛前观点",
+      "参考方向",
+      "赛后复盘"
+    ]
+  };
+}
+
+export function collectionPageJsonLd({
+  name,
+  description,
+  path,
+  items = []
+}: {
+  name: string;
+  description: string;
+  path: string;
+  items?: Array<{ name: string; path: string }>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name,
+    description,
+    url: absoluteUrl(path),
+    isPartOf: {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: siteName,
+      url: siteUrl
+    },
+    mainEntity: items.length ? itemListJsonLd({ name, path, items }) : undefined,
+    publisher: organizationJsonLd(),
+    inLanguage: "zh-CN"
+  };
+}
+
+export function personJsonLd({
+  name,
+  description,
+  path,
+  image,
+  teamName
+}: {
+  name: string;
+  description: string;
+  path: string;
+  image?: string;
+  teamName?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name,
+    description,
+    url: absoluteUrl(path),
+    image,
+    memberOf: teamName
+      ? {
+          "@type": "SportsTeam",
+          name: teamName,
+          sport: "Football"
+        }
+      : undefined,
+    knowsAbout: ["2026世界杯", "足球赛程", "赛前观点"],
+    inLanguage: "zh-CN"
+  };
+}
+
+export function placeJsonLd({
+  name,
+  description,
+  path,
+  country,
+  stadium
+}: {
+  name: string;
+  description: string;
+  path: string;
+  country?: string;
+  stadium?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Place",
+    name,
+    description,
+    url: absoluteUrl(path),
+    address: country
+      ? {
+          "@type": "PostalAddress",
+          addressCountry: country
+        }
+      : undefined,
+    containsPlace: stadium
+      ? {
+          "@type": "StadiumOrArena",
+          name: stadium
+        }
+      : undefined,
+    subjectOf: {
+      "@type": "SportsEvent",
+      name: "FIFA World Cup 2026",
+      sport: "Football"
+    },
     inLanguage: "zh-CN"
   };
 }

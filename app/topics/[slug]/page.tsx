@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/badge";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getAllPredictions, getReviews, getSchedule } from "@/lib/data";
+import { getPredictionDisplayMeta } from "@/lib/prediction-display";
 import { getSeoTopic, seoTopics } from "@/lib/seo-topics";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 import { getHostCityPath, getTeamPath, getWorldCupFixturePath, getWorldCupTeamEntries, hostCities } from "@/lib/world-cup";
@@ -77,6 +78,16 @@ export default async function TopicPage({ params }: TopicParams) {
         </div>
       </section>
 
+      <section className="grid gap-4 lg:grid-cols-3">
+        {topic.faq.map((item) => (
+          <div key={item.question} className="rounded-lg border border-turf/15 bg-turf/[0.045] p-5">
+            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-turf/80">快速答案</div>
+            <h2 className="mt-3 text-lg font-semibold text-white">{item.question}</h2>
+            <p className="mt-3 text-sm leading-7 text-white/66">{item.answer}</p>
+          </div>
+        ))}
+      </section>
+
       <section className="grid gap-4 lg:grid-cols-[1fr_0.75fr]">
         <div className="rounded-lg border border-white/10 bg-white/[0.035] p-5">
           <div className="mb-4 flex items-center justify-between gap-3">
@@ -96,7 +107,7 @@ export default async function TopicPage({ params }: TopicParams) {
             </div>
           ) : (
             <div className="rounded-lg border border-white/10 bg-black/20 p-6 text-sm leading-6 text-white/58">
-              当前没有符合条件的赛程，可查看完整比赛安排。
+              近期重点赛程请以完整赛程为准。
             </div>
           )}
         </div>
@@ -106,14 +117,19 @@ export default async function TopicPage({ params }: TopicParams) {
             <h2 className="text-xl font-semibold text-white">赛前观点</h2>
             <div className="mt-4 grid gap-3">
               {topicPredictions.slice(0, 4).map((prediction) => (
-                <Link key={prediction.id} href={`/predictions/${prediction.id}`} className="rounded-lg border border-white/10 bg-black/20 p-4 transition hover:border-turf/30">
-                  <div className="mb-2 flex flex-wrap gap-2">
-                    <Badge tone={prediction.visibility === "vip" ? "gold" : "green"}>{prediction.visibility === "vip" ? "VIP" : "免费"}</Badge>
-                    <Badge>{prediction.competition}</Badge>
-                  </div>
-                  <div className="font-semibold text-white">{prediction.matchup}</div>
-                  <div className="mt-2 text-sm text-white/58">{prediction.kickoff_time_text}</div>
-                </Link>
+                (() => {
+                  const { competitionLabel, timeLabel } = getPredictionDisplayMeta(prediction);
+                  return (
+                    <Link key={prediction.id} href={`/predictions/${prediction.id}`} className="rounded-lg border border-white/10 bg-black/20 p-4 transition hover:border-turf/30">
+                      <div className="mb-2 flex flex-wrap gap-2">
+                        <Badge tone={prediction.visibility === "vip" ? "gold" : "green"}>{prediction.visibility === "vip" ? "VIP" : "免费"}</Badge>
+                        <Badge>{competitionLabel}</Badge>
+                      </div>
+                      <div className="font-semibold text-white">{prediction.matchup}</div>
+                      <div className="mt-2 text-sm text-white/58">{timeLabel || "开球时间以赛程为准"}</div>
+                    </Link>
+                  );
+                })()
               ))}
             </div>
           </div>
@@ -135,15 +151,6 @@ export default async function TopicPage({ params }: TopicParams) {
         </aside>
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-3">
-        {topic.faq.map((item) => (
-          <div key={item.question} className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
-            <h2 className="text-lg font-semibold text-white">{item.question}</h2>
-            <p className="mt-3 text-sm leading-7 text-white/62">{item.answer}</p>
-          </div>
-        ))}
-      </section>
-
       <SeoTopicLinks />
     </div>
   );
@@ -158,6 +165,9 @@ function getTopicMatches(slug: string, matches: ReturnType<typeof getSchedule>) 
   }
   if (slug === "world-cup-2026-schedule") {
     return matches.filter((match) => match.competition.includes("世界杯") || match.stage.includes("小组赛") || match.stage.includes("淘汰赛"));
+  }
+  if (slug === "world-cup-2026-match-time" || slug === "north-america-world-cup" || slug === "world-cup-opening-final" || slug === "world-cup-team-lineups") {
+    return matches.filter((match) => match.competition.includes("世界杯") || match.stage.includes("小组赛") || match.stage.includes("淘汰赛") || match.stage.includes("决赛"));
   }
   if (slug === "football-score-result" || slug === "football-review") {
     return matches.filter((match) => match.status === "finished");
@@ -183,13 +193,13 @@ function getListItems(
       path: `/predictions/${prediction.id}`
     }));
   }
-  if (slug === "world-cup-2026-teams") {
+  if (slug === "world-cup-2026-teams" || slug === "world-cup-team-lineups") {
     return getWorldCupTeamEntries().map((team) => ({
       name: `${team.name}世界杯2026赛程`,
       path: getTeamPath(team.slug)
     }));
   }
-  if (slug === "world-cup-2026-host-cities") {
+  if (slug === "world-cup-2026-host-cities" || slug === "north-america-world-cup") {
     return hostCities.map((city) => ({
       name: `${city.name}世界杯赛程与球场信息`,
       path: getHostCityPath(city.slug)

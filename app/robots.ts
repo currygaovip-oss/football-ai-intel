@@ -23,6 +23,11 @@ export default function robots(): MetadataRoute.Robots {
           "Claude-User",
           "anthropic-ai",
           "Google-Extended",
+          "Applebot",
+          "DuckDuckBot",
+          "YouBot",
+          "Amazonbot",
+          "meta-externalagent",
           "Googlebot",
           "Bingbot"
         ],

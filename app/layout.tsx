@@ -16,7 +16,11 @@ export const metadata: Metadata = {
   applicationName: siteName,
   keywords: seoKeywords,
   alternates: {
-    canonical: siteUrl
+    canonical: siteUrl,
+    types: {
+      "application/rss+xml": `${siteUrl}/feed.xml`,
+      "application/opensearchdescription+xml": `${siteUrl}/opensearch.xml`
+    }
   },
   icons: {
     icon: [

@@ -81,7 +81,7 @@ export default async function WorldCupTeamPage({ params }: TeamParams) {
         dangerouslySetInnerHTML={{
           __html: jsonLd(faqJsonLd([
             { question: `${teamEntry.name}世界杯2026赛程在哪里看？`, answer: `${teamEntry.name}世界杯赛程包含比赛时间、对手和赛事阶段。` },
-            { question: `${teamEntry.name}比赛有赛前观点吗？`, answer: predictionCount > 0 ? `${teamEntry.name}已有${predictionCount}场比赛整理赛前观点。` : "赛前重点关注首发、伤停、球队状态和赛程压力。" },
+            { question: `${teamEntry.name}比赛有赛前观点吗？`, answer: predictionCount > 0 ? `${teamEntry.name}${predictionCount}场比赛可查看赛前观点。` : "赛前重点关注首发、伤停、球队状态和赛程压力。" },
             { question: `${teamEntry.name}世界杯赛前看什么？`, answer: "重点关注开球时间、对手、首发结构和关键球员状态。" }
           ]))
         }}
@@ -113,7 +113,7 @@ export default async function WorldCupTeamPage({ params }: TeamParams) {
       <section className="grid gap-3 md:grid-cols-4">
         <Info label="世界杯赛程" value={`${matches.length} 场`} />
         <Info label="关注区域" value={teamEntry.region} />
-        <Info label="赛前观点" value={predictionCount > 0 ? `${predictionCount} 场` : "临场关注"} />
+        <Info label="赛前观点" value={predictionCount > 0 ? `${predictionCount} 场` : "关注阵容"} />
         <Info label="常见搜索" value={teamEntry.searchFocus[0]} />
       </section>
 
@@ -149,7 +149,7 @@ export default async function WorldCupTeamPage({ params }: TeamParams) {
       <section className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
         <h2 className="text-xl font-semibold text-white">{teamEntry.name}赛前关注</h2>
         <p className="mt-3 text-sm leading-7 text-white/62">
-          小组赛对手、开球时间、比赛阶段、核心球员状态和阵容结构，会直接影响赛前判断。
+          小组赛对手、开球时间、比赛阶段、核心球员状态和阵容结构，是赛前阅读的核心线索。
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           {[`${teamEntry.name}世界杯赛程`, `${teamEntry.name}比赛时间`, `${teamEntry.name}赛前分析`].map((keyword) => (

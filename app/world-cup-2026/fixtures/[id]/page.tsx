@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: FixtureParams): Promise<Metad
 
   const stage = getStageLabel(match);
   const title = `${getMatchTitle(match)}世界杯2026比赛时间、赛前观点与球队看点`;
-  const description = truncateSeo(`${match.home_team} vs ${match.away_team}将在北京时间${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}开球，属于世界杯2026${stage}。赛前可看双方赛程位置、阵容动向、参考方向和复盘记录。`);
+  const description = truncateSeo(`${match.home_team} vs ${match.away_team}北京时间${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}开球，属于世界杯2026${stage}。赛前重点看赛程位置、阵容动向、参考方向和复盘记录。`);
 
   return createMetadata({
     title,
@@ -65,7 +65,7 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
   const stage = getStageLabel(match);
   const kickoff = getMatchDateTimeLabel(match);
   const title = `${getMatchTitle(match)}世界杯2026比赛时间、赛前观点与球队看点`;
-  const description = truncateSeo(`${match.home_team} vs ${match.away_team}将在北京时间${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}开球，属于世界杯2026${stage}。赛前可看双方赛程位置、阵容动向、参考方向和复盘记录。`);
+  const description = truncateSeo(`${match.home_team} vs ${match.away_team}北京时间${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}开球，属于世界杯2026${stage}。赛前重点看赛程位置、阵容动向、参考方向和复盘记录。`);
   const direction = getDirection(prediction);
   const homeTeam = getWorldCupTeamEntry(match.home_team);
   const awayTeam = getWorldCupTeamEntry(match.away_team);
@@ -110,7 +110,7 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
           __html: jsonLd(faqJsonLd([
             { question: `${match.home_team} vs ${match.away_team}什么时候比赛？`, answer: `本场比赛时间为北京时间${getMatchDateLabel(match)} ${getMatchTimeLabel(match)}。` },
             { question: `${match.home_team} vs ${match.away_team}属于哪个阶段？`, answer: `本场属于世界杯2026${stage}。` },
-            { question: `${match.home_team} vs ${match.away_team}有赛前分析吗？`, answer: prediction ? "本场已有赛前观点，包含完整分析和参考方向。" : "赛前可关注比赛时间、赛事阶段、双方赛程位置和临场阵容动向。" }
+            { question: `${match.home_team} vs ${match.away_team}有赛前分析吗？`, answer: prediction ? "本场可查看赛前观点、分析正文和参考方向。" : "赛前重点关注比赛时间、赛事阶段、双方赛程位置和临场阵容动向。" }
           ]))
         }}
       />
@@ -173,7 +173,7 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
           比赛时间、赛事阶段、赛程压力和首发变化，是判断本场节奏的核心线索。
         </ContentCard>
         <ContentCard title="赛前阅读">
-          赛前观点会直接给出参考方向，并展开球队状态、历史交锋、赛程强度和数据变化。
+          赛前观点重点呈现参考方向，并拆解球队状态、历史交锋、赛程强度和数据变化。
         </ContentCard>
         <ContentCard title="赛后回看">
           复盘记录原参考方向、实际赛果和主要偏差，便于回看判断质量。

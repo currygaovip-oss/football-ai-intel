@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarDays, ChevronRight, Globe2, MapPin, Ticket, Trophy } from "lucide-react";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
+import { WorldCupCountdown } from "@/components/world-cup-countdown";
 import { WorldCupMatchCard } from "@/components/world-cup-match-card";
 import { getAllPredictions } from "@/lib/data";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 import { getTeamPath, getWorldCupGroupMatches, getWorldCupKnockoutMatches, getWorldCupMatches, getWorldCupPrediction, getWorldCupTeamEntries, hostCities, worldCupBasePath } from "@/lib/world-cup";
+import { getNextWorldCupMatch, worldCupFinalCountdown } from "@/lib/world-cup-countdown";
 
 const pageDescription = "2026美加墨世界杯赛程、举办国家、举办城市、揭幕战、决赛、比赛时间和赛前观点。";
 
@@ -23,6 +25,7 @@ export default function WorldCup2026Page() {
   const featuredMatches = matches.slice(0, 6);
   const featuredTeams = getWorldCupTeamEntries().slice(0, 10);
   const featuredCities = hostCities.filter((city) => city.highlight).concat(hostCities.filter((city) => !city.highlight).slice(0, 4));
+  const nextWorldCupMatch = getNextWorldCupMatch(matches);
 
   return (
     <div className="space-y-6">
@@ -56,8 +59,12 @@ export default function WorldCup2026Page() {
                 answer: "单场比赛包含对阵、开球时间、赛事阶段、赛前观点和赛后复盘。"
               },
               {
-                question: "世界杯赛前分析什么时候更新？",
-                answer: "重点比赛会在开赛前给出参考方向，并同步到今日情报。"
+                question: "世界杯赛前分析怎么看？",
+                answer: "重点比赛可结合开球时间、对阵、球队状态、赛程压力和参考方向一起阅读。"
+              },
+              {
+                question: "2026世界杯揭幕战什么时候开始？",
+                answer: "2026世界杯揭幕战为北京时间6月12日03:00，墨西哥对阵南非。"
               }
             ])
           )
@@ -88,8 +95,10 @@ export default function WorldCup2026Page() {
         </div>
       </section>
 
+      <WorldCupCountdown primary={nextWorldCupMatch} secondary={worldCupFinalCountdown} variant="wide" />
+
       <section className="grid gap-3 md:grid-cols-4">
-        <StatCard label="已收录比赛" value={matches.length} href={`${worldCupBasePath}/schedule`} />
+        <StatCard label="世界杯比赛" value={matches.length} href={`${worldCupBasePath}/schedule`} />
         <StatCard label="小组赛" value={groupMatches.length} href={`${worldCupBasePath}/groups`} />
         <StatCard label="淘汰赛" value={knockoutMatches.length} href={`${worldCupBasePath}/knockout`} />
         <StatCard label="赛前观点" value={predictions.length} href="/today" />
@@ -139,11 +148,17 @@ export default function WorldCup2026Page() {
         <InfoCard title="球队赛程" href={`${worldCupBasePath}/teams`}>
           按球队看世界杯比赛时间、对手和赛前观点。
         </InfoCard>
+        <InfoCard title="比赛时间" href="/topics/world-cup-2026-match-time">
+          按北京时间查看小组赛、淘汰赛、揭幕战和决赛。
+        </InfoCard>
+        <InfoCard title="球队名单" href="/topics/world-cup-team-lineups">
+          热门球队重点球员、阵容位置和赛前关注点。
+        </InfoCard>
         <InfoCard title="重点球员" href={`${worldCupBasePath}/players`}>
           热门球队核心球员、阵容位置和赛前看点。
         </InfoCard>
-        <InfoCard title="单场赛前分析" href="/predictions">
-          重点比赛的参考方向与完整分析。
+        <InfoCard title="赛前观点" href="/predictions">
+          重点比赛的参考方向、关键变量和赛前阅读。
         </InfoCard>
       </section>
 
@@ -207,7 +222,7 @@ function InfoCard({ title, href, children }: { title: string; href: string; chil
     <Link href={href} className="rounded-lg border border-white/10 bg-white/[0.04] p-5 transition hover:border-turf/35">
       <h2 className="text-lg font-semibold text-white">{title}</h2>
       <p className="mt-2 text-sm leading-7 text-white/62">{children}</p>
-      <span className="mt-4 inline-flex items-center gap-1 text-sm text-turf">查看详情 <ChevronRight size={14} /></span>
+      <span className="mt-4 inline-flex items-center gap-1 text-sm text-turf">继续查看 <ChevronRight size={14} /></span>
     </Link>
   );
 }

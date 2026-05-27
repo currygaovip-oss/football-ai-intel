@@ -2,9 +2,14 @@ export type SeoTopicSlug =
   | "today-football-schedule"
   | "football-match-analysis"
   | "world-cup-2026-schedule"
+  | "world-cup-2026-countdown"
   | "world-cup-2026-teams"
   | "world-cup-2026-host-cities"
   | "world-cup-2026-tickets"
+  | "world-cup-2026-match-time"
+  | "north-america-world-cup"
+  | "world-cup-opening-final"
+  | "world-cup-team-lineups"
   | "football-review"
   | "football-score-result";
 
@@ -24,7 +29,7 @@ export const seoTopics: SeoTopic[] = [
     title: "今日足球赛程",
     eyebrow: "足球赛程",
     description: "今日足球赛程、比赛时间、赛事阶段和赛前分析，覆盖世界杯、五大联赛、杯赛和焦点赛事。",
-    intro: "今日与近期足球赛程按开球时间整理，有赛前观点的比赛会标出参考方向和完整分析。",
+    intro: "今日与近期足球赛程按开球时间整理，重点呈现比赛时间、对阵双方和赛前阅读重点。",
     primaryLink: { label: "今日足球赛程", href: "/football-schedule/today" },
     faq: [
       {
@@ -33,7 +38,7 @@ export const seoTopics: SeoTopic[] = [
       },
       {
         question: "没有今日比赛时怎么看？",
-        answer: "完整赛程包含接下来已收录的比赛安排。"
+        answer: "完整赛程按比赛日整理近期重点对阵，适合赛前快速确认开球时间。"
       },
       {
         question: "赛程和赛前分析有什么关系？",
@@ -55,11 +60,11 @@ export const seoTopics: SeoTopic[] = [
       },
       {
         question: "参考方向应该怎么理解？",
-        answer: "参考方向概括模型倾向，正文会展开球队状态、赛程强度和关键变量。"
+        answer: "参考方向概括模型倾向，正文重点看球队状态、赛程强度和关键变量。"
       },
       {
-        question: "赛前分析在哪里更新？",
-        answer: "重点比赛结合最新信息更新，更多动态在 Telegram 群和 X 主页发布。"
+        question: "赛前分析在哪里看？",
+        answer: "今日情报集中整理重点比赛，Telegram 群和 X 主页同步公开动态。"
       }
     ]
   },
@@ -81,7 +86,29 @@ export const seoTopics: SeoTopic[] = [
       },
       {
         question: "世界杯比赛有赛前观点吗？",
-        answer: "重点比赛的赛前观点在赛程卡片和今日情报中展示。"
+        answer: "重点比赛可在今日情报中查看赛前观点和参考方向。"
+      }
+    ]
+  },
+  {
+    slug: "world-cup-2026-countdown",
+    title: "2026世界杯倒计时",
+    eyebrow: "世界杯时间",
+    description: "2026世界杯倒计时、揭幕战时间、决赛时间、美加墨世界杯比赛日和赛程入口。",
+    intro: "2026世界杯揭幕战为北京时间6月12日03:00，墨西哥对阵南非。倒计时适合快速确认揭幕战、决赛和下一场世界杯比赛时间。",
+    primaryLink: { label: "世界杯倒计时", href: "/world-cup-2026" },
+    faq: [
+      {
+        question: "2026世界杯还有多少天？",
+        answer: "绿茵智报首页和世界杯专题提供揭幕战倒计时，并同步下一场世界杯比赛时间。"
+      },
+      {
+        question: "2026世界杯揭幕战什么时候开始？",
+        answer: "北京时间6月12日03:00，墨西哥对阵南非。"
+      },
+      {
+        question: "2026世界杯决赛什么时候开始？",
+        answer: "北京时间7月20日03:00，决赛地点为纽约/新泽西大都会人寿体育场。"
       }
     ]
   },
@@ -103,7 +130,7 @@ export const seoTopics: SeoTopic[] = [
       },
       {
         question: "球队赛程有赛前观点吗？",
-        answer: "重点比赛包含完整分析和参考方向，赛后保留复盘记录。"
+        answer: "重点比赛包含赛前观点和参考方向，赛后保留复盘记录。"
       }
     ]
   },
@@ -125,7 +152,7 @@ export const seoTopics: SeoTopic[] = [
       },
       {
         question: "中文球迷为什么关注城市赛程？",
-        answer: "中文球迷常会按城市搜索比赛、门票和观赛安排，例如纽约世界杯赛程、洛杉矶世界杯赛程、多伦多世界杯赛程。"
+        answer: "中文球迷常按城市搜索比赛、门票和观赛安排，例如纽约世界杯赛程、洛杉矶世界杯赛程、多伦多世界杯赛程。"
       }
     ]
   },
@@ -152,6 +179,94 @@ export const seoTopics: SeoTopic[] = [
     ]
   },
   {
+    slug: "world-cup-2026-match-time",
+    title: "2026世界杯比赛时间",
+    eyebrow: "比赛时间",
+    description: "2026世界杯比赛时间、北京时间开球、比赛日、小组赛和淘汰赛对阵整理。",
+    intro: "按北京时间查看2026世界杯开球安排，重点关注小组赛比赛日、淘汰赛时间、揭幕战和决赛。",
+    primaryLink: { label: "查看世界杯赛程", href: "/world-cup-2026/schedule" },
+    faq: [
+      {
+        question: "2026世界杯比赛时间怎么看？",
+        answer: "按北京时间查看小组赛、淘汰赛、揭幕战和决赛安排。"
+      },
+      {
+        question: "世界杯比赛时间适合赛前看什么？",
+        answer: "开球时间和赛事阶段是基础，再结合球队状态、首发信息和赛前观点阅读。"
+      },
+      {
+        question: "世界杯赛程按什么顺序整理？",
+        answer: "按比赛日、阶段和对阵顺序整理，方便快速找到具体比赛。"
+      }
+    ]
+  },
+  {
+    slug: "north-america-world-cup",
+    title: "美加墨世界杯",
+    eyebrow: "美加墨世界杯",
+    description: "美加墨世界杯举办国家、举办城市、球场、世界杯赛程、门票信息和观赛重点。",
+    intro: "2026世界杯由美国、加拿大、墨西哥联合举办。中文球迷可重点关注举办城市、球场、比赛时间和门票信息。",
+    primaryLink: { label: "查看举办城市", href: "/world-cup-2026/host-cities" },
+    faq: [
+      {
+        question: "美加墨世界杯是哪三个国家？",
+        answer: "2026世界杯由美国、加拿大、墨西哥联合举办。"
+      },
+      {
+        question: "美加墨世界杯有哪些核心城市？",
+        answer: "纽约/新泽西、洛杉矶、达拉斯、多伦多、温哥华、墨西哥城等城市关注度较高。"
+      },
+      {
+        question: "美加墨世界杯适合重点看什么？",
+        answer: "重点看比赛时间、举办城市、球队赛程、门票信息和赛前观点。"
+      }
+    ]
+  },
+  {
+    slug: "world-cup-opening-final",
+    title: "2026世界杯揭幕战与决赛",
+    eyebrow: "揭幕战与决赛",
+    description: "2026世界杯揭幕战、决赛时间、举办城市、比赛球场和赛程入口。",
+    intro: "2026世界杯揭幕战与决赛是中文球迷搜索最集中的两类比赛，重点关注开球时间、举办城市和对阵信息。",
+    primaryLink: { label: "查看揭幕战", href: "/world-cup-2026/opening-match" },
+    faq: [
+      {
+        question: "2026世界杯揭幕战在哪里？",
+        answer: "2026世界杯揭幕战在墨西哥城阿兹特克体育场举行。"
+      },
+      {
+        question: "2026世界杯决赛在哪里？",
+        answer: "2026世界杯决赛在纽约/新泽西大都会人寿体育场举行。"
+      },
+      {
+        question: "揭幕战和决赛赛前看什么？",
+        answer: "重点看开球时间、比赛城市、球队状态、阵容信息和赛前观点。"
+      }
+    ]
+  },
+  {
+    slug: "world-cup-team-lineups",
+    title: "2026世界杯球队名单",
+    eyebrow: "球队名单",
+    description: "2026世界杯球队名单、重点球员、阵容位置、球队赛程和赛前看点。",
+    intro: "按球队查看世界杯重点球员、阵容位置和比赛安排，适合赛前了解球队框架和关键球员状态。",
+    primaryLink: { label: "查看球队名单", href: "/world-cup-2026/teams" },
+    faq: [
+      {
+        question: "2026世界杯球队名单在哪里看？",
+        answer: "球队名单以各队官方公布为准，绿茵智报整理热门球队、重点球员和赛程入口。"
+      },
+      {
+        question: "球队名单和赛前分析有什么关系？",
+        answer: "阵容结构、首发位置和核心球员状态，是赛前判断比赛节奏的重要线索。"
+      },
+      {
+        question: "哪些球队关注度更高？",
+        answer: "阿根廷、巴西、法国、英格兰、葡萄牙、德国、西班牙、美国、墨西哥、加拿大、日本、韩国关注度较高。"
+      }
+    ]
+  },
+  {
     slug: "football-review",
     title: "足球赛后复盘",
     eyebrow: "赛后复盘",
@@ -165,7 +280,7 @@ export const seoTopics: SeoTopic[] = [
       },
       {
         question: "为什么复盘不是比赛结束后立刻出现？",
-        answer: "复盘会核对赛果、实际走势和主要变量，完成后进入复盘记录。"
+        answer: "复盘需要核对赛果、实际走势和主要变量，完成后进入复盘记录。"
       },
       {
         question: "复盘评分代表什么？",
@@ -186,12 +301,12 @@ export const seoTopics: SeoTopic[] = [
         answer: "已完成比赛保留赛果和复盘记录，便于回看赛前观点与实际赛果的差异。"
       },
       {
-        question: "比分赛果会覆盖哪些比赛？",
+        question: "比分赛果覆盖哪些比赛？",
         answer: "覆盖世界杯、五大联赛、杯赛和当天焦点足球赛事。"
       },
       {
         question: "赛果和复盘有什么区别？",
-        answer: "赛果记录比赛结果，复盘会进一步解释赛前判断与实际走势的偏差。"
+        answer: "赛果记录比赛结果，复盘进一步解释赛前判断与实际走势的偏差。"
       }
     ]
   }
