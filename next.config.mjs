@@ -51,3 +51,5 @@ function getOrigin(value) {
     return "";
   }
 }
+
+import('@opennextjs/cloudflare').then(m => m.initOpenNextCloudflareForDev());
