@@ -9,7 +9,6 @@ import { articleJsonLd, breadcrumbJsonLd, createMetadata, jsonLd, truncateSeo } 
 type ReviewParams = { params: Promise<{ id: string }> };
 
 export const dynamic = "force-static";
-export const dynamicParams = false;
 
 export function generateStaticParams() {
   return getAllReviews().map((review) => ({ id: review.id }));

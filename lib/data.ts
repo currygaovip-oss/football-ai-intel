@@ -30,6 +30,8 @@ type SnapshotData = ContentData & {
 };
 
 const snapshotData = worldcupSnapshot as SnapshotData;
+let cachedContentData: ContentData | null = null;
+let cachedCompletedReviews: Review[] | null = null;
 
 export function getHomeData() {
   const data = getContentData();
@@ -117,14 +119,19 @@ export function refreshDataSourceForRuntime() {
 }
 
 function getContentData(): ContentData {
+  if (cachedContentData) return cachedContentData;
+
   if (snapshotData?.predictions?.length) {
-    return sanitizeContentData({
+    cachedContentData = sanitizeContentData({
       matches: snapshotData.matches,
       predictions: snapshotData.predictions,
       reviews: snapshotData.reviews
     });
+    return cachedContentData;
   }
-  return sanitizeContentData({ matches, predictions, reviews });
+
+  cachedContentData = sanitizeContentData({ matches, predictions, reviews });
+  return cachedContentData;
 }
 
 function withPredictionModel(prediction: Prediction) {
@@ -163,7 +170,10 @@ function getActivePredictions(data: ContentData) {
 }
 
 function getCompletedReviews(reviewList: Review[]) {
-  return reviewList.filter(isCompletedReview);
+  if (cachedContentData?.reviews === reviewList && cachedCompletedReviews) return cachedCompletedReviews;
+  const completedReviews = reviewList.filter(isCompletedReview);
+  if (cachedContentData?.reviews === reviewList) cachedCompletedReviews = completedReviews;
+  return completedReviews;
 }
 
 function isCompletedReview(review: Review) {
