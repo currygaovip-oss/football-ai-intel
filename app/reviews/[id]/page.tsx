@@ -2,11 +2,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/badge";
-import { getReviewDetail } from "@/lib/data";
+import { getAllReviews, getReviewDetail } from "@/lib/data";
 import { getOriginalDirection, getReviewSummary, getReviewToneClass, getReviewVerdictMeta } from "@/lib/review-display";
 import { articleJsonLd, breadcrumbJsonLd, createMetadata, jsonLd, truncateSeo } from "@/lib/seo";
 
 type ReviewParams = { params: Promise<{ id: string }> };
+
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return getAllReviews().map((review) => ({ id: review.id }));
+}
 
 export async function generateMetadata({ params }: ReviewParams): Promise<Metadata> {
   const { id } = await params;
