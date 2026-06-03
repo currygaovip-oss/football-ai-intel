@@ -139,6 +139,12 @@ export default function WorldCup2026Page() {
         <InfoCard title="世界杯小组赛" href={`${worldCupBasePath}/groups`}>
           A 组到 L 组比赛时间、对阵和比赛日。
         </InfoCard>
+        <InfoCard title="抽签分组" href="/topics/world-cup-2026-draw">
+          A 组到 L 组球队、同组对手和出线路径。
+        </InfoCard>
+        <InfoCard title="赛制规则" href="/topics/world-cup-2026-format">
+          48队、12个小组、104场比赛和32强淘汰赛。
+        </InfoCard>
         <InfoCard title="世界杯淘汰赛" href={`${worldCupBasePath}/knockout`}>
           32强赛、16强赛、1/4决赛、半决赛、季军赛和决赛。
         </InfoCard>
@@ -147,6 +153,12 @@ export default function WorldCup2026Page() {
         </InfoCard>
         <InfoCard title="球队赛程" href={`${worldCupBasePath}/teams`}>
           按球队看世界杯比赛时间、对手和赛前观点。
+        </InfoCard>
+        <InfoCard title="参赛球队" href="/topics/world-cup-2026-qualified-teams">
+          热门球队、分组路径、重点球员和赛程入口。
+        </InfoCard>
+        <InfoCard title="举办球场" href="/topics/world-cup-2026-stadiums">
+          美加墨举办城市、球场和比赛分布。
         </InfoCard>
         <InfoCard title="北京时间" href={`${worldCupBasePath}/china-time`}>
           按北京时间查看小组赛、淘汰赛、揭幕战和决赛。

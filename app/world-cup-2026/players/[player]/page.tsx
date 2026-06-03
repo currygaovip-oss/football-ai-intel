@@ -42,6 +42,14 @@ export default async function WorldCupPlayerPage({ params }: PlayerParams) {
   const matches = getTeamMatches(playerEntry.teamSlug);
   const predictions = getAllPredictions();
   const featuredMatches = matches.slice(0, 4);
+  const playerSearchTerms = [
+    `${playerEntry.name}世界杯2026`,
+    `${playerEntry.name}比赛时间`,
+    `${playerEntry.name}世界杯看点`,
+    `${playerEntry.teamName}世界杯阵容`,
+    `${playerEntry.teamName}世界杯赛程`,
+    `${playerEntry.teamName}赛前分析`
+  ];
 
   return (
     <div className="space-y-6">
@@ -154,6 +162,35 @@ export default async function WorldCupPlayerPage({ params }: PlayerParams) {
         </InfoPanel>
       </section>
 
+      <section className="grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="rounded-lg border border-gold/20 bg-gold/[0.055] p-5">
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold/85">球员长尾词</div>
+          <h2 className="mt-3 text-xl font-semibold text-white">{playerEntry.name}世界杯搜索路径</h2>
+          <p className="mt-3 text-sm leading-7 text-white/64">
+            围绕球员、所属球队、比赛时间、阵容名单和赛前观点，把{playerEntry.name}相关搜索连接到{playerEntry.teamName}赛程。
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {playerSearchTerms.map((term) => (
+              <span key={term} className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs text-white/66">
+                {term}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          <InfoPanel title="球队赛程路径">
+            先查看{playerEntry.teamName}比赛时间和对手，再进入单场比赛确认赛前重点。
+          </InfoPanel>
+          <InfoPanel title="阵容名单路径">
+            从{playerEntry.name}的位置和角色进入{playerEntry.teamName}阵容名单，继续查看核心球员分布。
+          </InfoPanel>
+          <InfoPanel title="赛前观点路径">
+            重点比赛可继续查看赛前观点、参考方向和赛后复盘，形成赛前到赛后的阅读闭环。
+          </InfoPanel>
+        </div>
+      </section>
+
       <section>
         <div className="mb-4 flex items-end justify-between gap-3">
           <div>
@@ -176,18 +213,33 @@ export default async function WorldCupPlayerPage({ params }: PlayerParams) {
         <h2 className="mt-2 text-xl font-semibold text-white">相关搜索</h2>
         <div className="mt-4 flex flex-wrap gap-2">
           {[
-            `${playerEntry.name}世界杯2026`,
-            `${playerEntry.name}比赛时间`,
-            `${playerEntry.teamName}世界杯阵容`,
-            `${playerEntry.teamName}世界杯赛程`
+            ...playerSearchTerms.slice(0, 4)
           ].map((keyword) => (
             <span key={keyword} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/58">{keyword}</span>
           ))}
         </div>
       </section>
 
+      <section className="rounded-lg border border-white/10 bg-black/20 p-5">
+        <h2 className="text-xl font-semibold text-white">继续查看{playerEntry.name}相关信息</h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <PlayerLink href={playerEntry.teamPath} label={`${playerEntry.teamName}赛程`} />
+          <PlayerLink href={playerEntry.squadPath} label={`${playerEntry.teamName}阵容名单`} />
+          <PlayerLink href={`${worldCupBasePath}/players`} label="世界杯重点球员" />
+          <PlayerLink href="/topics/world-cup-team-lineups" label="世界杯球队名单" />
+        </div>
+      </section>
+
       <SeoTopicLinks />
     </div>
+  );
+}
+
+function PlayerLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="rounded-lg border border-white/10 bg-white/[0.035] px-4 py-3 text-sm text-white/70 transition hover:border-turf/35 hover:text-turf">
+      {label}
+    </Link>
   );
 }
 

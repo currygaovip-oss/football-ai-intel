@@ -33,11 +33,32 @@ export default function WorldCupMatchesPage() {
         <p className="mt-3 max-w-3xl text-sm leading-7 text-white/62">按比赛时间浏览全部对阵，重点场次可继续阅读赛前观点和参考方向。</p>
       </section>
 
+      <section className="grid gap-4 lg:grid-cols-3">
+        <IndexCard title="比赛时间长尾">
+          承接“某队vs某队比赛时间”“世界杯北京时间”“小组赛开球时间”等搜索，继续进入单场比赛详情。
+        </IndexCard>
+        <IndexCard title="赛前分析长尾">
+          重点比赛可从完整赛程进入赛前观点，查看参考方向、球队状态和赛程压力。
+        </IndexCard>
+        <IndexCard title="赛后复盘长尾">
+          比赛结束后，已复盘内容会连接原参考方向、实际赛果和偏差说明。
+        </IndexCard>
+      </section>
+
       <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         {matches.map((match) => <WorldCupMatchCard key={match.id} match={match} prediction={getWorldCupPrediction(match, predictions)} />)}
       </section>
 
       <SeoTopicLinks />
+    </div>
+  );
+}
+
+function IndexCard({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-lg border border-white/10 bg-white/[0.035] p-5">
+      <h2 className="text-base font-semibold text-white">{title}</h2>
+      <p className="mt-3 text-sm leading-7 text-white/62">{children}</p>
     </div>
   );
 }

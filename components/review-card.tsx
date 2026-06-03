@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Badge } from "@/components/badge";
 import type { Prediction, Review } from "@/lib/data";
-
-const statusText = { hit: "命中", miss: "未命中", half: "部分符合" };
-const tone = { hit: "green", miss: "red", half: "gold" } as const;
+import { getOriginalDirection, getReviewSummary, getReviewToneClass, getReviewVerdictMeta } from "@/lib/review-display";
 
 export function ReviewCard({ review, prediction }: { review: Review; prediction?: Prediction }) {
-  const originalDirection = prediction?.recommendation.replace(/^模型倾向：|^参考方向：/, "");
+  const originalDirection = getOriginalDirection(prediction);
+  const verdict = getReviewVerdictMeta(review);
+  const summary = getReviewSummary(review, prediction);
 
   return (
     <Link
@@ -17,13 +17,17 @@ export function ReviewCard({ review, prediction }: { review: Review; prediction?
       data-analytics-label={prediction?.matchup ?? "赛后复盘"}
     >
       <div className="mb-3 flex flex-wrap items-center gap-2">
-        <Badge tone={tone[review.result_status]}>{statusText[review.result_status]}</Badge>
-        <Badge tone="white">复盘评分 {review.score}</Badge>
+        <Badge tone={verdict.tone}>{verdict.label}</Badge>
         <span className="ml-auto text-xs text-white/45">{review.reviewed_at}</span>
       </div>
       <h3 className="text-lg font-semibold text-white">{prediction?.matchup ?? "赛后复盘"}</h3>
-      <p className="mt-2 text-sm text-white/62">赛果：{review.match_result}</p>
-      <p className="mt-3 text-sm text-white/72">原参考方向：{originalDirection}</p>
+      <div className="mt-3 grid gap-2 text-sm text-white/64 sm:grid-cols-2">
+        <p>赛果：<span className="text-white/82">{review.match_result}</span></p>
+        <p>赛前参考：<span className="text-white/82">{originalDirection}</span></p>
+      </div>
+      <p className={`mt-3 rounded-md border px-3 py-2 text-sm leading-6 text-white/68 ${getReviewToneClass(verdict.tone, "border")}`}>
+        {summary}
+      </p>
     </Link>
   );
 }

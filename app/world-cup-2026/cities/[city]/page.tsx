@@ -29,6 +29,13 @@ export default async function HostCityPage({ params }: CityParams) {
   const city = getHostCity(slug);
   if (!city) notFound();
   const path = getHostCityPath(city.slug);
+  const citySearchTerms = [
+    `${city.name}世界杯赛程`,
+    `${city.name}世界杯球场`,
+    `${city.name}世界杯门票`,
+    `${city.name}世界杯比赛时间`,
+    `${city.name}赛区观赛`
+  ];
 
   return (
     <div className="space-y-6">
@@ -92,6 +99,35 @@ export default async function HostCityPage({ params }: CityParams) {
         </div>
       </section>
 
+      <section className="grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="rounded-lg border border-gold/20 bg-gold/[0.055] p-5">
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold/85">城市长尾词</div>
+          <h2 className="mt-3 text-xl font-semibold text-white">{city.name}世界杯搜索路径</h2>
+          <p className="mt-3 text-sm leading-7 text-white/64">
+            围绕城市、球场、比赛时间和门票提醒，把{city.name}赛区信息连接到完整赛程、单场比赛和赛前观点。
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {citySearchTerms.map((term) => (
+              <span key={term} className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs text-white/66">
+                {term}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          <SearchCard title="赛区比赛时间">
+            先核对北京时间和当地城市，再查看该比赛所属阶段、对阵双方和赛前阅读重点。
+          </SearchCard>
+          <SearchCard title="球场与观赛">
+            {city.stadium} 是{city.name}赛区核心信息，适合与门票提醒、城市交通和入场要求一起核对。
+          </SearchCard>
+          <SearchCard title="赛前观点入口">
+            城市赛程应继续连接到单场比赛、球队赛程和赛前观点，方便赛前快速追踪。
+          </SearchCard>
+        </div>
+      </section>
+
       <section className="grid gap-4 lg:grid-cols-3">
         <SearchCard title={`${city.name}世界杯赛程`}>
           该赛区比赛时间、赛事阶段和重点对阵。
@@ -104,8 +140,26 @@ export default async function HostCityPage({ params }: CityParams) {
         </SearchCard>
       </section>
 
+      <section className="rounded-lg border border-white/10 bg-black/20 p-5">
+        <h2 className="text-xl font-semibold text-white">继续查看{city.name}相关信息</h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <CityLink href={`${worldCupBasePath}/schedule`} label="世界杯完整赛程" />
+          <CityLink href={`${worldCupBasePath}/host-cities`} label="全部举办城市" />
+          <CityLink href={getCityTicketPath(city.slug)} label={`${city.name}门票信息`} />
+          <CityLink href="/topics/world-cup-2026-stadiums" label="世界杯举办球场" />
+        </div>
+      </section>
+
       <SeoTopicLinks />
     </div>
+  );
+}
+
+function CityLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="rounded-lg border border-white/10 bg-white/[0.035] px-4 py-3 text-sm text-white/70 transition hover:border-turf/35 hover:text-turf">
+      {label}
+    </Link>
   );
 }
 

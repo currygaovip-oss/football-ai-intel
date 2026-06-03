@@ -4,8 +4,9 @@ import { BrainCircuit, Clock, Sparkles, Target } from "lucide-react";
 import { Badge } from "@/components/badge";
 import { SectionHeading } from "@/components/section-heading";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
-import { getModelDirectory, getTodayPredictions, type AiModel, type Prediction } from "@/lib/data";
+import { getAllReviews, getModelDirectory, getReviews, getTodayPredictions, type AiModel, type Prediction, type Review } from "@/lib/data";
 import { extractPredictionDirection, getPredictionDisplayMeta } from "@/lib/prediction-display";
+import { formatReviewStats, getOriginalDirection, getRecentReviewStats, getReviewMatchResult, getReviewToneClass, getReviewVerdictMeta } from "@/lib/review-display";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 
 const todayDescription = "今日足球赛前分析、比赛时间、对阵双方和参考方向；覆盖世界杯、五大联赛、中超和焦点赛事。";
@@ -19,6 +20,9 @@ export const metadata: Metadata = createMetadata({
 export default function TodayPage() {
   const predictions = getTodayPredictions();
   const models = getModelDirectory();
+  const historicalReviews = getReviews().slice(0, 6);
+  const recentStats = getRecentReviewStats(getAllReviews(), 30);
+  const recentStatsLabel = formatReviewStats(recentStats);
   const freeCount = predictions.filter(({ prediction }) => prediction.visibility === "free").length;
   const vipCount = predictions.length - freeCount;
 
@@ -72,17 +76,54 @@ export default function TodayPage() {
           <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5">赛前观点 {predictions.length}</span>
           <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5">免费 {freeCount}</span>
           <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5">VIP {vipCount}</span>
+          <span className="rounded-full border border-turf/20 bg-turf/10 px-3 py-1.5 text-turf">{recentStatsLabel}</span>
         </div>
       </div>
 
       <section>
         <div className="mb-3 flex items-center justify-between gap-3">
           <h2 className="text-lg font-semibold text-white">观点列表</h2>
-          <Link href="/reviews" className="text-sm text-white/55 hover:text-turf">查看历史复盘</Link>
+          <Link href="/reviews" className="text-sm text-white/55 hover:text-turf">查看历史预测</Link>
         </div>
         <div className="grid gap-3">
-          {predictions.map(({ prediction, model }) => <DirectionCard key={prediction.id} prediction={prediction} model={model} />)}
+          {predictions.map(({ prediction, model }) => (
+            <DirectionCard key={prediction.id} prediction={prediction} model={model} performanceText={recentStatsLabel} />
+          ))}
         </div>
+      </section>
+
+      <section className="rounded-lg border border-white/10 bg-white/[0.035]">
+        <div className="border-b border-white/10 p-4">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+              <p className="text-xs font-semibold tracking-[0.28em] text-turf">历史表现</p>
+              <h2 className="mt-2 text-xl font-semibold text-white">历史预测表现</h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-white/58">
+                保留赛前参考、最终赛果和结果归类，方便回看判断质量。
+            </p>
+          </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <HistoryStatPill label="预测命中" value={recentStats.hit} tone="green" />
+              <HistoryStatPill label="半命中" value={recentStats.half} tone="gold" />
+              <HistoryStatPill label="未命中" value={recentStats.miss} tone="red" />
+              <Link href="/reviews" className="rounded-full border border-turf/30 px-3 py-1.5 text-sm text-turf hover:bg-turf/10">
+                全部历史预测
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {historicalReviews.length ? (
+          <div className="divide-y divide-white/10">
+            {historicalReviews.map(({ review, prediction }) => (
+              <HistoryReviewRow key={review.id} review={review} prediction={prediction} />
+            ))}
+          </div>
+        ) : (
+          <div className="px-4 py-6 text-sm text-white/55">
+            已完成的预测会按赛前参考、最终赛果和结果归类沉淀在这里。
+          </div>
+        )}
       </section>
 
       <section className="rounded-lg border border-white/10 bg-white/[0.04] p-4">
@@ -100,7 +141,54 @@ export default function TodayPage() {
   );
 }
 
-function DirectionCard({ prediction, model }: { prediction: Prediction; model?: AiModel }) {
+function HistoryReviewRow({ review, prediction }: { review: Review; prediction?: Prediction }) {
+  const meta = getReviewVerdictMeta(review);
+  const direction = getOriginalDirection(prediction);
+  const matchResult = getReviewMatchResult(review);
+
+  return (
+    <Link
+      href={`/reviews/${review.id}`}
+      className="grid gap-3 px-4 py-4 transition hover:bg-turf/5 md:grid-cols-[120px_1.35fr_1fr_1fr_auto] md:items-center"
+      data-analytics-event="click_review"
+      data-analytics-area="today_history"
+      data-analytics-label={prediction?.matchup ?? review.match_result}
+    >
+      <div className="flex items-center justify-between gap-3 md:block">
+        <Badge tone={meta.tone}>{meta.shortLabel}</Badge>
+        <span className="text-xs text-white/42 md:mt-2 md:block">{review.reviewed_at}</span>
+      </div>
+
+      <div>
+        <div className="text-xs text-white/42">{prediction?.competition || "历史预测"}</div>
+        <h3 className="mt-1 text-base font-semibold leading-snug text-white">{prediction?.matchup ?? matchResult}</h3>
+      </div>
+
+      <div>
+        <div className="text-xs text-white/42">赛前参考</div>
+        <div className="mt-1 text-sm font-semibold text-white">{direction}</div>
+      </div>
+
+      <div>
+        <div className="text-xs text-white/42">最终赛果</div>
+        <div className="mt-1 text-sm text-white/72">{matchResult}</div>
+      </div>
+
+      <span className="text-sm text-turf md:text-right">完整回看</span>
+    </Link>
+  );
+}
+
+function HistoryStatPill({ label, value, tone }: { label: string; value: number; tone: "green" | "gold" | "red" }) {
+  const toneClass = tone === "green" ? "text-turf" : tone === "gold" ? "text-gold" : "text-red-200";
+  return (
+    <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-sm text-white/58">
+      {label} <strong className={`ml-1 font-semibold ${toneClass}`}>{value}</strong>
+    </span>
+  );
+}
+
+function DirectionCard({ prediction, model, performanceText }: { prediction: Prediction; model?: AiModel; performanceText: string }) {
   const direction = extractPredictionDirection(prediction.recommendation);
   const { competitionLabel, timeLabel } = getPredictionDisplayMeta(prediction);
   const reason = prediction.body[0]?.replace(/\n/g, " ").slice(0, 78);
@@ -131,6 +219,7 @@ function DirectionCard({ prediction, model }: { prediction: Prediction; model?: 
             <Target size={15} /> 核心参考方向
           </div>
           <div className="mt-2 text-lg font-semibold leading-snug text-white">{direction}</div>
+          <div className="mt-2 text-xs text-white/50">{performanceText}</div>
         </div>
 
         <div className="flex flex-wrap items-center gap-2 lg:justify-end">

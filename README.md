@@ -79,6 +79,36 @@ TG bot 发布预测 → npm run export:worldcup → npm run build → 部署
 WORLDCUP_BOT_DB_PATH="/你的路径/worldcup_bot.db" npm run export:worldcup
 ```
 
+## SEO / GEO 质检
+
+本项目内置 SEO/GEO 质检命令，用于检查公开文案、关键词覆盖、专题入口、AI 摘要上下文和页面基础收录条件。
+
+只扫源码：
+
+```bash
+npm run seo:audit
+```
+
+同时抓取本地页面：
+
+```bash
+npm run dev -- -p 3007
+npm run seo:audit -- --base=http://localhost:3007
+```
+
+输出会保存到：
+
+```text
+reports/seo-geo-audit-latest.json
+```
+
+推荐在每次 SEO/GEO 页面改动后执行，重点看：
+
+- 公开文案风险是否为 0。
+- 关键词覆盖是否通过。
+- 页面是否返回 200、具备 title、description、H1、canonical。
+- `llms.txt`、`llms-full.txt`、`answers.txt` 是否覆盖核心问答。
+
 ## 预览部署
 
 当前版本适合部署为公开访问版本，用来验证 UI、内容结构和社群承接链路。

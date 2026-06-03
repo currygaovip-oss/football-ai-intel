@@ -18,6 +18,8 @@ export const seoKeywords = [
   "世界杯赛程",
   "世界杯2026赛程",
   "2026世界杯",
+  "2026世界杯什么时候开始",
+  "2026世界杯在哪里举办",
   "美加墨世界杯",
   "美加墨世界杯赛程",
   "世界杯举办城市",
@@ -28,13 +30,27 @@ export const seoKeywords = [
   "世界杯淘汰赛赛程",
   "世界杯比赛时间",
   "2026世界杯北京时间",
+  "2026世界杯时差",
+  "世界杯北京时间换算",
   "世界杯赛程北京时间",
   "世界杯比赛中国时间",
   "世界杯分组",
   "2026世界杯分组",
+  "2026世界杯抽签",
+  "2026世界杯抽签分组",
+  "世界杯抽签结果",
   "世界杯小组赛分组",
   "世界杯A组",
   "世界杯L组",
+  "2026世界杯赛制",
+  "世界杯48队",
+  "2026世界杯48队",
+  "2026世界杯参赛球队",
+  "世界杯参赛球队",
+  "2026世界杯亚洲球队",
+  "亚洲球队世界杯赛程",
+  "2026世界杯举办球场",
+  "世界杯举办球场",
   "世界杯倒计时",
   "2026世界杯倒计时",
   "美加墨世界杯倒计时",
@@ -55,6 +71,7 @@ export const seoKeywords = [
   "2026世界杯小组赛",
   "2026世界杯淘汰赛",
   "世界杯32强赛",
+  "2026世界杯32强赛",
   "世界杯16强赛",
   "世界杯四分之一决赛",
   "世界杯半决赛",
@@ -62,6 +79,8 @@ export const seoKeywords = [
   "世界杯决赛门票",
   "世界杯揭幕战门票",
   "世界杯观赛攻略",
+  "2026世界杯观赛指南",
+  "世界杯哪里看",
   "阿根廷世界杯赛程",
   "阿根廷世界杯阵容",
   "阿根廷世界杯名单",
@@ -123,15 +142,27 @@ export const seoKeywords = [
 export const seoTopicLinks = [
   { label: "足球AI情报", href: "/football-ai-intelligence" },
   { label: "世界杯2026专题", href: "/world-cup-2026" },
+  { label: "世界杯长尾索引", href: "/world-cup-2026/index" },
   { label: "美加墨世界杯", href: "/world-cup-2026/host-countries" },
   { label: "世界杯举办城市", href: "/world-cup-2026/host-cities" },
+  { label: "2026世界杯在哪里举办", href: "/topics/world-cup-2026-where" },
+  { label: "2026世界杯什么时候开始", href: "/topics/world-cup-2026-start-date" },
   { label: "世界杯比赛时间", href: "/topics/world-cup-2026-match-time" },
   { label: "2026世界杯北京时间", href: "/world-cup-2026/china-time" },
+  { label: "2026世界杯时差", href: "/topics/world-cup-2026-time-difference" },
   { label: "2026世界杯分组", href: "/topics/world-cup-2026-groups" },
+  { label: "2026世界杯抽签分组", href: "/topics/world-cup-2026-draw" },
+  { label: "2026世界杯赛制", href: "/topics/world-cup-2026-format" },
+  { label: "2026世界杯48队", href: "/topics/world-cup-2026-48-teams" },
   { label: "世界杯小组赛", href: "/topics/world-cup-2026-group-stage" },
   { label: "世界杯淘汰赛", href: "/topics/world-cup-2026-knockout" },
+  { label: "世界杯32强赛", href: "/topics/world-cup-2026-round-of-32" },
   { label: "世界杯揭幕战时间", href: "/topics/world-cup-2026-opening-time" },
   { label: "世界杯决赛时间", href: "/topics/world-cup-2026-final-time" },
+  { label: "世界杯举办球场", href: "/topics/world-cup-2026-stadiums" },
+  { label: "世界杯参赛球队", href: "/topics/world-cup-2026-qualified-teams" },
+  { label: "世界杯亚洲球队", href: "/topics/world-cup-2026-asian-teams" },
+  { label: "世界杯观赛指南", href: "/topics/world-cup-2026-watch-guide" },
   { label: "美加墨世界杯", href: "/topics/north-america-world-cup" },
   { label: "世界杯揭幕战与决赛", href: "/topics/world-cup-opening-final" },
   { label: "世界杯球队赛程", href: "/world-cup-2026/teams" },
@@ -236,13 +267,14 @@ export function websiteJsonLd() {
   };
 }
 
-export function webPageJsonLd({ name, description, path }: { name: string; description: string; path: string }) {
+export function webPageJsonLd({ name, description, path, dateModified = new Date().toISOString() }: { name: string; description: string; path: string; dateModified?: string }) {
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name,
     description,
     url: absoluteUrl(path),
+    dateModified,
     isPartOf: {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
@@ -398,7 +430,9 @@ export function sportsEventJsonLd({
   startDate,
   competition,
   homeTeam,
-  awayTeam
+  awayTeam,
+  locationName = "比赛场地以赛事官方公布为准",
+  locationAddress = "比赛场地以赛事官方公布为准"
 }: {
   name: string;
   path: string;
@@ -406,6 +440,8 @@ export function sportsEventJsonLd({
   competition: string;
   homeTeam: string;
   awayTeam: string;
+  locationName?: string;
+  locationAddress?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -418,6 +454,14 @@ export function sportsEventJsonLd({
     organizer: {
       "@type": "Organization",
       name: competition
+    },
+    location: {
+      "@type": "Place",
+      name: locationName,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: locationAddress
+      }
     },
     competitor: [
       { "@type": "SportsTeam", name: homeTeam },

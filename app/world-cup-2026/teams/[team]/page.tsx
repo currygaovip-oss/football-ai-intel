@@ -50,6 +50,13 @@ export default async function WorldCupTeamPage({ params }: TeamParams) {
   const firstDirection = getDirection(firstPrediction);
   const firstOpponent = firstMatch ? (firstMatch.home_team === teamEntry.name ? firstMatch.away_team : firstMatch.home_team) : "";
   const predictionCount = matches.filter((match) => getWorldCupPrediction(match, predictions)).length;
+  const teamSearchTerms = [
+    ...teamEntry.searchFocus,
+    `${teamEntry.name}世界杯比赛时间`,
+    `${teamEntry.name}世界杯阵容`,
+    `${teamEntry.name}重点球员`,
+    `${teamEntry.name}赛前分析`
+  ];
 
   return (
     <div className="space-y-6">
@@ -152,10 +159,22 @@ export default async function WorldCupTeamPage({ params }: TeamParams) {
           小组赛对手、开球时间、比赛阶段、核心球员状态和阵容结构，是赛前阅读的核心线索。
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          {[`${teamEntry.name}世界杯赛程`, `${teamEntry.name}比赛时间`, `${teamEntry.name}赛前分析`].map((keyword) => (
+          {teamSearchTerms.map((keyword) => (
             <span key={keyword} className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs text-white/55">{keyword}</span>
           ))}
         </div>
+      </section>
+
+      <section className="grid gap-4 lg:grid-cols-3">
+        <InfoPanel title={`${teamEntry.name}赛程路径`}>
+          先确认比赛时间、对手和赛事阶段，再进入单场比赛查看赛前重点、球队状态和相关复盘入口。
+        </InfoPanel>
+        <InfoPanel title={`${teamEntry.name}阵容路径`}>
+          阵容结构、核心球员和首发变化会影响比赛节奏，适合与球队名单和重点球员信息一起阅读。
+        </InfoPanel>
+        <InfoPanel title={`${teamEntry.name}复盘路径`}>
+          比赛结束后，赛后复盘会记录原参考方向、实际赛果和偏差说明，方便回看判断质量。
+        </InfoPanel>
       </section>
 
       {teamEntry.profile || teamEntry.style || teamEntry.history ? (
@@ -213,8 +232,26 @@ export default async function WorldCupTeamPage({ params }: TeamParams) {
         )}
       </section>
 
+      <section className="rounded-lg border border-white/10 bg-black/20 p-5">
+        <h2 className="text-xl font-semibold text-white">继续查看{teamEntry.name}相关信息</h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <TeamLink href={`${worldCupBasePath}/teams`} label="世界杯球队赛程" />
+          <TeamLink href={getTeamSquadPath(teamEntry.slug)} label={`${teamEntry.name}球队名单`} />
+          <TeamLink href={`${worldCupBasePath}/players`} label="世界杯重点球员" />
+          <TeamLink href="/topics/world-cup-2026-qualified-teams" label="世界杯参赛球队" />
+        </div>
+      </section>
+
       <SeoTopicLinks />
     </div>
+  );
+}
+
+function TeamLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="rounded-lg border border-white/10 bg-white/[0.035] px-4 py-3 text-sm text-white/70 transition hover:border-turf/35 hover:text-turf">
+      {label}
+    </Link>
   );
 }
 

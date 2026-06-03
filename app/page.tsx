@@ -9,6 +9,7 @@ import { SocialCta } from "@/components/social-cta";
 import { WorldCupCountdown } from "@/components/world-cup-countdown";
 import { getHomeData, type AiModel, type Prediction } from "@/lib/data";
 import { extractPredictionDirection, getPredictionDisplayMeta } from "@/lib/prediction-display";
+import { formatReviewStats, getRecentReviewStats, getReviewVerdictMeta } from "@/lib/review-display";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, siteNavigationJsonLd, webPageJsonLd, websiteJsonLd } from "@/lib/seo";
 import { getNextWorldCupMatch, worldCupFinalCountdown } from "@/lib/world-cup-countdown";
 
@@ -36,6 +37,7 @@ export default function HomePage() {
   const nextWorldCupMatch = getNextWorldCupMatch(matches);
   const topPredictions = predictions.slice(0, 5);
   const latestReviews = reviews.slice(0, 2);
+  const recentReviewStats = formatReviewStats(getRecentReviewStats(reviews.map(({ review }) => review), 30));
 
   return (
     <div className="space-y-8">
@@ -112,6 +114,10 @@ export default function HomePage() {
                 {principle}
               </span>
             ))}
+            <Link href="/reviews" className="inline-flex items-center gap-2 rounded-md border border-turf/20 bg-turf/10 px-3 py-2 text-xs text-turf">
+              <Database size={14} />
+              {recentReviewStats}
+            </Link>
           </div>
         </div>
 
@@ -142,20 +148,25 @@ export default function HomePage() {
               </div>
               <div className="mt-3 grid gap-2">
                 {latestReviews.map(({ review, prediction }) => (
-                  <Link
-                    key={review.id}
-                    href={`/reviews/${review.id}`}
-                    className="rounded-md border border-white/10 bg-white/[0.04] p-3 transition hover:border-turf/30"
-                    data-analytics-event="click_review"
-                    data-analytics-area="home_latest_reviews"
-                    data-analytics-label={prediction?.matchup ?? "最新复盘"}
-                  >
-                    <div className="flex items-center justify-between gap-2 text-xs">
-                      <span className="text-turf">{review.result_status === "hit" ? "命中" : review.result_status === "half" ? "部分符合" : "未命中"}</span>
-                      <span className="text-white/40">评分 {review.score}</span>
-                    </div>
-                    <div className="mt-2 text-sm font-semibold text-white">{prediction?.matchup}</div>
-                  </Link>
+                  (() => {
+                    const verdict = getReviewVerdictMeta(review);
+                    return (
+                      <Link
+                        key={review.id}
+                        href={`/reviews/${review.id}`}
+                        className="rounded-md border border-white/10 bg-white/[0.04] p-3 transition hover:border-turf/30"
+                        data-analytics-event="click_review"
+                        data-analytics-area="home_latest_reviews"
+                        data-analytics-label={prediction?.matchup ?? "最新复盘"}
+                      >
+                        <div className="flex items-center justify-between gap-2 text-xs">
+                          <span className={verdict.tone === "green" ? "text-turf" : verdict.tone === "gold" ? "text-gold" : "text-red-200"}>{verdict.shortLabel}</span>
+                          <span className="text-white/40">{review.reviewed_at}</span>
+                        </div>
+                        <div className="mt-2 text-sm font-semibold text-white">{prediction?.matchup}</div>
+                      </Link>
+                    );
+                  })()
                 ))}
               </div>
             </div>

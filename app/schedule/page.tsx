@@ -65,24 +65,31 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
           )
         }}
       />
-      {filteredMatches.slice(0, 6).map((match) => (
-        <script
-          key={`event-${match.id}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: jsonLd(
-              sportsEventJsonLd({
-                name: `${match.home_team} vs ${match.away_team}`,
-                path: `/schedule?type=${currentType}`,
-                startDate: toEventDateTime(match.kickoff_time),
-                competition: match.competition,
-                homeTeam: match.home_team,
-                awayTeam: match.away_team
-              })
-            )
-          }}
-        />
-      ))}
+      {filteredMatches.slice(0, 6).map((match) => {
+        const eventStartDate = toEventDateTime(match.kickoff_time);
+        if (!eventStartDate) return null;
+
+        return (
+          <script
+            key={`event-${match.id}`}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: jsonLd(
+                sportsEventJsonLd({
+                  name: `${match.home_team} vs ${match.away_team}`,
+                  path: `/schedule?type=${currentType}`,
+                  startDate: eventStartDate,
+                  competition: match.competition,
+                  homeTeam: match.home_team,
+                  awayTeam: match.away_team,
+                  locationName: match.competition.includes("世界杯") ? "2026世界杯举办城市" : "比赛场地以赛事官方公布为准",
+                  locationAddress: match.competition.includes("世界杯") ? "美国、加拿大或墨西哥" : "比赛场地以赛事官方公布为准"
+                })
+              )
+            }}
+          />
+        );
+      })}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -353,7 +360,6 @@ function getTimeLabel(kickoffTime: string) {
 
 function toEventDateTime(kickoffTime: string) {
   const match = kickoffTime.match(/^(\d{2})\/(\d{2})\s+(\d{2}):(\d{2})/);
-  if (!match) return kickoffTime;
-  const year = new Date().getFullYear();
-  return `${year}-${match[1]}-${match[2]}T${match[3]}:${match[4]}:00+07:00`;
+  if (!match) return null;
+  return `2026-${match[1]}-${match[2]}T${match[3]}:${match[4]}:00+08:00`;
 }

@@ -45,6 +45,18 @@ export default function HostCitiesPage() {
         </p>
       </section>
 
+      <section className="grid gap-4 lg:grid-cols-3">
+        <CityIndexCard title="城市赛程长尾">
+          承接墨西哥城、纽约/新泽西、洛杉矶、达拉斯、多伦多、温哥华等城市赛程搜索。
+        </CityIndexCard>
+        <CityIndexCard title="球场信息长尾">
+          城市入口继续连接球场、举办国家、比赛时间和单场比赛详情。
+        </CityIndexCard>
+        <CityIndexCard title="门票观赛长尾">
+          从城市进入门票城市页，核对官方购票链接、入场要求和观赛提醒。
+        </CityIndexCard>
+      </section>
+
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {hostCities.map((city) => (
           <Link key={city.slug} href={getHostCityPath(city.slug)} className="rounded-lg border border-white/10 bg-white/[0.04] p-4 transition hover:border-turf/35">
@@ -77,6 +89,15 @@ export default function HostCitiesPage() {
       </section>
 
       <SeoTopicLinks />
+    </div>
+  );
+}
+
+function CityIndexCard({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-lg border border-white/10 bg-white/[0.035] p-5">
+      <h2 className="text-base font-semibold text-white">{title}</h2>
+      <p className="mt-3 text-sm leading-7 text-white/62">{children}</p>
     </div>
   );
 }

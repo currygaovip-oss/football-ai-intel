@@ -33,6 +33,18 @@ export default function WorldCupTeamsPage() {
         </p>
       </section>
 
+      <section className="grid gap-4 lg:grid-cols-3">
+        <IndexCard title="热门球队长尾">
+          阿根廷、巴西、法国、英格兰、葡萄牙等球队适合承接球队赛程、比赛时间和阵容名单搜索。
+        </IndexCard>
+        <IndexCard title="阵容名单长尾">
+          球队入口继续连接重点球员、阵容位置和首发观察，帮助赛前理解比赛变量。
+        </IndexCard>
+        <IndexCard title="单场比赛长尾">
+          从球队赛程进入具体比赛详情，再连接赛前观点、比赛时间和赛后复盘。
+        </IndexCard>
+      </section>
+
       <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {teams.map((team) => (
           <div key={team.slug} className="rounded-lg border border-white/10 bg-white/[0.04] p-4 transition hover:border-turf/35">
@@ -51,6 +63,15 @@ export default function WorldCupTeamsPage() {
       </section>
 
       <SeoTopicLinks />
+    </div>
+  );
+}
+
+function IndexCard({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-lg border border-white/10 bg-white/[0.035] p-5">
+      <h2 className="text-base font-semibold text-white">{title}</h2>
+      <p className="mt-3 text-sm leading-7 text-white/62">{children}</p>
     </div>
   );
 }

@@ -36,6 +36,13 @@ export default async function CityTicketPage({ params }: CityTicketParams) {
   const city = getHostCity(slug);
   if (!city) notFound();
   const path = getCityTicketPath(city.slug);
+  const ticketSearchTerms = [
+    `${city.name}世界杯门票`,
+    `${city.name}世界杯官方购票`,
+    `${city.name}世界杯球场`,
+    `${city.name}世界杯赛程`,
+    `${city.name}世界杯观赛`
+  ];
 
   return (
     <article className="mx-auto max-w-5xl space-y-6">
@@ -92,8 +99,64 @@ export default async function CityTicketPage({ params }: CityTicketParams) {
         </p>
       </section>
 
+      <section className="grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="rounded-lg border border-gold/20 bg-gold/[0.055] p-5">
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold/85">门票城市长尾词</div>
+          <h2 className="mt-3 text-xl font-semibold text-white">{city.name}世界杯门票搜索路径</h2>
+          <p className="mt-3 text-sm leading-7 text-white/64">
+            围绕官方门票信息、举办球场、城市赛程和观赛提醒，把{city.name}门票搜索连接到官方购票入口与赛区详情。
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {ticketSearchTerms.map((term) => (
+              <span key={term} className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs text-white/66">
+                {term}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          <TicketPath title="官方路径">
+            优先核对 FIFA 官方门票信息，再确认销售阶段、账号要求和赛事公告。
+          </TicketPath>
+          <TicketPath title="城市路径">
+            从{city.name}赛区进入球场、比赛时间、交通住宿和入场要求等观赛信息。
+          </TicketPath>
+          <TicketPath title="比赛路径">
+            购票前把具体比赛、对阵双方、开球时间和赛前观点一起核对，避免只看城市名称。
+          </TicketPath>
+        </div>
+      </section>
+
+      <section className="rounded-lg border border-white/10 bg-black/20 p-5">
+        <h2 className="text-xl font-semibold text-white">继续查看{city.name}门票相关信息</h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <TicketLink href={`${ticketBasePath}/official`} label="官方购票链接" />
+          <TicketLink href={getHostCityPath(city.slug)} label={`${city.name}赛区信息`} />
+          <TicketLink href={`${worldCupBasePath}/schedule`} label="世界杯完整赛程" />
+          <TicketLink href="/topics/world-cup-2026-watch-guide" label="世界杯观赛指南" />
+        </div>
+      </section>
+
       <SeoTopicLinks />
     </article>
+  );
+}
+
+function TicketPath({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-lg border border-white/10 bg-white/[0.035] p-5">
+      <h2 className="text-base font-semibold text-white">{title}</h2>
+      <p className="mt-3 text-sm leading-7 text-white/62">{children}</p>
+    </div>
+  );
+}
+
+function TicketLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="rounded-lg border border-white/10 bg-white/[0.035] px-4 py-3 text-sm text-white/70 transition hover:border-turf/35 hover:text-turf">
+      {label}
+    </Link>
   );
 }
 

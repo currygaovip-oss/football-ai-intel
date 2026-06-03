@@ -5,7 +5,8 @@ import { Badge } from "@/components/badge";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getAllPredictions, getReviews, getSchedule } from "@/lib/data";
 import { getPredictionDisplayMeta } from "@/lib/prediction-display";
-import { getSeoTopic, seoTopics } from "@/lib/seo-topics";
+import { getReviewVerdictMeta } from "@/lib/review-display";
+import { getSeoTopic, getSeoTopicEnhancement, seoTopics } from "@/lib/seo-topics";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 import { getHostCityPath, getTeamPath, getWorldCupFixturePath, getWorldCupTeamEntries, hostCities } from "@/lib/world-cup";
 
@@ -46,6 +47,7 @@ export default async function TopicPage({ params }: TopicParams) {
   const topicPredictions = predictions.slice(0, 6);
   const topicReviews = reviews.slice(0, 4);
   const listItems = getListItems(topic.slug, topicMatches, topicPredictions, topicReviews);
+  const enhancement = getSeoTopicEnhancement(topic);
 
   return (
     <div className="space-y-6">
@@ -86,6 +88,30 @@ export default async function TopicPage({ params }: TopicParams) {
             <p className="mt-3 text-sm leading-7 text-white/66">{item.answer}</p>
           </div>
         ))}
+      </section>
+
+      <section className="grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="rounded-lg border border-gold/20 bg-gold/[0.055] p-5">
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold/85">{enhancement.clusterName}</div>
+          <h2 className="mt-3 text-xl font-semibold text-white">长尾检索路径</h2>
+          <p className="mt-3 text-sm leading-7 text-white/64">{enhancement.intent}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {enhancement.longTailTerms.map((term) => (
+              <span key={term} className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs text-white/66">
+                {term}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          {enhancement.sections.map((section) => (
+            <div key={section.heading} className="rounded-lg border border-white/10 bg-white/[0.035] p-5">
+              <h2 className="text-base font-semibold text-white">{section.heading}</h2>
+              <p className="mt-3 text-sm leading-7 text-white/62">{section.body}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="grid gap-4 lg:grid-cols-[1fr_0.75fr]">
@@ -139,17 +165,35 @@ export default async function TopicPage({ params }: TopicParams) {
               <h2 className="text-xl font-semibold text-white">复盘记录</h2>
               <div className="mt-4 grid gap-3">
                 {topicReviews.map(({ review, prediction }) => (
-                  <Link key={review.id} href={`/reviews/${review.id}`} className="rounded-lg border border-white/10 bg-black/20 p-4 transition hover:border-gold/30">
-                    <div className="text-xs text-gold">复盘评分 {review.score}</div>
-                    <div className="mt-2 font-semibold text-white">{prediction?.matchup ?? "足球赛后复盘"}</div>
-                    <div className="mt-2 text-sm text-white/58">赛果：{review.match_result}</div>
-                  </Link>
+                  (() => {
+                    const verdict = getReviewVerdictMeta(review);
+                    return (
+                      <Link key={review.id} href={`/reviews/${review.id}`} className="rounded-lg border border-white/10 bg-black/20 p-4 transition hover:border-gold/30">
+                        <Badge tone={verdict.tone}>{verdict.shortLabel}</Badge>
+                        <div className="mt-2 font-semibold text-white">{prediction?.matchup ?? "足球赛后复盘"}</div>
+                        <div className="mt-2 text-sm text-white/58">赛果：{review.match_result}</div>
+                      </Link>
+                    );
+                  })()
                 ))}
               </div>
             </div>
           ) : null}
         </aside>
       </section>
+
+      {enhancement.relatedLinks.length > 0 ? (
+        <section className="rounded-lg border border-white/10 bg-black/20 p-5">
+          <h2 className="text-xl font-semibold text-white">继续查看</h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {enhancement.relatedLinks.map((item) => (
+              <Link key={item.href} href={item.href} className="rounded-lg border border-white/10 bg-white/[0.035] px-4 py-3 text-sm text-white/70 transition hover:border-turf/35 hover:text-turf">
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <SeoTopicLinks />
     </div>
@@ -174,6 +218,17 @@ function getTopicMatches(slug: string, matches: ReturnType<typeof getSchedule>) 
     slug === "world-cup-2026-knockout" ||
     slug === "world-cup-2026-opening-time" ||
     slug === "world-cup-2026-final-time" ||
+    slug === "world-cup-2026-draw" ||
+    slug === "world-cup-2026-format" ||
+    slug === "world-cup-2026-48-teams" ||
+    slug === "world-cup-2026-round-of-32" ||
+    slug === "world-cup-2026-stadiums" ||
+    slug === "world-cup-2026-qualified-teams" ||
+    slug === "world-cup-2026-where" ||
+    slug === "world-cup-2026-start-date" ||
+    slug === "world-cup-2026-time-difference" ||
+    slug === "world-cup-2026-asian-teams" ||
+    slug === "world-cup-2026-watch-guide" ||
     slug === "north-america-world-cup" ||
     slug === "world-cup-opening-final" ||
     slug === "world-cup-team-lineups"
@@ -204,13 +259,19 @@ function getListItems(
       path: `/predictions/${prediction.id}`
     }));
   }
-  if (slug === "world-cup-2026-teams" || slug === "world-cup-team-lineups") {
+  if (slug === "world-cup-2026-teams" || slug === "world-cup-team-lineups" || slug === "world-cup-2026-48-teams" || slug === "world-cup-2026-qualified-teams") {
     return getWorldCupTeamEntries().map((team) => ({
       name: `${team.name}世界杯2026赛程`,
       path: getTeamPath(team.slug)
     }));
   }
-  if (slug === "world-cup-2026-host-cities" || slug === "north-america-world-cup") {
+  if (slug === "world-cup-2026-asian-teams") {
+    return getWorldCupTeamEntries().filter((team) => team.region === "亚洲").map((team) => ({
+      name: `${team.name}世界杯2026赛程`,
+      path: getTeamPath(team.slug)
+    }));
+  }
+  if (slug === "world-cup-2026-host-cities" || slug === "north-america-world-cup" || slug === "world-cup-2026-stadiums" || slug === "world-cup-2026-where") {
     return hostCities.map((city) => ({
       name: `${city.name}世界杯赛程与球场信息`,
       path: getHostCityPath(city.slug)

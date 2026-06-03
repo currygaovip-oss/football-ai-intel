@@ -73,6 +73,13 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
   if (homeTeam) teamLinks.push(homeTeam);
   if (awayTeam) teamLinks.push(awayTeam);
   const statusLabel = match.status === "finished" ? "已结束" : match.status === "live" ? "进行中" : "未开始";
+  const matchSearchTerms = [
+    `${match.home_team}vs${match.away_team}比赛时间`,
+    `${match.home_team}vs${match.away_team}赛前分析`,
+    `${match.home_team}vs${match.away_team}世界杯赛程`,
+    `${stage}比赛时间`,
+    "2026世界杯北京时间"
+  ];
 
   return (
     <article className="mx-auto max-w-5xl space-y-6">
@@ -87,7 +94,9 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
               startDate: getEventStartDate(match),
               competition: match.competition,
               homeTeam: match.home_team,
-              awayTeam: match.away_team
+              awayTeam: match.away_team,
+              locationName: "2026世界杯举办城市",
+              locationAddress: "美国、加拿大或墨西哥"
             })
           )
         }}
@@ -183,6 +192,35 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
         </ContentCard>
       </section>
 
+      <section className="grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="rounded-lg border border-gold/20 bg-gold/[0.055] p-5">
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold/85">单场长尾词</div>
+          <h2 className="mt-3 text-xl font-semibold text-white">{match.home_team} vs {match.away_team}搜索路径</h2>
+          <p className="mt-3 text-sm leading-7 text-white/64">
+            这场比赛适合承接比赛时间、赛前分析、球队赛程、北京时间和赛后复盘相关搜索。
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {matchSearchTerms.map((term) => (
+              <span key={term} className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs text-white/66">
+                {term}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          <ContentCard title="时间路径">
+            先确认北京时间{getMatchDateLabel(match)} {getMatchTimeLabel(match)}，再查看赛事阶段和完整赛程位置。
+          </ContentCard>
+          <ContentCard title="球队路径">
+            继续查看{match.home_team}和{match.away_team}的球队赛程、阵容看点与重点球员信息。
+          </ContentCard>
+          <ContentCard title="复盘路径">
+            比赛结束后，复盘入口会把原参考方向、实际赛果和偏差说明串在一起。
+          </ContentCard>
+        </div>
+      </section>
+
       {teamLinks.length ? (
         <section className="grid gap-4 md:grid-cols-2">
           {teamLinks.map((team) => (
@@ -226,6 +264,8 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
         <Link href={`${worldCupBasePath}/teams`} className="rounded-md border border-white/15 px-3 py-2 text-sm text-white/72 hover:border-turf/30 hover:text-turf">球队赛程</Link>
         <Link href={`${worldCupBasePath}/groups`} className="rounded-md border border-white/15 px-3 py-2 text-sm text-white/72 hover:border-turf/30 hover:text-turf">世界杯小组赛</Link>
         <Link href={`${worldCupBasePath}/knockout`} className="rounded-md border border-white/15 px-3 py-2 text-sm text-white/72 hover:border-turf/30 hover:text-turf">世界杯淘汰赛</Link>
+        <Link href="/topics/world-cup-2026-match-time" className="rounded-md border border-white/15 px-3 py-2 text-sm text-white/72 hover:border-turf/30 hover:text-turf">世界杯比赛时间</Link>
+        <Link href="/topics/world-cup-2026-watch-guide" className="rounded-md border border-white/15 px-3 py-2 text-sm text-white/72 hover:border-turf/30 hover:text-turf">世界杯观赛指南</Link>
       </section>
 
       <SeoTopicLinks />
