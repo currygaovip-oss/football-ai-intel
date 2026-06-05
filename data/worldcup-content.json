@@ -1,9 +1,9 @@
 {
-  "exported_at": "2026-06-05T10:05:33.388Z",
+  "exported_at": "2026-06-05T11:56:13.139Z",
   "source": "worldcup_bot_snapshot",
   "counts": {
     "matches": 104,
-    "predictions": 50,
+    "predictions": 51,
     "reviews": 42
   },
   "matches": [
@@ -945,6 +945,32 @@
     }
   ],
   "predictions": [
+    {
+      "id": "tg-p54",
+      "model_id": "heat-guard",
+      "assistant_model_ids": [
+        "odds-mind",
+        "goal-net"
+      ],
+      "title": "国际友谊赛 摩尔多瓦 vs 保加利亚",
+      "competition": "赛事",
+      "kickoff_time_text": "06-06 00:00",
+      "matchup": "国际友谊赛 摩尔多瓦 vs 保加利亚",
+      "visibility": "free",
+      "recommendation": "模型倾向：小 2.25",
+      "risk_level": "高",
+      "body": [
+        "比赛时间：",
+        "小 2.25",
+        "进球方向：",
+        "核心思路：",
+        "本场核心在于友谊赛属性和双方进攻效率都不高。摩尔多瓦整体实力有限，阵容也不完整，锋线缺少稳定支点，比赛思路更可能以稳固防守和练兵为主。保加利亚实力略占优势，但同样处在调整期，客场作战下不太可能持续拉高节奏。指数层面进球数集中在 2.25 至 2.5 区间，也说明市场对大开大合并不支持。综合来看，比赛更可能偏谨慎，低比分方向更有参考价值。",
+        "绿茵智报：",
+        "https://lyzbvip.vip",
+        "以上内容仅为赛前观点与足球交流参考，不构成任何结果承诺或行动建议。"
+      ],
+      "published_at": "06/05 11:55"
+    },
     {
       "id": "tg-p53",
       "model_id": "squad-lens",
