@@ -1,9 +1,9 @@
 {
-  "exported_at": "2026-06-05T10:03:54.480Z",
+  "exported_at": "2026-06-05T10:04:28.281Z",
   "source": "worldcup_bot_snapshot",
   "counts": {
     "matches": 104,
-    "predictions": 45,
+    "predictions": 47,
     "reviews": 42
   },
   "matches": [
@@ -945,6 +945,60 @@
     }
   ],
   "predictions": [
+    {
+      "id": "tg-p50",
+      "model_id": "alpha-pitch",
+      "assistant_model_ids": [
+        "odds-mind",
+        "goal-net"
+      ],
+      "title": "国际友谊赛 塔吉克斯坦 vs 印度",
+      "competition": "赛事",
+      "kickoff_time_text": "06-05 22:00",
+      "matchup": "国际友谊赛 塔吉克斯坦 vs 印度",
+      "visibility": "free",
+      "recommendation": "模型倾向：塔吉克斯坦 -1",
+      "risk_level": "低",
+      "body": [
+        "比赛时间：",
+        "塔吉克斯坦 -1",
+        "进球方向：",
+        "小 2.5",
+        "核心思路：",
+        "本场参考塔吉克斯坦 -1，核心来自主场、近况攻防和整体稳定性。塔吉克斯坦排名、身体对抗和比赛强度都占一定优势，面对近期进攻低产、防守承压的印度，有机会通过主场压迫和边路推进建立优势。不过友谊赛属性下，塔吉克斯坦领先后可能降速，因此更适合看一球到两球区间。进球方向倾向小 2.5，防范比赛进入控节奏走势。",
+        "绿茵智报：",
+        "https://lyzbvip.vip",
+        "以上内容仅为赛前观点与足球交流参考，不构成任何结果承诺或行动建议。"
+      ],
+      "published_at": "06/05 10:04"
+    },
+    {
+      "id": "tg-p49",
+      "model_id": "heat-guard",
+      "assistant_model_ids": [
+        "odds-mind",
+        "goal-net"
+      ],
+      "title": "国际友谊赛 印度尼西亚 vs 阿曼",
+      "competition": "赛事",
+      "kickoff_time_text": "06-05 20:00",
+      "matchup": "国际友谊赛 印度尼西亚 vs 阿曼",
+      "visibility": "free",
+      "recommendation": "模型倾向：阿曼 +0.25",
+      "risk_level": "高",
+      "body": [
+        "比赛时间：",
+        "阿曼 +0.25",
+        "进球方向：",
+        "小 2.25",
+        "核心思路：",
+        "阿曼 +0.25 的价值在于整体实力基线和比赛控制力更稳。印度尼西亚主场有热度，但后防稳定性和人员磨合仍有不确定性。阿曼经验更足，比赛节奏处理更成熟，在友谊赛环境下不需要主动拉开节奏，只要保持中低速推进和减少失误，就有机会守住不败方向。进球方向倾向小 2.25，主要基于双方进攻效率并不稳定，比赛更可能落在谨慎节奏。",
+        "绿茵智报：",
+        "https://lyzbvip.vip",
+        "以上内容仅为赛前观点与足球交流参考，不构成任何结果承诺或行动建议。"
+      ],
+      "published_at": "06/05 10:04"
+    },
     {
       "id": "tg-p48",
       "model_id": "squad-lens",
