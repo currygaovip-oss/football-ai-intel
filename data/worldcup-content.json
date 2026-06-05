@@ -1,9 +1,9 @@
 {
-  "exported_at": "2026-06-05T10:04:28.281Z",
+  "exported_at": "2026-06-05T10:04:58.472Z",
   "source": "worldcup_bot_snapshot",
   "counts": {
     "matches": 104,
-    "predictions": 47,
+    "predictions": 49,
     "reviews": 42
   },
   "matches": [
@@ -945,6 +945,60 @@
     }
   ],
   "predictions": [
+    {
+      "id": "tg-p52",
+      "model_id": "goal-net",
+      "assistant_model_ids": [
+        "odds-mind",
+        "squad-lens"
+      ],
+      "title": "国际友谊赛 波多黎各 vs 沙特",
+      "competition": "赛事",
+      "kickoff_time_text": "06-06 06:00",
+      "matchup": "国际友谊赛 波多黎各 vs 沙特",
+      "visibility": "free",
+      "recommendation": "模型倾向：波多黎各 +2",
+      "risk_level": "中",
+      "body": [
+        "比赛时间：",
+        "波多黎各 +2",
+        "进球方向：",
+        "小 3.0",
+        "核心思路：",
+        "波多黎各 +2 的核心在于让步已经充分体现双方实力差距，但友谊赛场景下，沙特未必会持续追求大比分。沙特整体实力占优，但比赛目标更多可能是阵容磨合和节奏管理。波多黎各近期在部分友谊赛中表现出一定防守韧性，只要不出现早段崩盘，就有机会把分差控制在两球以内。进球方向倾向小 3.0，符合沙特友谊赛不追杀、波多黎各重防守的比赛属性。",
+        "绿茵智报：",
+        "https://lyzbvip.vip",
+        "以上内容仅为赛前观点与足球交流参考，不构成任何结果承诺或行动建议。"
+      ],
+      "published_at": "06/05 10:04"
+    },
+    {
+      "id": "tg-p51",
+      "model_id": "odds-mind",
+      "assistant_model_ids": [
+        "goal-net",
+        "squad-lens"
+      ],
+      "title": "国际友谊赛 圣马力诺 vs 孟加拉国",
+      "competition": "赛事",
+      "kickoff_time_text": "06-06 00:00",
+      "matchup": "国际友谊赛 圣马力诺 vs 孟加拉国",
+      "visibility": "free",
+      "recommendation": "模型倾向：圣马力诺 -0.25",
+      "risk_level": "高",
+      "body": [
+        "比赛时间：",
+        "圣马力诺 -0.25",
+        "进球方向：",
+        "小 2.25",
+        "核心思路：",
+        "本场选择圣马力诺 -0.25，主要基于双方都处于弱队区间，但孟加拉国近期大比分失利较多，防线稳定性偏低。圣马力诺虽然整体进攻能力有限，但在同级别对抗中更容易把比赛拖进低比分区间，并通过主场和节奏控制争取优势。进球方向倾向小 2.25，双方进攻端都缺少持续稳定输出，比赛更可能以谨慎试探为主。",
+        "绿茵智报：",
+        "https://lyzbvip.vip",
+        "以上内容仅为赛前观点与足球交流参考，不构成任何结果承诺或行动建议。"
+      ],
+      "published_at": "06/05 10:04"
+    },
     {
       "id": "tg-p50",
       "model_id": "alpha-pitch",
