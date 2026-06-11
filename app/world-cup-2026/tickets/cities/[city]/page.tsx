@@ -101,10 +101,10 @@ export default async function CityTicketPage({ params }: CityTicketParams) {
 
       <section className="grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="rounded-lg border border-gold/20 bg-gold/[0.055] p-5">
-          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold/85">门票城市长尾词</div>
-          <h2 className="mt-3 text-xl font-semibold text-white">{city.name}世界杯门票搜索路径</h2>
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold/85">城市门票信息</div>
+          <h2 className="mt-3 text-xl font-semibold text-white">{city.name}世界杯门票与观赛指南</h2>
           <p className="mt-3 text-sm leading-7 text-white/64">
-            围绕官方门票信息、举办球场、城市赛程和观赛提醒，把{city.name}门票搜索连接到官方购票入口与赛区详情。
+            查看官方门票信息、举办球场、城市赛程和观赛提醒，赛前核对购票入口与赛区详情。
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {ticketSearchTerms.map((term) => (

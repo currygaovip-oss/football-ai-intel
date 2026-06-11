@@ -101,10 +101,10 @@ export default async function HostCityPage({ params }: CityParams) {
 
       <section className="grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="rounded-lg border border-gold/20 bg-gold/[0.055] p-5">
-          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold/85">城市长尾词</div>
-          <h2 className="mt-3 text-xl font-semibold text-white">{city.name}世界杯搜索路径</h2>
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold/85">城市观赛信息</div>
+          <h2 className="mt-3 text-xl font-semibold text-white">{city.name}世界杯赛区指南</h2>
           <p className="mt-3 text-sm leading-7 text-white/64">
-            围绕城市、球场、比赛时间和门票提醒，把{city.name}赛区信息连接到完整赛程、单场比赛和赛前观点。
+            查看城市、球场、比赛时间和门票提醒，并继续进入完整赛程、单场比赛和赛前观点。
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {citySearchTerms.map((term) => (

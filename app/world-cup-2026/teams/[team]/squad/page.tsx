@@ -9,7 +9,7 @@ import { getPlayerPath, getTeamPath, getTeamSquadPath, getWorldCupTeamEntries, g
 type SquadParams = { params: Promise<{ team: string }> };
 
 export function generateStaticParams() {
-  return getWorldCupTeamEntries().filter((team) => team.players?.length).map((team) => ({ team: team.slug }));
+  return getWorldCupTeamEntries().map((team) => ({ team: team.slug }));
 }
 
 export async function generateMetadata({ params }: SquadParams): Promise<Metadata> {
@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: SquadParams): Promise<Metadat
   if (!teamEntry) return createMetadata({ title: "世界杯2026球队阵容名单", description: "世界杯2026球队阵容名单。", path: `/world-cup-2026/teams/${team}/squad`, noIndex: true });
 
   return createMetadata({
-    title: `${teamEntry.name}世界杯2026阵容名单与重点球员`,
-    description: `${teamEntry.name}世界杯2026阵容名单、重点球员、球队看点和赛前观点。最终名单以官方公布为准。`,
+    title: `${teamEntry.name}世界杯2026阵容观察与重点球员`,
+    description: `${teamEntry.name}世界杯2026阵容观察、重点球员、球队看点和赛前关注点。最终名单以官方公布为准。`,
     path: getTeamSquadPath(teamEntry.slug)
   });
 }
@@ -34,7 +34,7 @@ export default async function WorldCupTeamSquadPage({ params }: SquadParams) {
 
   return (
     <div className="space-y-6">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(webPageJsonLd({ name: `${teamEntry.name}世界杯2026阵容名单`, description: `${teamEntry.name}重点球员、阵容动态和赛前看点。`, path })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(webPageJsonLd({ name: `${teamEntry.name}世界杯2026阵容观察`, description: `${teamEntry.name}重点球员、阵容动态和赛前看点。`, path })) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -56,7 +56,7 @@ export default async function WorldCupTeamSquadPage({ params }: SquadParams) {
         <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-turf">
             <UsersRound size={15} /> 阵容名单
         </div>
-        <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">{teamEntry.name}世界杯2026阵容名单</h1>
+        <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">{teamEntry.name}世界杯2026阵容观察</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
           {teamEntry.squadStatus ?? "最终名单以球队官方公布为准。赛前重点看核心球员状态、位置结构和首发竞争。"}
         </p>
@@ -116,10 +116,22 @@ export default async function WorldCupTeamSquadPage({ params }: SquadParams) {
           </div>
         ) : (
           <div className="rounded-lg border border-white/10 bg-black/20 p-6 text-sm leading-7 text-white/58">
-            {teamEntry.name}最终名单以球队官方公布为准。
+            {teamEntry.name}最终名单以球队官方公布为准。当前可先关注位置结构、首发竞争、核心球员健康和小组赛轮换。
           </div>
         )}
       </section>
+
+      {!players.length ? (
+        <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {getSquadFocusItems(teamEntry.name).map((item) => (
+            <article key={item.title} className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
+              <div className="text-xs text-turf">{item.label}</div>
+              <h3 className="mt-2 text-lg font-semibold text-white">{item.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-white/58">{item.body}</p>
+            </article>
+          ))}
+        </section>
+      ) : null}
 
       <section className="rounded-lg border border-white/10 bg-black/20 p-5">
         <h2 className="text-xl font-semibold text-white">名单说明</h2>
@@ -140,4 +152,29 @@ function InfoPanel({ title, children }: { title: string; children: React.ReactNo
       <p className="mt-3 text-sm leading-7 text-white/58">{children}</p>
     </div>
   );
+}
+
+function getSquadFocusItems(teamName: string) {
+  return [
+    {
+      label: "名单状态",
+      title: "官方名单待公布",
+      body: `${teamName}最终名单以球队官方信息为准，当前页面先保留阵容观察入口，避免写入未经确认的名单。`
+    },
+    {
+      label: "位置结构",
+      title: "首发骨架",
+      body: "赛前重点看门将、中卫组合、中场覆盖、边路推进和锋线支点，这些位置决定比赛基本形态。"
+    },
+    {
+      label: "轮换变量",
+      title: "体能与赛程",
+      body: "小组赛三轮会放大体能和轮换影响，连续作战时首发变化通常比纸面实力更关键。"
+    },
+    {
+      label: "临场确认",
+      title: "首发与伤停",
+      body: "开球前再结合首发名单、伤停、对手风格和赛事阶段，判断球队真实比赛状态。"
+    }
+  ];
 }

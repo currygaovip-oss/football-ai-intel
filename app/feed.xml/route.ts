@@ -100,7 +100,7 @@ export function GET() {
 
   const items: FeedItem[] = [
     { title: "2026世界杯赛程", description: "2026世界杯赛程、比赛时间、球队资料和赛前观点。", path: worldCupBasePath },
-    { title: "世界杯2026长尾内容索引", description: "按赛程、球队、城市、门票、球员和比赛整理世界杯长尾入口。", path: `${worldCupBasePath}/index` },
+    { title: "世界杯2026内容导航", description: "按赛程、球队、城市、门票、球员和比赛整理世界杯重点入口。", path: `${worldCupBasePath}/index` },
     { title: "2026世界杯北京时间", description: "按北京时间整理2026世界杯揭幕战、决赛、小组赛和淘汰赛开球安排。", path: `${worldCupBasePath}/china-time` },
     { title: "2026世界杯抽签分组", description: "A组到L组球队、同组对手、小组赛顺序和淘汰赛路径。", path: "/topics/world-cup-2026-draw" },
     { title: "2026世界杯赛制规则", description: "48队、12个小组、104场比赛和32强淘汰赛。", path: "/topics/world-cup-2026-format" },

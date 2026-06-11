@@ -50,13 +50,13 @@ export default async function WorldCupTeamPage({ params }: TeamParams) {
   const firstDirection = getDirection(firstPrediction);
   const firstOpponent = firstMatch ? (firstMatch.home_team === teamEntry.name ? firstMatch.away_team : firstMatch.home_team) : "";
   const predictionCount = matches.filter((match) => getWorldCupPrediction(match, predictions)).length;
-  const teamSearchTerms = [
+  const teamSearchTerms = Array.from(new Set([
     ...teamEntry.searchFocus,
     `${teamEntry.name}世界杯比赛时间`,
     `${teamEntry.name}世界杯阵容`,
     `${teamEntry.name}重点球员`,
     `${teamEntry.name}赛前分析`
-  ];
+  ]));
 
   return (
     <div className="space-y-6">
@@ -185,33 +185,41 @@ export default async function WorldCupTeamPage({ params }: TeamParams) {
         </section>
       ) : null}
 
-      {teamEntry.players?.length ? (
-        <section className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-turf">
-                <ShieldCheck size={14} /> 阵容观察
-              </div>
-              <h2 className="mt-2 text-xl font-semibold text-white">{teamEntry.name}重点球员</h2>
-              <p className="mt-2 max-w-3xl text-sm leading-6 text-white/56">
-                {teamEntry.squadStatus}
-              </p>
+      <section className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-turf">
+              <ShieldCheck size={14} /> 阵容观察
             </div>
-            <Link href={getTeamSquadPath(teamEntry.slug)} className="text-sm text-turf hover:text-white">
-              查看阵容名单
-            </Link>
+            <h2 className="mt-2 text-xl font-semibold text-white">{teamEntry.name}{teamEntry.players?.length ? "重点球员" : "阵容观察"}</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-white/56">
+              {teamEntry.squadStatus ?? "最终名单以球队官方公布为准。赛前重点看核心球员状态、位置结构和首发竞争。"}
+            </p>
           </div>
-          <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-            {teamEntry.players.slice(0, 4).map((player) => (
+          <Link href={getTeamSquadPath(teamEntry.slug)} className="text-sm text-turf hover:text-white">
+            查看阵容观察
+          </Link>
+        </div>
+        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {teamEntry.players?.length ? (
+            teamEntry.players.slice(0, 4).map((player) => (
               <div key={player.slug} className="rounded-lg border border-white/10 bg-black/20 p-4">
                 <div className="text-xs text-turf">{player.position}</div>
                 <h3 className="mt-2 text-lg font-semibold text-white">{player.name}</h3>
                 <p className="mt-2 text-xs leading-5 text-white/50">{player.note}</p>
               </div>
-            ))}
-          </div>
-        </section>
-      ) : null}
+            ))
+          ) : (
+            getSquadFocusItems(teamEntry.name).map((item) => (
+              <div key={item.title} className="rounded-lg border border-white/10 bg-black/20 p-4">
+                <div className="text-xs text-turf">{item.label}</div>
+                <h3 className="mt-2 text-lg font-semibold text-white">{item.title}</h3>
+                <p className="mt-2 text-xs leading-5 text-white/50">{item.body}</p>
+              </div>
+            ))
+          )}
+        </div>
+      </section>
 
       <section>
         <div className="mb-4 flex items-end justify-between gap-3">
@@ -253,6 +261,31 @@ function TeamLink({ href, label }: { href: string; label: string }) {
       {label}
     </Link>
   );
+}
+
+function getSquadFocusItems(teamName: string) {
+  return [
+    {
+      label: "名单状态",
+      title: "官方名单待公布",
+      body: `${teamName}最终参赛名单以球队官方发布为准，赛前先关注核心球员健康和位置竞争。`
+    },
+    {
+      label: "位置结构",
+      title: "首发骨架",
+      body: "重点看门将、中卫组合、中场覆盖和锋线支点，首发结构会直接影响比赛节奏。"
+    },
+    {
+      label: "赛程变量",
+      title: "轮换与体能",
+      body: "小组赛连续比赛会放大体能和轮换影响，第二、第三轮首发变化尤其值得观察。"
+    },
+    {
+      label: "赛前阅读",
+      title: "临场信息",
+      body: "开球前结合伤停、首发、对手风格和比赛阶段，再判断球队真实竞争力。"
+    }
+  ];
 }
 
 function Info({ label, value }: { label: string; value: string }) {

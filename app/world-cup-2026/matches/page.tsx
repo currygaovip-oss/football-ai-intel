@@ -34,13 +34,13 @@ export default function WorldCupMatchesPage() {
       </section>
 
       <section className="grid gap-4 lg:grid-cols-3">
-        <IndexCard title="比赛时间长尾">
-          承接“某队vs某队比赛时间”“世界杯北京时间”“小组赛开球时间”等搜索，继续进入单场比赛详情。
+        <IndexCard title="比赛时间查询">
+          查看球队对阵、世界杯北京时间和小组赛开球时间，并继续进入单场比赛详情。
         </IndexCard>
-        <IndexCard title="赛前分析长尾">
+        <IndexCard title="赛前分析入口">
           重点比赛可从完整赛程进入赛前观点，查看参考方向、球队状态和赛程压力。
         </IndexCard>
-        <IndexCard title="赛后复盘长尾">
+        <IndexCard title="赛后复盘入口">
           比赛结束后，已复盘内容会连接原参考方向、实际赛果和偏差说明。
         </IndexCard>
       </section>

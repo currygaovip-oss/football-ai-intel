@@ -13,7 +13,7 @@ export function SeoTopicLinks() {
         一站看今日赛程、赛前分析、世界杯赛程和赛后复盘。
       </p>
       <div className="mt-3 grid gap-2 text-xs text-white/48 sm:grid-cols-3">
-        <span>数据快照：{updatedAt}</span>
+        <span>内容更新：{updatedAt}</span>
         <span>比赛 {dataSource.matchCount} 场</span>
         <span>观点 {dataSource.predictionCount} 条 / 复盘 {dataSource.reviewCount} 条</span>
       </div>

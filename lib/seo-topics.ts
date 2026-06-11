@@ -857,8 +857,8 @@ function getTopicSections(topic: SeoTopic, cluster: SeoKeywordCluster) {
 
   if (cluster.id === "world-cup-place") {
     return [
-      { heading: "举办地线索", body: "美加墨三国承接不同阶段比赛，城市、球场和开球时间会影响观赛安排与赛前关注点。" },
-      { heading: "城市长尾入口", body: "纽约/新泽西、洛杉矶、达拉斯、多伦多、温哥华、墨西哥城等城市适合单独承接赛程和门票搜索。" },
+      { heading: "举办地线索", body: "美加墨三国举办不同阶段比赛，城市、球场和开球时间会影响观赛安排与赛前关注点。" },
+      { heading: "城市赛程入口", body: "纽约/新泽西、洛杉矶、达拉斯、多伦多、温哥华、墨西哥城等城市可单独查看赛程和门票信息。" },
       { heading: "比赛信息串联", body: "城市内容需要连接到具体比赛、球队赛程和门票提醒，形成从举办地到单场比赛的阅读路径。" }
     ];
   }
@@ -867,15 +867,15 @@ function getTopicSections(topic: SeoTopic, cluster: SeoKeywordCluster) {
     return [
       { heading: "赛制理解", body: "48队、12个小组、32强淘汰赛是2026世界杯的核心结构，分组和赛程需要一起查看。" },
       { heading: "小组赛路径", body: "按A组到L组整理同组对手、比赛时间和出线位置，能帮助赛前判断比赛重要性。" },
-      { heading: "淘汰赛承接", body: "32强赛、16强赛、四分之一决赛、半决赛和决赛需要与完整赛程互链，方便持续追踪。" }
+      { heading: "淘汰赛追踪", body: "32强赛、16强赛、四分之一决赛、半决赛和决赛需要与完整赛程互链，方便持续追踪。" }
     ];
   }
 
   if (cluster.id === "world-cup-team") {
     return [
-      { heading: "球队赛程入口", body: "球队词适合承接阿根廷、巴西、法国、英格兰、葡萄牙等热门搜索，并连接到具体比赛。" },
+      { heading: "球队赛程入口", body: "阿根廷、巴西、法国、英格兰、葡萄牙等热门球队信息可继续进入具体比赛。" },
       { heading: "阵容与球员看点", body: "重点球员、阵容位置和首发变化会影响赛前判断，适合与比赛详情和赛前观点一起呈现。" },
-      { heading: "赛后沉淀", body: "比赛结束后保留赛果和复盘入口，让球队赛程不只服务赛前，也能承接赛后回看。" }
+      { heading: "赛后沉淀", body: "比赛结束后保留赛果和复盘入口，让球队赛程不只服务赛前，也能用于赛后回看。" }
     ];
   }
 
@@ -891,13 +891,13 @@ function getTopicSections(topic: SeoTopic, cluster: SeoKeywordCluster) {
     return [
       { heading: "官方信息优先", body: "门票内容以FIFA官方发布为准，适合同时连接举办城市、比赛时间和观赛提醒。" },
       { heading: "购票前核对", body: "核对比赛、城市、球场、官方票务链接和入场要求，比单独查看票务信息更稳妥。" },
-      { heading: "观赛搜索承接", body: "门票、城市、揭幕战、决赛和球队赛程应互相连接，覆盖赛前计划型搜索。" }
+      { heading: "观赛信息串联", body: "门票、城市、揭幕战、决赛和球队赛程应互相连接，方便赛前计划观赛。" }
     ];
   }
 
   return [
     { heading: `${topic.title}核心信息`, body: topic.intro },
-    { heading: "长尾内容承接", body: `围绕${cluster.terms.slice(0, 3).join("、")}等词，把赛程、球队、比赛详情和赛前观点串联起来。` },
+    { heading: "相关内容导航", body: `围绕${cluster.terms.slice(0, 3).join("、")}等主题，将赛程、球队、比赛详情和赛前观点串联起来。` },
     { heading: "持续更新方向", body: "随着赛程、阵容、赛果和复盘变化，内容应持续补充最新比赛线索和相关入口。" }
   ];
 }

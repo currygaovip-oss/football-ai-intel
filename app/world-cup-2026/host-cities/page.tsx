@@ -46,13 +46,13 @@ export default function HostCitiesPage() {
       </section>
 
       <section className="grid gap-4 lg:grid-cols-3">
-        <CityIndexCard title="城市赛程长尾">
-          承接墨西哥城、纽约/新泽西、洛杉矶、达拉斯、多伦多、温哥华等城市赛程搜索。
+        <CityIndexCard title="城市赛程">
+          查看墨西哥城、纽约/新泽西、洛杉矶、达拉斯、多伦多、温哥华等城市赛程。
         </CityIndexCard>
-        <CityIndexCard title="球场信息长尾">
+        <CityIndexCard title="球场信息">
           城市入口继续连接球场、举办国家、比赛时间和单场比赛详情。
         </CityIndexCard>
-        <CityIndexCard title="门票观赛长尾">
+        <CityIndexCard title="门票与观赛">
           从城市进入门票城市页，核对官方购票链接、入场要求和观赛提醒。
         </CityIndexCard>
       </section>

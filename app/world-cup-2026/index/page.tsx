@@ -18,10 +18,10 @@ import {
 } from "@/lib/world-cup";
 
 const path = `${worldCupBasePath}/index`;
-const description = "世界杯2026长尾内容索引，按赛程、比赛、球队、球员、城市、门票和专题整理所有重点入口。";
+const description = "世界杯2026内容导航，按赛程、比赛、球队、球员、城市、门票和专题整理重点入口。";
 
 export const metadata: Metadata = createMetadata({
-  title: "世界杯2026长尾内容索引：赛程、球队、城市、门票与球员",
+  title: "世界杯2026内容导航：赛程、球队、城市、门票与球员",
   description,
   path
 });
@@ -44,19 +44,19 @@ export default function WorldCupIndexPage() {
 
   return (
     <div className="space-y-6">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(webPageJsonLd({ name: "世界杯2026长尾内容索引", description, path, dateModified: dataSource.exportedAt })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(webPageJsonLd({ name: "世界杯2026内容导航", description, path, dateModified: dataSource.exportedAt })) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: jsonLd(itemListJsonLd({ name: "世界杯2026长尾内容索引", path, items: itemList }))
+          __html: jsonLd(itemListJsonLd({ name: "世界杯2026内容导航", path, items: itemList }))
         }}
       />
 
       <section className="rounded-lg border border-turf/20 bg-turf/[0.055] p-5 sm:p-7">
         <div className="text-xs font-semibold uppercase tracking-[0.24em] text-turf">World Cup Index</div>
-        <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">世界杯2026长尾内容索引</h1>
+        <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">世界杯2026内容导航</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64">
-          按搜索意图整理世界杯赛程、单场比赛、热门球队、重点球员、举办城市、门票信息和专题问答，方便中文球迷与搜索引擎快速发现重点入口。
+          按赛程、单场比赛、热门球队、重点球员、举办城市、门票信息和专题问答整理，方便中文球迷快速找到重点内容。
         </p>
         <div className="mt-5 grid gap-2 text-xs text-white/50 sm:grid-cols-3">
           <span>比赛 {dataSource.matchCount} 场</span>
@@ -66,14 +66,14 @@ export default function WorldCupIndexPage() {
       </section>
 
       <section className="grid gap-4 lg:grid-cols-3">
-        <IndexIntent title="时间与赛程搜索">
-          承接世界杯赛程、北京时间、比赛时间、揭幕战、决赛、小组赛和淘汰赛等查询。
+        <IndexIntent title="时间与赛程">
+          查看世界杯赛程、北京时间、比赛时间、揭幕战、决赛、小组赛和淘汰赛等信息。
         </IndexIntent>
-        <IndexIntent title="球队与球员搜索">
-          承接阿根廷、巴西、法国、梅西、姆巴佩、贝林厄姆等球队与球员长尾入口。
+        <IndexIntent title="球队与球员">
+          查看阿根廷、巴西、法国、梅西、姆巴佩、贝林厄姆等球队与球员信息。
         </IndexIntent>
-        <IndexIntent title="城市与门票搜索">
-          承接墨西哥城、纽约/新泽西、洛杉矶、达拉斯、多伦多、温哥华等城市和门票查询。
+        <IndexIntent title="城市与门票">
+          查看墨西哥城、纽约/新泽西、洛杉矶、达拉斯、多伦多、温哥华等城市和门票信息。
         </IndexIntent>
       </section>
 

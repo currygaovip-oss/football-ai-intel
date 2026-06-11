@@ -164,10 +164,10 @@ export default async function WorldCupPlayerPage({ params }: PlayerParams) {
 
       <section className="grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="rounded-lg border border-gold/20 bg-gold/[0.055] p-5">
-          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold/85">球员长尾词</div>
-          <h2 className="mt-3 text-xl font-semibold text-white">{playerEntry.name}世界杯搜索路径</h2>
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold/85">球员看点</div>
+          <h2 className="mt-3 text-xl font-semibold text-white">{playerEntry.name}世界杯2026赛前阅读</h2>
           <p className="mt-3 text-sm leading-7 text-white/64">
-            围绕球员、所属球队、比赛时间、阵容名单和赛前观点，把{playerEntry.name}相关搜索连接到{playerEntry.teamName}赛程。
+            从球员位置、所属球队、比赛时间、阵容动态和赛前看点，查看{playerEntry.name}与{playerEntry.teamName}相关信息。
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {playerSearchTerms.map((term) => (
@@ -179,13 +179,13 @@ export default async function WorldCupPlayerPage({ params }: PlayerParams) {
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
-          <InfoPanel title="球队赛程路径">
+          <InfoPanel title="球队赛程入口">
             先查看{playerEntry.teamName}比赛时间和对手，再进入单场比赛确认赛前重点。
           </InfoPanel>
-          <InfoPanel title="阵容名单路径">
+          <InfoPanel title="阵容名单入口">
             从{playerEntry.name}的位置和角色进入{playerEntry.teamName}阵容名单，继续查看核心球员分布。
           </InfoPanel>
-          <InfoPanel title="赛前观点路径">
+          <InfoPanel title="赛前观点入口">
             重点比赛可继续查看赛前观点、参考方向和赛后复盘，形成赛前到赛后的阅读闭环。
           </InfoPanel>
         </div>

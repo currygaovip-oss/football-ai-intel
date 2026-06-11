@@ -45,7 +45,7 @@ export default function VipPage() {
             VIP 内容聚焦重点比赛的赛前分析、关键变量和赛后复盘。Telegram 社群开放开通咨询，X 主页同步公开更新。
           </p>
           <div className="mt-5 grid gap-2 text-xs text-white/48 sm:grid-cols-3">
-            <span>数据快照：{formatDataDate(dataSource.exportedAt)}</span>
+            <span>内容更新：{formatDataDate(dataSource.exportedAt)}</span>
             <span>比赛 {dataSource.matchCount} 场</span>
             <span>观点 {dataSource.predictionCount} 条 / 复盘 {dataSource.reviewCount} 条</span>
           </div>

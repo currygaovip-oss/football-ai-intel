@@ -34,13 +34,13 @@ export default function WorldCupTeamsPage() {
       </section>
 
       <section className="grid gap-4 lg:grid-cols-3">
-        <IndexCard title="热门球队长尾">
-          阿根廷、巴西、法国、英格兰、葡萄牙等球队适合承接球队赛程、比赛时间和阵容名单搜索。
+        <IndexCard title="热门球队">
+          查看阿根廷、巴西、法国、英格兰、葡萄牙等球队的赛程、比赛时间和阵容观察。
         </IndexCard>
-        <IndexCard title="阵容名单长尾">
-          球队入口继续连接重点球员、阵容位置和首发观察，帮助赛前理解比赛变量。
+        <IndexCard title="阵容观察">
+          球队入口继续连接阵容位置、首发观察和重点球员。最终名单未公布前，先按球队结构和位置变量阅读。
         </IndexCard>
-        <IndexCard title="单场比赛长尾">
+        <IndexCard title="单场比赛">
           从球队赛程进入具体比赛详情，再连接赛前观点、比赛时间和赛后复盘。
         </IndexCard>
       </section>
@@ -56,7 +56,7 @@ export default function WorldCupTeamsPage() {
             <p className="mt-3 line-clamp-2 text-xs leading-5 text-white/45">{team.searchFocus.join(" / ")}</p>
             <div className="mt-4 flex flex-wrap gap-3 text-xs">
               <Link href={getTeamPath(team.slug)} className="text-turf hover:text-white">球队赛程</Link>
-              {team.players?.length ? <Link href={getTeamSquadPath(team.slug)} className="text-turf hover:text-white">阵容名单</Link> : null}
+              <Link href={getTeamSquadPath(team.slug)} className="text-turf hover:text-white">阵容观察</Link>
             </div>
           </div>
         ))}

@@ -45,7 +45,7 @@ export default function WorldCupFinalPage() {
       {match ? <WorldCupMatchCard match={match} prediction={prediction} /> : null}
 
       <section className="grid gap-4 md:grid-cols-3">
-        <Info title="举办城市" body="纽约/新泽西赛区承接2026世界杯决赛，球场为 MetLife Stadium。" href={getHostCityPath("new-york-new-jersey")} />
+        <Info title="举办城市" body="纽约/新泽西赛区举办2026世界杯决赛，球场为 MetLife Stadium。" href={getHostCityPath("new-york-new-jersey")} />
         <Info title="门票信息" body="查看决赛官方票务链接、纽约/新泽西赛区和购票前提醒。" href={getTicketTopicPath("final")} />
         <Info title="淘汰赛赛程" body="查看32强赛到决赛的全部比赛时间。" href={`${worldCupBasePath}/knockout`} />
         <Info title="赛前观点" body="决赛相关观点包含参考方向、球队状态和赛前分析。" href="/today" />

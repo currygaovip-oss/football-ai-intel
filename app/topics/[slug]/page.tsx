@@ -93,7 +93,7 @@ export default async function TopicPage({ params }: TopicParams) {
       <section className="grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="rounded-lg border border-gold/20 bg-gold/[0.055] p-5">
           <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold/85">{enhancement.clusterName}</div>
-          <h2 className="mt-3 text-xl font-semibold text-white">长尾检索路径</h2>
+          <h2 className="mt-3 text-xl font-semibold text-white">相关内容导航</h2>
           <p className="mt-3 text-sm leading-7 text-white/64">{enhancement.intent}</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {enhancement.longTailTerms.map((term) => (

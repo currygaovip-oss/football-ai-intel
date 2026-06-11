@@ -194,10 +194,10 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
 
       <section className="grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="rounded-lg border border-gold/20 bg-gold/[0.055] p-5">
-          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold/85">单场长尾词</div>
-          <h2 className="mt-3 text-xl font-semibold text-white">{match.home_team} vs {match.away_team}搜索路径</h2>
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold/85">比赛看点</div>
+          <h2 className="mt-3 text-xl font-semibold text-white">{match.home_team} vs {match.away_team}赛前阅读</h2>
           <p className="mt-3 text-sm leading-7 text-white/64">
-            这场比赛适合承接比赛时间、赛前分析、球队赛程、北京时间和赛后复盘相关搜索。
+            这场比赛可从比赛时间、球队赛程、北京时间、阵容动态和赛后复盘几个角度继续查看。
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {matchSearchTerms.map((term) => (

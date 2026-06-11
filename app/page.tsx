@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Activity, BarChart3, CalendarDays, Clock, Database, ShieldCheck, Sparkles, Target } from "lucide-react";
+import { Activity, BarChart3, CalendarDays, Clock, Database, Globe2, MapPin, ShieldCheck, Sparkles, Target, Ticket, Trophy } from "lucide-react";
 import { Badge } from "@/components/badge";
 import { ModelCard } from "@/components/model-card";
 import { SectionHeading } from "@/components/section-heading";
@@ -13,10 +13,10 @@ import { formatReviewStats, getRecentReviewStats, getReviewVerdictMeta } from "@
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, siteNavigationJsonLd, webPageJsonLd, websiteJsonLd } from "@/lib/seo";
 import { getNextWorldCupMatch, worldCupFinalCountdown } from "@/lib/world-cup-countdown";
 
-const homeDescription = "绿茵智报官网提供今日足球赛程、世界杯赛程、比赛时间、赛前分析、参考方向和赛后复盘，面向中文球迷追踪重点赛事。";
+const homeDescription = "绿茵智报官网整理世界杯2026赛程、球队资料、比赛时间、举办城市、赛前情报和赛后复盘，面向中文球迷追踪重点赛事。";
 
 export const metadata: Metadata = createMetadata({
-  title: "绿茵智报官网：今日足球赛程、赛前分析与赛后复盘",
+  title: "绿茵智报官网：2026世界杯赛程、球队资料与足球情报",
   description: homeDescription,
   path: "/"
 });
@@ -66,7 +66,7 @@ export default function HomePage() {
             faqJsonLd([
               {
                 question: "绿茵智报主要提供什么足球内容？",
-                answer: "绿茵智报官网提供今日足球赛程、世界杯赛程、赛前分析、参考方向和赛后复盘，面向中文球迷追踪重点赛事。"
+                answer: "绿茵智报官网整理世界杯2026赛程、球队资料、比赛时间、举办城市、赛前情报和赛后复盘，面向中文球迷追踪重点赛事。"
               },
               {
                 question: "赛前分析怎么看？",
@@ -84,12 +84,12 @@ export default function HomePage() {
         <div className="rounded-lg border border-turf/20 bg-turf/[0.055] p-4 sm:p-5">
           <div className="flex flex-col gap-3 border-b border-white/10 pb-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <div className="text-xs font-semibold tracking-[0.18em] text-turf">赛前观点</div>
+              <div className="text-xs font-semibold tracking-[0.18em] text-turf">绿茵智报</div>
               <h1 className="mt-2 text-2xl font-semibold leading-tight text-white sm:text-3xl">
-                最新赛前参考方向
+                2026世界杯赛程、球队资料与足球情报
               </h1>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-white/58">
-                每场比赛直接呈现开球时间、参考方向和完整分析；Telegram 群同步每日情报与复盘。
+                稳定整理世界杯比赛时间、48 队资料、举办城市、门票信息和赛后复盘；每日动态内容由 Telegram 同步更新。
               </p>
             </div>
             <Link
@@ -99,13 +99,17 @@ export default function HomePage() {
               data-analytics-area="home_hero"
               data-analytics-label="查看全部赛前观点"
             >
-              查看全部赛前观点
+              查看今日情报
             </Link>
           </div>
 
-          <div className="mt-4 grid gap-3">
-            {topPredictions.map(({ prediction, model }) => <HeroDirectionCard key={prediction.id} prediction={prediction} model={model} />)}
-          </div>
+          {topPredictions.length ? (
+            <div className="mt-4 grid gap-3">
+              {topPredictions.map(({ prediction, model }) => <HeroDirectionCard key={prediction.id} prediction={prediction} model={model} />)}
+            </div>
+          ) : (
+            <StaticGateway />
+          )}
 
           <div className="mt-4 flex flex-wrap gap-2">
             {principles.map((principle) => (
@@ -196,7 +200,7 @@ export default function HomePage() {
           ))}
         </div>
         <div className="mt-4 rounded-lg border border-white/10 bg-black/20 p-4 text-sm leading-7 text-white/62">
-          按比赛时间查看今日、明日和世界杯赛程；重点场次同步呈现参考方向。
+          按比赛时间查看今日、明日和世界杯赛程；世界杯专题页会持续补充球队资料、城市信息和单场比赛入口。
         </div>
         <div className="mt-3 flex flex-wrap gap-2 text-sm">
           <Link href="/football-schedule/today" className="rounded-md border border-white/15 px-3 py-2 text-white/68 hover:border-turf/30 hover:text-turf">今日足球赛程</Link>
@@ -258,6 +262,54 @@ function HeroDirectionCard({ prediction, model }: { prediction: Prediction; mode
         </span>
       </div>
     </Link>
+  );
+}
+
+function StaticGateway() {
+  const gateways = [
+    {
+      title: "世界杯2026专题",
+      description: "查看赛程、揭幕战、决赛、北京时间和淘汰赛路径。",
+      href: "/world-cup-2026",
+      Icon: Trophy
+    },
+    {
+      title: "48队球队资料",
+      description: "按球队查看比赛时间、阵容观察、战术风格和赛前变量。",
+      href: "/world-cup-2026/teams",
+      Icon: Globe2
+    },
+    {
+      title: "举办城市与球场",
+      description: "覆盖美加墨16个举办城市、球场和城市观赛线索。",
+      href: "/world-cup-2026/host-cities",
+      Icon: MapPin
+    },
+    {
+      title: "门票与观赛提醒",
+      description: "整理官方票务入口、转售提醒和城市观赛前核对事项。",
+      href: "/world-cup-2026/tickets",
+      Icon: Ticket
+    }
+  ];
+
+  return (
+    <div className="mt-4 grid gap-3 md:grid-cols-2">
+      {gateways.map(({ title, description, href, Icon }) => (
+        <Link
+          key={href}
+          href={href}
+          className="rounded-lg border border-white/10 bg-black/20 p-4 transition hover:-translate-y-0.5 hover:border-turf/35"
+          data-analytics-event="click_home_gateway"
+          data-analytics-area="home_static_gateway"
+          data-analytics-label={title}
+        >
+          <Icon className="text-turf" size={18} />
+          <h2 className="mt-3 text-base font-semibold text-white">{title}</h2>
+          <p className="mt-2 text-sm leading-6 text-white/58">{description}</p>
+        </Link>
+      ))}
+    </div>
   );
 }
 

@@ -142,7 +142,7 @@ export const seoKeywords = [
 export const seoTopicLinks = [
   { label: "足球AI情报", href: "/football-ai-intelligence" },
   { label: "世界杯2026专题", href: "/world-cup-2026" },
-  { label: "世界杯长尾索引", href: "/world-cup-2026/index" },
+  { label: "世界杯内容导航", href: "/world-cup-2026/index" },
   { label: "美加墨世界杯", href: "/world-cup-2026/host-countries" },
   { label: "世界杯举办城市", href: "/world-cup-2026/host-cities" },
   { label: "2026世界杯在哪里举办", href: "/topics/world-cup-2026-where" },

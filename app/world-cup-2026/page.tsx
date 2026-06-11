@@ -9,10 +9,10 @@ import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from
 import { getTeamPath, getWorldCupGroupMatches, getWorldCupKnockoutMatches, getWorldCupMatches, getWorldCupPrediction, getWorldCupTeamEntries, hostCities, worldCupBasePath } from "@/lib/world-cup";
 import { getNextWorldCupMatch, worldCupFinalCountdown } from "@/lib/world-cup-countdown";
 
-const pageDescription = "2026美加墨世界杯赛程、举办国家、举办城市、揭幕战、决赛、比赛时间和赛前观点。";
+const pageDescription = "2026美加墨世界杯赛程、举办国家、举办城市、揭幕战、决赛、比赛时间、球队资料和观赛指南。";
 
 export const metadata: Metadata = createMetadata({
-  title: "2026世界杯赛程、美加墨举办城市与赛前分析",
+  title: "2026世界杯赛程、美加墨举办城市与球队资料",
   description: pageDescription,
   path: worldCupBasePath
 });
@@ -29,7 +29,7 @@ export default function WorldCup2026Page() {
 
   return (
     <div className="space-y-6">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(webPageJsonLd({ name: "2026世界杯赛程、美加墨举办城市与赛前分析", description: pageDescription, path: worldCupBasePath })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(webPageJsonLd({ name: "2026世界杯赛程、美加墨举办城市与球队资料", description: pageDescription, path: worldCupBasePath })) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -75,9 +75,9 @@ export default function WorldCup2026Page() {
         <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.24em] text-turf">
           <Trophy size={15} /> 世界杯 2026
         </div>
-        <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">2026世界杯赛程与美加墨举办城市</h1>
+        <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">2026世界杯赛程、球队资料与美加墨举办城市</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64">
-          汇总美加墨世界杯比赛时间、小组赛、淘汰赛、举办城市、揭幕战、决赛和赛前观点。
+          汇总美加墨世界杯比赛时间、小组赛、淘汰赛、48 支球队、16 个举办城市、揭幕战、决赛和观赛信息。
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link href={`${worldCupBasePath}/schedule`} className="rounded-md bg-turf px-4 py-2.5 text-sm font-semibold text-pitch-950">
@@ -102,6 +102,18 @@ export default function WorldCup2026Page() {
         <StatCard label="小组赛" value={groupMatches.length} href={`${worldCupBasePath}/groups`} />
         <StatCard label="淘汰赛" value={knockoutMatches.length} href={`${worldCupBasePath}/knockout`} />
         <StatCard label="赛前观点" value={predictions.length} href="/today" />
+      </section>
+
+      <section className="grid gap-4 lg:grid-cols-3">
+        <InfoCard title="基础资料持续维护" href={`${worldCupBasePath}/index`}>
+          赛程、球队、城市、门票和专题问答作为官网基础资料维护，方便长期查询。
+        </InfoCard>
+        <InfoCard title="名单以官方为准" href={`${worldCupBasePath}/teams`}>
+          球队阵容页优先展示观察框架；最终名单、首发和伤停以球队官方公布信息为准。
+        </InfoCard>
+        <InfoCard title="动态内容独立更新" href="/today">
+          今日情报和赛后复盘由数据同步更新，世界杯专题页保持长期资料入口稳定。
+        </InfoCard>
       </section>
 
       <section className="grid gap-4 lg:grid-cols-4">
