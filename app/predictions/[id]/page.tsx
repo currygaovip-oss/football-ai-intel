@@ -43,6 +43,7 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
   const matchupKeyword = compactMatchup(prediction.matchup);
   const pageTitle = `${matchupKeyword}赛前分析`;
   const description = truncateSeo(`${prediction.competition}${prediction.matchup}赛前分析，比赛时间：${prediction.kickoff_time_text}。${prediction.recommendation}。`);
+  const analysisBody = getAnalysisBody(prediction.body, prediction.recommendation);
 
   return (
     <article className="mx-auto max-w-4xl">
@@ -106,7 +107,7 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
         <section className="mt-8">
           <h2 className="mb-3 text-xl font-semibold">{matchupKeyword}赛前分析正文</h2>
           <div className="space-y-4 text-base leading-8 text-white/72">
-            {prediction.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            {analysisBody.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
         </section>
 
@@ -183,4 +184,22 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
 
 function compactMatchup(matchup: string) {
   return matchup.replace(/\s+vs\s+/i, "vs").replace(/\s+/g, "");
+}
+
+function getAnalysisBody(body: string[], recommendation: string) {
+  const direction = recommendation.replace(/^(参考方向|模型倾向)[：:]\s*/, "").trim();
+  const normalizedDirection = normalizeBodyLine(direction);
+
+  return body
+    .map((paragraph) => paragraph.trim())
+    .filter((paragraph) => {
+      if (!paragraph) return false;
+      if (/^比赛时间[：:]?$/.test(paragraph)) return false;
+      if (normalizeBodyLine(paragraph) === normalizedDirection) return false;
+      return true;
+    });
+}
+
+function normalizeBodyLine(text: string) {
+  return text.replace(/\s+/g, "").replace(/[。.]$/, "");
 }
