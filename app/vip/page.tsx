@@ -85,7 +85,7 @@ export default function VipPage() {
         </VipInfo>
       </section>
 
-      <SeoTopicLinks />
+      <SeoTopicLinks compact maxItems={10} />
     </div>
   );
 }

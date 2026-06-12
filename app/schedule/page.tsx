@@ -43,7 +43,8 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
   const todayCount = matches.filter((match) => matchMatchesFilter(match, "today")).length;
   const tomorrowCount = matches.filter((match) => matchMatchesFilter(match, "tomorrow")).length;
   const predictionMatchCount = matches.filter((match) => findPredictionForMatch(predictions, match)).length;
-  const dateGroups = groupMatchesByDate(filteredMatches);
+  const visibleMatches = currentType === "all" ? filteredMatches.slice(0, 32) : filteredMatches;
+  const dateGroups = groupMatchesByDate(visibleMatches);
   const stageGroups = groupStageCounts(matches);
   const nextWorldCupMatch = getNextWorldCupMatch(matches);
 
@@ -187,6 +188,11 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
               </Link>
             </div>
           )}
+          {currentType === "all" && filteredMatches.length > visibleMatches.length ? (
+            <div className="rounded-lg border border-white/10 bg-white/[0.035] p-5 text-sm leading-7 text-white/58">
+              已优先展示近期 {visibleMatches.length} 场比赛。完整世界杯赛程可按“小组赛 / 淘汰赛”筛选，或进入世界杯赛程表查看。
+            </div>
+          ) : null}
         </div>
 
         <aside className="space-y-4">
@@ -250,7 +256,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
         </div>
       </section>
 
-      <SeoTopicLinks />
+      <SeoTopicLinks compact maxItems={12} />
     </div>
   );
 }
@@ -309,7 +315,7 @@ function ScheduleMatchCard({
 }
 
 function normalizeFilter(type: string | undefined): FilterKey {
-  return filters.some((filter) => filter.key === type) ? (type as FilterKey) : "all";
+  return filters.some((filter) => filter.key === type) ? (type as FilterKey) : "today";
 }
 
 function matchMatchesFilter(match: ReturnType<typeof getSchedule>[number], type: FilterKey) {

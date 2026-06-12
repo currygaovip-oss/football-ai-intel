@@ -2,9 +2,10 @@ import Link from "next/link";
 import { getDataSourceInfo } from "@/lib/data";
 import { seoTopicLinks } from "@/lib/seo";
 
-export function SeoTopicLinks() {
+export function SeoTopicLinks({ compact = false, maxItems }: { compact?: boolean; maxItems?: number } = {}) {
   const dataSource = getDataSourceInfo();
   const updatedAt = formatDataDate(dataSource.exportedAt);
+  const links = typeof maxItems === "number" ? seoTopicLinks.slice(0, maxItems) : seoTopicLinks;
 
   return (
     <section className="rounded-lg border border-white/10 bg-black/20 p-4">
@@ -12,13 +13,15 @@ export function SeoTopicLinks() {
       <p className="mt-2 text-sm leading-6 text-white/56">
         一站看今日赛程、赛前分析、世界杯赛程和赛后复盘。
       </p>
-      <div className="mt-3 grid gap-2 text-xs text-white/48 sm:grid-cols-3">
-        <span>内容更新：{updatedAt}</span>
-        <span>比赛 {dataSource.matchCount} 场</span>
-        <span>观点 {dataSource.predictionCount} 条 / 复盘 {dataSource.reviewCount} 条</span>
-      </div>
+      {!compact ? (
+        <div className="mt-3 grid gap-2 text-xs text-white/48 sm:grid-cols-3">
+          <span>内容更新：{updatedAt}</span>
+          <span>比赛 {dataSource.matchCount} 场</span>
+          <span>观点 {dataSource.predictionCount} 条 / 复盘 {dataSource.reviewCount} 条</span>
+        </div>
+      ) : null}
       <div className="mt-4 flex flex-wrap gap-2">
-        {seoTopicLinks.map((item) => (
+        {links.map((item) => (
           <Link
             key={item.href}
             href={item.href}
