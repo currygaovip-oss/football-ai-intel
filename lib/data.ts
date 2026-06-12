@@ -186,14 +186,18 @@ function isCompletedReview(review: Review) {
 
 function sanitizeContentData(data: ContentData): ContentData {
   return {
-    matches: data.matches.map((match) => ({
-      ...match,
-      competition: sanitizePublicCopy(match.competition),
-      kickoff_time: sanitizePublicCopy(match.kickoff_time),
-      home_team: sanitizePublicCopy(match.home_team),
-      away_team: sanitizePublicCopy(match.away_team),
-      stage: sanitizePublicCopy(match.stage)
-    })),
+    matches: data.matches.map((match) => {
+      const normalizedMatch = normalizeFixtureTime(match);
+
+      return {
+        ...normalizedMatch,
+        competition: sanitizePublicCopy(normalizedMatch.competition),
+        kickoff_time: sanitizePublicCopy(normalizedMatch.kickoff_time),
+        home_team: sanitizePublicCopy(normalizedMatch.home_team),
+        away_team: sanitizePublicCopy(normalizedMatch.away_team),
+        stage: sanitizePublicCopy(normalizedMatch.stage)
+      };
+    }),
     predictions: data.predictions.map((prediction) => ({
       ...prediction,
       title: sanitizePublicCopy(prediction.title),
@@ -212,6 +216,17 @@ function sanitizeContentData(data: ContentData): ContentData {
       reviewed_at: sanitizePublicCopy(review.reviewed_at)
     }))
   };
+}
+
+function normalizeFixtureTime(match: Match): Match {
+  if (match.id === "tg-m6" || match.id === "wc-6" || (match.home_team === "澳大利亚" && match.away_team === "土耳其")) {
+    return {
+      ...match,
+      kickoff_time: match.kickoff_time.includes("北京时间") ? "06/14 12:00 北京时间" : "06/14 12:00"
+    };
+  }
+
+  return match;
 }
 
 function normalizeReviewStatus(review: Review): Review["result_status"] {
