@@ -27,6 +27,7 @@ export default function ReviewsPage() {
   const stats = getReviewStats(reviews.map(({ review }) => review));
   const recentStats = getRecentReviewStats(reviews.map(({ review }) => review), 30);
   const groupedReviews = groupReviewsByVerdict(reviews);
+  const latestReviews = reviews.slice(0, 4);
   const recentLabel = recentStats.total ? `近${recentStats.total}条复盘` : "近期复盘";
 
   return (
@@ -94,6 +95,23 @@ export default function ReviewsPage() {
           <p className="mt-2 text-xs leading-5 text-white/48">按最近完成复盘的场次统计。</p>
         </div>
       </div>
+
+      {latestReviews.length > 0 ? (
+        <section>
+          <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 className="text-xl font-semibold text-white">最新复盘</h2>
+              <p className="mt-1 text-sm text-white/50">按完成时间展示最近归档的赛后复盘。</p>
+            </div>
+            <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-white/58">
+              最近 {latestReviews.length} 场
+            </span>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {latestReviews.map(({ review, prediction }) => <ReviewCard key={`latest-${review.id}`} review={review} prediction={prediction} />)}
+          </div>
+        </section>
+      ) : null}
 
       {reviewVerdictOrder().map((verdictKey) => {
         const info = reviewVerdictInfo(verdictKey);
