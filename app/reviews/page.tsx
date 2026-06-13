@@ -9,6 +9,9 @@ import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from
 
 const reviewsDescription = "足球赛后复盘记录，包含赛前观点、比赛赛果、命中分类、偏差归因和历史表现。";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata: Metadata = createMetadata({
   title: "足球赛后复盘记录：赛前分析结果与模型表现",
   description: reviewsDescription,
