@@ -9,6 +9,9 @@ import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from
 
 const description = "足球赛前分析、今日比赛观点、参考方向和完整分析，覆盖世界杯、五大联赛、杯赛和焦点赛事。";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata: Metadata = createMetadata({
   title: "足球赛前分析：今日观点、参考方向与比赛解读",
   description,
