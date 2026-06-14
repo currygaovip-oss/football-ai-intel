@@ -5,7 +5,7 @@ import { Badge } from "@/components/badge";
 import { SectionHeading } from "@/components/section-heading";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getAllReviews, getModelDirectory, getReviews, getTodayPredictions, type AiModel, type Prediction, type Review } from "@/lib/data";
-import { extractPredictionDirection, getPredictionDisplayMeta } from "@/lib/prediction-display";
+import { getPredictionDirectionDisplay, getPredictionDisplayMeta } from "@/lib/prediction-display";
 import { formatReviewStats, getOriginalDirection, getRecentReviewStats, getReviewMatchResult, getReviewToneClass, getReviewVerdictMeta } from "@/lib/review-display";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 
@@ -192,9 +192,9 @@ function HistoryStatPill({ label, value, tone }: { label: string; value: number;
 }
 
 function DirectionCard({ prediction, model, performanceText }: { prediction: Prediction; model?: AiModel; performanceText: string }) {
-  const direction = extractPredictionDirection(prediction.recommendation);
+  const direction = getPredictionDirectionDisplay(prediction);
   const { competitionLabel, timeLabel } = getPredictionDisplayMeta(prediction);
-  const reason = prediction.body[0]?.replace(/\n/g, " ").slice(0, 78);
+  const reason = direction.locked ? direction.teaser : prediction.body[0]?.replace(/\n/g, " ").slice(0, 78);
 
   return (
     <Link
@@ -221,7 +221,8 @@ function DirectionCard({ prediction, model, performanceText }: { prediction: Pre
           <div className="flex items-center gap-2 text-xs text-turf">
             <Target size={15} /> 核心参考方向
           </div>
-          <div className="mt-2 text-lg font-semibold leading-snug text-white">{direction}</div>
+          <div className="mt-2 text-lg font-semibold leading-snug text-white">{direction.label}</div>
+          {direction.locked ? <div className="mt-1 text-xs leading-5 text-white/50">{direction.teaser}</div> : null}
           <div className="mt-2 text-xs text-white/50">{performanceText}</div>
         </div>
 

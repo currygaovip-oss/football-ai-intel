@@ -1,4 +1,5 @@
 import { getAllPredictions, getSchedule, type Match, type Prediction } from "@/lib/data";
+import { getPredictionDirectionDisplay } from "@/lib/prediction-display";
 
 export type { Match, Prediction };
 
@@ -844,7 +845,7 @@ export function getEventStartDate(match: Match) {
 }
 
 export function getDirection(prediction?: Prediction) {
-  return prediction?.recommendation.replace(/^模型倾向：/, "").replace(/^参考方向：/, "");
+  return prediction ? getPredictionDirectionDisplay(prediction).label : "";
 }
 
 export function getStageLabel(match: Match) {

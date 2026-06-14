@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/badge";
 import { ModelMiniLink } from "@/components/model-card";
 import { getPredictionDetail } from "@/lib/data";
+import { getPredictionDirectionDisplay } from "@/lib/prediction-display";
 import { articleJsonLd, breadcrumbJsonLd, createMetadata, jsonLd, truncateSeo } from "@/lib/seo";
 
 type PredictionParams = { params: Promise<{ id: string }> };
@@ -40,10 +41,11 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
   const detail = getPredictionDetail(id);
   if (!detail) notFound();
   const { assistantModels, model, prediction, review } = detail;
+  const direction = getPredictionDirectionDisplay(prediction);
   const matchupKeyword = compactMatchup(prediction.matchup);
   const pageTitle = `${matchupKeyword}赛前分析`;
-  const description = truncateSeo(`${prediction.competition}${prediction.matchup}赛前分析，比赛时间：${prediction.kickoff_time_text}。${prediction.recommendation}。`);
-  const analysisBody = getAnalysisBody(prediction.body, prediction.recommendation);
+  const description = truncateSeo(`${prediction.competition}${prediction.matchup}赛前分析，比赛时间：${prediction.kickoff_time_text}。${direction.recommendation}`);
+  const analysisBody = direction.locked ? [] : getAnalysisBody(prediction.body, prediction.recommendation);
 
   return (
     <article className="mx-auto max-w-4xl">
@@ -85,7 +87,8 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
 
         <section className="mt-6 rounded-lg border border-turf/25 bg-turf/10 p-5">
           <h2 className="text-lg font-semibold text-turf">参考方向</h2>
-          <p className="mt-2 text-xl font-semibold leading-8 text-white">{prediction.recommendation}</p>
+          <p className="mt-2 text-xl font-semibold leading-8 text-white">{direction.recommendation}</p>
+          {direction.locked ? <p className="mt-2 text-sm leading-6 text-white/58">{direction.teaser}</p> : null}
         </section>
 
         <section className="mt-6 rounded-lg border border-white/10 bg-white/5 p-4">
@@ -106,9 +109,15 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
         </section>
         <section className="mt-8">
           <h2 className="mb-3 text-xl font-semibold">{matchupKeyword}赛前分析正文</h2>
-          <div className="space-y-4 text-base leading-8 text-white/72">
-            {analysisBody.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-          </div>
+          {direction.locked ? (
+            <div className="rounded-lg border border-gold/25 bg-gold/10 p-5 text-sm leading-7 text-white/68">
+              VIP 深度正文将在比赛结束后开放公开回看；赛前请以社群内完整情报为准。
+            </div>
+          ) : (
+            <div className="space-y-4 text-base leading-8 text-white/72">
+              {analysisBody.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            </div>
+          )}
         </section>
 
         {model ? (

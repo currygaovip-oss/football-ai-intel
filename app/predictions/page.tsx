@@ -4,7 +4,7 @@ import { Clock, Target } from "lucide-react";
 import { Badge } from "@/components/badge";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getTodayPredictions } from "@/lib/data";
-import { extractPredictionDirection, getPredictionDisplayMeta } from "@/lib/prediction-display";
+import { getPredictionDirectionDisplay, getPredictionDisplayMeta } from "@/lib/prediction-display";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 
 const description = "足球赛前分析、今日比赛观点、参考方向和完整分析，覆盖世界杯、五大联赛、杯赛和焦点赛事。";
@@ -50,7 +50,7 @@ export default function PredictionsPage() {
 
       <section className="grid gap-3">
         {predictions.map(({ prediction, model }) => {
-          const direction = extractPredictionDirection(prediction.recommendation);
+          const direction = getPredictionDirectionDisplay(prediction);
           const { competitionLabel, timeLabel } = getPredictionDisplayMeta(prediction);
           return (
             <Link key={prediction.id} href={`/predictions/${prediction.id}`} className="rounded-lg border border-white/10 bg-white/[0.04] p-4 transition hover:border-turf/35">
@@ -68,7 +68,8 @@ export default function PredictionsPage() {
                 </div>
                 <div className="rounded-md border border-turf/25 bg-turf/10 px-3 py-2">
                   <div className="flex items-center gap-1.5 text-xs text-turf"><Target size={13} /> 参考方向</div>
-                  <div className="mt-1 text-lg font-semibold text-white">{direction}</div>
+                  <div className="mt-1 text-lg font-semibold text-white">{direction.label}</div>
+                  {direction.locked ? <div className="mt-1 text-xs leading-5 text-white/50">{direction.teaser}</div> : null}
                 </div>
                 <span className="text-sm text-turf">查看完整分析</span>
               </div>

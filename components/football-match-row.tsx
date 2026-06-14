@@ -3,9 +3,10 @@ import { ChevronRight, Clock3, Target } from "lucide-react";
 import { Badge } from "@/components/badge";
 import { getMatchPath, getReadableKickoff, getTimeLabel } from "@/lib/football-schedule";
 import type { Match, Prediction } from "@/lib/data";
+import { getPredictionDirectionDisplay } from "@/lib/prediction-display";
 
 export function FootballMatchRow({ match, prediction }: { match: Match; prediction?: Prediction }) {
-  const direction = prediction?.recommendation.replace(/^模型倾向：/, "").replace(/^参考方向：/, "");
+  const direction = prediction ? getPredictionDirectionDisplay(prediction) : null;
   const href = getMatchPath(match, prediction);
 
   return (
@@ -34,7 +35,8 @@ export function FootballMatchRow({ match, prediction }: { match: Match; predicti
       {direction ? (
         <div className="rounded-md border border-turf/25 bg-turf/10 px-3 py-2">
           <div className="flex items-center gap-1.5 text-xs text-turf"><Target size={13} /> 参考方向</div>
-          <div className="mt-1 text-sm font-semibold text-white">{direction}</div>
+          <div className="mt-1 text-sm font-semibold text-white">{direction.label}</div>
+          {direction.locked ? <div className="mt-1 text-xs leading-5 text-white/50">{direction.teaser}</div> : null}
         </div>
       ) : (
         <div className="rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white/46">关注临场信息</div>

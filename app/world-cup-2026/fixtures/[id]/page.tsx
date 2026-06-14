@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/badge";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getReviews } from "@/lib/data";
+import { getPredictionDirectionDisplay } from "@/lib/prediction-display";
 import { articleJsonLd, breadcrumbJsonLd, createMetadata, faqJsonLd, jsonLd, sportsEventJsonLd, truncateSeo, webPageJsonLd } from "@/lib/seo";
 import { ticketBasePath } from "@/lib/world-cup-tickets";
 import {
@@ -130,7 +131,7 @@ export default async function WorldCupFixturePage({ params }: FixtureParams) {
             __html: jsonLd(
               articleJsonLd({
                 title: `${getMatchTitle(match)}赛前分析`,
-                description: truncateSeo(`${match.home_team} vs ${match.away_team}赛前分析：${prediction.recommendation}`),
+                description: truncateSeo(`${match.home_team} vs ${match.away_team}赛前分析：${getPredictionDirectionDisplay(prediction).recommendation}`),
                 path: `/predictions/${prediction.id}`,
                 publishedAt: prediction.published_at
               })

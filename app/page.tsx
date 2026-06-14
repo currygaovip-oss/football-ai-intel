@@ -8,7 +8,7 @@ import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { SocialCta } from "@/components/social-cta";
 import { WorldCupCountdown } from "@/components/world-cup-countdown";
 import { getHomeData, type AiModel, type Prediction } from "@/lib/data";
-import { extractPredictionDirection, getPredictionDisplayMeta } from "@/lib/prediction-display";
+import { getPredictionDirectionDisplay, getPredictionDisplayMeta } from "@/lib/prediction-display";
 import { formatReviewStats, getRecentReviewStats, getReviewVerdictMeta } from "@/lib/review-display";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, siteNavigationJsonLd, webPageJsonLd, websiteJsonLd } from "@/lib/seo";
 import { getNextWorldCupMatch, worldCupFinalCountdown } from "@/lib/world-cup-countdown";
@@ -229,7 +229,7 @@ export default function HomePage() {
 }
 
 function HeroDirectionCard({ prediction, model }: { prediction: Prediction; model?: AiModel }) {
-  const direction = extractPredictionDirection(prediction.recommendation);
+  const direction = getPredictionDirectionDisplay(prediction);
   const { competitionLabel, timeLabel } = getPredictionDisplayMeta(prediction);
 
   return (
@@ -257,7 +257,8 @@ function HeroDirectionCard({ prediction, model }: { prediction: Prediction; mode
           <div className="flex items-center gap-1.5 text-[11px] text-turf">
             <Target size={13} /> 参考方向
           </div>
-          <div className="mt-1 text-base font-semibold leading-snug text-white">{direction}</div>
+          <div className="mt-1 text-base font-semibold leading-snug text-white">{direction.label}</div>
+          {direction.locked ? <div className="mt-1 text-[11px] leading-4 text-white/50">{direction.teaser}</div> : null}
         </div>
 
         <span className="inline-flex justify-center rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 text-xs text-white/55 md:justify-start">
@@ -317,7 +318,7 @@ function StaticGateway() {
 }
 
 function HomeDirectionCard({ prediction, model }: { prediction: Prediction; model?: AiModel }) {
-  const direction = extractPredictionDirection(prediction.recommendation);
+  const direction = getPredictionDirectionDisplay(prediction);
   const { competitionLabel, timeLabel } = getPredictionDisplayMeta(prediction);
 
   return (
@@ -345,7 +346,8 @@ function HomeDirectionCard({ prediction, model }: { prediction: Prediction; mode
           <div className="flex items-center gap-2 text-xs text-turf">
             <Target size={15} /> 参考方向
           </div>
-          <div className="mt-2 text-lg font-semibold leading-snug text-white">{direction}</div>
+          <div className="mt-2 text-lg font-semibold leading-snug text-white">{direction.label}</div>
+          {direction.locked ? <div className="mt-1 text-xs leading-5 text-white/50">{direction.teaser}</div> : null}
         </div>
 
         <div className="lg:text-right">

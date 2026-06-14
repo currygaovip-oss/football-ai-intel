@@ -2,10 +2,11 @@ import Link from "next/link";
 import { BrainCircuit, Clock, Sparkles, Trophy } from "lucide-react";
 import { Badge } from "@/components/badge";
 import type { AiModel, Prediction } from "@/lib/data";
-import { getPredictionDisplayMeta } from "@/lib/prediction-display";
+import { getPredictionDirectionDisplay, getPredictionDisplayMeta } from "@/lib/prediction-display";
 
 export function PredictionCard({ prediction, model, compact = false }: { prediction: Prediction; model?: AiModel; compact?: boolean }) {
   const { competitionLabel, timeLabel } = getPredictionDisplayMeta(prediction);
+  const direction = getPredictionDirectionDisplay(prediction);
 
   if (compact) {
     return (
@@ -43,7 +44,7 @@ export function PredictionCard({ prediction, model, compact = false }: { predict
 
         <p className="mt-3 flex items-start gap-2 rounded-md border border-turf/20 bg-turf/10 px-3 py-2 text-sm text-turf">
           <Sparkles className="mt-0.5 shrink-0" size={15} />
-          <span>{prediction.recommendation}</span>
+          <span>{direction.recommendation}</span>
         </p>
       </Link>
     );
@@ -83,7 +84,7 @@ export function PredictionCard({ prediction, model, compact = false }: { predict
       </div>
       <p className="mt-4 flex items-start gap-2 rounded-md border border-turf/20 bg-turf/10 px-3 py-2 text-sm text-turf">
         <Sparkles className="mt-0.5 shrink-0" size={15} />
-        <span>{prediction.recommendation}</span>
+        <span>{direction.recommendation}</span>
       </p>
     </Link>
   );

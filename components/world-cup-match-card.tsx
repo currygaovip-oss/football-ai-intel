@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ChevronRight, Clock3, Target } from "lucide-react";
 import { Badge } from "@/components/badge";
 import {
-  getDirection,
   getMatchDateLabel,
   getMatchTimeLabel,
   getStageLabel,
@@ -10,9 +9,10 @@ import {
   type Match,
   type Prediction
 } from "@/lib/world-cup";
+import { getPredictionDirectionDisplay } from "@/lib/prediction-display";
 
 export function WorldCupMatchCard({ match, prediction }: { match: Match; prediction?: Prediction }) {
-  const direction = getDirection(prediction);
+  const direction = prediction ? getPredictionDirectionDisplay(prediction) : null;
 
   return (
     <Link
@@ -36,7 +36,8 @@ export function WorldCupMatchCard({ match, prediction }: { match: Match; predict
       {direction ? (
         <div className="mt-3 rounded-md border border-turf/25 bg-turf/10 px-3 py-2">
           <div className="flex items-center gap-1.5 text-xs text-turf"><Target size={13} /> 参考方向</div>
-          <div className="mt-1 text-sm font-semibold text-white">{direction}</div>
+          <div className="mt-1 text-sm font-semibold text-white">{direction.label}</div>
+          {direction.locked ? <div className="mt-1 text-xs leading-5 text-white/50">{direction.teaser}</div> : null}
         </div>
       ) : (
         <p className="mt-3 text-sm leading-6 text-white/50">重点看开球时间、赛事阶段、首发变化与球队状态。</p>

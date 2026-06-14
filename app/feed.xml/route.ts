@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAllPredictions, getDataSourceInfo, getReviews } from "@/lib/data";
+import { getPredictionDirectionDisplay } from "@/lib/prediction-display";
 import { seoTopics } from "@/lib/seo-topics";
 import { siteDescription, siteName, siteUrl } from "@/lib/seo";
 import { getCityTicketPath } from "@/lib/world-cup-tickets";
@@ -50,14 +51,14 @@ export function GET() {
   const dataSource = getDataSourceInfo();
   const predictions = getAllPredictions().slice(0, 20).map((prediction) => ({
     title: `${prediction.matchup}赛前分析`,
-    description: `${prediction.matchup}，参考方向：${prediction.recommendation}`,
+    description: `${prediction.matchup}，参考方向：${getPredictionDirectionDisplay(prediction).recommendation}`,
     path: `/predictions/${prediction.id}`,
     date: prediction.published_at
   }));
 
   const reviews = getReviews().slice(0, 12).map(({ review, prediction }) => ({
     title: `${prediction?.matchup ?? "足球赛事"}赛后复盘`,
-    description: `复盘结果：${review.match_result}。原参考方向：${prediction?.recommendation ?? "赛前观点"}`,
+    description: `复盘结果：${review.match_result}。原参考方向：${prediction ? getPredictionDirectionDisplay(prediction).recommendation : "赛前观点"}`,
     path: `/reviews/${review.id}`,
     date: review.reviewed_at
   }));

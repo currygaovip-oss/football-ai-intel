@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Search } from "lucide-react";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getAllPredictions } from "@/lib/data";
+import { getPredictionDirectionDisplay } from "@/lib/prediction-display";
 import { createMetadata } from "@/lib/seo";
 import { seoTopics } from "@/lib/seo-topics";
 import { getTeamPath, getWorldCupTeamEntries, worldCupBasePath } from "@/lib/world-cup";
@@ -23,7 +24,7 @@ export default async function SearchPage({ searchParams }: { searchParams?: Prom
 
   const topicResults = seoTopics.filter((topic) => matches(normalized, [topic.title, topic.description, topic.intro]));
   const teamResults = teams.filter((team) => matches(normalized, [team.name, team.summary, ...team.searchFocus]));
-  const predictionResults = predictions.filter((prediction) => matches(normalized, [prediction.matchup, prediction.title, prediction.recommendation])).slice(0, 8);
+  const predictionResults = predictions.filter((prediction) => matches(normalized, [prediction.matchup, prediction.title, getPredictionDirectionDisplay(prediction).recommendation])).slice(0, 8);
 
   return (
     <div className="space-y-6">
@@ -48,7 +49,7 @@ export default async function SearchPage({ searchParams }: { searchParams?: Prom
               <ResultCard key={team.slug} title={`${team.name}世界杯赛程`} href={getTeamPath(team.slug)} summary={team.summary} />
             ))}
             {predictionResults.map((prediction) => (
-              <ResultCard key={prediction.id} title={prediction.matchup} href={`/predictions/${prediction.id}`} summary={prediction.recommendation} />
+              <ResultCard key={prediction.id} title={prediction.matchup} href={`/predictions/${prediction.id}`} summary={getPredictionDirectionDisplay(prediction).recommendation} />
             ))}
           </div>
           {!topicResults.length && !teamResults.length && !predictionResults.length ? (
