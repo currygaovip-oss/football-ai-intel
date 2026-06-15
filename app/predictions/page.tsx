@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Clock, Target } from "lucide-react";
 import { Badge } from "@/components/badge";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
-import { getTodayPredictions } from "@/lib/data";
+import { getAllPredictions, getAllReviews, getModelDirectory } from "@/lib/data";
 import { getPredictionDirectionDisplay, getPredictionDisplayMeta } from "@/lib/prediction-display";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 
@@ -18,7 +18,10 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default function PredictionsPage() {
-  const predictions = getTodayPredictions();
+  const predictions = getAllPredictions();
+  const models = getModelDirectory();
+  const modelById = new Map(models.map((model) => [model.id, model]));
+  const reviewByPredictionId = new Map(getAllReviews().map((review) => [review.prediction_id, review]));
 
   return (
     <div className="space-y-6">
@@ -26,7 +29,7 @@ export default function PredictionsPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: jsonLd(itemListJsonLd({ name: "足球赛前分析列表", path: "/predictions", items: predictions.map(({ prediction }) => ({ name: `${prediction.matchup}赛前分析`, path: `/predictions/${prediction.id}` })) }))
+          __html: jsonLd(itemListJsonLd({ name: "足球赛前分析列表", path: "/predictions", items: predictions.map((prediction) => ({ name: `${prediction.matchup}赛前分析`, path: `/predictions/${prediction.id}` })) }))
         }}
       />
       <script
@@ -43,14 +46,16 @@ export default function PredictionsPage() {
         <div className="text-xs font-semibold tracking-[0.18em] text-turf">赛前分析</div>
         <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">足球赛前分析</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">
-          汇总近期赛前观点，重点呈现比赛时间、参考方向和影响判断的主要变量。
+          汇总历史赛前观点，保留比赛时间、参考方向、完整分析和赛后复盘入口。
         </p>
       </section>
 
       <section className="grid gap-3">
-        {predictions.map(({ prediction, model }) => {
+        {predictions.map((prediction) => {
           const direction = getPredictionDirectionDisplay(prediction);
           const { competitionLabel, timeLabel } = getPredictionDisplayMeta(prediction);
+          const model = modelById.get(prediction.model_id);
+          const review = reviewByPredictionId.get(prediction.id);
           return (
             <Link key={prediction.id} href={`/predictions/${prediction.id}`} className="rounded-lg border border-white/10 bg-white/[0.04] p-4 transition hover:border-turf/35">
               <div className="grid gap-3 lg:grid-cols-[1fr_0.9fr_auto] lg:items-center">
@@ -58,6 +63,7 @@ export default function PredictionsPage() {
                   <div className="mb-2 flex flex-wrap gap-2">
                     <Badge tone={prediction.visibility === "vip" ? "gold" : "green"}>{prediction.visibility === "vip" ? "VIP" : "免费"}</Badge>
                     <Badge>{competitionLabel}</Badge>
+                    {review ? <Badge tone="green">已复盘</Badge> : <Badge tone="gold">待复盘</Badge>}
                   </div>
                   <h2 className="text-xl font-semibold text-white">{prediction.matchup}</h2>
                   <p className="mt-2 flex flex-wrap gap-3 text-xs text-white/48">
@@ -70,7 +76,7 @@ export default function PredictionsPage() {
                   <div className="mt-1 text-lg font-semibold text-white">{direction.label}</div>
                   {direction.locked ? <div className="mt-1 text-xs leading-5 text-white/50">{direction.teaser}</div> : null}
                 </div>
-                <span className="text-sm text-turf">查看完整分析</span>
+                <span className="text-sm text-turf">{review ? "查看分析与复盘" : "查看完整分析"}</span>
               </div>
             </Link>
           );
