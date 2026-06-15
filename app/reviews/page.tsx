@@ -24,7 +24,7 @@ export default function ReviewsPage() {
   const reviewedPredictionIds = new Set(allReviews.map((review) => review.prediction_id));
   const pendingReviews = predictions.filter((prediction) => !reviewedPredictionIds.has(prediction.id)).slice(0, 6);
   const stats = getReviewStats(reviews.map(({ review }) => review));
-  const recentStats = getRecentReviewStats(reviews.map(({ review }) => review), 30);
+  const recentStats = getRecentReviewStats(reviews.map(({ review }) => review), 10);
   const groupedReviews = groupReviewsByVerdict(reviews);
   const latestReviews = reviews.slice(0, 4);
   const recentLabel = recentStats.total ? `近${recentStats.total}条复盘` : "近期复盘";

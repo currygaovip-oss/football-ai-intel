@@ -39,7 +39,7 @@ export default function HomePage() {
   const nextWorldCupMatch = getNextWorldCupMatch(matches);
   const topPredictions = predictions.slice(0, 5);
   const latestReviews = reviews.slice(0, 2);
-  const recentReviewStats = formatReviewStats(getRecentReviewStats(reviews.map(({ review }) => review), 30));
+  const recentReviewStats = formatReviewStats(getRecentReviewStats(reviews.map(({ review }) => review), 10));
 
   return (
     <div className="space-y-8">

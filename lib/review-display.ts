@@ -72,7 +72,7 @@ export function getReviewStats(reviews: Review[]): ReviewStats {
   );
 }
 
-export function getRecentReviewStats(reviews: Review[], limit = 30) {
+export function getRecentReviewStats(reviews: Review[], limit = 10) {
   return getReviewStats(reviews.slice(0, limit));
 }
 

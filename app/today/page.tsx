@@ -23,7 +23,7 @@ export default function TodayPage() {
   const predictions = getTodayPredictions();
   const models = getModelDirectory();
   const historicalReviews = getReviews().slice(0, 6);
-  const recentStats = getRecentReviewStats(getAllReviews(), 30);
+  const recentStats = getRecentReviewStats(getAllReviews(), 10);
   const recentStatsLabel = formatReviewStats(recentStats);
   const freeCount = predictions.filter(({ prediction }) => prediction.visibility === "free").length;
   const vipCount = predictions.length - freeCount;
