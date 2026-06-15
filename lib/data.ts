@@ -32,21 +32,29 @@ type SnapshotData = ContentData & {
 const snapshotData = worldcupSnapshot as SnapshotData;
 let cachedContentData: ContentData | null = null;
 let cachedCompletedReviews: Review[] | null = null;
+let cachedContentIndex: ContentIndex | null = null;
+
+type ContentIndex = {
+  activePredictions: Prediction[];
+  completedReviews: Review[];
+  predictionById: Map<string, Prediction>;
+  reviewById: Map<string, Review>;
+  reviewByPredictionId: Map<string, Review>;
+};
 
 export function getHomeData() {
   const data = getContentData();
-  const activePredictions = getActivePredictions(data);
-  const completedReviews = getCompletedReviews(data.reviews);
+  const index = getContentIndex(data);
 
   return {
     aiModels: publicAiModels.slice(0, 3),
     modelCount: publicAiModels.length,
     matches: data.matches,
-    predictions: activePredictions.map(withPredictionModel),
-    reviews: completedReviews.map((review) => withReviewPrediction(review, data.predictions)),
+    predictions: index.activePredictions.map(withPredictionModel),
+    reviews: index.completedReviews.map((review) => withReviewPrediction(review, index)),
     totals: {
       predictions: data.predictions.length,
-      reviews: completedReviews.length,
+      reviews: index.completedReviews.length,
       matches: data.matches.length
     }
   };
@@ -54,7 +62,7 @@ export function getHomeData() {
 
 export function getTodayPredictions() {
   const data = getContentData();
-  return getActivePredictions(data).map(withPredictionModel);
+  return getContentIndex(data).activePredictions.map(withPredictionModel);
 }
 
 export function getAllPredictions() {
@@ -71,34 +79,38 @@ export function getSchedule() {
 
 export function getReviews() {
   const data = getContentData();
-  return getCompletedReviews(data.reviews).map((review) => withReviewPrediction(review, data.predictions));
+  const index = getContentIndex(data);
+  return index.completedReviews.map((review) => withReviewPrediction(review, index));
 }
 
 export function getAllReviews() {
-  return getCompletedReviews(getContentData().reviews);
+  const data = getContentData();
+  return getContentIndex(data).completedReviews;
 }
 
 export function getPredictionDetail(id: string) {
   const data = getContentData();
-  const prediction = data.predictions.find((item) => item.id === id);
+  const index = getContentIndex(data);
+  const prediction = index.predictionById.get(id);
   if (!prediction) return null;
 
   return {
     prediction,
     model: getPredictionModel(prediction),
     assistantModels: getAssistantModels(prediction),
-    review: getCompletedReviews(data.reviews).find((review) => review.prediction_id === prediction.id)
+    review: index.reviewByPredictionId.get(prediction.id)
   };
 }
 
 export function getReviewDetail(id: string) {
   const data = getContentData();
-  const review = getCompletedReviews(data.reviews).find((item) => item.id === id);
+  const index = getContentIndex(data);
+  const review = index.reviewById.get(id);
   if (!review) return null;
 
   return {
     review,
-    prediction: getPredictionForReview(review, data.predictions)
+    prediction: getPredictionForReview(review, index)
   };
 }
 
@@ -109,7 +121,7 @@ export function getDataSourceInfo() {
     source: snapshotData ? "worldcup_bot_snapshot" : "local",
     exportedAt: snapshotData?.exported_at,
     predictionCount: contentData.predictions.length,
-    reviewCount: getCompletedReviews(contentData.reviews).length,
+    reviewCount: getContentIndex(contentData).completedReviews.length,
     matchCount: contentData.matches.length
   };
 }
@@ -141,10 +153,10 @@ function withPredictionModel(prediction: Prediction) {
   };
 }
 
-function withReviewPrediction(review: Review, predictionList = getContentData().predictions) {
+function withReviewPrediction(review: Review, index = getContentIndex()) {
   return {
     review,
-    prediction: getPredictionForReview(review, predictionList)
+    prediction: getPredictionForReview(review, index)
   };
 }
 
@@ -160,13 +172,8 @@ function getAssistantModels(prediction: Prediction) {
   return prediction.assistant_model_ids.map(getAiModel).filter((model): model is AiModel => Boolean(model));
 }
 
-function getPredictionForReview(review: Review, predictionList = getContentData().predictions) {
-  return predictionList.find((prediction) => prediction.id === review.prediction_id);
-}
-
-function getActivePredictions(data: ContentData) {
-  const completedPredictionIds = new Set(getCompletedReviews(data.reviews).map((review) => review.prediction_id));
-  return data.predictions.filter((prediction) => !completedPredictionIds.has(prediction.id));
+function getPredictionForReview(review: Review, index = getContentIndex()) {
+  return index.predictionById.get(review.prediction_id);
 }
 
 function getCompletedReviews(reviewList: Review[]) {
@@ -174,6 +181,20 @@ function getCompletedReviews(reviewList: Review[]) {
   const completedReviews = reviewList.filter(isCompletedReview);
   if (cachedContentData?.reviews === reviewList) cachedCompletedReviews = completedReviews;
   return completedReviews;
+}
+
+function getContentIndex(data = getContentData()): ContentIndex {
+  if (cachedContentData === data && cachedContentIndex) return cachedContentIndex;
+
+  const completedReviews = getCompletedReviews(data.reviews);
+  const reviewById = new Map(completedReviews.map((review) => [review.id, review]));
+  const reviewByPredictionId = new Map(completedReviews.map((review) => [review.prediction_id, review]));
+  const predictionById = new Map(data.predictions.map((prediction) => [prediction.id, prediction]));
+  const activePredictions = data.predictions.filter((prediction) => !reviewByPredictionId.has(prediction.id));
+  const index = { activePredictions, completedReviews, predictionById, reviewById, reviewByPredictionId };
+
+  if (cachedContentData === data) cachedContentIndex = index;
+  return index;
 }
 
 function isCompletedReview(review: Review) {

@@ -10,6 +10,8 @@ import { getNextWorldCupMatch } from "@/lib/world-cup-countdown";
 
 const pageDescription = "世界杯2026完整赛程，覆盖小组赛、淘汰赛、比赛时间、对阵双方和赛前观点。";
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = createMetadata({
   title: "世界杯2026完整赛程：小组赛、淘汰赛与比赛时间",
   description: pageDescription,

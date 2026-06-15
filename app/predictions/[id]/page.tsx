@@ -3,11 +3,17 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/badge";
 import { ModelMiniLink } from "@/components/model-card";
-import { getPredictionDetail } from "@/lib/data";
+import { getAllPredictions, getPredictionDetail } from "@/lib/data";
 import { getPredictionDirectionDisplay } from "@/lib/prediction-display";
 import { articleJsonLd, breadcrumbJsonLd, createMetadata, jsonLd, truncateSeo } from "@/lib/seo";
 
 type PredictionParams = { params: Promise<{ id: string }> };
+
+export const revalidate = 300;
+
+export function generateStaticParams() {
+  return getAllPredictions().map((prediction) => ({ id: prediction.id }));
+}
 
 export async function generateMetadata({ params }: PredictionParams): Promise<Metadata> {
   const { id } = await params;

@@ -10,6 +10,8 @@ import { getNextWorldCupMatch } from "@/lib/world-cup-countdown";
 
 const scheduleDescription = "今日足球赛程、明日赛程、世界杯2026赛程、小组赛和淘汰赛比赛时间；有赛前观点的比赛可查看参考方向和详细分析。";
 
+export const revalidate = 300;
+
 export const metadata: Metadata = createMetadata({
   title: "足球赛程中心：今日赛程、世界杯赛程与比赛时间",
   description: scheduleDescription,

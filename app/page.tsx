@@ -15,8 +15,7 @@ import { getNextWorldCupMatch, worldCupFinalCountdown } from "@/lib/world-cup-co
 
 const homeDescription = "绿茵智报官网整理世界杯2026赛程、球队资料、比赛时间、举办城市、赛前情报和赛后复盘，面向中文球迷追踪重点赛事。";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 300;
 
 export const metadata: Metadata = createMetadata({
   title: "绿茵智报官网：2026世界杯赛程、球队资料与足球情报",
