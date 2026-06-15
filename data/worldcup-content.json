@@ -2918,7 +2918,7 @@
       "id": "tg-r69",
       "prediction_id": "tg-p69",
       "match_result": "已复盘",
-      "result_status": "miss",
+      "result_status": "hit",
       "score": 8,
       "body": [
         "赛后复盘",
