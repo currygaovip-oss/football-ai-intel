@@ -76,6 +76,14 @@ export function getRecentReviewStats(reviews: Review[], limit = 10) {
   return getReviewStats(reviews.slice(0, limit));
 }
 
+export function getMonthlyReviewStats(reviews: Review[], now = new Date()) {
+  const since = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+  return getReviewStats(reviews.filter((review) => {
+    const reviewedAt = parseReviewedAt(review.reviewed_at, now);
+    return reviewedAt ? reviewedAt >= since && reviewedAt <= now : false;
+  }));
+}
+
 export function groupReviewsByVerdict<T extends { review: Review }>(items: T[]) {
   return items.reduce<Record<ReviewVerdict, T[]>>(
     (groups, item) => {
@@ -120,6 +128,19 @@ function extractReviewBodyValue(review: Review, label: string) {
   const index = review.body.findIndex((line) => line.trim() === label);
   if (index < 0) return "";
   return review.body[index + 1]?.trim() ?? "";
+}
+
+function parseReviewedAt(value: string, now: Date) {
+  const match = value.match(/(\d{1,2})\/(\d{1,2})(?:\s+(\d{1,2}):(\d{2}))?/);
+  if (!match) return null;
+
+  const [, month, day, hour = "0", minute = "0"] = match;
+  const reviewedAt = new Date(now.getFullYear(), Number(month) - 1, Number(day), Number(hour), Number(minute));
+  if (reviewedAt.getTime() > now.getTime() + 24 * 60 * 60 * 1000) {
+    reviewedAt.setFullYear(reviewedAt.getFullYear() - 1);
+  }
+
+  return Number.isNaN(reviewedAt.getTime()) ? null : reviewedAt;
 }
 
 export function getReviewMatchResult(review: Review) {

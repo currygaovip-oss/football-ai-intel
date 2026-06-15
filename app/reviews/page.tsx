@@ -4,7 +4,7 @@ import { ReviewCard } from "@/components/review-card";
 import { SectionHeading } from "@/components/section-heading";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getAllPredictions, getAllReviews, getReviews } from "@/lib/data";
-import { getRecentReviewStats, getReviewStats, getReviewToneClass, groupReviewsByVerdict, reviewVerdictInfo, reviewVerdictOrder } from "@/lib/review-display";
+import { getMonthlyReviewStats, getRecentReviewStats, getReviewToneClass, groupReviewsByVerdict, reviewVerdictInfo, reviewVerdictOrder } from "@/lib/review-display";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 
 const reviewsDescription = "足球赛后复盘记录，包含赛前观点、比赛赛果、命中分类、偏差归因和历史表现。";
@@ -23,7 +23,7 @@ export default function ReviewsPage() {
   const predictions = getAllPredictions();
   const reviewedPredictionIds = new Set(allReviews.map((review) => review.prediction_id));
   const pendingReviews = predictions.filter((prediction) => !reviewedPredictionIds.has(prediction.id)).slice(0, 6);
-  const stats = getReviewStats(reviews.map(({ review }) => review));
+  const monthlyStats = getMonthlyReviewStats(reviews.map(({ review }) => review));
   const recentStats = getRecentReviewStats(reviews.map(({ review }) => review), 10);
   const groupedReviews = groupReviewsByVerdict(reviews);
   const latestReviews = reviews.slice(0, 4);
@@ -78,11 +78,11 @@ export default function ReviewsPage() {
           const info = reviewVerdictInfo(verdictKey);
           return (
             <div key={verdictKey} className="rounded-lg border border-white/10 bg-white/[0.04] p-4">
-              <div className="text-xs text-white/45">{info.title}</div>
+              <div className="text-xs text-white/45">最近一个月{info.title}</div>
               <div className={`mt-2 text-3xl font-semibold ${getReviewToneClass(info.tone)}`}>
-                {stats[verdictKey]}
+                {monthlyStats[verdictKey]}
               </div>
-              <p className="mt-2 text-xs leading-5 text-white/48">{info.description}</p>
+              <p className="mt-2 text-xs leading-5 text-white/48">最近一个月{info.description}</p>
             </div>
           );
         })}
