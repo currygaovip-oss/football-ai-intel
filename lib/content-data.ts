@@ -150,7 +150,7 @@ export const matches: Match[] = [
   {
     "id": "wc-20",
     "competition": "世界杯 小组赛",
-    "kickoff_time": "06/16 12:00 北京时间",
+    "kickoff_time": "06/17 12:00 北京时间",
     "home_team": "奥地利",
     "away_team": "约旦",
     "status": "scheduled",
