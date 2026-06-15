@@ -3,7 +3,6 @@ import Link from "next/link";
 import { CalendarDays, ChevronRight, Clock3, Trophy } from "lucide-react";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { WorldCupCountdown } from "@/components/world-cup-countdown";
-import { cn } from "@/lib/utils";
 import { getAllPredictions, getSchedule } from "@/lib/data";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, sportsEventJsonLd, webPageJsonLd } from "@/lib/seo";
 import { getNextWorldCupMatch } from "@/lib/world-cup-countdown";
@@ -18,15 +17,7 @@ export const metadata: Metadata = createMetadata({
   path: "/schedule"
 });
 
-const filters = [
-  { key: "today", label: "今日" },
-  { key: "tomorrow", label: "明日" },
-  { key: "group", label: "小组赛" },
-  { key: "knockout", label: "淘汰赛" },
-  { key: "all", label: "全部" }
-] as const;
-
-type FilterKey = (typeof filters)[number]["key"];
+type FilterKey = "today" | "tomorrow" | "group" | "knockout" | "all";
 
 const emptyCopy: Record<FilterKey, string> = {
   today: "今日重点比赛以赛程中心最新整理为准。",
@@ -36,9 +27,8 @@ const emptyCopy: Record<FilterKey, string> = {
   knockout: "淘汰赛时间以世界杯官方赛程为准。"
 };
 
-export default async function SchedulePage({ searchParams }: { searchParams?: Promise<{ type?: string }> }) {
-  const params = await searchParams;
-  const currentType = normalizeFilter(params?.type);
+export default function SchedulePage() {
+  const currentType: FilterKey = "all";
   const matches = getSchedule();
   const predictions = getAllPredictions();
   const filteredMatches = matches.filter((match) => matchMatchesFilter(match, currentType));
@@ -59,10 +49,10 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
           __html: jsonLd(
             itemListJsonLd({
               name: "足球赛程列表",
-              path: `/schedule?type=${currentType}`,
+              path: "/schedule",
               items: filteredMatches.slice(0, 20).map((match) => ({
                 name: `${match.home_team} vs ${match.away_team}`,
-                path: `/schedule?type=${currentType}`
+                path: "/schedule"
               }))
             })
           )
@@ -80,7 +70,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
               __html: jsonLd(
                 sportsEventJsonLd({
                   name: `${match.home_team} vs ${match.away_team}`,
-                  path: `/schedule?type=${currentType}`,
+                  path: "/schedule",
                   startDate: eventStartDate,
                   competition: match.competition,
                   homeTeam: match.home_team,
@@ -128,7 +118,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
           <div className="flex flex-wrap gap-2 text-xs text-white/58">
             <ScheduleStat label="今日" value={todayCount} href="/football-schedule/today" />
             <ScheduleStat label="明日" value={tomorrowCount} href="/football-schedule/tomorrow" />
-            <ScheduleStat label="全部" value={matches.length} href="/schedule?type=all" />
+            <ScheduleStat label="全部" value={matches.length} href="/schedule" />
             <ScheduleStat label="有分析" value={predictionMatchCount} href="/today" />
           </div>
         </div>
@@ -140,24 +130,8 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
         <Link href="/football-schedule/today" className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white/75 transition hover:border-turf/30 hover:text-turf">今日足球赛程</Link>
         <Link href="/football-schedule/tomorrow" className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white/75 transition hover:border-turf/30 hover:text-turf">明日足球赛程</Link>
         <Link href="/world-cup-2026/schedule" className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white/75 transition hover:border-turf/30 hover:text-turf">世界杯赛程表</Link>
-        {filters.map((filter) => {
-          const active = filter.key === currentType;
-          return (
-            <Link
-              key={filter.key}
-              href={`/schedule?type=${filter.key}`}
-              className={cn(
-                "inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-medium transition",
-                active ? "border-turf/35 bg-turf/15 text-turf" : "border-white/15 bg-white/10 text-white/75 hover:border-turf/30 hover:text-turf"
-              )}
-              data-analytics-event="click_schedule"
-              data-analytics-area="schedule_filters"
-              data-analytics-label={filter.label}
-            >
-              {filter.label}
-            </Link>
-          );
-        })}
+        <Link href="/schedule" className="inline-flex items-center rounded-full border border-turf/35 bg-turf/15 px-3 py-1.5 text-xs font-medium text-turf">全部</Link>
+        <Link href="/world-cup-2026/schedule" className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white/75 transition hover:border-turf/30 hover:text-turf">小组赛 / 淘汰赛</Link>
       </div>
 
       <section className="grid gap-5 xl:grid-cols-[1fr_300px]">
@@ -185,7 +159,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
             <div className="glass rounded-lg p-8 text-center">
               <div className="text-lg font-semibold text-white">没有匹配比赛</div>
               <p className="mt-2 text-sm leading-6 text-white/58">{emptyCopy[currentType]}</p>
-              <Link href="/schedule?type=all" className="mt-5 inline-flex rounded-md border border-turf/30 bg-turf/10 px-4 py-2 text-sm text-turf hover:bg-turf/15">
+              <Link href="/schedule" className="mt-5 inline-flex rounded-md border border-turf/30 bg-turf/10 px-4 py-2 text-sm text-turf hover:bg-turf/15">
                 查看全部赛程
               </Link>
             </div>
@@ -206,7 +180,7 @@ export default async function SchedulePage({ searchParams }: { searchParams?: Pr
               {stageGroups.map(([stage, count]) => (
                 <Link
                   key={stage}
-                  href={`/schedule?type=${stage.includes("淘汰") || stage.includes("决赛") ? "knockout" : "group"}`}
+                  href="/world-cup-2026/schedule"
                   className="flex items-center justify-between rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 text-sm transition hover:border-turf/30 hover:text-turf"
                   data-analytics-event="click_schedule"
                   data-analytics-area="schedule_stage"
@@ -314,10 +288,6 @@ function ScheduleMatchCard({
       </div>
     </div>
   );
-}
-
-function normalizeFilter(type: string | undefined): FilterKey {
-  return filters.some((filter) => filter.key === type) ? (type as FilterKey) : "today";
 }
 
 function matchMatchesFilter(match: ReturnType<typeof getSchedule>[number], type: FilterKey) {
