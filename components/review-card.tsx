@@ -4,7 +4,7 @@ import type { Prediction, Review } from "@/lib/data";
 import { getOriginalDirection, getReviewSummary, getReviewToneClass, getReviewVerdictMeta } from "@/lib/review-display";
 
 export function ReviewCard({ review, prediction }: { review: Review; prediction?: Prediction }) {
-  const originalDirection = getOriginalDirection(prediction);
+  const originalDirection = getOriginalDirection(prediction, review);
   const verdict = getReviewVerdictMeta(review);
   const summary = getReviewSummary(review, prediction);
 

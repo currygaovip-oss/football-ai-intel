@@ -146,7 +146,7 @@ export default function TodayPage() {
 
 function HistoryReviewRow({ review, prediction }: { review: Review; prediction?: Prediction }) {
   const meta = getReviewVerdictMeta(review);
-  const direction = getOriginalDirection(prediction);
+  const direction = getOriginalDirection(prediction, review);
   const matchResult = getReviewMatchResult(review);
 
   return (

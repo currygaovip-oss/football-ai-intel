@@ -41,7 +41,7 @@ export default async function ReviewDetailPage({ params }: ReviewParams) {
   const detail = getReviewDetail(id);
   if (!detail) notFound();
   const { prediction, review } = detail;
-  const originalDirection = getOriginalDirection(prediction);
+  const originalDirection = getOriginalDirection(prediction, review);
   const verdict = getReviewVerdictMeta(review);
   const summary = getReviewSummary(review, prediction);
   const matchupKeyword = compactMatchup(prediction?.matchup ?? "足球赛事");

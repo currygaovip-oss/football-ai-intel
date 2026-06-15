@@ -102,17 +102,24 @@ export function getReviewToneClass(tone: ReviewVerdictMeta["tone"], variant: "te
   return "text-red-200";
 }
 
-export function getOriginalDirection(prediction?: Prediction) {
-  return prediction?.recommendation.replace(/^模型倾向：|^参考方向：/, "") || "赛前参考已记录";
+export function getOriginalDirection(prediction?: Prediction, review?: Review) {
+  const reviewDirection = review ? extractReviewBodyValue(review, "原参考方向：") : "";
+  return reviewDirection || prediction?.recommendation.replace(/^模型倾向：|^参考方向：/, "") || "赛前参考已记录";
 }
 
 export function getReviewSummary(review: Review, prediction?: Prediction) {
-  const direction = getOriginalDirection(prediction);
+  const direction = getOriginalDirection(prediction, review);
   const verdict = getReviewVerdictMeta(review);
   const firstBodyLine = review.body.find((line) => line.trim()) || "";
   const cleanBody = firstBodyLine.replace(/^赛后复盘[：:]?/, "").trim();
   const summary = cleanBody || `${verdict.label}，赛前参考为${direction}。`;
   return summary.length > 72 ? `${summary.slice(0, 72)}...` : summary;
+}
+
+function extractReviewBodyValue(review: Review, label: string) {
+  const index = review.body.findIndex((line) => line.trim() === label);
+  if (index < 0) return "";
+  return review.body[index + 1]?.trim() ?? "";
 }
 
 export function getReviewMatchResult(review: Review) {
