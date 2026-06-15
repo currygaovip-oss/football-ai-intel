@@ -70,7 +70,7 @@ export default function ReviewsPage() {
       />
       <SectionHeading title="历史复盘记录" eyebrow="Review Archive" level={1} />
       <p className="mb-6 max-w-3xl text-sm leading-7 text-white/62">
-        每场复盘按结果归类，直接区分预测命中、半命中和未命中，同时保留赛前参考方向、最终赛果和主要偏差。
+        最近一个月复盘按结果归类，直接区分预测命中、半命中和未命中，同时保留赛前参考方向、最终赛果和主要偏差。
       </p>
 
       <div className="grid gap-3 md:grid-cols-4">
