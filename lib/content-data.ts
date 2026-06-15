@@ -294,7 +294,7 @@ export const matches: Match[] = [
   {
     "id": "wc-36",
     "competition": "世界杯 小组赛",
-    "kickoff_time": "06/20 12:00 北京时间",
+    "kickoff_time": "06/21 12:00 北京时间",
     "home_team": "突尼斯",
     "away_team": "日本",
     "status": "scheduled",

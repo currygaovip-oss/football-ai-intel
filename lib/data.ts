@@ -207,18 +207,20 @@ function isCompletedReview(review: Review) {
 
 function sanitizeContentData(data: ContentData): ContentData {
   return {
-    matches: data.matches.map((match) => {
-      const normalizedMatch = normalizeFixtureTime(match);
+    matches: data.matches
+      .map((match) => {
+        const normalizedMatch = normalizeFixtureTime(match);
 
-      return {
-        ...normalizedMatch,
-        competition: sanitizePublicCopy(normalizedMatch.competition),
-        kickoff_time: sanitizePublicCopy(normalizedMatch.kickoff_time),
-        home_team: sanitizePublicCopy(normalizedMatch.home_team),
-        away_team: sanitizePublicCopy(normalizedMatch.away_team),
-        stage: sanitizePublicCopy(normalizedMatch.stage)
-      };
-    }),
+        return {
+          ...normalizedMatch,
+          competition: sanitizePublicCopy(normalizedMatch.competition),
+          kickoff_time: sanitizePublicCopy(normalizedMatch.kickoff_time),
+          home_team: sanitizePublicCopy(normalizedMatch.home_team),
+          away_team: sanitizePublicCopy(normalizedMatch.away_team),
+          stage: sanitizePublicCopy(normalizedMatch.stage)
+        };
+      })
+      .sort(compareMatchesByKickoff),
     predictions: data.predictions.map((prediction) => ({
       ...prediction,
       title: sanitizePublicCopy(prediction.title),
@@ -248,6 +250,18 @@ function normalizeFixtureTime(match: Match): Match {
   }
 
   return match;
+}
+
+function compareMatchesByKickoff(a: Match, b: Match) {
+  return parseKickoffSortTime(a.kickoff_time) - parseKickoffSortTime(b.kickoff_time);
+}
+
+function parseKickoffSortTime(kickoffTime: string) {
+  const match = kickoffTime.match(/(\d{2})\/(\d{2})\s+(\d{2}):(\d{2})/);
+  if (!match) return Number.MAX_SAFE_INTEGER;
+
+  const [, month, day, hour, minute] = match;
+  return Date.UTC(2026, Number(month) - 1, Number(day), Number(hour), Number(minute));
 }
 
 function normalizeReviewStatus(review: Review): Review["result_status"] {
