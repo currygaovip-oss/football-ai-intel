@@ -44,7 +44,9 @@ const verdictMeta: Record<ReviewVerdict, Omit<ReviewVerdictMeta, "verdict">> = {
 
 export function getReviewVerdict(review: Review): ReviewVerdict {
   const bodyText = review.body.join("\n");
+  const explicitVerdict = getExplicitReviewVerdict(review.body);
 
+  if (explicitVerdict) return explicitVerdict;
   if (review.result_status === "half") return "half";
   if (review.score >= 7 && review.result_status === "hit") return "hit";
   if (review.score <= 4 && review.result_status === "miss") return "miss";
@@ -54,6 +56,18 @@ export function getReviewVerdict(review: Review): ReviewVerdict {
   if (review.result_status === "hit" && review.score <= 6) return "half";
 
   return review.result_status;
+}
+
+function getExplicitReviewVerdict(body: string[]): ReviewVerdict | null {
+  const lines = body.map((line) => line.trim()).filter(Boolean);
+  const resultIndex = lines.findIndex((line) => /^复盘结果[:：]?$/.test(line));
+  const resultLine = resultIndex >= 0 ? lines[resultIndex + 1] : null;
+
+  if (!resultLine) return null;
+  if (/^(预测)?命中$|^全命中$|^方向命中$/.test(resultLine)) return "hit";
+  if (/半命中|部分符合|小偏差/.test(resultLine)) return "half";
+  if (/未命中/.test(resultLine)) return "miss";
+  return null;
 }
 
 export function getReviewVerdictMeta(review: Review): ReviewVerdictMeta {
