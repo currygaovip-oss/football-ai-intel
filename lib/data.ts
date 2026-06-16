@@ -34,6 +34,12 @@ let cachedContentData: ContentData | null = null;
 let cachedCompletedReviews: Review[] | null = null;
 let cachedContentIndex: ContentIndex | null = null;
 
+const canonicalFixtureTimes = new Map<string, string>([
+  ["澳大利亚 vs 土耳其", "06/14 12:00"],
+  ["奥地利 vs 约旦", "06/17 12:00"],
+  ["突尼斯 vs 日本", "06/21 12:00"]
+]);
+
 type ContentIndex = {
   activePredictions: Prediction[];
   completedReviews: Review[];
@@ -242,10 +248,11 @@ function sanitizeContentData(data: ContentData): ContentData {
 }
 
 function normalizeFixtureTime(match: Match): Match {
-  if (match.id === "tg-m6" || match.id === "wc-6" || (match.home_team === "澳大利亚" && match.away_team === "土耳其")) {
+  const canonicalKickoffTime = canonicalFixtureTimes.get(`${match.home_team} vs ${match.away_team}`);
+  if (canonicalKickoffTime) {
     return {
       ...match,
-      kickoff_time: match.kickoff_time.includes("北京时间") ? "06/14 12:00 北京时间" : "06/14 12:00"
+      kickoff_time: match.kickoff_time.includes("北京时间") ? `${canonicalKickoffTime} 北京时间` : canonicalKickoffTime
     };
   }
 

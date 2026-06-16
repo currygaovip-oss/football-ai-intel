@@ -2,6 +2,13 @@ import { getAllPredictions, getSchedule, type Match, type Prediction } from "@/l
 
 export type ScheduleRange = "today" | "tomorrow" | "week";
 
+const beijingDateFormatter = new Intl.DateTimeFormat("en-US", {
+  timeZone: "Asia/Shanghai",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit"
+});
+
 export function getFootballSchedule(range: ScheduleRange) {
   const matches = getSchedule();
   if (range === "week") return matches.filter((match) => isWithinDays(match, 7));
@@ -48,7 +55,7 @@ export function getReadableKickoff(match: Match) {
 
 function isSameOffsetDay(match: Match, offset: number) {
   const target = getTargetDate(offset);
-  const targetLabel = `${String(target.getMonth() + 1).padStart(2, "0")}/${String(target.getDate()).padStart(2, "0")}`;
+  const targetLabel = `${String(target.getUTCMonth() + 1).padStart(2, "0")}/${String(target.getUTCDate()).padStart(2, "0")}`;
   return match.kickoff_time.startsWith(targetLabel);
 }
 
@@ -64,10 +71,12 @@ function parseMatchDate(kickoffTime: string) {
   const match = kickoffTime.match(/^(\d{2})\/(\d{2})/);
   if (!match) return null;
   const year = new Date().getFullYear();
-  return new Date(year, Number(match[1]) - 1, Number(match[2]));
+  return new Date(Date.UTC(year, Number(match[1]) - 1, Number(match[2])));
 }
 
 function getTargetDate(offset: number) {
-  const now = new Date();
-  return new Date(now.getFullYear(), now.getMonth(), now.getDate() + offset);
+  const parts = Object.fromEntries(beijingDateFormatter.formatToParts(new Date()).map((part) => [part.type, part.value]));
+  const date = new Date(Date.UTC(Number(parts.year), Number(parts.month) - 1, Number(parts.day)));
+  date.setUTCDate(date.getUTCDate() + offset);
+  return date;
 }
