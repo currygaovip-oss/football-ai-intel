@@ -1,9 +1,9 @@
 {
-  "exported_at": "2026-06-16T03:32:06.391Z",
+  "exported_at": "2026-06-16T18:28:06.143Z",
   "source": "worldcup_bot_snapshot",
   "counts": {
     "matches": 104,
-    "predictions": 67,
+    "predictions": 68,
     "reviews": 67
   },
   "matches": [
@@ -44,15 +44,6 @@
       "stage": "小组赛 · D组"
     },
     {
-      "id": "tg-m6",
-      "competition": "世界杯",
-      "kickoff_time": "06/14 12:00",
-      "home_team": "澳大利亚",
-      "away_team": "土耳其",
-      "status": "scheduled",
-      "stage": "小组赛 · D组"
-    },
-    {
       "id": "tg-m8",
       "competition": "世界杯",
       "kickoff_time": "06/14 03:00",
@@ -78,6 +69,15 @@
       "away_team": "苏格兰",
       "status": "scheduled",
       "stage": "小组赛 · C组"
+    },
+    {
+      "id": "tg-m6",
+      "competition": "世界杯",
+      "kickoff_time": "06/14 12:00",
+      "home_team": "澳大利亚",
+      "away_team": "土耳其",
+      "status": "scheduled",
+      "stage": "小组赛 · D组"
     },
     {
       "id": "tg-m10",
@@ -152,15 +152,6 @@
       "stage": "小组赛 · G组"
     },
     {
-      "id": "tg-m20",
-      "competition": "世界杯",
-      "kickoff_time": "06/17 12:00",
-      "home_team": "奥地利",
-      "away_team": "约旦",
-      "status": "scheduled",
-      "stage": "小组赛 · J组"
-    },
-    {
       "id": "tg-m17",
       "competition": "世界杯",
       "kickoff_time": "06/17 03:00",
@@ -184,6 +175,15 @@
       "kickoff_time": "06/17 09:00",
       "home_team": "阿根廷",
       "away_team": "阿尔及利亚",
+      "status": "scheduled",
+      "stage": "小组赛 · J组"
+    },
+    {
+      "id": "tg-m20",
+      "competition": "世界杯",
+      "kickoff_time": "06/17 12:00",
+      "home_team": "奥地利",
+      "away_team": "约旦",
       "status": "scheduled",
       "stage": "小组赛 · J组"
     },
@@ -296,15 +296,6 @@
       "stage": "小组赛 · D组"
     },
     {
-      "id": "tg-m36",
-      "competition": "世界杯",
-      "kickoff_time": "06/21 12:00",
-      "home_team": "突尼斯",
-      "away_team": "日本",
-      "status": "scheduled",
-      "stage": "小组赛 · F组"
-    },
-    {
       "id": "tg-m35",
       "competition": "世界杯",
       "kickoff_time": "06/21 01:00",
@@ -330,6 +321,15 @@
       "away_team": "库拉索",
       "status": "scheduled",
       "stage": "小组赛 · E组"
+    },
+    {
+      "id": "tg-m36",
+      "competition": "世界杯",
+      "kickoff_time": "06/21 12:00",
+      "home_team": "突尼斯",
+      "away_team": "日本",
+      "status": "scheduled",
+      "stage": "小组赛 · F组"
     },
     {
       "id": "tg-m38",
@@ -945,6 +945,36 @@
     }
   ],
   "predictions": [
+    {
+      "id": "tg-p73",
+      "model_id": "squad-lens",
+      "assistant_model_ids": [
+        "odds-mind",
+        "goal-net"
+      ],
+      "title": "世界杯 法国 vs 塞内加尔",
+      "competition": "赛事",
+      "kickoff_time_text": "06-17 03:00",
+      "matchup": "世界杯 法国 vs 塞内加尔",
+      "visibility": "free",
+      "recommendation": "模型倾向：法国 -1",
+      "risk_level": "高",
+      "body": [
+        "比赛时间：",
+        "法国 -1",
+        "核心思路：",
+        "本场核心在于法国能否把前场个人能力和阵容厚度转化成比分优势。法国首发基本延续德尚的稳妥思路，迈尼昂镇守球门，后防由特奥、萨利巴、于帕梅卡诺和孔德组成，中场是拉比奥搭档琼阿梅尼，前场则由奥利塞、登贝莱、杜埃和姆巴佩组成攻击线。",
+        "这个首发说明法国并不是单纯依靠控球推进，而是更强调前场速度、单点突破和肋部冲击。姆巴佩具备直接撕开防线的能力，登贝莱和奥利塞可以在两侧制造一对一，杜埃则能在中路和边路之间增加变化。面对塞内加尔这种身体对抗强、反击速度快的球队，法国不会盲目压上，而是更可能用成熟的方式控制风险，等待前场个人能力解决问题。",
+        "塞内加尔并不是弱队。球队首发中有库利巴利、爱德华-门迪、伊德里萨-盖耶、拉明-卡马拉、伊斯梅拉-萨尔、尼古拉斯-杰克逊和马内，身体对抗、反击速度和大赛经验都不差。尤其是马内和萨尔在边路的冲击，会对法国两个边后卫身后形成威胁。",
+        "但塞内加尔的问题在于中后场出球和阵地推进稳定性。面对法国的中场压迫，帕普-盖耶、伊德里萨-盖耶和拉明-卡马拉需要承担大量防守覆盖，一旦被迫长时间低位防守，前场三人能够拿到的反击机会会减少。尼古拉斯-杰克逊需要支点作用，但面对萨利巴和于帕梅卡诺，单点持球难度很高。",
+        "指数层面，法国让到 -1.25，说明市场认可法国优势，但也没有直接拉到更深位置，体现出对塞内加尔反击能力的防范。法国方向的关键不是控球多少，而是能不能尽早通过姆巴佩、登贝莱或定位球打开局面。一旦先取得进球，塞内加尔被迫压出，法国前场速度会有更多发挥空间。",
+        "综合来看，塞内加尔有制造麻烦的能力，但法国首发攻击线质量更高，中后场稳定性也更强。只要法国正常发挥，拿下比赛的概率更高，并具备扩大比分的空间。",
+        "绿茵智报：",
+        "https://lyzbvip.vip",
+        "以上内容仅为赛前观点与足球交流参考，不构成任何结果承诺或行动建议。"
+      ],
+      "published_at": "06/16 18:27"
+    },
     {
       "id": "tg-p72",
       "model_id": "goal-net",
