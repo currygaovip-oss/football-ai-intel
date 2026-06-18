@@ -252,11 +252,18 @@ function normalizeFixtureTime(match: Match): Match {
   if (canonicalKickoffTime) {
     return {
       ...match,
-      kickoff_time: match.kickoff_time.includes("北京时间") ? `${canonicalKickoffTime} 北京时间` : canonicalKickoffTime
+      kickoff_time: withBeijingTimeSuffix(canonicalKickoffTime)
     };
   }
 
-  return match;
+  return {
+    ...match,
+    kickoff_time: withBeijingTimeSuffix(match.kickoff_time)
+  };
+}
+
+function withBeijingTimeSuffix(value: string) {
+  return value.includes("北京时间") ? value : `${value} 北京时间`;
 }
 
 function compareMatchesByKickoff(a: Match, b: Match) {
