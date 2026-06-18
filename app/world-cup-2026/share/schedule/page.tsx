@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarDays } from "lucide-react";
 import { createMetadata } from "@/lib/seo";
+import { getReadableKickoff } from "@/lib/football-schedule";
 import { getWorldCupMatches, worldCupBasePath } from "@/lib/world-cup";
 
 export const metadata: Metadata = createMetadata({
@@ -26,7 +27,7 @@ export default function WorldCupScheduleSharePage() {
         <div className="mt-6 grid gap-3 md:grid-cols-2">
           {matches.map((match) => (
             <Link key={match.id} href={`${worldCupBasePath}/fixtures/${match.id}`} className="rounded-md border border-white/10 bg-black/20 p-3 hover:border-turf/35">
-              <div className="text-xs text-turf">{match.kickoff_time}</div>
+              <div className="text-xs text-turf">{getReadableKickoff(match)}</div>
               <div className="mt-1 font-semibold text-white">{match.home_team} vs {match.away_team}</div>
               <div className="mt-1 text-xs text-white/42">{match.stage}</div>
             </Link>

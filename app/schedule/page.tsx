@@ -264,6 +264,7 @@ function ScheduleMatchCard({
       <div className="flex items-center gap-2 text-sm text-white/62 md:block">
         <Clock3 size={15} className="text-turf md:hidden" />
         <div className="font-semibold text-white">{getTimeLabel(match.kickoff_time)}</div>
+        <div className="mt-0.5 text-xs text-white/42">北京时间</div>
         <div className="mt-0.5 text-xs text-white/42">{match.competition}</div>
       </div>
       <div>

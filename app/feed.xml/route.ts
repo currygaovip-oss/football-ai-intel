@@ -3,6 +3,7 @@ import { getAllPredictions, getDataSourceInfo, getReviews } from "@/lib/data";
 import { getPredictionDirectionDisplay } from "@/lib/prediction-display";
 import { seoTopics } from "@/lib/seo-topics";
 import { siteDescription, siteName, siteUrl } from "@/lib/seo";
+import { getReadableKickoff } from "@/lib/football-schedule";
 import { getCityTicketPath } from "@/lib/world-cup-tickets";
 import { getHostCityPath, getPlayerPath, getWorldCupFixturePath, getWorldCupMatches, getWorldCupPlayerEntries, getWorldCupTeamEntries, hostCities, getTeamPath, worldCupBasePath } from "@/lib/world-cup";
 
@@ -95,7 +96,7 @@ export function GET() {
 
   const fixtures = getWorldCupMatches().slice(0, 20).map((match) => ({
     title: `${match.home_team} vs ${match.away_team}`,
-    description: `${match.kickoff_time}，${match.stage}。`,
+    description: `${getReadableKickoff(match)}，${match.stage}。`,
     path: getWorldCupFixturePath(match)
   }));
 

@@ -11,6 +11,7 @@ import { getHomeData, type AiModel, type Prediction } from "@/lib/data";
 import { getPredictionDirectionDisplay, getPredictionDisplayMeta } from "@/lib/prediction-display";
 import { formatReviewStats, getRecentReviewStats, getReviewVerdictMeta } from "@/lib/review-display";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, siteNavigationJsonLd, webPageJsonLd, websiteJsonLd } from "@/lib/seo";
+import { getReadableKickoff } from "@/lib/football-schedule";
 import { getNextWorldCupMatch, worldCupFinalCountdown } from "@/lib/world-cup-countdown";
 
 const homeDescription = "绿茵智报官网整理世界杯2026赛程、球队资料、比赛时间、举办城市、赛前情报和赛后复盘，面向中文球迷追踪重点赛事。";
@@ -196,7 +197,7 @@ export default function HomePage() {
             <div key={match.id} className="glass rounded-lg p-5">
               <div className="mb-3 text-xs text-turf">{match.competition} · {match.stage}</div>
               <div className="text-lg font-semibold">{match.home_team} vs {match.away_team}</div>
-              <div className="mt-3 text-sm text-white/58">{match.kickoff_time}</div>
+              <div className="mt-3 text-sm text-white/58">{getReadableKickoff(match)}</div>
               {match.status === "finished" ? <div className="mt-3 text-2xl font-semibold text-gold">{match.home_score}-{match.away_score}</div> : null}
             </div>
           ))}

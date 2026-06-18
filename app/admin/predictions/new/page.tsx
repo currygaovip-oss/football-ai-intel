@@ -16,7 +16,7 @@ export default async function NewPredictionPage() {
           <Input name="title" label="标题" />
           <div className="grid gap-4 md:grid-cols-2">
             <Input name="competition" label="赛事" placeholder="世界杯 小组赛" />
-            <Input name="kickoff_time_text" label="开赛时间" placeholder="今晚 21:00" />
+            <Input name="kickoff_time_text" label="开赛时间" placeholder="今晚 21:00 北京时间" />
             <Input name="matchup" label="对阵" placeholder="阿贾克斯 vs 格罗宁根" />
             <Input name="published_at" label="发布时间" placeholder="今天 11:20" />
           </div>

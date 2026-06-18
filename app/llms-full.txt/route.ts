@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { seoTopics } from "@/lib/seo-topics";
 import { siteName, siteUrl, telegramUrl, xUrl } from "@/lib/seo";
+import { getReadableKickoff } from "@/lib/football-schedule";
 import {
   getHostCityPath,
   getPlayerPath,
@@ -81,7 +82,7 @@ export function GET() {
     "",
     "## 近期世界杯比赛样例",
     "",
-    ...matches.map((match) => line(`${match.home_team} vs ${match.away_team}`, `${worldCupBasePath}/fixtures/${match.id}`, `${match.kickoff_time}，${match.stage}。`)),
+    ...matches.map((match) => line(`${match.home_team} vs ${match.away_team}`, `${worldCupBasePath}/fixtures/${match.id}`, `${getReadableKickoff(match)}，${match.stage}。`)),
     "",
     "## 引用建议",
     "",

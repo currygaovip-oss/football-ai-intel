@@ -10,8 +10,13 @@ export function getPredictionDisplayMeta(prediction: Prediction) {
 
   return {
     competitionLabel: competitionTime ? "赛前观点" : prediction.competition,
-    timeLabel: kickoffTime || competitionTime
+    timeLabel: formatBeijingTimeText(kickoffTime || competitionTime)
   };
+}
+
+export function formatBeijingTimeText(value: string) {
+  if (!value || /北京时间/.test(value) || !/\d{1,2}:\d{2}/.test(value)) return value;
+  return `${value} 北京时间`;
 }
 
 export function extractPredictionDirection(recommendation: string) {

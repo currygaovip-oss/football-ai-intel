@@ -4,6 +4,7 @@ import { ReviewCard } from "@/components/review-card";
 import { SectionHeading } from "@/components/section-heading";
 import { SeoTopicLinks } from "@/components/seo-topic-links";
 import { getAllPredictions, getAllReviews, getReviews } from "@/lib/data";
+import { formatBeijingTimeText } from "@/lib/prediction-display";
 import { getMonthlyReviewStats, getRecentReviewStats, getReviewToneClass, groupReviewsByVerdict, reviewVerdictInfo, reviewVerdictOrder } from "@/lib/review-display";
 import { createMetadata, faqJsonLd, itemListJsonLd, jsonLd, webPageJsonLd } from "@/lib/seo";
 
@@ -142,7 +143,7 @@ export default function ReviewsPage() {
               <Link key={prediction.id} href={`/predictions/${prediction.id}`} className="rounded-lg border border-white/10 bg-black/20 p-4 transition hover:border-turf/30">
                 <div className="text-xs text-turf">{prediction.competition}</div>
                 <div className="mt-1 font-semibold text-white">{prediction.matchup}</div>
-                <div className="mt-2 text-sm text-white/58">{prediction.kickoff_time_text}</div>
+                <div className="mt-2 text-sm text-white/58">{formatBeijingTimeText(prediction.kickoff_time_text)}</div>
               </Link>
             ))}
           </div>

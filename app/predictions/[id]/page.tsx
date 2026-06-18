@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/badge";
 import { ModelMiniLink } from "@/components/model-card";
 import { getAllPredictions, getPredictionDetail } from "@/lib/data";
-import { getPredictionDirectionDisplay } from "@/lib/prediction-display";
+import { formatBeijingTimeText, getPredictionDirectionDisplay } from "@/lib/prediction-display";
 import { articleJsonLd, breadcrumbJsonLd, createMetadata, jsonLd, truncateSeo } from "@/lib/seo";
 
 type PredictionParams = { params: Promise<{ id: string }> };
@@ -48,9 +48,10 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
   if (!detail) notFound();
   const { assistantModels, model, prediction, review } = detail;
   const direction = getPredictionDirectionDisplay(prediction);
+  const kickoffTime = formatBeijingTimeText(prediction.kickoff_time_text);
   const matchupKeyword = compactMatchup(prediction.matchup);
   const pageTitle = `${matchupKeyword}赛前分析`;
-  const description = truncateSeo(`${prediction.competition}${prediction.matchup}赛前分析，比赛时间：${prediction.kickoff_time_text}。${direction.recommendation}`);
+  const description = truncateSeo(`${prediction.competition}${prediction.matchup}赛前分析，比赛时间：${kickoffTime}。${direction.recommendation}`);
   const analysisBody = direction.locked ? [] : getAnalysisBody(prediction.body, prediction.recommendation);
 
   return (
@@ -100,7 +101,7 @@ export default async function PredictionDetailPage({ params }: PredictionParams)
         <section className="mt-6 rounded-lg border border-white/10 bg-white/5 p-4">
           <h2 className="mb-3 text-lg font-semibold">比赛信息</h2>
           <div className="grid gap-3 text-sm text-white/68 sm:grid-cols-3">
-            <div>比赛时间：{prediction.kickoff_time_text}</div>
+            <div>比赛时间：{kickoffTime}</div>
             <div>对阵：{prediction.matchup}</div>
             <div>赛事：{prediction.competition}</div>
           </div>
