@@ -49,13 +49,13 @@ const matchSql = `
   order by m.kickoff_at asc
 `;
 
-function rowToPrediction(row) {
+function rowToPrediction(row, matchIndex = new Map()) {
   const model_id = modelCycle[row.id % modelCycle.length];
   const assistant_model_ids = assistantCycle.filter((id) => id !== model_id).slice(0, 2);
   const matchup = cleanMatchup(row.event_matchup) || cleanMatchup(formatMatchup(row)) || "待确认对阵";
   const title = cleanTitle(row.title) || matchup;
   const competition = cleanCompetition(row.event_name, row.body, row.stage);
-  const kickoff = formatPredictionKickoff(row);
+  const kickoff = formatPredictionKickoff(row, matchup, matchIndex);
 
   return {
     id: `tg-p${row.id}`,
@@ -122,7 +122,7 @@ function cleanPredictionBody(value, context) {
     .filter((line) => !skip.has(cleanLoose(line)))
     .filter((line) => !/^\d{4}-\d{2}-\d{2}/.test(line))
     .filter((line) => !/投资|博彩|投注|重要声明/.test(line))
-    .filter((line) => !["参考方向", "进球思路"].includes(cleanText(line).replace(/[：:]/g, "")))
+    .filter((line) => !["比赛时间", "参考方向", "进球思路"].includes(cleanText(line).replace(/[：:]/g, "")))
     .filter((line, index, array) => array.indexOf(line) === index);
 
   return lines.length > 0 ? lines : ["暂无完整正文，建议结合参考方向和风险提示阅读。"];
@@ -161,8 +161,9 @@ function formatMatchup(row) {
   return "";
 }
 
-function formatPredictionKickoff(row) {
-  return cleanText(row.event_time_text) || formatDisplayTime(row.kickoff_at);
+function formatPredictionKickoff(row, matchup, matchIndex) {
+  const fixtureTime = findFixtureTime(matchup, matchIndex);
+  return fixtureTime || cleanText(row.event_time_text) || formatDisplayTime(row.kickoff_at);
 }
 
 function formatRecommendation(row) {
@@ -235,6 +236,48 @@ function cleanText(value) {
     .trim();
 }
 
+function normalizeTeamName(value) {
+  const aliases = new Map([
+    ["刚果金", "民主刚果"],
+    ["刚果民主共和国", "民主刚果"],
+    ["DR Congo", "民主刚果"],
+    ["Congo DR", "民主刚果"],
+    ["南韩", "韩国"],
+    ["土耳其", "土耳其"],
+    ["Türkiye", "土耳其"]
+  ]);
+  let text = cleanText(value);
+  for (const [from, to] of aliases) text = text.replaceAll(from, to);
+  return text
+    .replace(/世界杯|今日|情报|赛前|观点|vip|VIP|[A-L]组|赛事/g, "")
+    .replace(/\s+VS\s+/gi, "vs")
+    .replace(/\s+V\s+/gi, "vs")
+    .replace(/[：:，,。.\s\-－]/g, "")
+    .toLowerCase();
+}
+
+function buildFixtureTimeIndex(matchRows) {
+  const index = new Map();
+  for (const row of matchRows) {
+    const home = normalizeTeamName(row.home_team);
+    const away = normalizeTeamName(row.away_team);
+    const time = formatDisplayTime(row.kickoff_at);
+    if (!home || !away || !time) continue;
+    index.set(`${home}${away}`, time);
+    index.set(`${away}${home}`, time);
+  }
+  return index;
+}
+
+function findFixtureTime(matchup, matchIndex) {
+  const normalized = normalizeTeamName(matchup);
+  if (!normalized) return "";
+  for (const [key, time] of matchIndex) {
+    if (normalized.includes(key)) return time;
+  }
+  return "";
+}
+
 function cleanLoose(value) {
   return cleanText(value).replace(/[：:，,。.\s]/g, "").toLowerCase();
 }
@@ -254,9 +297,10 @@ if (!existsSync(dbPath)) {
 const database = new DatabaseSync(dbPath, { readOnly: true });
 
 try {
-  const predictionRows = database.prepare(predictionSql).all();
   const matchRows = database.prepare(matchSql).all();
-  const predictions = predictionRows.map(rowToPrediction);
+  const predictionRows = database.prepare(predictionSql).all();
+  const matchIndex = buildFixtureTimeIndex(matchRows);
+  const predictions = predictionRows.map((row) => rowToPrediction(row, matchIndex));
   const reviews = predictionRows.flatMap(rowToReview);
   const payload = {
     source: "worldcup_bot_snapshot",
