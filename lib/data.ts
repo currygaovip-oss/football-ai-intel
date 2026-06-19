@@ -37,6 +37,7 @@ let cachedContentIndex: ContentIndex | null = null;
 const canonicalFixtureTimes = new Map<string, string>([
   ["澳大利亚 vs 土耳其", "06/14 12:00"],
   ["奥地利 vs 约旦", "06/17 12:00"],
+  ["巴西 vs 海地", "06/20 09:00"],
   ["突尼斯 vs 日本", "06/21 12:00"]
 ]);
 
