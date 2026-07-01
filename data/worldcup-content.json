@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-07-01T12:28:37.051Z",
+  "exported_at": "2026-07-01T12:30:11.448Z",
   "source": "worldcup_bot_snapshot",
   "counts": {
     "matches": 104,
@@ -946,15 +946,15 @@
   ],
   "predictions": [
     {
-      "id": "tg-p110",
-      "model_id": "alpha-pitch",
+      "id": "tg-p111",
+      "model_id": "odds-mind",
       "assistant_model_ids": [
-        "odds-mind",
-        "goal-net"
+        "goal-net",
+        "squad-lens"
       ],
       "title": "世界杯 比利时 vs 塞内加尔",
       "competition": "赛事",
-      "kickoff_time_text": "07-02 05:00",
+      "kickoff_time_text": "07-02 04:00",
       "matchup": "世界杯 比利时 vs 塞内加尔",
       "visibility": "free",
       "recommendation": "模型倾向：进球数 小2.5",
@@ -972,7 +972,7 @@
         "https://lyzbvip.vip",
         "以上内容仅为赛前观点与足球交流参考，不构成任何结果承诺或行动建议。"
       ],
-      "published_at": "07/01 12:28"
+      "published_at": "07/01 12:29"
     },
     {
       "id": "tg-p109",
