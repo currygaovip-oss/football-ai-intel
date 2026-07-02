@@ -11,3 +11,13 @@ reports/
 tsconfig.tsbuildinfo
 .DS_Store
 *.log
+
+# OpenNext
+.open-next
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+
+!.env.example
